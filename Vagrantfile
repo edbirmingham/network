@@ -34,8 +34,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   npm install -g bower
   npm install -g gulp
   npm install -g grunt
+  npm install -g grunt-cli
   npm install -g yo
   npm install -g generator-meanjs
+  su - vagrant -c "cd /vagrant && npm install"
   echo ""
   echo "============================================="
   echo ""
