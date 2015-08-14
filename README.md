@@ -22,6 +22,7 @@ $ mongod --dbpath /home/ubuntu/workspace/mongo --smallfiles --fork --logpath /ho
 ```
 grunt
 ```
+* To view the app in the browser, select Preview from the editor menu and then select Preview Running Application.  This will open the application in a tab of the editor.
 * Hack away
 * Send lots of pull requests!!
 
