@@ -3,26 +3,30 @@
 ## Super Easy Setup
 * Create a Github account
 * Fork [Network](https://github.com/edbirmingham/network)
-* Signup for [Cloud9 IDE](http://c9.io) with your Github Account
-* Goto the Repositories link in Cloud9 IDE
-* Select "Clone to edit" on your fork of Network
-* Name your workspace
-* Choose the Node.js template
-* Create your workspace
-* In the bash tab, install Node.js modules
+  * Scroll to the top of this page and click "fork" in the top right corner. 
+* Setup Cloud9
+  * Signup for [Cloud9 IDE](http://c9.io) with your Github Account
+  * Goto the Repositories link in Cloud9 IDE
+  * Select "Clone to edit" on your fork of Network
+  * Name your workspace
+  * Choose the Node.js template
+  * Create your workspace
+  * In the bash tab, install Node.js modules by entering the following command:
 ```
-$ npm install
+npm install
 ```
-* In the bash tab, setup MongoDb
+> Note: If the command fails, you can restart the workspace by clicking in the top right corner where it says "Memory, CPU, and Disk". Then click restart in that menu. 
+
+  * In the bash tab, setup MongoDb by entering the following commands:
 ```
-$ mkdir /home/ubuntu/workspace/mongo
-$ mongod --dbpath /home/ubuntu/workspace/mongo --smallfiles --fork --logpath /home/ubuntu/workspace/mongo/mongod.log
+mkdir /home/ubuntu/workspace/mongo
+mongod --dbpath /home/ubuntu/workspace/mongo --smallfiles --fork --logpath /home/ubuntu/workspace/mongo/mongod.log
 ```
-* In the bash tab, start the application
+  * In the bash tab, start the application by entering the following command:
 ```
 grunt
 ```
-* To view the app in the browser, select Preview from the editor menu and then select Preview Running Application.  This will open the application in a tab of the editor.
+  * To view the app in the browser, select Preview from the editor menu and then select Preview Running Application.  This will open the application in a tab of the editor.
 * Hack away
 * Send lots of pull requests!!
 
