@@ -1,9 +1,38 @@
 ## Contributing to Network
+
+## Super Easy Setup
+* Create a Github account
+* Fork [Network](https://github.com/edbirmingham/network)
+* Signup for [Cloud9 IDE](http://c9.io) with your Github Account
+* Goto the Repositories link in Cloud9 IDE
+* Select "Clone to edit" on your fork of Network
+* Name your workspace
+* Choose the Node.js template
+* Create your workspace
+* In the bash tab, install Node.js modules
+```
+$ npm install
+```
+* In the bash tab, setup MongoDb
+```
+$ mkdir /home/ubuntu/workspace/mongo
+$ mongod --dbpath /home/ubuntu/workspace/mongo --smallfiles --fork --logpath /home/ubuntu/workspace/mongo/mongod.log
+```
+* In the bash tab, start the application
+```
+grunt
+```
+* Hack away
+* Send lots of pull requests!!
+
+## Not Too Difficult Setup
+* Create a Github account
+* Fork [Network](https://github.com/edbirmingham/network)
 * Install VirtualBox
 * Install Vagrant
-* Clone the Network repo
+* Clone your forked Network repo
 ```
-git clone git@github.com:edbirmingham/network.git
+git clone git@github.com:<your-github-id>/network.git
 ```
 * Change to the directory containing Network
 * Download the Chef cookbooks
@@ -30,7 +59,10 @@ http://localhost:3000
 * Hack away
 * Send lots of pull requests!!
 
-## Generated Readme
+## Really Difficult Setup
+* Look at the Vagrantfile and install all that stuff.  Good luck.  :)
+
+## Helpful MEAN.JS Information
 [![MEAN.JS Logo](http://meanjs.org/img/logo-small.png)](http://meanjs.org/)
 
 [![Build Status](https://travis-ci.org/meanjs/mean.svg?branch=master)](https://travis-ci.org/meanjs/mean)
@@ -45,18 +77,6 @@ Before you begin we recommend you read about the basic building blocks that asse
 * AngularJS - Angular's [Official Website](http://angularjs.org/) is a great starting point. You can also use [Thinkster Popular Guide](http://www.thinkster.io/), and the [Egghead Videos](https://egghead.io/).
 * Node.js - Start by going through [Node.js Official Website](http://nodejs.org/) and this [StackOverflow Thread](http://stackoverflow.com/questions/2353818/how-do-i-get-started-with-node-js), which should get you going with the Node.js platform in no time.
 
-
-## Running Your Application
-After the install process is over, you'll be able to run your application using Grunt, just run grunt default task:
-
-```
-$ grunt
-```
-
-Your application should run on the 3000 port so in your browser just go to [http://localhost:3000](http://localhost:3000)
-                            
-That's it! your application should be running by now, to proceed with your development check the other sections in this documentation. 
-If you encounter any problem try the Troubleshooting section.
 
 ## Development and deployment With Docker
 
