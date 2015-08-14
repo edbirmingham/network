@@ -12,20 +12,20 @@
   * Choose the Node.js template
   * Create your workspace
   * In the bash tab, install Node.js modules by entering the following command:
-```
-npm install
-```
-> Note: If the command fails, you can restart the workspace by clicking in the top right corner where it says "Memory, CPU, and Disk". Then click restart in that menu. 
+  ```
+  npm install
+  ```
+  > Note: If the command fails, you can restart the workspace by clicking in the top right corner where it says "Memory, CPU, and Disk". Then click restart in that menu. 
 
   * In the bash tab, setup MongoDb by entering the following commands:
-```
-mkdir /home/ubuntu/workspace/mongo
-mongod --dbpath /home/ubuntu/workspace/mongo --smallfiles --fork --logpath /home/ubuntu/workspace/mongo/mongod.log
-```
+  ```
+  mkdir /home/ubuntu/workspace/mongo
+  mongod --dbpath /home/ubuntu/workspace/mongo --smallfiles --fork --logpath /home/ubuntu/workspace/mongo/mongod.log
+  ```
   * In the bash tab, start the application by entering the following command:
-```
-grunt
-```
+  ```
+  grunt
+  ```
   * To view the app in the browser, select Preview from the editor menu and then select Preview Running Application.  This will open the application in a tab of the editor.
 * Hack away
 * Send lots of pull requests!!
