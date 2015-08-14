@@ -11,3 +11,4 @@ cookbooks/
 *.swp
 .vagrant/
 tmp/
+mongo/
