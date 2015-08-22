@@ -1,7 +1,7 @@
 ## We're the Birmingham Education Foundation.
 You can call us, Ed.
 
-## What We Do.
+## What We Do
 The unique and specific focus of our work is “Network-Building”. The Birmingham Education Foundation (Ed) is dedicated to increasing the number of students in the Birmingham City Schools that are on the path to college, career, and life readiness. We believe that this is only possible by cultivating a diverse network of people who demand excellence for our students and inspire others to do the same. We believe Network members are:
 
 1. Committed to deliberate actions that demonstrate their belief in and love for our students; and
