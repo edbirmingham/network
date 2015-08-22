@@ -14,6 +14,7 @@ To actively cultivate the Network, we provide direct programming for students an
 In order to reach our Network membership and action goals it is imperative that we maintain organization of our data, communication, and progress. The Network Asset Database, aka [edbirmingham/network](https://github.com/edbirmingham/network), is being developed to increase Ed’s Network activity; maintaining Membership records, supporting stewardship (progress to requests/offers between Network members), and increasing access and awareness to school/community based assets.
 
 ## Contributing to Network
+* Questions? Visit our [slack](https://magiccitytech.slack.com/messages/edbirmingham/) channel.
 
 ## Super Easy Setup
 * Create a Github account
