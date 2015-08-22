@@ -16,17 +16,17 @@ In order to reach our Network membership and action goals it is imperative that 
 ## Contributing to Network
 
 ## Super Easy Setup
+This setup uses Cloud9 for your development environment.  Cloud9 provides an online development environment and server for you to use.  All you need is a browser and good internet connection.  Everything else is available on Cloud9's site.
 * Create a Github account
 * Fork [Network](https://github.com/edbirmingham/network)
   * Scroll to the top of this page and click "fork" in the top right corner. 
 * Setup Cloud9
   * Signup for [Cloud9 IDE](http://c9.io) with your Github Account
   * Goto the Repositories link in Cloud9 IDE
-  * Select "Clone to edit" on your fork of Network
-  * Name your workspace
-  * Choose the Node.js template
-  * Create your workspace
-  * In the bash tab, install Node.js modules by entering the following command:
+  * Select "Clone to edit" on *your* fork of Network.
+    * Note, you will see two options for Network.  One is "edbirmingham/network", which you do not want to select.  The other is "*your name*/network" which is the correct repository to select.
+  * Cloud9 will soon display the development environment. 
+  * In the bash tab (bottom of the screen), install Node.js modules by entering the following command:
   ```
   npm install
   ```
@@ -47,6 +47,7 @@ In order to reach our Network membership and action goals it is imperative that 
 * Send lots of pull requests!!
 
 ## Not Too Difficult Setup
+This setup uses Vagrant to create a virtual machine for the development environment.  The virtual machine runs on your computer.  Therefore you will need a good computer with plenty of memory and hard-disk space. The virtual machine keeps all the development safely isolated to avoid conflicts with other stuff on your computer.
 * Create a Github account
 * Fork [Network](https://github.com/edbirmingham/network)
 * Install VirtualBox
