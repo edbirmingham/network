@@ -1,3 +1,18 @@
+## We're the Birmingham Education Foundation.
+You can call us, Ed.
+
+## What We Do.
+The unique and specific focus of our work is “Network-Building”. The Birmingham Education Foundation (Ed) is dedicated to increasing the number of students in the Birmingham City Schools that are on the path to college, career, and life readiness. We believe that this is only possible by cultivating a diverse network of people who demand excellence for our students and inspire others to do the same. We believe Network members are:
+
+1. Committed to deliberate actions that demonstrate their belief in and love for our students; and
+2. Intentionally connected through a set of relationships, taking advantage of opportunities to act together, 
+and exchanging value between individuals and groups. 
+
+To actively cultivate the Network, we provide direct programming for students and fun and interactive opportunities for Network members to build new relationships and strengthen existing ones. We serve as Connectors among five different stakeholder groups – students, educators, families, local residents, and community partners– bringing them together to create a new operating culture that sparks organic and objective-driven visions to increase student preparedness for college, career, and life.
+
+## Network Asset Database
+In order to reach our Network membership and action goals it is imperative that we maintain organization of our data, communication, and progress. The Network Asset Database, aka [edbirmingham/network](https://github.com/edbirmingham/network), is being developed to increase Ed’s Network activity; maintaining Membership records, supporting stewardship (progress to requests/offers between Network members), and increasing access and awareness to school/community based assets.
+
 ## Contributing to Network
 
 ## Super Easy Setup
