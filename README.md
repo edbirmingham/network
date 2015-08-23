@@ -88,6 +88,7 @@ http://localhost:3000
 * Send lots of pull requests!!
 
 ## Really Difficult Setup
+This setup is for those who want complete control of their development environment, love wrestling with install scripts and who refer to dependency resolution as "Dependency Heaven".
 * Look at the Vagrantfile and install all that stuff.  Good luck.  :)
 
 ## Built with MEAN.JS
