@@ -16,7 +16,7 @@ In order to reach our Network membership and action goals it is imperative that 
 ## Contributing
 Network is 100% free and open-source. We encourage and support an active, healthy community that accepts contributions from the public – including you!
 * Questions? Visit our [slack](https://magiccitytech.slack.com/messages/edbirmingham/) channel.
-* Not sure what to work on?  Check out the issues in our upcoming [milestones](https://github.com/edbirmingham/network/milestones).
+* Not sure what to work on?  Check out the issues in our upcoming [milestones](https://github.com/edbirmingham/network/milestones).  Please add a comment to issues when you begin working on them.
 * Wondering how to setup a development environment?  See the [Super Easy](#super-easy-setup), [Not Too Difficult](#not-too-difficult-setup) and [Really Difficult](#really-difficult-setup) setup instructions below.
 * Want to learn about the technology being used?  See the [Built with MEAN.JS](#built-with-meanjs) section below.
 * Please use the [Official Yo Generator](http://meanjs.org/generator.html) when adding functionality.
