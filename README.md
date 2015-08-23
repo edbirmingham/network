@@ -16,7 +16,7 @@ In order to reach our Network membership and action goals it is imperative that 
 ## Contributing
 Network is 100% free and open-source. We encourage and support an active, healthy community that accepts contributions from the public – including you!
 * Questions? Visit our [slack](https://magiccitytech.slack.com/messages/edbirmingham/) channel.
-* Not sure what to work on?  Check out the issues in our upcoming [milestones](https://github.com/edbirmingham/network/milestones)
+* Not sure what to work on?  Check out the issues in our upcoming [milestones](https://github.com/edbirmingham/network/milestones).
 
 ## Super Easy Setup
 This setup uses Cloud9 for your development environment.  Cloud9 provides an online development environment and server for you to use.  All you need is a browser and good internet connection.  Everything else is available on Cloud9's site.
@@ -95,19 +95,19 @@ Network is built on the MEAN.JS stack.  It is Javascript all the way down folks.
 MEAN.JS is a full-stack JavaScript open-source solution, which provides a solid starting point for [MongoDB](http://www.mongodb.org/), [Node.js](http://www.nodejs.org/), [Express](http://expressjs.com/), and [AngularJS](http://angularjs.org/) based applications. The idea is to solve the common issues with connecting those frameworks, build a robust framework to support daily development needs, and help developers use better practices while working with popular JavaScript components. 
 
 ## MEAN.JS Building Blocks
-Before you begin we recommend you read about the basic building blocks that assemble a MEAN.JS application: 
+Before you begin we recommend you be familiar with the basic building blocks that assemble a MEAN.JS application: 
 * MongoDB - Go through [MongoDB Official Website](http://mongodb.org/) and proceed to their [Official Manual](http://docs.mongodb.org/manual/), which should help you understand NoSQL and MongoDB better.
-* Express - The best way to understand express is through its [Official Website](http://expressjs.com/), which has a [Getting Started](http://expressjs.com/starter/installing.html) guide, as well as an [ExpressJS Guide](http://expressjs.com/guide/error-handling.html) guide for general express topics. You can also go through this [StackOverflow Thread](http://stackoverflow.com/questions/8144214/learning-express-for-node-js) for more resources.
+* Express - The best way to understand express is through its [Official Website](http://expressjs.com/), which has a [Getting Started](http://expressjs.com/starter/installing.html) guide, as well as an [ExpressJS Guide](http://expressjs.com/guide/error-handling.html) guide for general Express topics. You can also go through this [StackOverflow Thread](http://stackoverflow.com/questions/8144214/learning-express-for-node-js) for more resources.
 * AngularJS - Angular's [Official Website](http://angularjs.org/) is a great starting point. You can also use [Thinkster Popular Guide](http://www.thinkster.io/), and the [Egghead Videos](https://egghead.io/).
 * Node.js - Start by going through [Node.js Official Website](http://nodejs.org/) and this [StackOverflow Thread](http://stackoverflow.com/questions/2353818/how-do-i-get-started-with-node-js), which should get you going with the Node.js platform in no time.
 
 ## Understanding MEAN.JS
-You have your application running but there are a lot of stuff to understand, we recommend you'll go over the [Official Documentation](http://meanjs.org/docs.html). 
-In the docs we'll try to explain both general concepts of MEAN components and give you some guidelines to help you improve your development process. We tried covering as many aspects as possible, and will keep update it by your request, you can also help us develop the documentation better by checking out the *gh-pages* branch of this repository.
+There is a lot to understand, we recommend you go over the [Official Documentation](http://meanjs.org/docs.html). 
+The docs explain both general concepts of MEAN components and give some guidelines to help improve the development process.
 
 ## MEAN.JS Community
-* Use to [Offical Website](http://meanjs.org) to learn about changes and the roadmap.
+* Use the [Offical Website](http://meanjs.org) to learn about changes and the roadmap.
 * Join #meanjs on freenode.
-* Discuss it in the new [Google Group](https://groups.google.com/d/forum/meanjs)
-* Ping us on [Twitter](http://twitter.com/meanjsorg) and [Facebook](http://facebook.com/meanjs)
+* Discuss it in the [Google Group](https://groups.google.com/d/forum/meanjs)
+* Ping them on [Twitter](http://twitter.com/meanjsorg) and [Facebook](http://facebook.com/meanjs)
 
