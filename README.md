@@ -25,7 +25,7 @@ This setup uses Cloud9 for your development environment.  Cloud9 provides an onl
   * Signup for [Cloud9 IDE](http://c9.io) with your Github Account
   * Goto the Repositories link in Cloud9 IDE
   * Select "Clone to edit" on *your* fork of Network.
-    * Note, you will see two options for Network.  One is "edbirmingham/network", which you do not want to select.  The other is "*your name*/network" which is the correct repository to select.
+    * Note, you may see two options for Network.  One is "edbirmingham/network", which you do not want to select.  The other is "*your name*/network" which is the correct repository to select.
   * Cloud9 will soon display the development environment. 
   * In the bash tab (bottom of the screen), install Node.js modules by entering the following command:
   ```
