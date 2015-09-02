@@ -31,8 +31,12 @@ This setup uses Cloud9 for your development environment.  Cloud9 provides an onl
   * Goto the Repositories link in Cloud9 IDE
   * Select "Clone to edit" on *your* fork of Network.
     * Note, you may see two options for Network.  One is "edbirmingham/network", which you do not want to select.  The other is "*your name*/network" which is the correct repository to select.
-  * Cloud9 will soon display the development environment. 
-  * In the bash tab (bottom of the screen), install Node.js modules by entering the following command:
+  * Cloud9 will soon display the development environment.
+  * In the bash tab (bottom of the screen), setup a git remote to the main project:
+  ```
+  git remote add upstream https://github.com/edbirmingham/network.git
+  ```
+  * In the bash tab, install Node.js modules by entering the following command:
   ```
   npm install
   ```
@@ -48,9 +52,12 @@ This setup uses Cloud9 for your development environment.  Cloud9 provides an onl
   grunt
   ```
   * To view the app in the browser, select Preview from the editor menu and then select Preview Running Application.  This will open the application in a tab of the editor.
-* Read documentation about [Official Yo Generator](http://meanjs.org/generator.html) for MEAN
 * Hack away
 * Send lots of pull requests!!
+* In order to get updates from the main project use the following command in the bash tab:
+```
+git pull upstream master
+```
 
 ## Not Too Difficult Setup
 This setup uses Vagrant to create a virtual machine for the development environment.  The virtual machine runs on your computer.  Therefore you will need a good computer with plenty of memory and hard-disk space. The virtual machine keeps all the development safely isolated to avoid conflicts with other stuff on your computer.
