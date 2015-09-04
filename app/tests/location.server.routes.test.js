@@ -163,41 +163,95 @@ describe('Location CRUD tests', function() {
 			});
 	});
 
-	it('should be able to get a list of Locations if not signed in', function(done) {
+	it('should not be able to get a list of Locations if not signed in', function(done) {
 		// Create new Location model instance
 		var locationObj = new Location(location);
 
 		// Save the Location
 		locationObj.save(function() {
 			// Request Locations
-			request(app).get('/locations')
-				.end(function(req, res) {
-					// Set assertion
-					res.body.should.be.an.Array.with.lengthOf(1);
+			agent.get('/locations')
+			  .expect(401)
+			  .end(function(req, res) {
+			    // Set message assertion
+				  res.body.message.should.match('User is not logged in');
 
-					// Call the assertion callback
-					done();
-				});
+				  // Handle Location error error
+				  done();
+			});
 
 		});
 	});
 
+  it('should be able to get a list of Locations if signed in', function(done) {
+    agent.post('/auth/signin')
+      .send(credentials)
+      .expect(200)
+        .end(function(signinErr, signinRes) {
+          // Handle signin error
+          if (signinErr) done(signinErr);
 
-	it('should be able to get a single Location if not signed in', function(done) {
-		// Create new Location model instance
-		var locationObj = new Location(location);
+          // Create new Location model instance
+          var locationObj = new Location(location);
 
-		// Save the Location
-		locationObj.save(function() {
-			request(app).get('/locations/' + locationObj._id)
-				.end(function(req, res) {
-					// Set assertion
-					res.body.should.be.an.Object.with.property('name', location.name);
+          // Save the Location
+          locationObj.save(function() {
 
-					// Call the assertion callback
-					done();
-				});
-		});
+            // Request Locations
+			      agent.get('/locations')
+              .expect(200)
+				      .end(function(req, res) {
+                // Set assertion
+					      res.body.should.be.an.Array.with.lengthOf(1);
+
+					      // Call the assertion callback
+					      done();
+				      });
+          });
+		    });
+	});
+
+  it('should not be able to get a single Location if not signed in', function(done) {
+    // Create new Location model instance
+    var locationObj = new Location(location);
+
+    // Save the Location
+    locationObj.save(function() {
+      request(app).get('/locations/' + locationObj._id)
+        .end(function(req, res) {
+          // Set message assertion
+          res.body.message.should.match('User is not logged in');
+
+          // Handle Location error error
+          done();
+        });
+    });
+  });
+
+	it('should be able to get a single Location if signed in', function(done) {
+    agent.post('/auth/signin')
+      .send(credentials)
+      .expect(200)
+        .end(function(signinErr, signinRes) {
+          // Handle signin error
+          if (signinErr) done(signinErr);
+
+          // Create new Location model instance
+          var locationObj = new Location(location);
+
+          // Save the Location
+          locationObj.save(function() {
+            agent.get('/locations/' + locationObj._id)
+              .expect(200)
+              .end(function(req, res) {
+                // Set assertion
+                res.body.should.be.an.Object.with.property('name', location.name);
+
+                // Call the assertion callback
+                done();
+              });
+          });
+        });
 	});
 
 	it('should be able to delete Location instance if signed in', function(done) {
