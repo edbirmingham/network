@@ -70,6 +70,10 @@ This setup uses Vagrant to create a virtual machine for the development environm
 git clone git@github.com:<your-github-id>/network.git
 ```
 * Change to the directory containing Network
+* If librarian-chef is not installed:
+```
+gem install librarian-chef
+```
 * Download the Chef cookbooks
 ```
 librarian-chef install
