@@ -1,4 +1,6 @@
 ## We're the Birmingham Education Foundation.
+
+[![Join the chat at https://gitter.im/edbirmingham/network](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/edbirmingham/network?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 You can call us, [Ed](http://edbirmingham.org).
 
 ## What We Do
