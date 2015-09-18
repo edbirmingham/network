@@ -15,7 +15,7 @@ In order to reach our Network membership and action goals it is imperative that 
 
 ## Contributing
 Network is 100% free and open-source. We encourage and support an active, healthy community that accepts contributions from the public – including you!
-* Questions? Visit our [slack](https://magiccitytech.slack.com/messages/edbirmingham/) channel.
+* Questions? Visit our [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/edbirmingham/network?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) room.
 * Not sure what to work on?  Check out the [![Stories in Ready](https://badge.waffle.io/edbirmingham/network.svg?label=ready&title=Ready)](http://waffle.io/edbirmingham/network) issues at [waffle](https://waffle.io/edbirmingham/network). Please move issues to the [waffle](https://waffle.io/edbirmingham/network) "In Progress" column when you begin working on them.
 * Wondering how to setup a development environment?  See the [Super Easy](#super-easy-setup), [Not Too Difficult](#not-too-difficult-setup) and [Really Difficult](#really-difficult-setup) setup instructions below.
 * Want to learn about the technology being used?  See the [Built with MEAN.JS](#built-with-meanjs) section below.
