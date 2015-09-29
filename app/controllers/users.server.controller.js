@@ -3,7 +3,10 @@
 /**
  * Module dependencies.
  */
-var _ = require('lodash');
+var mongoose = require('mongoose'),
+	errorHandler = require('./errors.server.controller'),
+	User = mongoose.model('User'),
+	_ = require('lodash');
 
 /**
  * Extend user's controller
