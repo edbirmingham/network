@@ -15,38 +15,27 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		watch: {
+			livereload: false,
 			serverViews: {
-				files: watchFiles.serverViews,
-				options: {
-					livereload: true
-				}
+				files: watchFiles.serverViews
 			},
 			serverJS: {
 				files: watchFiles.serverJS,
-				tasks: ['jshint'],
-				options: {
-					livereload: true
-				}
+				tasks: ['jshint']
 			},
 			clientViews: {
 				files: watchFiles.clientViews,
-				options: {
-					livereload: true,
-				}
 			},
 			clientJS: {
 				files: watchFiles.clientJS,
 				tasks: ['jshint'],
 				options: {
-					livereload: true
+					livereload: false
 				}
 			},
 			clientCSS: {
 				files: watchFiles.clientCSS,
-				tasks: ['csslint'],
-				options: {
-					livereload: true
-				}
+				tasks: ['csslint']
 			}
 		},
 		jshint: {
@@ -139,6 +128,20 @@ module.exports = function(grunt) {
 			unit: {
 				configFile: 'karma.conf.js'
 			}
+		},
+		shell: {
+    		mongodb: {
+        		command: 'mongod --dbpath /home/ubuntu/workspace/mongo --smallfiles --fork --logpath /home/ubuntu/workspace/mongo/mongod.log',
+	        	options: {
+	            	async: true,
+	            	stdout: false,
+	            	stderr: true,
+		            failOnError: true,
+		            execOptions: {
+		                cwd: '.'
+		            }
+		        }
+	    	}
 		}
 	});
 
@@ -174,4 +177,7 @@ module.exports = function(grunt) {
 
 	// Test task.
 	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
+	
+	// Launch mongo db.
+	grunt.registerTask('mongo', ['shell:mongodb']);
 };
