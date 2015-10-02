@@ -1,5 +1,15 @@
 'use strict';
 
+// Configuring the Users module
+angular.module('users').run(['Menus',
+	function(Menus) {
+		// Set top bar menu items
+		Menus.addMenuItem('topbar', 'Users', 'users', 'dropdown', '/users(/create)?');
+		Menus.addSubMenuItem('topbar', 'users', 'List Users', 'users');
+		Menus.addSubMenuItem('topbar', 'users', 'New User', 'users/create');
+	}
+]);
+
 // Config HTTP Error Handling
 angular.module('users').config(['$httpProvider',
 	function($httpProvider) {
