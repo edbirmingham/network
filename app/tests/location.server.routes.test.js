@@ -11,7 +11,7 @@ var should = require('should'),
 /**
  * Globals
  */
-var credentials, user, location;
+var credentials, user, my_location;
 
 /**
  * Location routes tests
@@ -37,7 +37,7 @@ describe('Location CRUD tests', function() {
 
 		// Save a user to the test db and create new Location
 		user.save(function() {
-			location = {
+			my_location = {
 				name: 'Location Name'
 			};
 
@@ -58,7 +58,7 @@ describe('Location CRUD tests', function() {
 
 				// Save a new Location
 				agent.post('/locations')
-					.send(location)
+					.send(my_location)
 					.expect(200)
 					.end(function(locationSaveErr, locationSaveRes) {
 						// Handle Location save error
@@ -86,7 +86,7 @@ describe('Location CRUD tests', function() {
 
 	it('should not be able to save Location instance if not logged in', function(done) {
 		agent.post('/locations')
-			.send(location)
+			.send(my_location)
 			.expect(401)
 			.end(function(locationSaveErr, locationSaveRes) {
 				// Call the assertion callback
@@ -96,7 +96,7 @@ describe('Location CRUD tests', function() {
 
 	it('should not be able to save Location instance if no name is provided', function(done) {
 		// Invalidate name field
-		location.name = '';
+		my_location.name = '';
 
 		agent.post('/auth/signin')
 			.send(credentials)
@@ -110,7 +110,7 @@ describe('Location CRUD tests', function() {
 
 				// Save a new Location
 				agent.post('/locations')
-					.send(location)
+					.send(my_location)
 					.expect(400)
 					.end(function(locationSaveErr, locationSaveRes) {
 						// Set message assertion
@@ -135,18 +135,18 @@ describe('Location CRUD tests', function() {
 
 				// Save a new Location
 				agent.post('/locations')
-					.send(location)
+					.send(my_location)
 					.expect(200)
 					.end(function(locationSaveErr, locationSaveRes) {
 						// Handle Location save error
 						if (locationSaveErr) done(locationSaveErr);
 
 						// Update Location name
-						location.name = 'WHY YOU GOTTA BE SO MEAN?';
+						my_location.name = 'WHY YOU GOTTA BE SO MEAN?';
 
 						// Update existing Location
 						agent.put('/locations/' + locationSaveRes.body._id)
-							.send(location)
+							.send(my_location)
 							.expect(200)
 							.end(function(locationUpdateErr, locationUpdateRes) {
 								// Handle Location update error
@@ -165,7 +165,7 @@ describe('Location CRUD tests', function() {
 
 	it('should not be able to get a list of Locations if not signed in', function(done) {
 		// Create new Location model instance
-		var locationObj = new Location(location);
+		var locationObj = new Location(my_location);
 
 		// Save the Location
 		locationObj.save(function() {
@@ -192,7 +192,7 @@ describe('Location CRUD tests', function() {
           if (signinErr) done(signinErr);
 
           // Create new Location model instance
-          var locationObj = new Location(location);
+          var locationObj = new Location(my_location);
 
           // Save the Location
           locationObj.save(function() {
@@ -213,7 +213,7 @@ describe('Location CRUD tests', function() {
 
   it('should not be able to get a single Location if not signed in', function(done) {
     // Create new Location model instance
-    var locationObj = new Location(location);
+    var locationObj = new Location(my_location);
 
     // Save the Location
     locationObj.save(function() {
@@ -237,7 +237,7 @@ describe('Location CRUD tests', function() {
           if (signinErr) done(signinErr);
 
           // Create new Location model instance
-          var locationObj = new Location(location);
+          var locationObj = new Location(my_location);
 
           // Save the Location
           locationObj.save(function() {
@@ -245,7 +245,7 @@ describe('Location CRUD tests', function() {
               .expect(200)
               .end(function(req, res) {
                 // Set assertion
-                res.body.should.be.an.Object.with.property('name', location.name);
+                res.body.should.be.an.Object.with.property('name', my_location.name);
 
                 // Call the assertion callback
                 done();
@@ -267,7 +267,7 @@ describe('Location CRUD tests', function() {
 
 				// Save a new Location
 				agent.post('/locations')
-					.send(location)
+					.send(my_location)
 					.expect(200)
 					.end(function(locationSaveErr, locationSaveRes) {
 						// Handle Location save error
@@ -275,7 +275,7 @@ describe('Location CRUD tests', function() {
 
 						// Delete existing Location
 						agent.delete('/locations/' + locationSaveRes.body._id)
-							.send(location)
+							.send(my_location)
 							.expect(200)
 							.end(function(locationDeleteErr, locationDeleteRes) {
 								// Handle Location error error
@@ -293,10 +293,10 @@ describe('Location CRUD tests', function() {
 
 	it('should not be able to delete Location instance if not signed in', function(done) {
 		// Set Location user
-		location.user = user;
+		my_location.user = user;
 
 		// Create new Location model instance
-		var locationObj = new Location(location);
+		var locationObj = new Location(my_location);
 
 		// Save the Location
 		locationObj.save(function() {

@@ -31,7 +31,7 @@ module.exports = function(grunt) {
 			clientViews: {
 				files: watchFiles.clientViews,
 				options: {
-					livereload: true,
+					livereload: true
 				}
 			},
 			clientJS: {
@@ -139,6 +139,20 @@ module.exports = function(grunt) {
 			unit: {
 				configFile: 'karma.conf.js'
 			}
+		},
+		shell: {
+    		mongodb: {
+        		command: 'mongod --dbpath /home/ubuntu/workspace/mongo --smallfiles --fork --logpath /home/ubuntu/workspace/mongo/mongod.log',
+	        	options: {
+	            	async: true,
+	            	stdout: false,
+	            	stderr: true,
+		            failOnError: true,
+		            execOptions: {
+		                cwd: '.'
+		            }
+		        }
+	    	}
 		}
 	});
 
@@ -174,4 +188,7 @@ module.exports = function(grunt) {
 
 	// Test task.
 	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
+	
+	// Launch mongo db.
+	grunt.registerTask('mongo', ['shell:mongodb']);
 };
