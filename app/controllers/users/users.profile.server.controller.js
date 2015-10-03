@@ -135,3 +135,14 @@ exports.hasAuthorization = function(req, res, next) {
 	}
 	next();
 };
+
+/**
+ * User functionality that is disabled middleware
+ */
+exports.isDisabledFunctionality = function(req, res, next) {
+	if (true) {
+		return res.status(404).send('Page not found.');
+	}
+	
+	next(); 
+};
