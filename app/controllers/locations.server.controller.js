@@ -73,7 +73,7 @@ exports.delete = function(req, res) {
  * List of Locations
  */
 exports.list = function(req, res) {
-	Location.find().sort('-created').populate('user', 'displayName').exec(function(err, locations) {
+	Location.find().sort('name').populate('user', 'displayName').exec(function(err, locations) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
