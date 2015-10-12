@@ -1,0 +1,39 @@
+<section data-ng-controller="ParticipantsController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1 data-ng-bind="participant.displayName"></h1>
+	</div>
+	<div class="clearfix">
+		<dl class="dl-horizontal">
+		  <dt>Phone</dt>
+		  <dd data-ng-bind="participant.phone"></dd>
+		  <dt>Email</dt>
+		  <dd data-ng-bind="participant.email"></dd>
+		  <dt>Identity</dt>
+		  <dd data-ng-bind="participant.identity"></dd>
+		  <dt>Affiliation</dt>
+		  <dd data-ng-bind="participant.affiliation"></dd>
+		</dl>
+	</div>
+	<div class="page-header">
+		<h1 data-ng-bind="participant.name"></h1>
+	</div>
+	<div class="pull-right" data-ng-show="authentication.user">
+		<a class="btn btn-primary" href="/#!/participants/create">
+			<i class="glyphicon glyphicon-plus-sign"></i>
+		</a>
+		<a class="btn btn-primary" href="/#!/participants/{{participant._id}}/edit">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+	</div>
+	<small>
+		<em class="text-muted">
+			Created on
+			<span data-ng-bind="participant.created | date:'mediumDate'"></span>
+			by
+			<span data-ng-bind="participant.user.displayName"></span>
+		</em>
+	</small>
+</section>
