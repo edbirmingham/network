@@ -37,9 +37,9 @@ describe('User CRUD tests', function() {
 		// Save a user to the test db and create new User
 		logged_in_user.save(function() {
 			user = {
-				firstName: 'Test',
+				firstName: 'Another',
 				lastName: 'Name',
-				displayName: 'Test Name',
+				displayName: 'Another Name',
 				email: 'testname@test.com',
 				username: 'testusername',
 				password: 'testpassword',
@@ -80,7 +80,7 @@ describe('User CRUD tests', function() {
 
 								// Set assertions
 								(users[0].user._id).should.equal(userId);
-								(users[0].displayName).should.match('Test Name');
+								(users[0].displayName).should.match('Another Name');
 
 								// Call the assertion callback
 								done();
