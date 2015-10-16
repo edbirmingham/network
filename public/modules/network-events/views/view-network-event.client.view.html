@@ -1,0 +1,31 @@
+<section data-ng-controller="NetworkEventsController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1 data-ng-bind="networkEvent.name"></h1>
+	</div>
+	<div class="clearfix">
+		<dl class="dl-horizontal">
+		  <dt>Event Type</dt>
+		  <dd data-ng-bind="networkEvent.eventType"></dd>
+		  <dt>Location</dt>
+		  <dd data-ng-bind="networkEvent.location.name"></dd>
+		  <dt>Scheduled Date</dt>
+		  <dd data-ng-bind="networkEvent.scheduled | date:'mediumDate'"></dd>
+		</dl>
+	</div>
+	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == networkEvent.user._id))">
+		<a class="btn btn-primary" href="/#!/network-events/{{networkEvent._id}}/edit">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+	</div>
+	<small>
+		<em class="text-muted">
+			Created on
+			<span data-ng-bind="networkEvent.created | date:'mediumDate'"></span>
+			by
+			<span data-ng-bind="networkEvent.user.displayName"></span>
+		</em>
+	</small>
+</section>
