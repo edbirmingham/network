@@ -74,27 +74,36 @@ exports.delete = function(req, res) {
  * List of Network events
  */
 exports.list = function(req, res) { 
-	NetworkEvent.find().sort('-scheduled name').populate('user location', 'name').exec(function(err, networkEvents) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(networkEvents);
-		}
-	});
+	NetworkEvent
+	    .find()
+	    .sort('-scheduled name')
+	    .populate('user', 'displayName')
+	    .populate('location', 'name')
+	    .exec(function(err, networkEvents) {
+			if (err) {
+				return res.status(400).send({
+					message: errorHandler.getErrorMessage(err)
+				});
+			} else {
+				res.jsonp(networkEvents);
+			}
+		});
 };
 
 /**
  * Network event middleware
  */
 exports.networkEventByID = function(req, res, next, id) { 
-	NetworkEvent.findById(id).populate('user location', 'name').exec(function(err, networkEvent) {
-		if (err) return next(err);
-		if (! networkEvent) return next(new Error('Failed to load Network event ' + id));
-		req.networkEvent = networkEvent ;
-		next();
-	});
+	NetworkEvent
+		.findById(id)
+		.populate('user', 'displayName')
+		.populate('location', 'name')
+		.exec(function(err, networkEvent) {
+			if (err) return next(err);
+			if (! networkEvent) return next(new Error('Failed to load Network event ' + id));
+			req.networkEvent = networkEvent ;
+			next();
+		});
 };
 
 /**
