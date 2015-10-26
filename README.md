@@ -38,6 +38,7 @@ This setup uses Cloud9 for your development environment.  Cloud9 provides an onl
   ```
   * In the bash tab, install Node.js modules by entering the following command:
   ```
+  nvm use v0.10
   npm install
   ```
   > Note: If the command fails, you can restart the workspace by clicking in the top right corner where it says "Memory, CPU, and Disk". Then click restart in that menu. 
