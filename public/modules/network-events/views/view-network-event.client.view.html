@@ -12,7 +12,10 @@
 		  <dd data-ng-bind="networkEvent.scheduled | date:'mediumDate'"></dd>
 		</dl>
 	</div>
-	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == networkEvent.user._id))">
+	<div class="pull-right" data-ng-show="authentication.user">
+		<a class="btn btn-primary" href="/#!/network-events/{{networkEvent._id}}/participations/create">
+			<i class="glyphicon glyphicon-list"></i>
+		</a>
 		<a class="btn btn-primary" href="/#!/network-events/{{networkEvent._id}}/edit">
 			<i class="glyphicon glyphicon-edit"></i>
 		</a>

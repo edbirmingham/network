@@ -5,7 +5,7 @@
     <div class="list-group">
         <a data-ng-repeat="location in locations" data-ng-href="#!/locations/{{location._id}}" class="list-group-item">
 			<small class="list-group-item-text">
-				Posted on
+				Created on
 				<span data-ng-bind="location.created | date:'medium'"></span>
 				by
 				<span data-ng-bind="location.user.displayName"></span>

@@ -111,10 +111,14 @@
 			});
 
 			// Fixture mock form input values
-			scope.networkEvent = sampleNetworkEventPostData;
+			scope.networkEvent = {
+				name: 'New Network event',
+				eventType: 'Raise Up Network',
+				location: {_id: '525a8422f6d0f87f0e407a33'}
+			};
 
 			// Set POST response
-			$httpBackend.expectGET('locations').respond([]);
+			$httpBackend.expectGET('locations').respond([{_id: '525a8422f6d0f87f0e407a33', name: 'School'}]);
 			$httpBackend.expectPOST('network-events', sampleNetworkEventPostData).respond(sampleNetworkEventResponse);
 
 			// Run controller functionality

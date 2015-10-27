@@ -1,0 +1,68 @@
+<section data-ng-controller="ParticipationsController" data-ng-init="newParticipation()">
+    <div class="page-header">
+        <h1 data-ng-bind="networkEvent.name"></h1>
+    </div>
+    
+    <div class="col-md-12">
+        <form class="form-horizontal" data-ng-submit="create()" novalidate>
+            <fieldset>
+                <div class="form-group">
+                    <label class="control-label" for="name">Find participant</label>
+                    <div class="controls">
+                        <input type="text" ng-model="selected" ng-change="attendee = null" typeahead-editable="false" typeahead-on-select="attendee = $item" typeahead="participant.displayName for participant in findParticipants($viewValue)" class="form-control" placeholder="Find participant">
+                    </div>
+                </div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="firstName">First Name</label>
+                    <div class="controls">
+    					<input type="text" required id="firstName" name="firstName" class="form-control" data-ng-model="attendee.firstName" placeholder="First Name">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="lastName">Last Name</label>
+                    <div class="controls">
+    					<input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="attendee.lastName" placeholder="Last Name">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="phone">Phone</label>
+                    <div class="controls">
+    					<input type="phone" id="phone" name="phone" class="form-control" data-ng-model="attendee.phone" placeholder="Phone">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="email">Email</label>
+                    <div class="controls">
+    					<input type="email" id="email" name="email" class="form-control" data-ng-model="attendee.email" placeholder="Email">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="identity">Who are you?</label>
+					<span id="identityHelpBlock" class="help-block">Ask: Student/Parent/Educator/Resident/Community Partner (choose one)</span>
+                    <div class="controls">
+    					<select id="identity" name="identity" class="form-control" data-ng-model="attendee.identity" placeholder="Who are you?">
+    						<option>Student</option>
+    						<option>Parent</option>
+    						<option>Educator</option>
+    						<option>Resident</option>
+    						<option>Community Partner</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="affiliation">Affiliation?</label>
+					<span id="identityHelpBlock" class="help-block">Where are you coming from? (Specific school, neighborhood, organization/group)</span>
+                    <div class="controls">
+    					<input type="text" id="affiliation" name="affiliation" class="form-control" data-ng-model="attendee.affiliation" placeholder="Affiliation?">
+					</div>
+				</div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-default">
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</section>
