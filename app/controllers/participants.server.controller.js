@@ -75,7 +75,14 @@ exports.delete = function(req, res) {
  * List of Participants
  */
 exports.list = function(req, res) { 
-	Participant.find().sort('firstName lastName').populate('user', 'displayName').exec(function(err, participants) {
+	var conditions = {};
+	if (req.query.name) {
+		conditions = { $or: [ 
+			{ lastName: new RegExp(req.query.name, 'i') }, 
+			{ firstName: new RegExp(req.query.name, 'i') } 
+		] };
+	}
+	Participant.find(conditions).sort('firstName lastName').populate('user', 'displayName').exec(function(err, participants) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
