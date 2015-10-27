@@ -6,13 +6,13 @@ module.exports = function(app) {
 
 	// Members Routes
 	app.route('/members')
-		.get(members.list)
+		.get(users.requiresLogin, members.list)
 		.post(users.requiresLogin, members.create);
 
 	app.route('/members/:memberId')
-		.get(members.read)
-		.put(users.requiresLogin, members.hasAuthorization, members.update)
-		.delete(users.requiresLogin, members.hasAuthorization, members.delete);
+		.get(users.requiresLogin, members.read)
+		.put(users.requiresLogin, members.update)
+		.delete(users.requiresLogin,  members.delete);
 
 	// Finish by binding the Member middleware
 	app.param('memberId', members.memberByID);
