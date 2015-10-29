@@ -4,45 +4,17 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-	Schema = mongoose.Schema;
+	Schema = mongoose.Schema,    
+	participant = require('./participant.server.model'),
+	Participant = mongoose.model('Participant'),
+	_ = require('lodash');
 
 /**
  * Member Schema
  */
-var MemberSchema = new Schema({
-	firstName: {
-		type: String,
-		trim: true,
-		default: '',
-		required: 'Please fill in the first name'
-	},
-	lastName: {
-		type: String,
-		trim: true,
-		default: '',
-		required: 'Please fill in the last name'
-	},
-	displayName: {
-		type: String,
-		trim: true
-	},
-	member: {
-		type: Boolean,
-		default: true,
-	},
-	phone: {
-		type: String,
-		trim: true,
-		default: '',
-		required: 'Please fill in the phone'
-	},
-	email: {
-		type: String,
-		trim: true,
-		default: '',
-		validate: [/^\s*$|.+\@.+\..+/, 'Please provide a valid email address']
-	},
-	address: {             // Should address be composed of subdocuments?
+var MemberSchema = Participant.discriminator('Member', 
+	new Schema({ 
+			address: {             // Should address be composed of subdocuments?
 		type: String,
 		default: '',
 	},
@@ -71,29 +43,11 @@ var MemberSchema = new Schema({
 		trim: true,
 		default: '',
 	},
-	communityNetworks: {
-		network1: {type: String},
-		network2: {type: String},
-		network3: {type: String}
-	},
-	extraGroups: {                            //is this the best way to store these groups
-		group1: {type: String},
-		group2: {type: String},
-		group3: {type: String},
-	},
-	otherNetworks: {
-		otherNetwork1: {type: String},
-		otherNetwork2: {type: String},
-		otherNetwork3: {type: String},
-	},
-	created: {
-		type: Date,
-		default: Date.now
-	},
-	user: {
-		type: Schema.ObjectId,
-		ref: 'User'
-	}
-});
+	communityNetworks: [String],
+	extraGroups: [String],
+	ortherNetworks: [String],
+		
+	}));
+
 
 mongoose.model('Member', MemberSchema);
