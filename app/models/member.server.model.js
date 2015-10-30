@@ -33,7 +33,7 @@ var MemberSchema = Participant.discriminator('Member', new Schema({
 	},
 	communityNetworks: [String],
 	extraGroups: [String],
-	ortherNetworks: [String],
+	otherNetworks: [String],
 }));
 
 
