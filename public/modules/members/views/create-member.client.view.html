@@ -5,18 +5,86 @@
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="create()" novalidate>
             <fieldset>
-                <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
+                <div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="firstName">First Name</label>
                     <div class="controls">
-                        <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required>
-                    </div>
-                </div>
+    					<input type="text" required id="firstName" name="firstName" class="form-control" data-ng-model="member.firstName" placeholder="First Name">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="lastName">Last Name</label>
+                    <div class="controls">
+    					<input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="member.lastName" placeholder="Last Name">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="phone">Phone</label>
+                    <div class="controls">
+    					<input type="phone" id="phone" name="phone" class="form-control" data-ng-model="member.phone" placeholder="Phone">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="email">Email</label>
+                    <div class="controls">
+    					<input type="email" id="email" name="email" class="form-control" data-ng-model="member.email" placeholder="Email">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="identity">Who are you?</label>
+					<span id="identityHelpBlock" class="help-block">Ask: Student/Parent/Educator/Resident/Community Partner (choose one)</span>
+                    <div class="controls">
+    					<select id="identity" name="identity" class="form-control" data-ng-model="member.identity" placeholder="Who are you?">
+    						<option>Student</option>
+    						<option>Parent</option>
+    						<option>Educator</option>
+    						<option>Resident</option>
+    						<option>Community Partner</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="affiliation">Affiliation?</label>
+					<span id="identityHelpBlock" class="help-block">Where are you coming from? (Specific school, neighborhood, organization/group)</span>
+                    <div class="controls">
+    					<input type="text" id="affiliation" name="affiliation" class="form-control" data-ng-model="member.affiliation" placeholder="Affiliation?">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="address">Address</label>
+                    <div class="controls">
+    					<input type="address" id="address" name="address" class="form-control" data-ng-model="member.address" placeholder="Address">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="shirtSize">T-shirt Size</label>
+					<span id="shirtSizeHelpBlock" class="help-block">Ask: What size T-shirt?</span>
+                    <div class="controls">
+    					<select id="shirtSize" name="shirtSize" class="form-control" data-ng-model="member.shirtSize" placeholder="Shirt Size?">
+    						<option>Small</option>
+    						<option>Medium</option>
+    						<option>Large</option>
+    						<option>X-Large</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="talent">Talent/Passion</label>
+                    <div class="controls">
+    					<input type="talent" id="talent" name="talent" class="form-control" data-ng-model="member.talent" placeholder="Talent">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="placeOfWorship">Place Of Worship</label>
+                    <div class="controls">
+    					<input type="placeOfWorship" id="placeOfWorship" name="placeOfWorship" class="form-control" data-ng-model="member.placeOfWorship" placeholder="Place Of Worship">
+					</div>
+				</div>
                 <div class="form-group">
                     <input type="submit" class="btn btn-default">
                 </div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
             </fieldset>
         </form>
     </div>
