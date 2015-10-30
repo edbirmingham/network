@@ -12,17 +12,10 @@ var mongoose = require('mongoose'),
 /**
  * Member Schema
  */
-var MemberSchema = Participant.discriminator('Member', 
-	new Schema({ 
-			address: {             // Should address be composed of subdocuments?
+var MemberSchema = Participant.discriminator('Member', new Schema({ 
+	address: {             // Should address be composed of subdocuments?
 		type: String,
 		default: '',
-	},
-	identity: {
-		type: String,
-		trim: true,
-		default: '',
-		required: 'Please choose an option for "Who are you ?"'
 	},
 	shirtSize: {
 		type: String,
@@ -30,13 +23,8 @@ var MemberSchema = Participant.discriminator('Member',
 	},
 	talent: {
 		type: String,
-		required: 'Please provide a talent/passion.'
-	},
-	affiliation: {
-		type: String,
 		trim: true,
-		default: '',
-		required: 'Please fill in the affiliation'
+		required: 'Please provide a talent/passion.'
 	},
 	placeOfWorship: {
 		type: String,
@@ -46,8 +34,7 @@ var MemberSchema = Participant.discriminator('Member',
 	communityNetworks: [String],
 	extraGroups: [String],
 	ortherNetworks: [String],
-		
-	}));
+}));
 
 
 mongoose.model('Member', MemberSchema);
