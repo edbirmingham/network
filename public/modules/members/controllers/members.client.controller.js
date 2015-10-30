@@ -8,16 +8,23 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 		// Create new Member
 		$scope.create = function() {
 			// Create new Member object
-			var member = new Members ({
-				name: this.name
-			});
+			var member = new Members($scope.member);
 
 			// Redirect after save
 			member.$save(function(response) {
 				$location.path('members/' + response._id);
 
 				// Clear form fields
-				$scope.name = '';
+				$scope.member.firstName = '';
+				$scope.member.lastName = '';
+				$scope.member.phone = '';
+				$scope.member.email = '';
+				$scope.member.identity = '';
+				$scope.member.affiliation = '';
+				$scope.member.address = '';
+				$scope.member.shirtSize = '';
+				$scope.member.talent = '';
+				$scope.member.placeOfWorship = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
