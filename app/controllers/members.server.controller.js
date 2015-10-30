@@ -13,7 +13,6 @@ var mongoose = require('mongoose'),
  */
 exports.create = function(req, res) {
 	var member = new Member(req.body);
-	member.displayName = member.firstName + ' ' + member.lastName;
 	member.user = req.user;
 
 	member.save(function(err) {
@@ -41,7 +40,6 @@ exports.update = function(req, res) {
 	var member = req.member ;
 
 	member = _.extend(member , req.body);
-	member.displayName = member.firstName + ' ' + member.lastName;
 
 	member.save(function(err) {
 		if (err) {
@@ -55,7 +53,7 @@ exports.update = function(req, res) {
 };
 
 /**
- * Delete a Member
+ * Delete an Member
  */
 exports.delete = function(req, res) {
 	var member = req.member ;
@@ -75,14 +73,7 @@ exports.delete = function(req, res) {
  * List of Members
  */
 exports.list = function(req, res) { 
-	var conditions = {};
-	if(req.query.name) {
-		conditions = { $or: [
-			{ lastName: new RegExp(req.query.name, 'i') },
-			{ firstName: new RegExp(req.query.name, 'i')}
-		]};
-	}
-	Member.find(conditions).sort('firstName lastName').populate('user', 'displayName').exec(function(err, members) {
+	Member.find().sort('-created').populate('user', 'displayName').exec(function(err, members) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
