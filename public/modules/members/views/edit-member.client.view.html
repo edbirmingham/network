@@ -5,18 +5,56 @@
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="update()" novalidate>
             <fieldset>
+                <div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
                 <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
+                    <label class="control-label" for="firstName">First Name</label>
                     <div class="controls">
-                        <input type="text" data-ng-model="member.name" id="name" class="form-control" placeholder="Name" required>
+                        <input type="text" required data-ng-model="member.firstName" id="firstName" class="form-control" placeholder="First ame" required>
                     </div>
                 </div>
                 <div class="form-group">
+					<label class="control-label" for="lastName">Last Name</label>
+                    <div class="controls">
+    					<input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="member.lastName" placeholder="Last Name">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="phone">Phone</label>
+                    <div class="controls">
+    					<input type="phone" id="phone" name="phone" class="form-control" data-ng-model="member.phone" placeholder="Phone">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="email">Email</label>
+                    <div class="controls">
+    					<input type="email" id="email" name="email" class="form-control" data-ng-model="member.email" placeholder="Email">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="identity">Who are you?</label>
+					<span id="identityHelpBlock" class="help-block">Ask: Student/Parent/Educator/Resident/Community Partner (choose one)</span>
+                    <div class="controls">
+    					<select id="identity" name="identity" class="form-control" data-ng-model="member.identity" placeholder="Who are you?">
+    						<option>Student</option>
+    						<option>Parent</option>
+    						<option>Educator</option>
+    						<option>Resident</option>
+    						<option>Community Partner</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="affiliation">Affiliation?</label>
+					<span id="identityHelpBlock" class="help-block">Where are you coming from? (Specific school, neighborhood, organization/group)</span>
+                    <div class="controls">
+    					<input type="text" id="affiliation" name="affiliation" class="form-control" data-ng-model="member.affiliation" placeholder="Affiliation?">
+					</div>
+				</div>
+                <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-default">
                 </div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
             </fieldset>
         </form>
     </div>
