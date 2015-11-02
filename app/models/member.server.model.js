@@ -31,6 +31,10 @@ var MemberSchema = Participant.discriminator('Member', new Schema({
 		trim: true,
 		default: '',
 	},
+	recruitment: {
+		type: String,
+		required: 'Please provide a recruiter.'
+	},
 	communityNetworks: [String],
 	extraGroups: [String],
 	otherNetworks: [String],
