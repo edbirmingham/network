@@ -25,6 +25,16 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 				$scope.member.shirtSize = '';
 				$scope.member.talent = '';
 				$scope.member.placeOfWorship = '';
+				$scope.member.communityNetwork1 = '';
+				$scope.member.communityNetwork2 = '';
+				$scope.member.communityNetwork3 = '';
+				$scope.member.extraGroup1 = '';
+				$scope.member.extraGroup2 = '';
+				$scope.member.extraGroup3 = '';
+				$scope.member.otherNetwork1 = '';
+				$scope.member.otherNetwork2 = '';
+				$scope.member.otherNetwork3 = '';
+
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
