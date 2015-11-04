@@ -52,6 +52,54 @@
     					<input type="text" id="affiliation" name="affiliation" class="form-control" data-ng-model="member.affiliation" placeholder="Affiliation?">
 					</div>
 				</div>
+				<div class="form-group">
+					<label class="control-label" for="address">Address</label>
+                    <div class="controls">
+    					<input type="address" id="address" name="address" class="form-control" data-ng-model="member.address" placeholder="Address">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="shirtSize">T-shirt Size</label>
+					<span id="shirtSizeHelpBlock" class="help-block">Ask: What size T-shirt?</span>
+                    <div class="controls">
+    					<select id="shirtSize" name="shirtSize" class="form-control" data-ng-model="member.shirtSize" placeholder="Shirt Size?">
+    						<option>Small</option>
+    						<option>Medium</option>
+    						<option>Large</option>
+    						<option>X-Large</option>
+    						<option>XX-Large</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="talent">What are you good at? What do you have a talent/passion for?</label>
+                    <div class="controls">
+    					<input type="talent" id="talent" name="talent" class="form-control" data-ng-model="member.talent" placeholder="Talent">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="placeOfWorship">Place Of Worship</label>
+                    <div class="controls">
+    					<input type="placeOfWorship" id="placeOfWorship" name="placeOfWorship" class="form-control" data-ng-model="member.placeOfWorship" placeholder="Place Of Worship">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="recruitment">How were you recruited?</label></label>
+					<span id="recruitmentHelpBlock" class="help-block">Ask: How did you become a member?</span>
+                    <div class="controls">
+    					<select id="recruitment" name="recruitment" class="form-control" data-ng-model="member.recruitment" placeholder="Who recruited you?">
+    						<option>EdBirmingham Staff</option>
+    						<option>Network Night</option>
+    						<option>Career Development Conference</option>
+    						<option>Bridging the Gap</option>
+    						<option>Connector Recruitment</option></option>
+    						<option>Educator Roundtable</option>
+    						<option>Parent Pathways</option>
+    						<option>Gear Up</option>                     
+    						<option>Other</option>
+						</select>
+					</div>
+				</div>
                 <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-default">
                 </div>
