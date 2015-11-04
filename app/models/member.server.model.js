@@ -13,7 +13,7 @@ var mongoose = require('mongoose'),
  * Member Schema
  */
 var MemberSchema = Participant.discriminator('Member', new Schema({ 
-	address: {             // Should address be composed of subdocuments?
+	address: {             
 		type: String,
 		default: '',
 	},
