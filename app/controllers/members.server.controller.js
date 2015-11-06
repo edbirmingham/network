@@ -39,9 +39,9 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
 	var member = req.member ;
-	member.displayName = member.firstName + ' ' + member.lastName;
 	member = _.extend(member , req.body);
-
+	member.displayName = member.firstName + ' ' + member.lastName;
+	
 	member.save(function(err) {
 		if (err) {
 			return res.status(400).send({
