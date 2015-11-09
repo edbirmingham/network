@@ -43,6 +43,10 @@ angular.element(document).ready(function() {
 });
 'use strict';
 
+// Use applicaion configuration module to register a new module
+ApplicationConfiguration.registerModule('actions');
+'use strict';
+
 // Use Applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('core');
 'use strict';
@@ -65,6 +69,183 @@ ApplicationConfiguration.registerModule('participations');
 
 // Use applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('users');
+'use strict';
+
+// Configuring the Articles module
+angular.module('actions').run(['Menus',
+	function(Menus) {
+		// Set top bar menu items
+		Menus.addMenuItem('topbar', 'Actions', 'actions', 'dropdown', '/actions(/create)?');
+		Menus.addSubMenuItem('topbar', 'actions', 'List Actions', 'actions');
+		Menus.addSubMenuItem('topbar', 'actions', 'New Action', 'actions/create');
+	}
+]);
+'use strict';
+
+//Setting up route
+angular.module('actions').config(['$stateProvider',
+	function($stateProvider) {
+		// Actions state routing
+		$stateProvider.
+		state('listActions', {
+			url: '/actions',
+			templateUrl: 'modules/actions/views/list-actions.client.view.html'
+		}).
+		state('createAction', {
+			url: '/actions/create',
+			templateUrl: 'modules/actions/views/create-action.client.view.html'
+		}).
+		state('viewAction', {
+			url: '/actions/:actionId',
+			templateUrl: 'modules/actions/views/view-action.client.view.html'
+		}).
+		state('editAction', {
+			url: '/actions/:actionId/edit',
+			templateUrl: 'modules/actions/views/edit-action.client.view.html'
+		});
+	}
+]);
+'use strict';
+
+// Actions controller
+angular.module('actions').controller('ActionsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Actions', 'Participants', 'NetworkEvents',
+	function($scope, $stateParams, $location, Authentication, Actions, Participants, NetworkEvents) {
+		$scope.authentication = Authentication;
+
+        // Retrieve the list of possible events for the action.
+        $scope.networkEvents = NetworkEvents.query();
+        
+		// Create new Action
+		$scope.create = function() {
+			$scope.action = $scope.action || {};
+			
+			var match_ids = [];
+			angular.forEach($scope.matches, function(match){
+				this.push(match._id);
+			}, match_ids);
+			
+			var networkEventID = null;
+			if ($scope.networkEvent) {
+				networkEventID = $scope.networkEvent._id;
+			}
+			
+			var actorID = null;
+			if ($scope.actor) {
+				actorID = $scope.actor._id;
+			}
+			
+			// Create new Action object
+			var action = new Actions ({
+				networkEvent: networkEventID,
+				actor: actorID,
+				type: $scope.action.type,
+				description: $scope.action.description,
+				matches: match_ids
+			});
+
+			// Redirect after save
+			action.$save(function(response) {
+				$location.path('actions/create');
+				
+				// Show success message
+				$scope.success = $scope.actor.displayName + '\'s action was successfully added.';
+				
+				// Clear form fields
+				$scope.actor = null;
+				$scope.action.type = null;
+				$scope.action.description = null;
+				$scope.matches = [];
+				$scope.selectedMatch = null;
+				
+				// Focus on selecting the next actor.
+				var actor_input = document.querySelector('#actor');
+				if (actor_input) {
+					actor_input.focus();
+				}
+			}, function(errorResponse) {
+				$scope.success = null;
+				$scope.error = errorResponse.data.message;
+			});
+		};
+
+		// Remove existing Action
+		$scope.remove = function(action) {
+			if ( action ) { 
+				action.$remove();
+
+				for (var i in $scope.actions) {
+					if ($scope.actions [i] === action) {
+						$scope.actions.splice(i, 1);
+					}
+				}
+			} else {
+				$scope.action.$remove(function() {
+					$location.path('actions');
+				});
+			}
+		};
+
+		// Update existing Action
+		$scope.update = function() {
+			var action = $scope.action;
+
+			action.$update(function() {
+				$location.path('actions/' + action._id);
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+
+		// Find a list of Actions
+		$scope.find = function() {
+			$scope.actions = Actions.query();
+		};
+
+		// Find existing Action
+		$scope.findOne = function() {
+			$scope.action = Actions.get({ 
+				actionId: $stateParams.actionId
+			});
+		};
+		
+		// Find existing participants
+		$scope.findParticipants = function(name) {
+			return Participants.query({name: name}).$promise;
+		};
+		
+		// Initialize the create action form
+		$scope.newAction = function() {
+			$scope.actor = null;
+			$scope.matches = [];
+		};
+		
+		// Add the selected match to the match list.
+		$scope.addMatch = function(matches, match) {
+			matches.push(match);
+			$scope.selectedMatch = null;
+		};
+		
+		// Remove match from the match list.
+		$scope.removeMatch = function(matches, matchIndex) {
+			matches.splice(matchIndex, 1);
+		};
+	}
+]);
+'use strict';
+
+//Actions service used to communicate Actions REST endpoints
+angular.module('actions').factory('Actions', ['$resource',
+	function($resource) {
+		var Action = $resource('actions/:actionId', { actionId: '@_id'
+		}, {
+			update: {
+				method: 'PUT'
+			}
+		});
+		
+		return Action;
+	}
+]);
 'use strict';
 
 // Setting up route
@@ -504,14 +685,22 @@ angular.module('network-events').controller('NetworkEventsController', ['$scope'
 'use strict';
 
 //Network events service used to communicate Network events REST endpoints
-angular.module('network-events').factory('NetworkEvents', ['$resource',
-	function($resource) {
-		return $resource('network-events/:networkEventId', { networkEventId: '@_id'
+angular.module('network-events').factory('NetworkEvents', ['$resource', '$filter',
+	function($resource, $filter) {
+		var NetworkEvent = $resource('network-events/:networkEventId', { networkEventId: '@_id'
 		}, {
 			update: {
 				method: 'PUT'
 			}
 		});
+		
+		angular.extend(NetworkEvent.prototype, {
+			listName: function() {
+				return this.name + ' (' + $filter('date')(this.scheduled) + ')';
+			}
+		});
+		
+		return NetworkEvent;
 	}
 ]);
 'use strict';
