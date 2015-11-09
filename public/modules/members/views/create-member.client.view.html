@@ -5,6 +5,12 @@
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="create()" novalidate>
             <fieldset>
+            	 <div class="form-group">
+                    <label class="control-label" for="name">Find participant</label>
+                    <div class="controls">
+                        <input type="text" ng-model="selected" ng-change="attendee = null" typeahead-editable="false" typeahead-on-select="attendee = $item" typeahead="participant.displayName for participant in findParticipants($viewValue)" class="form-control" placeholder="Find participant">
+                    </div>
+                </div>
                 <div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>
 				</div>
