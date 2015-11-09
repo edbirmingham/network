@@ -1,8 +1,8 @@
 'use strict';
 
 // Members controller
-angular.module('members').controller('MembersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Members',
-	function($scope, $stateParams, $location, Authentication, Members) {
+angular.module('members').controller('MembersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Members', 'Participants',
+	function($scope, $stateParams, $location, Authentication, Members, Participants) {
 		$scope.authentication = Authentication;
 
 		// Create new Member
@@ -72,6 +72,12 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 		$scope.find = function() {
 			$scope.members = Members.query();
 		};
+		
+		// Find existing participants
+		$scope.findParticipants = function(name) {
+			return Participants.query({name: name}).$promise;
+		};
+
 
 		// Find existing Member
 		$scope.findOne = function() {
