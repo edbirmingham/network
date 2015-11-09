@@ -7,37 +7,66 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 
 		// Create new Member
 		$scope.create = function() {
-			// Create new Member object
-			var member = new Members($scope.member);
+			
+			var saveMember = function(Participant) {
+				
+				// Create new Member object
+				var member = new Members($scope.member);
 
-			// Redirect after save
-			member.$save(function(response) {
-				$location.path('members/' + response._id);
+				// Redirect after save
+				member.$save(function(response) {
+					$location.path('members/' + response._id);
 
-				// Clear form fields
-				$scope.member.firstName = '';
-				$scope.member.lastName = '';
-				$scope.member.phone = '';
-				$scope.member.email = '';
-				$scope.member.identity = '';
-				$scope.member.affiliation = '';
-				$scope.member.address = '';
-				$scope.member.shirtSize = '';
-				$scope.member.talent = '';
-				$scope.member.placeOfWorship = '';
-				$scope.member.communityNetwork1 = '';
-				$scope.member.communityNetwork2 = '';
-				$scope.member.communityNetwork3 = '';
-				$scope.member.extraGroup1 = '';
-				$scope.member.extraGroup2 = '';
-				$scope.member.extraGroup3 = '';
-				$scope.member.otherNetwork1 = '';
-				$scope.member.otherNetwork2 = '';
-				$scope.member.otherNetwork3 = '';
+					// Clear form fields
+					$scope.selected = null;
+					$scope.member.firstName = '';
+					$scope.member.lastName = '';
+					$scope.member.phone = '';
+					$scope.member.email = '';
+					$scope.member.identity = '';
+					$scope.member.affiliation = '';
+					$scope.member.address = '';
+					$scope.member.shirtSize = '';
+					$scope.member.talent = '';
+					$scope.member.placeOfWorship = '';
+					$scope.member.communityNetwork1 = '';
+					$scope.member.communityNetwork2 = '';
+					$scope.member.communityNetwork3 = '';
+					$scope.member.extraGroup1 = '';
+					$scope.member.extraGroup2 = '';
+					$scope.member.extraGroup3 = '';
+					$scope.member.otherNetwork1 = '';
+					$scope.member.otherNetwork2 = '';
+					$scope.member.otherNetwork3 = '';
 
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
+				
+			};
+			
+			
+			if ($scope.participant._id) {
+				// Update the participant to member.
+				$scope.participant.$update(function(response) {
+					saveMember(response);
+				}, function(errorResponse) {
+					$scope.error = errorResponse.data.message;
+				});
+				
+			// Otherwise create a new Member.
+			} else {
+				// Create new Participant object
+				var member = new Members($scope.participant);
+	
+				// Redirect after save
+				member.$save(function(response) {
+					saveMember(response);
+				}, function(errorResponse) {
+					$scope.error = errorResponse.data.message;
+				});
+				
+			}
 		};
 
 		// Remove existing Member
@@ -46,7 +75,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 				member.$remove();
 
 				for (var i in $scope.members) {
-					if ($scope.members [i] === member) {
+					if ($scope .members [i] === member) {
 						$scope.members.splice(i, 1);
 					}
 				}
