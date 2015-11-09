@@ -1,0 +1,37 @@
+<section data-ng-controller="ActionsController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1 data-ng-bind="action.description"></h1>
+	</div>
+	<div class="clearfix">
+		<dl class="dl-horizontal">
+			<dt ng-if="action.networkEvent">Event</dt>
+			<dd ng-if="action.networkEvent"><span data-ng-bind="action.networkEvent.name"></span> (<span data-ng-bind="action.networkEvent.scheduled | date"></span>)</dd>
+			<dt>Actor</dt>
+			<dd data-ng-bind="action.actor.displayName"></dd>
+			<dt>Type</dt>
+			<dd data-ng-bind="action.type"></dd>
+			<dt>Matches</dt>
+			<dd>
+				<span data-ng-repeat="match in action.matches">
+					<a data-ng-bind="match.displayName" data-ng-href="#!/participants/{{match._id}}"></a><span ng-if="!$last">, </span>
+				</span>
+			</dd>
+		</dl>
+	</div>
+	<div class="pull-right" data-ng-show="authentication.user">
+		<a class="btn btn-primary" href="/#!/actions/{{action._id}}/edit">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+	</div>
+	<small>
+		<em class="text-muted">
+			Entered on
+			<span data-ng-bind="action.created | date:'mediumDate'"></span>
+			by
+			<span data-ng-bind="action.user.displayName"></span>
+		</em>
+	</small>
+</section>

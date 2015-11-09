@@ -1,0 +1,65 @@
+<section data-ng-controller="ActionsController" data-ng-init="findOne()">
+    <div class="page-header">
+        <h1>Edit Action</h1>
+    </div>
+    <div class="col-md-12">
+        <form class="form-horizontal" data-ng-submit="update()" novalidate>
+            <fieldset>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+                <div class="form-group">
+                    <label class="control-label" for="networkEvent">Network Event</label>
+                    <div class="controls">
+                        <select id="networkEvent" class="form-control" data-ng-model="action.networkEvent._id" ng-options="networkEvent._id as networkEvent.listName() for networkEvent in networkEvents">
+                            <option value="">-- Not associated with an event -- </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="actor">Find actor</label>
+                    <div class="controls">
+                        <input id="actor" type="text" ng-model="action.actor" typeahead-editable="false" typeahead-on-select="action.actor = $item" typeahead="participant.displayName for participant in findParticipants($viewValue)" class="form-control" placeholder="Find actor">
+                    </div>
+                </div>
+				<div class="form-group">
+					<label class="control-label" for="type">Type of action?</label>
+					<span id="identityHelpBlock" class="help-block">Action: Offering, Request, Declaration, BOTN</span>
+                    <div class="controls">
+    					<select id="type" name="type" class="form-control" data-ng-model="action.type" placeholder="Action?">
+    						<option>Offering</option>
+    						<option>Request</option>
+    						<option>Declaration</option>
+    						<option>BOTN</option>
+						</select>
+					</div>
+				</div>
+                <div class="form-group">
+                    <label class="control-label" for="description">Description</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="action.description" id="description" class="form-control" placeholder="Description" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="match">Find match</label>
+                    <div class="controls">
+                        <input type="text" ng-model="selectedMatch" typeahead-editable="false" typeahead-on-select="addMatch(action.matches, $item)" typeahead="participant.displayName for participant in findParticipants($viewValue)" class="form-control" placeholder="Find match">
+                    </div>
+                </div>
+                <div class="list-group">
+                    <span data-ng-repeat="match in action.matches" class="list-group-item">
+                    	<span>
+                			<span data-ng-bind="match.displayName"></span>
+                    		<a class="btn" data-ng-click="removeMatch(action.matches, $index);">
+                    			<i class="glyphicon glyphicon-remove"></i>
+                    		</a>
+                    	</span>
+                    </span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Update" class="btn btn-default">
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</section>

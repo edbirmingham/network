@@ -1,0 +1,27 @@
+<section data-ng-controller="ActionsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Actions</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="action in actions" data-ng-href="#!/actions/{{action._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				<span data-ng-bind="action.type"></span>
+				made on
+				<span data-ng-bind="action.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="action.actor.displayName"></span>
+				<span ng-if="action.networkEvent">
+					at
+					<span data-ng-bind="action.networkEvent.name"></span>
+				</span>
+				with
+				<span data-ng-bind="action.matches.length"></span>
+				matches.
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="action.description"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!actions.$resolved || actions.length">
+    	No Actions yet, why don't you <a href="/#!/actions/create">create one</a>?
+    </div>
+</section>
