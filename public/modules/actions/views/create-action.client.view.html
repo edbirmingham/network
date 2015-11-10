@@ -3,7 +3,7 @@
         <h1>New Action</h1>
     </div>
     <div class="col-md-12">
-        <form class="form-horizontal" data-ng-submit="create()" novalidate>
+        <form class="form-horizontal" data-ng-submit="create()" novalidate autocomplete="off">
             <fieldset>
 				<alert data-ng-show="success" data-ng-bind="success" type="success"></alert>
 				<div data-ng-show="error" class="text-danger">
@@ -20,7 +20,7 @@
                 <div class="form-group">
                     <label class="control-label" for="actor">Find actor</label>
                     <div class="controls">
-                        <input id="actor" type="text" autocomplete="off" ng-model="actor" typeahead-editable="false" typeahead-on-select="actor = $item" typeahead="participant.displayName for participant in findParticipants($viewValue)" class="form-control" placeholder="Find actor">
+                        <input id="actor" type="text" autocomplete="off" ng-model="actor" typeahead-editable="false" typeahead-on-select="actor = $item" typeahead="participant.listName() for participant in findParticipants($viewValue)" class="form-control" placeholder="Find actor">
                     </div>
                 </div>
 				<div class="form-group">
@@ -44,7 +44,7 @@
                 <div class="form-group">
                     <label class="control-label" for="match">Find match</label>
                     <div class="controls">
-                        <input type="text" ng-model="selectedMatch" typeahead-editable="false" typeahead-on-select="addMatch(matches, $item)" typeahead="participant.displayName for participant in findParticipants($viewValue)" class="form-control" placeholder="Find match">
+                        <input type="text" ng-model="selectedMatch" typeahead-editable="false" typeahead-on-select="addMatch(matches, $item)" typeahead="participant.listName() for participant in findParticipants($viewValue)" class="form-control" placeholder="Find match">
                     </div>
                 </div>
                 <div class="list-group">

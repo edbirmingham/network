@@ -3,7 +3,7 @@
         <h1>Edit Action</h1>
     </div>
     <div class="col-md-12">
-        <form class="form-horizontal" data-ng-submit="update()" novalidate>
+        <form class="form-horizontal" data-ng-submit="update()" novalidate autocomplete="off">
             <fieldset>
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>
@@ -19,7 +19,7 @@
                 <div class="form-group">
                     <label class="control-label" for="actor">Find actor</label>
                     <div class="controls">
-                        <input id="actor" type="text" ng-model="action.actor" typeahead-editable="false" typeahead-on-select="action.actor = $item" typeahead="participant.displayName for participant in findParticipants($viewValue)" class="form-control" placeholder="Find actor">
+                        <input id="actor" type="text" ng-model="action.actor.displayName" typeahead-editable="false" typeahead-on-select="action.actor = $item" typeahead="participant.listName() for participant in findParticipants($viewValue)" class="form-control" placeholder="Find actor">
                     </div>
                 </div>
 				<div class="form-group">
@@ -43,7 +43,7 @@
                 <div class="form-group">
                     <label class="control-label" for="match">Find match</label>
                     <div class="controls">
-                        <input type="text" ng-model="selectedMatch" typeahead-editable="false" typeahead-on-select="addMatch(action.matches, $item)" typeahead="participant.displayName for participant in findParticipants($viewValue)" class="form-control" placeholder="Find match">
+                        <input type="text" ng-model="selectedMatch" typeahead-editable="false" typeahead-on-select="addMatch(action.matches, $item)" typeahead="participant.listName() for participant in findParticipants($viewValue)" class="form-control" placeholder="Find match">
                     </div>
                 </div>
                 <div class="list-group">
