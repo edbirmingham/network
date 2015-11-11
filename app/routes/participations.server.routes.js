@@ -7,12 +7,12 @@ module.exports = function(app) {
 
     // Participants Routes
     app.route('/network-events/:parentNetworkEventId/participants')
-    	.get(participations.requiresNetworkEvent, participants.list);
+    	.get(users.requiresLogin, participations.requiresNetworkEvent, participants.list);
     	
 	// Participations Routes
 	app.route('/network-events/:parentNetworkEventId/participations')
 		.get(users.requiresLogin, participations.list)
-		.post(participations.create);
+		.post(users.requiresLogin, participations.create);
 
 	// Finish by binding the Participation middleware
 	app.param('parentNetworkEventId', participations.parentNetworkEventByID);

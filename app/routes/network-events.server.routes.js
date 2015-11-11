@@ -6,11 +6,11 @@ module.exports = function(app) {
 
 	// Network events Routes
 	app.route('/network-events')
-		.get(networkEvents.list)
+		.get(users.requiresLogin, networkEvents.list)
 		.post(users.requiresLogin, networkEvents.create);
 
 	app.route('/network-events/:networkEventId')
-		.get(networkEvents.read)
+		.get(users.requiresLogin, networkEvents.read)
 		.put(users.requiresLogin, networkEvents.update)
 		.delete(users.requiresLogin, networkEvents.delete);
 
