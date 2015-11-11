@@ -25,6 +25,11 @@ angular.module('participations').controller('ParticipationsController', ['$scope
 					// Clear form fields
 					$scope.selected = null;
 					$scope.attendee = null;
+					// Focus on selecting the next actor.
+					var attendee_input = document.querySelector('#participant');
+					if (attendee_input) {
+						attendee_input.focus();
+					}
 				}, function(errorResponse) {
 					$scope.error = errorResponse.data.message;
 				});
