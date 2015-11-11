@@ -97,12 +97,7 @@
 			$httpBackend.flush();
 
 			// Test form inputs are reset
-			expect(scope.attendee.firstName).toEqual('');
-			expect(scope.attendee.lastName).toEqual('');
-			expect(scope.attendee.phone).toEqual('');
-			expect(scope.attendee.email).toEqual('');
-			expect(scope.attendee.identity).toEqual('');
-			expect(scope.attendee.affiliation).toEqual('');
+			expect(scope.attendee).toEqual(null);
 
 			// Test URL redirection after the Participation was created
 			expect($location.path()).toBe('/network-events/525a8422f6d0f87f0e407a33/participations/create');
