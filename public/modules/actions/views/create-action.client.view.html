@@ -6,9 +6,7 @@
         <form class="form-horizontal" data-ng-submit="create()" novalidate autocomplete="off">
             <fieldset>
 				<alert data-ng-show="success" data-ng-bind="success" type="success"></alert>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
+				<alert data-ng-show="error" data-ng-bind="error" type="error"></alert>
                 <div class="form-group">
                     <label class="control-label" for="networkEvent">Network Event</label>
                     <div class="controls">

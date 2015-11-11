@@ -46,9 +46,7 @@
 				</div>
 			</div>
             <fieldset data-ng-show="showForm(selected, isSelectionEditable)">
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
+				<alert data-ng-show="error" data-ng-bind="error" type="error"></alert>
 				<div class="form-group">
 					<label class="control-label" for="firstName">First Name</label>
                     <div class="controls">
