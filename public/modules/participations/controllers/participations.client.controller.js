@@ -4,6 +4,7 @@
 angular.module('participations').controller('ParticipationsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Participations', 'NetworkEvents', 'Participants',
 	function($scope, $stateParams, $location, Authentication, Participations, NetworkEvents, Participants) {
 		$scope.authentication = Authentication;
+		$scope.isSelectionEditable = false;
 		
 		// Create new Participation
 		$scope.create = function() {
@@ -16,22 +17,19 @@ angular.module('participations').controller('ParticipationsController', ['$scope
 				// Redirect after save
 				participation.$save({ networkEventId: $stateParams.networkEventId }, function(response) {
 					$location.path('network-events/' + $stateParams.networkEventId + '/participations/create');
+					$scope.isSelectionEditable = false; 
+					$scope.error = null;
 	
 					// Clear form fields
 					$scope.selected = null;
-					$scope.attendee.firstName = '';
-					$scope.attendee.lastName = '';
-					$scope.attendee.phone = '';
-					$scope.attendee.email = '';
-					$scope.attendee.identity = '';
-					$scope.attendee.affiliation = '';
+					$scope.attendee = null;
 				}, function(errorResponse) {
 					$scope.error = errorResponse.data.message;
 				});
 			};
 			
 			// If an attendee is selected from existing participants update the attendee
-			if ($scope.attendee._id) {
+			if ($scope.attendee && $scope.attendee._id) {
 				// Update the attendee participant.
 				$scope.attendee.$update(function(response) {
 					saveParticipation(response);
@@ -65,6 +63,36 @@ angular.module('participations').controller('ParticipationsController', ['$scope
 			$scope.networkEvent = NetworkEvents.get({ 
 				networkEventId: $stateParams.networkEventId
 			});
+		};
+		
+		// Clears out the selected participant without saving anything.
+		$scope.clearSelection = function() {
+			$scope.attendee = null; 
+			$scope.selected = null;
+		};
+		
+		// Allows the selected participant to be edited and saved.
+		$scope.editSelection = function() {
+			$scope.isSelectionEditable = true; 
+		};
+		
+		// Called when the attendee name in the typeahead is changed.
+		$scope.onSelectedChange = function() {
+			$scope.attendee = null;
+			$scope.isSelectionEditable = false; 
+		};
+		
+		// Determine if the participant form should be shown to help prevent
+		// accidentally changing information for a participant.
+		$scope.showForm = function(selected, isEditable) {
+			return !selected || isEditable;
+		};
+		
+		// Determine if the selected participants attributes should be shown 
+		// instead of the participant form to help prevent accidental changes
+		// to a participant's information.
+		$scope.showSelectedAttributes = function(selected, isEditable) {
+			return selected && !isEditable;
 		};
 	}
 ]);
