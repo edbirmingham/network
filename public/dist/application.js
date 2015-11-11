@@ -861,6 +861,8 @@ angular.module('participations').controller('ParticipationsController', ['$scope
 				// Redirect after save
 				participation.$save({ networkEventId: $stateParams.networkEventId }, function(response) {
 					$location.path('network-events/' + $stateParams.networkEventId + '/participations/create');
+					
+					$scope.success =  $scope.attendee.firstName + ' ' + $scope.attendee.lastName + ' was successfully added.';
 					$scope.isSelectionEditable = false; 
 					$scope.error = null;
 	
