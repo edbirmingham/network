@@ -16,6 +16,8 @@ angular.module('participations').controller('ParticipationsController', ['$scope
 				// Redirect after save
 				participation.$save({ networkEventId: $stateParams.networkEventId }, function(response) {
 					$location.path('network-events/' + $stateParams.networkEventId + '/participations/create');
+					
+					$scope.success =  attendee.firstName + ' ' + attendee.lastName + ' was successfully added.';
 	
 					// Clear form fields
 					$scope.selected = null;
