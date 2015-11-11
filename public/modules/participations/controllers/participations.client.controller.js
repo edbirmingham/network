@@ -17,17 +17,13 @@ angular.module('participations').controller('ParticipationsController', ['$scope
 				// Redirect after save
 				participation.$save({ networkEventId: $stateParams.networkEventId }, function(response) {
 					$location.path('network-events/' + $stateParams.networkEventId + '/participations/create');
-<<<<<<< HEAD
-<<<<<<< HEAD
 					
-					$scope.success =  attendee.firstName + ' ' + attendee.lastName + ' was successfully added.';
-=======
-=======
-					$scope.success = $scope.attendee.firstName + ' ' + $scope.attendee.lastName + ' was succesfully saved.';
->>>>>>> Add success message for Participations
+					$scope.success =  $scope.attendee.firstName + ' ' + $scope.attendee.lastName + ' was successfully added.';
+					
+
 					$scope.isSelectionEditable = false; 
 					$scope.error = null;
->>>>>>> Improved user experience for participant signin
+
 	
 					// Clear form fields
 					$scope.selected = null;
