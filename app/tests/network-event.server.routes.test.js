@@ -177,7 +177,7 @@ describe('Network event CRUD tests', function() {
 			});
 	});
 
-	it('should be able to get a list of Network events if not signed in', function(done) {
+	it('should not be able to get a list of Network events if not signed in', function(done) {
 		// Create new Network event model instance
 		var networkEventObj = new NetworkEvent(networkEvent);
 
@@ -185,19 +185,47 @@ describe('Network event CRUD tests', function() {
 		networkEventObj.save(function() {
 			// Request Network events
 			request(app).get('/network-events')
+				.expect(401)
 				.end(function(req, res) {
-					// Set assertion
-					res.body.should.be.an.Array.with.lengthOf(1);
-
-					// Call the assertion callback
+					// Set message assertion
+					res.body.message.should.match('User is not logged in');
+	
+					// Handle Network event error
 					done();
 				});
 
 		});
 	});
+	
+	it('should be able to get a list of Network events if signed in', function(done) {
+		agent.post('/auth/signin')
+			.send(credentials)
+			.expect(200)
+			.end(function(signinErr, signinRes) {
+				// Handle signin error
+				if (signinErr) done(signinErr);
+	
+				// Create new Network event model instance
+				var networkEventObj = new NetworkEvent(networkEvent);
+	
+				// Save the NetworkEvent
+				networkEventObj.save(function() {
+	
+					// Request NetworkEvent
+					agent.get('/network-events')
+						.expect(200)
+						.end(function(req, res) {
+							// Set assertion
+							res.body.should.be.an.Array.with.lengthOf(1);
+	
+							// Call the assertion callback
+							done();
+						});
+				});
+			});
+	});
 
-
-	it('should be able to get a single Network event if not signed in', function(done) {
+	it('should not be able to get a single Network event if not signed in', function(done) {
 		// Create new Network event model instance
 		var networkEventObj = new NetworkEvent(networkEvent);
 
@@ -205,8 +233,8 @@ describe('Network event CRUD tests', function() {
 		networkEventObj.save(function() {
 			request(app).get('/network-events/' + networkEventObj._id)
 				.end(function(req, res) {
-					// Set assertion
-					res.body.should.be.an.Object.with.property('name', networkEvent.name);
+					// Set message assertion
+					res.body.message.should.match('User is not logged in');
 
 					// Call the assertion callback
 					done();
