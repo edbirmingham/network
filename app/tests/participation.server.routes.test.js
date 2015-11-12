@@ -123,30 +123,14 @@ describe('Participation CRUD tests', function() {
 			});
 	});
 
-	it('should be able to save Participation instance if not logged in', function(done) {
+	it('should not be able to save Participation instance if not logged in', function(done) {
 		// Save a new Participation
 		agent.post('/network-events/' + networkEvent.id + '/participations')
 			.send(participation)
-			.expect(200)
+			.expect(401)
 			.end(function(participationSaveErr, participationSaveRes) {
-				// Handle Participation save error
-				if (participationSaveErr) done(participationSaveErr);
-
-				var participantId = participant.id;
-				var networkEventId = networkEvent.id;
-				
-				Participation
-					.find({networkEvent: networkEventId})
-					.populate('participant', 'displayName')
-					.populate('networkEvent', 'name')
-					.exec(function(err, participations){
-						// Set assertions
-						(participations[0].participant._id.toString()).should.equal(participantId);
-						(participations[0].networkEvent._id.toString()).should.equal(networkEventId);
-
-						// Call the assertion callback
-						done();
-					});
+				// Call the assertion callback
+				done(participationSaveErr);
 			});
 	});
 
