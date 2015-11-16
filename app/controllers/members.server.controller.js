@@ -96,10 +96,10 @@ exports.memberByID = function(req, res, next, id) {
 		// if no member is found
 		if (! member && id) {
 			//use Participant model to search for participant
-			Participant.findById(id).populate('user', 'displayName').exec(function(err, participant) {
+			Participant.findById(id).populate('user', 'displayName').cast(Member, res).exec(function(err, participant) {
 				if(err) return next(err);
 				//cast participant as Member
-				req.member = res.cast(Member, participant);
+				req.member = Participant.cast(Member, participant);
 				next();
 			});
 		}
