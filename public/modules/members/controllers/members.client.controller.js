@@ -46,7 +46,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 		
 			  */
 				
-			if($scope.participant) {
+			if($scope.participant && $scope.participant._id) {
 				$scope.member._id = $scope.participant._id;
 				$scope.member.$update(function(response) {
 					resetMemberAttributes(response);
