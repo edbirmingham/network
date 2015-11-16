@@ -31,6 +31,11 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 				$scope.member.otherNetwork[0] = '';
 				$scope.member.otherNetwork[1] = '';
 				$scope.member.otherNetwork[2] = '';
+				
+				var attendee_input = document.querySelector('#participant');
+				if (attendee_input) {
+					attendee_input.focus();
+				}
 			};
 				/*
 			//if a participant was selected
@@ -48,19 +53,20 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 					$scope.error = errorResponse.data.message;
 				});  */
 				
-			if( false) {
-				//set meber id to participant id
-				//update member
-			
+			if($scope.participant && $scope.participant._id) {
+				$scope.member._id = $scope.participant._id;
+				$scope.member.$update(function(response) {
+					resetMemberAttributes(response);
+				}, function(errorResponse) {
+				    $scope.error = errorResponse.data.message;
+				});
 			} else {                 
 				// Create new Member 
 
 				var member = new Members($scope.member);
-	
 				// Redirect after save
 				member.$save(function(response) {
 					resetMemberAttributes(response);
-
 				}, function(errorResponse) {
 					$scope.error = errorResponse.data.message;
 				});
