@@ -8,9 +8,9 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 		// Create new Member
 		$scope.create = function() {
 			
-			var resetMemberAttributes = function(Participant) {
+		var resetMemberAttributes = function(Participant) {
 				// Clear form fields
-				$scope.selected = null;
+				$scope.selected = null;       //make sure no participant is selected
 				$scope.member.firstName = '';
 				$scope.member.lastName = '';
 				$scope.member.phone = '';
@@ -21,17 +21,18 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 				$scope.member.shirtSize = '';
 				$scope.member.talent = '';
 				$scope.member.placeOfWorship = '';
-				$scope.member.communityNetwork1 = '';
-				$scope.member.communityNetwork2 = '';
-				$scope.member.communityNetwork3 = '';
-				$scope.member.extraGroup1 = '';
-				$scope.member.extraGroup2 = '';
-				$scope.member.extraGroup3 = '';
-				$scope.member.otherNetwork1 = '';
-				$scope.member.otherNetwork2 = '';
-				$scope.member.otherNetwork3 = '';
+				$scope.member.recruitment = '';
+				$scope.member.communityNetwork[0] = '';
+				$scope.member.communityNetwork[1] = '';
+				$scope.member.communityNetwork[2] = '';
+				$scope.member.extraGroup[0] = '';
+				$scope.member.extraGroup[1] = '';
+				$scope.member.extraGroup[2] = '';
+				$scope.member.otherNetwork[0] = '';
+				$scope.member.otherNetwork[1] = '';
+				$scope.member.otherNetwork[2] = '';
 			};
-			
+				/*
 			//if a participant was selected
 				//set the member id to the participant id
 				//update the member
@@ -45,10 +46,13 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 					resetMemberAttributes(response);
 				}, function(errorResponse) {
 					$scope.error = errorResponse.data.message;
-				});
+				});  */
 				
+			if( false) {
+				//set meber id to participant id
+				//update member
 			
-			} else {
+			} else {                 
 				// Create new Member 
 
 				var member = new Members($scope.member);
@@ -61,7 +65,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 					$scope.error = errorResponse.data.message;
 				});
 				
-			}
+			} 
 		};
 
 		// Remove existing Member
