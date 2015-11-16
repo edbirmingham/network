@@ -44,14 +44,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 			//else
 				//create the member
 		
-			if ($scope.participant._id) {   
-				//Set member ID to participant's ID
-				$scope.member._id = $scope.participant._id;
-				$scope.member.$update(function(response) {
-					resetMemberAttributes(response);
-				}, function(errorResponse) {
-					$scope.error = errorResponse.data.message;
-				});  */
+			  */
 				
 			if($scope.participant && $scope.participant._id) {
 				$scope.member._id = $scope.participant._id;
