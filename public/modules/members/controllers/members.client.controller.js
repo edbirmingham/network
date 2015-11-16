@@ -22,19 +22,19 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 				$scope.member.talent = '';
 				$scope.member.placeOfWorship = '';
 				$scope.member.recruitment = '';
-				$scope.member.communityNetwork[0] = '';
-				$scope.member.communityNetwork[1] = '';
-				$scope.member.communityNetwork[2] = '';
-				$scope.member.extraGroup[0] = '';
-				$scope.member.extraGroup[1] = '';
-				$scope.member.extraGroup[2] = '';
-				$scope.member.otherNetwork[0] = '';
-				$scope.member.otherNetwork[1] = '';
-				$scope.member.otherNetwork[2] = '';
-				
-				var attendee_input = document.querySelector('#participant');
-				if (attendee_input) {
-					attendee_input.focus();
+				$scope.member.communityNetworks[0] = '';
+				$scope.member.communityNetworks[1] = '';
+				$scope.member.communityNetworks[2] = '';
+				$scope.member.extraGroups[0] = '';
+				$scope.member.extraGroups[1] = '';
+				$scope.member.extraGroups[2] = '';
+				$scope.member.otherNetworks[0] = '';
+				$scope.member.otherNetworks[1] = '';
+				$scope.member.otherNetworks[2] = '';
+				//set focus to Find participant field
+				var participant_input = document.querySelector('#participant');
+				if (participant_input) {
+					participant_input.focus();
 				}
 			};
 				/*
@@ -46,7 +46,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 		
 			  */
 				
-			if($scope.participant && $scope.participant._id) {
+			if($scope.participant) {
 				$scope.member._id = $scope.participant._id;
 				$scope.member.$update(function(response) {
 					resetMemberAttributes(response);

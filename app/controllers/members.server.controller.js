@@ -6,15 +6,16 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Member = mongoose.model('Member'),
-	_ = require('lodash');
-
+	_ = require('lodash'),
+	Participant = mongoose.model('Participant');
 /**
  * Create a Member
  */
 exports.create = function(req, res) {
 	var member = new Member(req.body);
-	member.user = req.user;
 	member.displayName = member.firstName + ' ' + member.lastName;
+	member.user = req.user;
+	
 
 	member.save(function(err) {
 		if (err) {
@@ -92,7 +93,16 @@ exports.list = function(req, res) {
 exports.memberByID = function(req, res, next, id) { 
 	Member.findById(id).populate('user', 'displayName').exec(function(err, member) {
 		if (err) return next(err);
-		if (! member) return next(new Error('Failed to load Member ' + id));
+		// if no member is found
+		if (! member && id) {
+			//use Participant model to search for participant
+			Participant.findById(id).populate('user', 'displayName').exec(function(err, participant) {
+				if(err) return next(err);
+				//cast participant as Member
+				req.member = res.cast(Member, participant);
+				next();
+			});
+		}
 		req.member = member ;
 		next();
 	});
