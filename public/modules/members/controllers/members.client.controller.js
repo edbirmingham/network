@@ -9,16 +9,8 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 		$scope.create = function() {
 			
 			// function to save member
-			var saveMember = function(Participant) {
-				
-				// Create new Member object
-				var member = new Members($scope.member);
-
-				// Redirect after saving Member objects
-				member.$save(function(response) {
-					$location.path('members/' + response._id);
-
-					// Clear form fields
+			var resetMemberAttributes = function(Participant) {
+				// Clear form fields
 					$scope.selected = null;
 					$scope.member.firstName = '';
 					$scope.member.lastName = '';
@@ -39,32 +31,31 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 					$scope.member.otherNetwork1 = '';
 					$scope.member.otherNetwork2 = '';
 					$scope.member.otherNetwork3 = '';
-
-				}, function(errorResponse) {
-					$scope.error = errorResponse.data.message;  //errorhandling
-				});
-				
 			};
 			
-			
-			// If we can find participant, update participant to member
-			//otherwise, create new member
-			if ($scope.participant._id) {     
-				// Update the participant to member.
-				$scope.participant.$update(function(response) {
-					saveMember(response);
+			//if a participant was selected
+				//set the member id to the participant id
+				//update the member
+			//else
+				//create the member
+		
+			if ($scope.participant._id) {   
+				//Set member ID to participant's ID
+				$scope.member._id = $scope.participant._id;
+				$scope.member.$update(function(response) {
+					resetMemberAttributes(response);
 				}, function(errorResponse) {
 					$scope.error = errorResponse.data.message;
 				});
 				
-			// Otherwise create a new Member.
+			
 			} else {
-				// Create new Member object
+				// Create new Member 
 				var member = new Members($scope.member);
 	
 				// Redirect after save
 				member.$save(function(response) {
-					saveMember(response);
+					resetMemberAttributes(response);
 				}, function(errorResponse) {
 					$scope.error = errorResponse.data.message;
 				});
