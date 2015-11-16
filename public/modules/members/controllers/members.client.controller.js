@@ -8,29 +8,28 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 		// Create new Member
 		$scope.create = function() {
 			
-			// function to save member
 			var resetMemberAttributes = function(Participant) {
 				// Clear form fields
-					$scope.selected = null;
-					$scope.member.firstName = '';
-					$scope.member.lastName = '';
-					$scope.member.phone = '';
-					$scope.member.email = '';
-					$scope.member.identity = '';
-					$scope.member.affiliation = '';
-					$scope.member.address = '';
-					$scope.member.shirtSize = '';
-					$scope.member.talent = '';
-					$scope.member.placeOfWorship = '';
-					$scope.member.communityNetwork1 = '';
-					$scope.member.communityNetwork2 = '';
-					$scope.member.communityNetwork3 = '';
-					$scope.member.extraGroup1 = '';
-					$scope.member.extraGroup2 = '';
-					$scope.member.extraGroup3 = '';
-					$scope.member.otherNetwork1 = '';
-					$scope.member.otherNetwork2 = '';
-					$scope.member.otherNetwork3 = '';
+				$scope.selected = null;
+				$scope.member.firstName = '';
+				$scope.member.lastName = '';
+				$scope.member.phone = '';
+				$scope.member.email = '';
+				$scope.member.identity = '';
+				$scope.member.affiliation = '';
+				$scope.member.address = '';
+				$scope.member.shirtSize = '';
+				$scope.member.talent = '';
+				$scope.member.placeOfWorship = '';
+				$scope.member.communityNetwork1 = '';
+				$scope.member.communityNetwork2 = '';
+				$scope.member.communityNetwork3 = '';
+				$scope.member.extraGroup1 = '';
+				$scope.member.extraGroup2 = '';
+				$scope.member.extraGroup3 = '';
+				$scope.member.otherNetwork1 = '';
+				$scope.member.otherNetwork2 = '';
+				$scope.member.otherNetwork3 = '';
 			};
 			
 			//if a participant was selected
@@ -51,11 +50,13 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 			
 			} else {
 				// Create new Member 
+
 				var member = new Members($scope.member);
 	
 				// Redirect after save
 				member.$save(function(response) {
 					resetMemberAttributes(response);
+
 				}, function(errorResponse) {
 					$scope.error = errorResponse.data.message;
 				});
