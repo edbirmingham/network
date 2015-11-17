@@ -19,6 +19,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 				$scope.member.affiliation = '';
 				$scope.member.address = '';
 				$scope.member.shirtSize = '';
+				$scope.member.shirtReceived = '';
 				$scope.member.talent = '';
 				$scope.member.placeOfWorship = '';
 				$scope.member.recruitment = '';

@@ -8,7 +8,7 @@
             	 <div class="form-group">
                     <label class="control-label" for="name">Find participant</label>
                     <div class="controls">
-                        <input id = participant type="text" ng-model="selected" ng-change="participant = null" typeahead-editable="false" typeahead-on-select="member = $item" typeahead="participant.displayName for participant in findParticipants($viewValue)" class="form-control" placeholder="Find participant">
+                        <input id="participant" type="text" ng-model="selected" ng-change="participant = null" typeahead-editable="false" typeahead-on-select="member = $item" typeahead="participant.displayName for participant in findParticipants($viewValue)" class="form-control" placeholder="Find participant">
                     </div>
                 </div>
                 <div data-ng-show="error" class="text-danger">
