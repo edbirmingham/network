@@ -1,4 +1,4 @@
-<section data-ng-controller="NetworkEventsController" data-ng-init="findOne()">
+<section data-ng-controller="NetworkEventsController" data-ng-init="initView()">
 	<div class="page-header">
 		<h1 data-ng-bind="networkEvent.name"></h1>
 	</div>
@@ -31,4 +31,27 @@
 			<span data-ng-bind="networkEvent.user.displayName"></span>
 		</em>
 	</small>
+	<h3>Participants</h3>
+	<div class="table-responsive">
+		<table class="table table-condensed table-hover">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Phone</th>
+					<th>Email</th>
+					<th>Who?</th>
+					<th>Affiliation</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr data-ng-repeat="participation in participations | orderBy: 'participant.displayName'">
+					<td data-ng-bind="participation.participant.displayName"></td>
+					<td data-ng-bind="participation.participant.phone"></td>
+					<td data-ng-bind="participation.participant.email"></td>
+					<td data-ng-bind="participation.participant.identity"></td>
+					<td data-ng-bind="participation.participant.affiliation"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </section>

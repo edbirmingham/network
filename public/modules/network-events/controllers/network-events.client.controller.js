@@ -1,13 +1,10 @@
 'use strict';
 
 // Network events controller
-angular.module('network-events').controller('NetworkEventsController', ['$scope', '$stateParams', '$location', 'Authentication', 'NetworkEvents', 'Locations',
-	function($scope, $stateParams, $location, Authentication, NetworkEvents, Locations) {
+angular.module('network-events').controller('NetworkEventsController', ['$scope', '$stateParams', '$location', 'Authentication', 'NetworkEvents', 'Locations', 'Participations',
+	function($scope, $stateParams, $location, Authentication, NetworkEvents, Locations, Participations) {
 		$scope.authentication = Authentication;
 
-        // Retrieve the list of possible locations for the event.
-        $scope.locations = Locations.query();
-        
 		// Create new Network event
 		$scope.create = function() {
 			// Create new Network event object
@@ -71,5 +68,25 @@ angular.module('network-events').controller('NetworkEventsController', ['$scope'
 				networkEventId: $stateParams.networkEventId
 			});
 		};
+		
+        // Retrieve the list of possible locations for the event.
+		$scope.findLocations = function() {
+	        $scope.locations = Locations.query();
+		};
+		
+		// Initialize the edit screen with the event and possible locations.
+		$scope.initEdit = function() {
+			$scope.findLocations();
+			$scope.findOne();
+		};
+		
+		// Initialize the view screen with the event and all the participations.
+		$scope.initView = function() {
+			$scope.findOne();
+			$scope.participations = Participations.query({
+				networkEventId: $stateParams.networkEventId
+			});
+		};
+		
 	}
 ]);

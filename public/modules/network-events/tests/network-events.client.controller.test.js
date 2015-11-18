@@ -62,7 +62,6 @@
 			var sampleNetworkEvents = [sampleNetworkEvent];
 
 			// Set GET response
-			$httpBackend.expectGET('locations').respond([]);
 			$httpBackend.expectGET('network-events').respond(sampleNetworkEvents);
 
 			// Run controller functionality
@@ -83,7 +82,6 @@
 			$stateParams.networkEventId = '525a8422f6d0f87f0e407a33';
 
 			// Set GET response
-			$httpBackend.expectGET('locations').respond([]);
 			$httpBackend.expectGET(/network-events\/([0-9a-fA-F]{24})$/).respond(sampleNetworkEvent);
 
 			// Run controller functionality
@@ -118,7 +116,6 @@
 			};
 
 			// Set POST response
-			$httpBackend.expectGET('locations').respond([{_id: '525a8422f6d0f87f0e407a33', name: 'School'}]);
 			$httpBackend.expectPOST('network-events', sampleNetworkEventPostData).respond(sampleNetworkEventResponse);
 
 			// Run controller functionality
@@ -143,7 +140,6 @@
 			scope.networkEvent = sampleNetworkEventPutData;
 
 			// Set PUT response
-			$httpBackend.expectGET('locations').respond([]);
 			$httpBackend.expectPUT(/network-events\/([0-9a-fA-F]{24})$/).respond();
 
 			// Run controller functionality
@@ -164,7 +160,6 @@
 			scope.networkEvents = [sampleNetworkEvent];
 
 			// Set expected DELETE response
-			$httpBackend.expectGET('locations').respond([]);
 			$httpBackend.expectDELETE(/network-events\/([0-9a-fA-F]{24})$/).respond(204);
 
 			// Run controller functionality
