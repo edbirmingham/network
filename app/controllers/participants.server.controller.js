@@ -77,10 +77,13 @@ exports.delete = function(req, res) {
 exports.list = function(req, res) { 
 	var conditions = {};
 	if (req.query.name) {
-		conditions = { $or: [ 
-			{ lastName: new RegExp(req.query.name, 'i') }, 
-			{ firstName: new RegExp(req.query.name, 'i') } 
-		] };
+		var or_conditions = [];
+		var name_parts = req.query.name.split(/[ ,]+/)
+		_.each(name_parts, function(part) {
+			or_conditions.push({ lastName: new RegExp('^' + part, 'i') });
+			or_conditions.push({ firstName: new RegExp('^' + part, 'i') });
+		});
+		conditions = { $or: or_conditions };
 	}
 	Participant.find(conditions).sort('firstName lastName').populate('user', 'displayName').exec(function(err, participants) {
 		if (err) {
