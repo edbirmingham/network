@@ -35,7 +35,7 @@ exports.list = function(req, res) {
 	Participation
 		.find({networkEvent: req.networkEvent.id})
 		.sort('created')
-		.populate('participant', 'displayName')
+		.populate('participant', 'displayName phone email affiliation identity')
 		.populate('networkEvent', 'name')
 		.exec(function(err, participations) {
 			if (err) {

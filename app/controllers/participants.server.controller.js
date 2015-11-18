@@ -78,13 +78,14 @@ exports.list = function(req, res) {
 	var conditions = {};
 	if (req.query.name) {
 		var or_conditions = [];
-		var name_parts = req.query.name.split(/[ ,]+/)
+		var name_parts = req.query.name.split(/[ ,]+/);
 		_.each(name_parts, function(part) {
 			or_conditions.push({ lastName: new RegExp('^' + part, 'i') });
 			or_conditions.push({ firstName: new RegExp('^' + part, 'i') });
 		});
 		conditions = { $or: or_conditions };
 	}
+	
 	Participant.find(conditions).sort('firstName lastName').populate('user', 'displayName').exec(function(err, participants) {
 		if (err) {
 			return res.status(400).send({
