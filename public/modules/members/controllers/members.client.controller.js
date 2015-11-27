@@ -8,9 +8,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 		// Create new Member
 		$scope.create = function() {
 			
-		var resetMemberAttributes = function(Participant) {
-				// Clear form fields
-				$scope.selected = null;       //make sure no participant is selected
+		var clearFields = function(Participant) {
 				$scope.member.firstName = '';
 				$scope.member.lastName = '';
 				$scope.member.phone = '';
@@ -32,11 +30,6 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 				$scope.member.otherNetworks[0] = '';
 				$scope.member.otherNetworks[1] = '';
 				$scope.member.otherNetworks[2] = '';
-				//set focus to Find participant field
-				var participant_input = document.querySelector('#participant');
-				if (participant_input) {
-					participant_input.focus();
-				}
 			};
 				/*
 			//if a participant was selected
@@ -48,19 +41,30 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 			  */
 				
 			if($scope.participant && $scope.participant._id) {
+				var member = new Members({
+					
+				});
 				$scope.member._id = $scope.participant._id;
+				
 				$scope.member.$update(function(response) {
-					resetMemberAttributes(response);
+					$location.path('members/' + response._id);
+					clearFields(response);
+					
 				}, function(errorResponse) {
 				    $scope.error = errorResponse.data.message;
 				});
+				
+				$scope.participant.$remove(function(response){
+					
+				});
+				
 			} else {                 
 				// Create new Member 
 
 				var member = new Members($scope.member);
 				// Redirect after save
 				member.$save(function(response) {
-					resetMemberAttributes(response);
+					clearFields(response);
 				}, function(errorResponse) {
 					$scope.error = errorResponse.data.message;
 				});

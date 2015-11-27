@@ -40,19 +40,56 @@ exports.read = function(req, res) {
  * Update a Member
  */
 exports.update = function(req, res) {
-	var member = req.member ;
-	member = _.extend(member , req.body);
-	member.displayName = member.firstName + ' ' + member.lastName;
+	if(req.participant) {
+		req.member.validate( function (err){
+			if (err) {
+				return res.status(400).send({
+					message: errorHandler.getErrorMessage(err)
+				});
+  			}	else {
+  				
+  				//	delete req.participant
+  				req.participant.remove( function (err) {
+  					if(err) {
+  						return res.status(400).send({
+  							message: errorHandler.getErrorMessage(err)
+  						})
+  					} else {
+  						res.jsonp(req.participant);
+  					}	
+  				});
+  			
+            	//	save req.member
+        		member.save(function(err) {
+					if (err) {
+						return res.status(400).send({
+							message: errorHandler.getErrorMessage(err)
+						});
+					} else {
+						res.jsonp(member);
+					}
+				});
+				
+  			}
+		});
+	}
+	else {
+		//save member
+		var member = req.member;
+		member = _,extend(member, req.body);
+		member.displayName = member.firstName + ' ' + member.lastName;
+		member.save(function(err) {
+			if (err) {
+				return res.status(400).send({
+					message: errorHandler.getErrorMessage(err)
+				});	
+			} else {
+				res.jsonp(member);
+			}
+		});
+		
+	}
 	
-	member.save(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(member);
-		}
-	});
 };
 
 /**
