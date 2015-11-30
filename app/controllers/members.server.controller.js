@@ -76,7 +76,7 @@ exports.update = function(req, res) {
 	else {
 		//save member
 		var member = req.member;
-		member = _,extend(member, req.body);
+		member = _.extend(member, req.body);
 		member.displayName = member.firstName + ' ' + member.lastName;
 		member.save(function(err) {
 			if (err) {
@@ -131,13 +131,18 @@ exports.memberByID = function(req, res, next, id) {
 	Member.findById(id).populate('user', 'displayName').exec(function(err, member) {
 		if (err) return next(err);
 		// if no member is found
-		if (! member && id) {
+		if( member) {
+			req.member = member;
+		}
+		else {
 			//use Participant model to search for participant
-			Participant.findById(id).populate('user', 'displayName').cast(Member, res).exec(function(err, member) {
+			Participant.findById(id).populate('user', 'displayName').cast(Member, res).exec(function(err, participant) {
 				if(err) return next(err);
 				//cast participant as Member
-				req.member = member;
-				next();
+				if (participant) {
+					req.participant = participant;
+					req.member = new Member(participant);
+				}
 			});
 		}
 		req.member = member ;
