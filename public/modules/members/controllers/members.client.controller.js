@@ -31,37 +31,19 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 				$scope.member.otherNetworks[1] = '';
 				$scope.member.otherNetworks[2] = '';
 			};
-				/*
-			//if a participant was selected
-				//set the member id to the participant id
-				//update the member
-			//else
-				//create the member
-		
-			  */
-				
-			if($scope.participant && $scope.participant._id) {
-				var member = new Members({
-					
-				});
-				$scope.member._id = $scope.participant._id;
-				
-				$scope.member.$update(function(response) {
+
+			// Create new Member
+			var member = new Members($scope.member);
+			
+			if(member && member._id) {
+				member.$update(function(response) {
 					$location.path('members/' + response._id);
 					clearFields(response);
-					
 				}, function(errorResponse) {
 				    $scope.error = errorResponse.data.message;
 				});
 				
-				$scope.participant.$remove(function(response){
-					
-				});
-				
 			} else {                 
-				// Create new Member 
-
-				var member = new Members($scope.member);
 				// Redirect after save
 				member.$save(function(response) {
 					clearFields(response);

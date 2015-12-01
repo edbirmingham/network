@@ -3,12 +3,12 @@
         <h1>New Member</h1>
     </div>
     <div class="col-md-12">
-        <form class="form-horizontal" data-ng-submit="create()" novalidate>
+        <form class="form-horizontal" data-ng-submit="create()" novalidate autocomplete="off">
             <fieldset>
             	 <div class="form-group">
                     <label class="control-label" for="name">Find participant</label>
                     <div class="controls">
-                        <input id="participant" type="text" ng-model="selected" ng-change="participant = null" typeahead-editable="false" typeahead-on-select="member = $item" typeahead="participant.displayName for participant in findParticipants($viewValue)" class="form-control" placeholder="Find participant">
+                        <input id="participant" type="text" ng-model="selected" ng-change="member = null" typeahead-editable="false" typeahead-on-select="member = $item" typeahead="participant.displayName for participant in findParticipants($viewValue)" class="form-control" placeholder="Find participant">
                     </div>
                 </div>
                 <div data-ng-show="error" class="text-danger">

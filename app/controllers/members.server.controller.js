@@ -40,44 +40,40 @@ exports.read = function(req, res) {
  * Update a Member
  */
 exports.update = function(req, res) {
-	if(req.participant) {
-		req.member.validate( function (err){
-			if (err) {
-				return res.status(400).send({
-					message: errorHandler.getErrorMessage(err)
-				});
-  			}	else {
-  				
-  				//	delete req.participant
-  				req.participant.remove( function (err) {
-  					if(err) {
-  						return res.status(400).send({
-  							message: errorHandler.getErrorMessage(err)
-  						})
+	var member = req.member;
+	
+	member = _.extend(member , req.body);
+	member.displayName = member.firstName + ' ' + member.lastName;
+	
+	// If the Member is being converted from a Participant.
+	if (member.isNew) {
+		member.validate(function(err) {    //good
+  			if(err) {
+  				return res.status(400).send({
+  					message: errorHandler.getErrorMessage(err)
+  				}); // good
+  			} else {
+  				Participant.update({_id: member._id}, {$set: {__t: 'Member'}}, {strict: false}, function (err) {
+  					if (err) {
+ 						return res.status(400).send({
+ 							message: errorHandler.getErrorMessage(err)
+ 						});
   					} else {
-  						res.jsonp(req.participant);
-  					}	
-  				});
-  			
-            	//	save req.member
-        		member.save(function(err) {
-					if (err) {
-						return res.status(400).send({
-							message: errorHandler.getErrorMessage(err)
+  						Member.update({_id: member._id }, { $set: member}, function(err){  //goodjj
+							if (err) {
+								return res.status(400).send({
+									message: errorHandler.getErrorMessage(err)
+								});
+							} else {
+								res.jsonp(member);
+							}
 						});
-					} else {
-						res.jsonp(member);
-					}
+  					}
 				});
-				
-  			}
+			}
 		});
-	}
-	else {
-		//save member
-		var member = req.member;
-		member = _.extend(member, req.body);
-		member.displayName = member.firstName + ' ' + member.lastName;
+	// If the Member already exists and is being updated.
+	} else {
 		member.save(function(err) {
 			if (err) {
 				return res.status(400).send({
@@ -87,7 +83,6 @@ exports.update = function(req, res) {
 				res.jsonp(member);
 			}
 		});
-		
 	}
 	
 };
@@ -129,24 +124,20 @@ exports.list = function(req, res) {
  */
 exports.memberByID = function(req, res, next, id) { 
 	Member.findById(id).populate('user', 'displayName').exec(function(err, member) {
-		if (err) return next(err);
-		// if no member is found
 		if( member) {
 			req.member = member;
-		}
-		else {
+			next();
+		} else {
 			//use Participant model to search for participant
-			Participant.findById(id).populate('user', 'displayName').cast(Member, res).exec(function(err, participant) {
+			Participant.findById(id).populate('user', 'displayName').exec(function(err, participant) {
 				if(err) return next(err);
-				//cast participant as Member
-				if (participant) {
-					req.participant = participant;
-					req.member = new Member(participant);
-				}
+				if (!participant) return next(new Error('Failed to load Member ' + id));
+				
+				// Cast participant as member	
+				req.member = new Member(participant);
+				next();
 			});
 		}
-		req.member = member ;
-		next();
 	});
 };
 
