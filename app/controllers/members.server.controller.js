@@ -47,11 +47,11 @@ exports.update = function(req, res) {
 	
 	// If the Member is being converted from a Participant.
 	if (member.isNew) {
-		member.validate(function(err) {    //good
+		member.validate(function(err) {    
   			if(err) {
   				return res.status(400).send({
   					message: errorHandler.getErrorMessage(err)
-  				}); // good
+  				}); 
   			} else {
   				Participant.update({_id: member._id}, {$set: {__t: 'Member'}}, {strict: false}, function (err) {
   					if (err) {
