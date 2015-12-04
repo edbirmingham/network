@@ -141,6 +141,11 @@ module.exports = function(grunt) {
 			}
 		},
 		shell: {
+			initdb: {
+				/* jshint ignore:start */
+				command: 'mongo network-dev --eval \'db.users.insert({ "salt" : "\\u0019�\\u001cE�־��܂TZG��", "displayName" : "Jane Doe", "provider" : "local", "username" : "janedoe", "created" : ISODate("2015-08-20T14:33:40.135Z"), "roles" : [ "user", "admin" ], "password" : "WBA78SQ77XMCq3FW4QA+NKEuxnbs1SLc2fS06TOI6LHdetcu4UXjbWrmFkh7/cRFvacT4ke9AigmoUF56Y0X8w==", "email" : "jane@doe.com", "lastName" : "Doe", "firstName" : "Jane", "__v" : 0 })\''
+				/* jshint ignore:end */
+			},
     		mongodb: {
         		command: 'mongod --dbpath /home/ubuntu/workspace/mongo --smallfiles --fork --logpath /home/ubuntu/workspace/mongo/mongod.log',
 	        	options: {
@@ -188,6 +193,9 @@ module.exports = function(grunt) {
 
 	// Test task.
 	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
+	
+	// Initialize mongo db for development.
+	grunt.registerTask('initdb', ['shell:initdb']);
 	
 	// Launch mongo db.
 	grunt.registerTask('mongo', ['shell:mongodb']);
