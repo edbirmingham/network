@@ -88,6 +88,10 @@ vagrant up
 ```
 vagrant ssh
 ```
+* Create a development user.  The username is `janedoe` and the password is `password`.
+```
+grunt initdb
+```
 * Run the application
 ```
 grunt
