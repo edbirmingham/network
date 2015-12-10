@@ -41,9 +41,22 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
 	var member = req.member;
-	
+	member.communityNetworks = ['', '', ''];
+	member.extraGroups = ['', '', ''];
+	member.otherNetworks = ['', '', ''];
 	member = _.extend(member , req.body);
 	member.displayName = member.firstName + ' ' + member.lastName;
+	
+	//why does this work?
+	member.communityNetworks[0] = req.body.communityNetworks[0];
+	member.communityNetworks[1] = req.body.communityNetworks[1];
+	member.communityNetworks[2] = req.body.communityNetworks[2];
+	member.extraGroups[0] = req.body.extraGroups[0];
+	member.extraGroups[1] = req.body.extraGroups[1];
+	member.extraGroups[2] = req.body.extraGroups[2];
+	member.otherNetworks[0] = req.body.otherNetworks[0];
+	member.otherNetworks[1] = req.body.otherNetworks[1];
+	member.otherNetworks[2] = req.body.otherNetworks[2];
 	
 	// If the Member is being converted from a Participant.
 	if (member.isNew) {
@@ -59,12 +72,13 @@ exports.update = function(req, res) {
  							message: errorHandler.getErrorMessage(err)
  						});
   					} else {
-  						Member.update({_id: member._id }, { $set: member}, function(err){  //goodjj
+  						Member.update({_id: member._id }, { $set: member}, function(err){  
 							if (err) {
 								return res.status(400).send({
 									message: errorHandler.getErrorMessage(err)
 								});
 							} else {
+								console.log(member);
 								res.jsonp(member);
 							}
 						});
