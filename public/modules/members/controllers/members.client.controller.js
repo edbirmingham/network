@@ -106,14 +106,14 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 				extraGroups: [],
 				otherNetworks: []
 			});
-		}
+		};
 		
 		// A member is selected from the typehead search
 		$scope.selectMember = function(participant) {
-			$scope.member = new Members(participant)
+			$scope.member = new Members(participant);
 			$scope.member.communityNetworks = [];
 			$scope.member.extraGroups = [];
 			$scope.member.otherNetworks = [];
-		}
+		};
 	}
 ]);
