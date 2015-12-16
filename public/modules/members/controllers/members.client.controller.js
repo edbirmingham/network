@@ -46,6 +46,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 			} else {                 
 				// Redirect after save
 				member.$save(function(response) {
+					$location.path('members/' + response._id);
 					clearFields(response);
 				}, function(errorResponse) {
 					$scope.error = errorResponse.data.message;
