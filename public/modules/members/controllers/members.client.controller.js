@@ -8,7 +8,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 		// Create new Member
 		$scope.create = function() {
 			
-		var clearFields = function(Participant) {
+			var clearFields = function(Participant) {
 				$scope.member.firstName = '';
 				$scope.member.lastName = '';
 				$scope.member.phone = '';
@@ -33,7 +33,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 			};
 
 			// Create new Member
-			var member = new Members($scope.member);
+			var member = $scope.member;
 			
 			if(member && member._id) {
 				member.$update(function(response) {
@@ -92,12 +92,28 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 			return Participants.query({name: name}).$promise;
 		};
 
-
 		// Find existing Member
 		$scope.findOne = function() {
 			$scope.member = Members.get({ 
 				memberId: $stateParams.memberId
 			});
 		};
+		
+		// Initialize a new Member
+		$scope.newMember = function() {
+			$scope.member = new Members({
+				communityNetworks: [],
+				extraGroups: [],
+				otherNetworks: []
+			});
+		}
+		
+		// A member is selected from the typehead search
+		$scope.selectMember = function(participant) {
+			$scope.member = new Members(participant)
+			$scope.member.communityNetworks = [];
+			$scope.member.extraGroups = [];
+			$scope.member.otherNetworks = [];
+		}
 	}
 ]);

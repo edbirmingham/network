@@ -41,13 +41,13 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
 	var member = req.member;
-	member.communityNetworks = ['', '', ''];
-	member.extraGroups = ['', '', ''];
-	member.otherNetworks = ['', '', ''];
 	member = _.extend(member , req.body);
 	member.displayName = member.firstName + ' ' + member.lastName;
 	
-	//why does this work?
+	member.communityNetworks = ['', '', ''];
+	member.extraGroups = ['', '', ''];
+	member.otherNetworks = ['', '', ''];
+	
 	member.communityNetworks[0] = req.body.communityNetworks[0];
 	member.communityNetworks[1] = req.body.communityNetworks[1];
 	member.communityNetworks[2] = req.body.communityNetworks[2];
@@ -78,7 +78,7 @@ exports.update = function(req, res) {
 									message: errorHandler.getErrorMessage(err)
 								});
 							} else {
-								console.log(member);
+							//	console.log(member);
 								res.jsonp(member);
 							}
 						});

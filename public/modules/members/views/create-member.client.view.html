@@ -1,4 +1,4 @@
-<section data-ng-controller="MembersController">
+<section data-ng-controller="MembersController" data-ng-init="newMember()">
     <div class="page-header">
         <h1>New Member</h1>
     </div>
@@ -9,7 +9,7 @@
             	 <div class="form-group">
                     <label class="control-label" for="name">Find participant</label>
                     <div class="controls">
-                        <input id="participant" type="text" ng-model="selected" ng-change="member = null" typeahead-editable="false" typeahead-on-select="member = $item" typeahead="participant.displayName for participant in findParticipants($viewValue)" class="form-control" placeholder="Find participant">
+                        <input id="participant" type="text" ng-model="selected" ng-change="member = null" typeahead-editable="false" typeahead-on-select="selectMember($item)" typeahead="participant.displayName for participant in findParticipants($viewValue)" class="form-control" placeholder="Find participant">
                     </div>
                 </div>
 				<div class="form-group">
