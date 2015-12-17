@@ -22,7 +22,8 @@ var MemberSchema = Participant.discriminator('Member', new Schema({
 		required: 'Please choose a shirt size'
 	},
 	shirtReceived: {
-		type: Boolean
+		type: Boolean,
+		default: false,
 	},
 	talent: {
 		type: String,
