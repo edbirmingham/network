@@ -1,0 +1,169 @@
+<section data-ng-controller="MembersController" data-ng-init="findOne()">
+    <div class="page-header">
+        <h1>Edit Member</h1>
+    </div>
+    <div class="col-md-12">
+        <form class="form-horizontal" data-ng-submit="update()" novalidate>
+            <fieldset>
+                <div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+                <div class="form-group">
+                    <label class="control-label" for="firstName">First Name</label>
+                    <div class="controls">
+                        <input type="text" required data-ng-model="member.firstName" id="firstName" class="form-control" placeholder="First ame" required>
+                    </div>
+                </div>
+                <div class="form-group">
+					<label class="control-label" for="lastName">Last Name</label>
+                    <div class="controls">
+    					<input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="member.lastName" placeholder="Last Name">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="phone">Phone</label>
+                    <div class="controls">
+    					<input type="phone" id="phone" name="phone" class="form-control" data-ng-model="member.phone" placeholder="Phone">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="email">Email</label>
+                    <div class="controls">
+    					<input type="email" id="email" name="email" class="form-control" data-ng-model="member.email" placeholder="Email">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="identity">Who are you?</label>
+					<span id="identityHelpBlock" class="help-block">Ask: Student/Parent/Educator/Resident/Community Partner (choose one)</span>
+                    <div class="controls">
+    					<select id="identity" name="identity" class="form-control" data-ng-model="member.identity" placeholder="Who are you?">
+    						<option>Student</option>
+    						<option>Parent</option>
+    						<option>Educator</option>
+    						<option>Resident</option>
+    						<option>Community Partner</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="affiliation">Affiliation?</label>
+					<span id="identityHelpBlock" class="help-block">Where are you coming from? (Specific school, neighborhood, organization/group)</span>
+                    <div class="controls">
+    					<input type="text" id="affiliation" name="affiliation" class="form-control" data-ng-model="member.affiliation" placeholder="Affiliation?">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="address">Address</label>
+                    <div class="controls">
+    					<input type="address" id="address" name="address" class="form-control" data-ng-model="member.address" placeholder="Address">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="shirtSize">T-shirt Size</label>
+					<span id="shirtSizeHelpBlock" class="help-block">Ask: What size T-shirt?</span>
+                    <div class="controls">
+    					<select id="shirtSize" name="shirtSize" class="form-control" data-ng-model="member.shirtSize" placeholder="Shirt Size?">
+    						<option>Small</option>
+    						<option>Medium</option>
+    						<option>Large</option>
+    						<option>X-Large</option>
+    						<option>XX-Large</option>
+						</select>
+					</div>
+				</div>
+					<div class="form-group">
+					<label class="control-label" for="shirtReceived">T-Shirt Received</label>
+                    <div class="controls">
+    					<input type="checkbox" id="shirtReceived" name="shirtReceived" class="form-control" data-ng-model="member.shirtReceived" placeholder="shirtReceived">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="talent">What are you good at? What do you have a talent/passion for?</label>
+                    <div class="controls">
+    					<input type="talent" id="talent" name="talent" class="form-control" data-ng-model="member.talent" placeholder="Talent">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="placeOfWorship">Place Of Worship</label>
+                    <div class="controls">
+    					<input type="placeOfWorship" id="placeOfWorship" name="placeOfWorship" class="form-control" data-ng-model="member.placeOfWorship" placeholder="Place Of Worship">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="recruitment">How were you recruited?</label></label>
+					<span id="recruitmentHelpBlock" class="help-block">Ask: How did you become a member?</span>
+                    <div class="controls">
+    					<select id="recruitment" name="recruitment" class="form-control" data-ng-model="member.recruitment" placeholder="Who recruited you?">
+    						<option>EdBirmingham Staff</option>
+    						<option>Network Night</option>
+    						<option>Career Development Conference</option>
+    						<option>Bridging the Gap</option>
+    						<option>Connector Recruitment</option></option>
+    						<option>Educator Roundtable</option>
+    						<option>Parent Pathways</option>
+    						<option>Gear Up</option>                     
+    						<option>Other</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="communityNetwork1">Neighborhood/Community Network #1</label>
+                    <div class="controls">
+    					<input type="text" id="communityNetwork1" name="communityNetwork1" class="form-control" data-ng-model="member.communityNetworks[0]" placeholder="Community Networks">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="communityNetwork2">Neighborhood/Community Networks #2</label>
+                    <div class="controls">
+    					<input type="text" id="communityNetwork2" name="communityNetwork2" class="form-control" data-ng-model="member.communityNetworks[1]" placeholder="Community Networks">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="communityNetwork3">Neightborhood/Community Network #3</label>
+                    <div class="controls">
+    					<input type="text" id="communityNetwork3" name="communityNetwork3" class="form-control" data-ng-model="member.communityNetworks[2]" placeholder="Community Networks">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="extraGroup1">Extracurricular Group #1</label>
+                    <div class="controls">
+    					<input type="text" id="extraGroup1" name="extraGroup1" class="form-control" data-ng-model="member.extraGroups[0]" placeholder="Extra Groups">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="extraGroup2">Extracurricular Group #2</label>
+                    <div class="controls">
+    					<input type="text" id="extraGroup2" name="extraGroup2" class="form-control" data-ng-model="member.extraGroups[1]" placeholder="Extra Groups">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="extraGroup3">Extracurricular Group #3</label>
+                    <div class="controls">
+    					<input type="text" id="extraGroup3" name="extraGroup3" class="form-control" data-ng-model="member.extraGroups[2]" placeholder="Extra Groups">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="otherNetwork1">Other Network #1</label>
+                    <div class="controls">
+    					<input type="text" id="otherNetwork1" name="otherNetwork1" class="form-control" data-ng-model="member.otherNetworks[0]" placeholder="Other Networks">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="otherNetwork2">Other Network #2</label>
+                    <div class="controls">
+    					<input type="text" id="otherNetwork2" name="otherNetwork2" class="form-control" data-ng-model="member.otherNetworks[1]" placeholder="Other Networks">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="otherNetwork3">Other Network #3</label>
+                    <div class="controls">
+    					<input type="text" id="otherNetwork3" name="otherNetwork3" class="form-control" data-ng-model="member.otherNetworks[2]" placeholder="Other Networks">
+					</div>
+				</div>
+                <div class="form-group">
+                    <input type="submit" value="Update" class="btn btn-default">
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</section>

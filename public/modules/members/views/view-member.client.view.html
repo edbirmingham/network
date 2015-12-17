@@ -1,0 +1,57 @@
+<section data-ng-controller="MembersController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1 data-ng-bind="member.displayName"></h1>
+	</div>
+	<div class="clearfix">
+		<dl class="dl-horizontal">
+		  <dt>Phone</dt>
+		  <dd data-ng-bind="member.phone"></dd>
+		  <dt>Email</dt>
+		  <dd data-ng-bind="member.email"></dd>
+		  <dt>Identity</dt>
+		  <dd data-ng-bind="member.identity"></dd>
+		  <dt>Affiliation</dt>
+		  <dd data-ng-bind="member.affiliation"></dd>
+		   <dt>Address</dt>
+		  <dd data-ng-bind="member.address"></dd>
+		   <dt>T-shirt Size</dt>
+		  <dd data-ng-bind="member.shirtSize"></dd>
+		  <dt>T-shirt Received</dt>
+		  <dd data-ng-bind="member.shirtReceived"></dd>
+		   <dt>Talent/Passions</dt>
+		  <dd data-ng-bind="member.talent"></dd>
+		   <dt>Place of Worship</dt>
+		  <dd data-ng-bind="member.placeOfWorship"></dd>
+		  <dt>Recruited Through</dt>
+		  <dd data-ng-bind="member.recruitment"></dd>
+		  <dt>Community Networks</dt>
+		  <dd data-ng-bind="member.communityNetworks"></dd>
+		  <dt>Extracurricular Groups</dt>
+		  <dd data-ng-bind="member.extraGroups"></dd>
+		  <dt>Other Networks</dt>
+		  <dd data-ng-bind="member.otherNetworks"></dd>
+		</dl>
+	</div>
+	<div class="page-header">
+		<h1 data-ng-bind="member.name"></h1>
+	</div>
+	<div class="pull-right" data-ng-show="authentication.user">
+		<a class="btn btn-primary" href="/#!/members/create">
+			<i class="glyphicon glyphicon-plus-sign"></i>
+		</a>
+		<a class="btn btn-primary" href="/#!/members/{{member._id}}/edit">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+	</div>
+	<small>
+		<em class="text-muted">
+			Created on
+			<span data-ng-bind="member.created | date:'mediumDate'"></span>
+			by
+			<span data-ng-bind="member.user.displayName"></span>
+		</em>
+	</small>
+</section>
