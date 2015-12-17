@@ -47,12 +47,13 @@ This setup uses Cloud9 for your development environment.  Cloud9 provides an onl
   ```
   mkdir /home/ubuntu/workspace/mongo
   mongod --dbpath /home/ubuntu/workspace/mongo --smallfiles --fork --logpath /home/ubuntu/workspace/mongo/mongod.log
+  grunt initdb
   ```
   * In the bash tab, start the application by entering the following command:
   ```
   grunt
   ```
-  * To view the app in the browser, select Preview from the editor menu and then select Preview Running Application.  This will open the application in a tab of the editor.
+  * To view the app in the browser, select Preview from the editor menu and then select Preview Running Application.  This will open the application in a tab of the editor.  Log into the application with username `janedoe` and password `password`.
 * Hack away
 * Send lots of pull requests!!
 * In order to get updates from the main project use the following command in the bash tab:
@@ -86,6 +87,10 @@ vagrant up
 * SSH into the Vagrant virtual machine
 ```
 vagrant ssh
+```
+* Create a development user.  The username is `janedoe` and the password is `password`.
+```
+grunt initdb
 ```
 * Run the application
 ```
