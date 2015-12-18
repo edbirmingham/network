@@ -38,7 +38,22 @@ describe('Member CRUD tests', function() {
 		// Save a user to the test db and create new Member
 		user.save(function() {
 			member = {
-				name: 'Member Name'
+				firstName: 'Member',
+				lastName: 'Name',
+				displayName: 'MemberName',
+				phone: '2055558888',
+				email: 'mem@email.com',
+				identity: 'Educator',
+				affiliation: 'UAB',
+				address: '1234 Broadt Street',
+				shirtSize: 'XL',
+				shirtReceived: true,
+				talent: 'Music',
+				placeOfWorship: 'Baptist Church',
+				recruitment: 'Network Night',
+				communityNetworks: ['cn1', 'cn2', 'cn3'],
+				extraGroups: ['eg1', 'eg2'],
+				otherNetworks: ['on1', 'on2', 'on3'],
 			};
 
 			done();
@@ -75,8 +90,9 @@ describe('Member CRUD tests', function() {
 
 								// Set assertions
 								(members[0].user._id).should.equal(userId);
-								(members[0].name).should.match('Member Name');
-
+								(members[0].firstName).should.match('Member');
+								(members[0].lastName).should.match('Name');
+								(members[0].affiliation).should.match('UAB');
 								// Call the assertion callback
 								done();
 							});
@@ -96,7 +112,7 @@ describe('Member CRUD tests', function() {
 
 	it('should not be able to save Member instance if no name is provided', function(done) {
 		// Invalidate name field
-		member.name = '';
+		member.firstName = '';
 
 		agent.post('/auth/signin')
 			.send(credentials)
@@ -114,7 +130,7 @@ describe('Member CRUD tests', function() {
 					.expect(400)
 					.end(function(memberSaveErr, memberSaveRes) {
 						// Set message assertion
-						(memberSaveRes.body.message).should.match('Please fill Member name');
+						(memberSaveRes.body.message).should.match('Please fill in the first name');
 						
 						// Handle Member save error
 						done(memberSaveErr);
@@ -142,7 +158,7 @@ describe('Member CRUD tests', function() {
 						if (memberSaveErr) done(memberSaveErr);
 
 						// Update Member name
-						member.name = 'WHY YOU GOTTA BE SO MEAN?';
+						member.firstName = 'WHY YOU GOTTA BE SO MEAN?';
 
 						// Update existing Member
 						agent.put('/members/' + memberSaveRes.body._id)
@@ -154,7 +170,7 @@ describe('Member CRUD tests', function() {
 
 								// Set assertions
 								(memberUpdateRes.body._id).should.equal(memberSaveRes.body._id);
-								(memberUpdateRes.body.name).should.match('WHY YOU GOTTA BE SO MEAN?');
+								(memberUpdateRes.body.firstName).should.match('WHY YOU GOTTA BE SO MEAN?');
 
 								// Call the assertion callback
 								done();
@@ -163,7 +179,7 @@ describe('Member CRUD tests', function() {
 			});
 	});
 
-	it('should be able to get a list of Members if not signed in', function(done) {
+	it('should not be able to get a list of Members if not signed in', function(done) {
 		// Create new Member model instance
 		var memberObj = new Member(member);
 
@@ -171,31 +187,27 @@ describe('Member CRUD tests', function() {
 		memberObj.save(function() {
 			// Request Members
 			request(app).get('/members')
-				.end(function(req, res) {
-					// Set assertion
-					res.body.should.be.an.Array.with.lengthOf(1);
-
+				.expect(401)
+				.end(function(memberSaveError, memberSaveRes) {
 					// Call the assertion callback
-					done();
+					done(memberSaveError);
 				});
 
 		});
 	});
 
 
-	it('should be able to get a single Member if not signed in', function(done) {
+	it('should not be able to get a single Member if not signed in', function(done) {
 		// Create new Member model instance
 		var memberObj = new Member(member);
 
 		// Save the Member
 		memberObj.save(function() {
 			request(app).get('/members/' + memberObj._id)
-				.end(function(req, res) {
-					// Set assertion
-					res.body.should.be.an.Object.with.property('name', member.name);
-
+				.expect(401)
+				.end(function(memberSaveError, memberSaveRes) {
 					// Call the assertion callback
-					done();
+					done(memberSaveError);
 				});
 		});
 	});

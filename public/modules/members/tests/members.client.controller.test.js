@@ -53,7 +53,22 @@
 		it('$scope.find() should create an array with at least one Member object fetched from XHR', inject(function(Members) {
 			// Create sample Member using the Members service
 			var sampleMember = new Members({
-				name: 'New Member'
+				firstName: 'Member',
+				lastName: 'Name',
+				displayName: 'MemberName',
+				phone: '2055558888',
+				email: 'mem@email.com',
+				identity: 'Educator',
+				affiliation: 'UAB',
+				address: '1234 Broadt Street',
+				shirtSize: 'XL',
+				shirtReceived: true,
+				talent: 'Music',
+				placeOfWorship: 'Baptist Church',
+				recruitment: 'Network Night',
+				communityNetworks: ['cn1', 'cn2', 'cn3'],
+				extraGroups: ['eg1', 'eg2'],
+				otherNetworks: ['on1', 'on2', 'on3'],
 			});
 
 			// Create a sample Members array that includes the new Member
@@ -73,7 +88,22 @@
 		it('$scope.findOne() should create an array with one Member object fetched from XHR using a memberId URL parameter', inject(function(Members) {
 			// Define a sample Member object
 			var sampleMember = new Members({
-				name: 'New Member'
+				firstName: 'Member',
+				lastName: 'Name',
+				displayName: 'MemberName',
+				phone: '2055558888',
+				email: 'mem@email.com',
+				identity: 'Educator',
+				affiliation: 'UAB',
+				address: '1234 Broadt Street',
+				shirtSize: 'XL',
+				shirtReceived: true,
+				talent: 'Music',
+				placeOfWorship: 'Baptist Church',
+				recruitment: 'Network Night',
+				communityNetworks: ['cn1', 'cn2', 'cn3'],
+				extraGroups: ['eg1', 'eg2'],
+				otherNetworks: ['on1', 'on2', 'on3'],
 			});
 
 			// Set the URL parameter
@@ -93,17 +123,47 @@
 		it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function(Members) {
 			// Create a sample Member object
 			var sampleMemberPostData = new Members({
-				name: 'New Member'
+				firstName: 'Member',
+				lastName: 'Name',
+				displayName: 'MemberName',
+				phone: '2055558888',
+				email: 'mem@email.com',
+				identity: 'Educator',
+				affiliation: 'UAB',
+				address: '1234 Broadt Street',
+				shirtSize: 'XL',
+				shirtReceived: true,
+				talent: 'Music',
+				placeOfWorship: 'Baptist Church',
+				recruitment: 'Network Night',
+				communityNetworks: ['cn1', 'cn2', 'cn3'],
+				extraGroups: ['eg1', 'eg2'],
+				otherNetworks: ['on1', 'on2', 'on3'],
 			});
 
 			// Create a sample Member response
 			var sampleMemberResponse = new Members({
 				_id: '525cf20451979dea2c000001',
-				name: 'New Member'
+				firstName: 'Member',
+				lastName: 'Name',
+				displayName: 'MemberName',
+				phone: '2055558888',
+				email: 'mem@email.com',
+				identity: 'Educator',
+				affiliation: 'UAB',
+				address: '1234 Broadt Street',
+				shirtSize: 'XL',
+				shirtReceived: true,
+				talent: 'Music',
+				placeOfWorship: 'Baptist Church',
+				recruitment: 'Network Night',
+				communityNetworks: ['cn1', 'cn2', 'cn3'],
+				extraGroups: ['eg1', 'eg2'],
+				otherNetworks: ['on1', 'on2', 'on3'],
 			});
 
 			// Fixture mock form input values
-			scope.name = 'New Member';
+			scope.member = sampleMemberPostData;
 
 			// Set POST response
 			$httpBackend.expectPOST('members', sampleMemberPostData).respond(sampleMemberResponse);
@@ -113,7 +173,7 @@
 			$httpBackend.flush();
 
 			// Test form inputs are reset
-			expect(scope.name).toEqual('');
+			expect(scope.member.firstName).toEqual('');
 
 			// Test URL redirection after the Member was created
 			expect($location.path()).toBe('/members/' + sampleMemberResponse._id);
@@ -123,7 +183,22 @@
 			// Define a sample Member put data
 			var sampleMemberPutData = new Members({
 				_id: '525cf20451979dea2c000001',
-				name: 'New Member'
+				firstName: 'Member',
+				lastName: 'Name',
+				displayName: 'MemberName',
+				phone: '2055558888',
+				email: 'mem@email.com',
+				identity: 'Educator',
+				affiliation: 'UAB',
+				address: '1234 Broadt Street',
+				shirtSize: 'XL',
+				shirtReceived: true,
+				talent: 'Music',
+				placeOfWorship: 'Baptist Church',
+				recruitment: 'Network Night',
+				communityNetworks: ['cn1', 'cn2', 'cn3'],
+				extraGroups: ['eg1', 'eg2'],
+				otherNetworks: ['on1', 'on2', 'on3'],
 			});
 
 			// Mock Member in scope
