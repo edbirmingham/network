@@ -13,3 +13,10 @@
 .ng-valid.ng-dirty {
 	border-color: #78FA89;
 }
+.row {
+	display: block;
+}
+.lead {
+	padding-top: 15px;
+	text-align: center;
+}
