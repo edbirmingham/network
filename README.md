@@ -1,4 +1,4 @@
-## We're the Birmingham Education Foundation.
+## We're the Birmingham Education Foundation.[![Build Status](https://travis-ci.org/edbirmingham/network.svg)](https://travis-ci.org/edbirmingham/network)
 You can call us, [Ed](http://edbirmingham.org).
 
 ## What We Do
