@@ -786,6 +786,14 @@ angular.module('network-events').config(['$stateProvider',
 angular.module('network-events').controller('NetworkEventsController', ['$scope', '$stateParams', '$location', 'Authentication', 'NetworkEvents', 'Locations', 'Participations',
 	function($scope, $stateParams, $location, Authentication, NetworkEvents, Locations, Participations) {
 		$scope.authentication = Authentication;
+		$scope.status = { dateOpen: false };
+
+		$scope.open = function($event) {
+		    $event.preventDefault();
+		    $event.stopPropagation();
+		
+		    $scope.status.dateOpen = !$scope.status.dateOpen;
+		  };
 
 		// Create new Network event
 		$scope.create = function() {
@@ -869,7 +877,6 @@ angular.module('network-events').controller('NetworkEventsController', ['$scope'
 				networkEventId: $stateParams.networkEventId
 			});
 		};
-		
 	}
 ]);
 'use strict';
