@@ -56,6 +56,10 @@ ApplicationConfiguration.registerModule('locations');
 'use strict';
 
 // Use applicaion configuration module to register a new module
+ApplicationConfiguration.registerModule('members');
+'use strict';
+
+// Use applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('network-events');
 'use strict';
 
@@ -574,6 +578,175 @@ angular.module('locations').factory('Locations', ['$resource',
 'use strict';
 
 // Configuring the Articles module
+angular.module('members').run(['Menus',
+	function(Menus) {
+		// Set top bar menu items
+		Menus.addMenuItem('topbar', 'Members', 'members', 'dropdown', '/members(/create)?');
+		Menus.addSubMenuItem('topbar', 'members', 'List Members', 'members');
+		Menus.addSubMenuItem('topbar', 'members', 'New Member', 'members/create');
+	}
+]);
+'use strict';
+
+//Setting up route
+angular.module('members').config(['$stateProvider',
+	function($stateProvider) {
+		// Members state routing
+		$stateProvider.
+		state('listMembers', {
+			url: '/members',
+			templateUrl: 'modules/members/views/list-members.client.view.html'
+		}).
+		state('createMember', {
+			url: '/members/create',
+			templateUrl: 'modules/members/views/create-member.client.view.html'
+		}).
+		state('viewMember', {
+			url: '/members/:memberId',
+			templateUrl: 'modules/members/views/view-member.client.view.html'
+		}).
+		state('editMember', {
+			url: '/members/:memberId/edit',
+			templateUrl: 'modules/members/views/edit-member.client.view.html'
+		});
+	}
+]);
+'use strict';
+
+// Members controller
+angular.module('members').controller('MembersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Members', 'Participants',
+	function($scope, $stateParams, $location, Authentication, Members, Participants) {
+		$scope.authentication = Authentication;
+
+		// Create new Member
+		$scope.create = function() {
+			
+			var clearFields = function(Participant) {
+				$scope.member.firstName = '';
+				$scope.member.lastName = '';
+				$scope.member.phone = '';
+				$scope.member.email = '';
+				$scope.member.identity = '';
+				$scope.member.affiliation = '';
+				$scope.member.address = '';
+				$scope.member.shirtSize = '';
+				$scope.member.shirtReceived = '';
+				$scope.member.talent = '';
+				$scope.member.placeOfWorship = '';
+				$scope.member.recruitment = '';
+				$scope.member.communityNetworks[0] = '';
+				$scope.member.communityNetworks[1] = '';
+				$scope.member.communityNetworks[2] = '';
+				$scope.member.extraGroups[0] = '';
+				$scope.member.extraGroups[1] = '';
+				$scope.member.extraGroups[2] = '';
+				$scope.member.otherNetworks[0] = '';
+				$scope.member.otherNetworks[1] = '';
+				$scope.member.otherNetworks[2] = '';
+			};
+
+			// Create new Member
+			var member = $scope.member;
+			
+			if(member && member._id) {
+				member.$update(function(response) {
+					$location.path('members/' + response._id);
+					clearFields(response);
+				}, function(errorResponse) {
+				    $scope.error = errorResponse.data.message;
+				});
+				
+			} else {                 
+				// Redirect after save
+				member.$save(function(response) {
+					$location.path('members/' + response._id);
+					clearFields(response);
+				}, function(errorResponse) {
+					$scope.error = errorResponse.data.message;
+				});
+				
+			} 
+		};
+
+		// Remove existing Member
+		$scope.remove = function(member) {
+			if ( member ) { 
+				member.$remove();
+
+				for (var i in $scope.members) {
+					if ($scope .members [i] === member) {
+						$scope.members.splice(i, 1);
+					}
+				}
+			} else {
+				$scope.member.$remove(function() {
+					$location.path('members');
+				});
+			}
+		};
+
+		// Update existing Member
+		$scope.update = function() {
+			var member = $scope.member;
+
+			member.$update(function() {
+				$location.path('members/' + member._id);
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+
+		// Find a list of Members
+		$scope.find = function() {
+			$scope.members = Members.query();
+		};
+		
+		// Find existing participants
+		$scope.findParticipants = function(name) {
+			return Participants.query({name: name}).$promise;
+		};
+
+		// Find existing Member
+		$scope.findOne = function() {
+			$scope.member = Members.get({ 
+				memberId: $stateParams.memberId
+			});
+		};
+		
+		// Initialize a new Member
+		$scope.newMember = function() {
+			$scope.member = new Members({
+				communityNetworks: [],
+				extraGroups: [],
+				otherNetworks: []
+			});
+		};
+		
+		// A member is selected from the typehead search
+		$scope.selectMember = function(participant) {
+			$scope.member = new Members(participant);
+			$scope.member.communityNetworks = [];
+			$scope.member.extraGroups = [];
+			$scope.member.otherNetworks = [];
+		};
+	}
+]);
+'use strict';
+
+//Members service used to communicate Members REST endpoints
+angular.module('members').factory('Members', ['$resource',
+	function($resource) {
+		return $resource('members/:memberId', { memberId: '@_id'
+		}, {
+			update: {
+				method: 'PUT'
+			}
+		});
+	}
+]);
+'use strict';
+
+// Configuring the Articles module
 angular.module('network-events').run(['Menus',
 	function(Menus) {
 		// Set top bar menu items
@@ -613,6 +786,14 @@ angular.module('network-events').config(['$stateProvider',
 angular.module('network-events').controller('NetworkEventsController', ['$scope', '$stateParams', '$location', 'Authentication', 'NetworkEvents', 'Locations', 'Participations',
 	function($scope, $stateParams, $location, Authentication, NetworkEvents, Locations, Participations) {
 		$scope.authentication = Authentication;
+		$scope.status = { dateOpen: false };
+
+		$scope.open = function($event) {
+		    $event.preventDefault();
+		    $event.stopPropagation();
+		
+		    $scope.status.dateOpen = !$scope.status.dateOpen;
+		  };
 
 		// Create new Network event
 		$scope.create = function() {
@@ -696,7 +877,6 @@ angular.module('network-events').controller('NetworkEventsController', ['$scope'
 				networkEventId: $stateParams.networkEventId
 			});
 		};
-		
 	}
 ]);
 'use strict';
