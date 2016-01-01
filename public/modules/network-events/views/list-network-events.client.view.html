@@ -5,10 +5,10 @@
     <div class="list-group">
         <a data-ng-repeat="networkEvent in networkEvents" data-ng-href="#!/network-events/{{networkEvent._id}}" class="list-group-item">
 			<small class="list-group-item-text">
-				Created:
-				<span data-ng-bind="networkEvent.created | date:'medium'"></span>
-				| By:
+				Creator:
 				<span data-ng-bind="networkEvent.user.displayName"></span>
+				| Event Date:
+				<span data-ng-bind="networkEvent.scheduled| date:'medium'"></span>
 				| At: 
 				<span data-ng-bind="networkEvent.location.name"></span>
 				| Type:
