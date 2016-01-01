@@ -4,13 +4,24 @@
     </div>
     <div class="list-group">
         <a data-ng-repeat="networkEvent in networkEvents" data-ng-href="#!/network-events/{{networkEvent._id}}" class="list-group-item">
+			<span>
+			    <h4 class="list-group-item-heading">
+			        <span data-ng-bind="networkEvent.name"></span>
+			        <small data-ng-bind="networkEvent.eventType"></small>
+			    </h4>
+			</span>
 			<small class="list-group-item-text">
 				Created on
 				<span data-ng-bind="networkEvent.created | date:'medium'"></span>
 				by
 				<span data-ng-bind="networkEvent.user.displayName"></span>
+			</small><br/>
+			<small>
+			    Occurs
+			    <span data-ng-bind="networkEvent.scheduled | date:'MMM d, y'"></span>
+			    at
+			    <span data-ng-bind="networkEvent.location.name"></span>
 			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="networkEvent.name"></h4>
         </a>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!networkEvents.$resolved || networkEvents.length">
