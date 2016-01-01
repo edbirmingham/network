@@ -20,3 +20,7 @@
 	padding-top: 15px;
 	text-align: center;
 }
+.list-group span {
+	font-weight: bold;
+	color: #538cc6;
+}

@@ -5,18 +5,19 @@
     <div class="list-group">
         <a data-ng-repeat="action in actions" data-ng-href="#!/actions/{{action._id}}" class="list-group-item">
 			<small class="list-group-item-text">
+				Type: 
 				<span data-ng-bind="action.type"></span>
-				made on
+				| Made:
 				<span data-ng-bind="action.created | date:'medium'"></span>
-				by
+				| By:
 				<span data-ng-bind="action.actor.displayName"></span>
+				| At:
 				<span ng-if="action.networkEvent">
-					at
 					<span data-ng-bind="action.networkEvent.name"></span>
 				</span>
-				with
+				| With:
 				<span data-ng-bind="action.matches.length"></span>
-				matches.
+				match(es).
 			</small>
 			<h4 class="list-group-item-heading" data-ng-bind="action.description"></h4>
         </a>
