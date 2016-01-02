@@ -82,10 +82,16 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 				$scope.error = errorResponse.data.message;
 			});
 		};
+		
+		$scope.shirtFilterOn = true;
 
 		// Find a list of Members
 		$scope.find = function() {
-			$scope.members = Members.query();
+			if($scope.shirtFilterOn === false) {
+				$scope.members = Members.query();
+			} else {
+				$scope.members = Members.query({shirtReceived: false});
+			}
 		};
 		
 		// Find existing participants
@@ -116,5 +122,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 			$scope.member.extraGroups = [];
 			$scope.member.otherNetworks = [];
 		};
+		
+	
 	}
 ]);
