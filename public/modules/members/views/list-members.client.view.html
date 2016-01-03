@@ -5,14 +5,16 @@
     <div class="list-group">
         <a data-ng-repeat="member in members" data-ng-href="#!/members/{{member._id}}" class="list-group-item">
 			<small class="list-group-item-text">
-			    <span data-ng-bind="member.displayName"></span>
-			    (created on
+			    Phone:
+			    <span data-ng-bind="member.phone"></span>
+			    | Email:
+				<span data-ng-bind="member.email"></span>
+				| Member is a: 
+				<span data-ng-bind="member.identity"></span>
+				| Member since: 
 				<span data-ng-bind="member.created | date:'medium'"></span>
-				by
-				<span data-ng-bind="member.user.displayName"></span>
-				)
 			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="member.name"></h4>
+			<h4 class="list-group-item-heading" data-ng-bind="member.displayName"></h4>
         </a>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!members.$resolved || members.length">

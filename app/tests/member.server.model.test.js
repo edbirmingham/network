@@ -29,7 +29,22 @@ describe('Member Model Unit Tests:', function() {
 
 		user.save(function() { 
 			member = new Member({
-				name: 'Member Name',
+				firstName: 'Member',
+				lastName: 'Name',
+				displayName: 'MemberName',
+				phone: '2055558888',
+				email: 'mem@email.com',
+				identity: 'Educator',
+				affiliation: 'UAB',
+				address: '1234 Broadt Street',
+				shirtSize: 'XL',
+				shirtReceived: true,
+				talent: 'Music',
+				placeOfWorship: 'Baptist Church',
+				recruitment: 'Network Night',
+				communityNetworks: ['cn1', 'cn2', 'cn3'],
+				extraGroups: ['eg1', 'eg2'],
+				otherNetworks: ['on1', 'on2', 'on3'],
 				user: user
 			});
 
@@ -45,8 +60,71 @@ describe('Member Model Unit Tests:', function() {
 			});
 		});
 
-		it('should be able to show an error when try to save without name', function(done) { 
-			member.name = '';
+		it('should be able to show an error when try to save without first name', function(done) { 
+			member.firstName = '';
+
+			return member.save(function(err) {
+				should.exist(err);
+				done();
+			});
+		});
+		
+		it('should be able to show an error when try to save without last name', function(done) { 
+			member.lastName = '';
+
+			return member.save(function(err) {
+				should.exist(err);
+				done();
+			});
+		});
+		
+		it('should be able to show an error when try to save without a phone number', function(done) { 
+			member.phone = '';
+
+			return member.save(function(err) {
+				should.exist(err);
+				done();
+			});
+		});
+		
+		it('should be able to show an error when try to save without an identity', function(done) { 
+			member.identity = '';
+
+			return member.save(function(err) {
+				should.exist(err);
+				done();
+			});
+		});
+		
+		it('should be able to show an error when try to save without an affiliation', function(done) { 
+			member.affiliation = '';
+
+			return member.save(function(err) {
+				should.exist(err);
+				done();
+			});
+		});
+		
+		it('should be able to show an error when try to save without a shirt size', function(done) { 
+			member.shirtSize = '';
+
+			return member.save(function(err) {
+				should.exist(err);
+				done();
+			});
+		});
+		
+		it('should be able to show an error when try to save without a talent', function(done) { 
+			member.talent = '';
+
+			return member.save(function(err) {
+				should.exist(err);
+				done();
+			});
+		});
+		
+		it('should be able to show an error when try to save without a recruitment', function(done) { 
+			member.recruitment = '';
 
 			return member.save(function(err) {
 				should.exist(err);

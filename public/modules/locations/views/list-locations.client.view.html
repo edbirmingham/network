@@ -5,9 +5,9 @@
     <div class="list-group">
         <a data-ng-repeat="location in locations" data-ng-href="#!/locations/{{location._id}}" class="list-group-item">
 			<small class="list-group-item-text">
-				Created on
+				Created:
 				<span data-ng-bind="location.created | date:'medium'"></span>
-				by
+				| By:
 				<span data-ng-bind="location.user.displayName"></span>
 			</small>
 			<h4 class="list-group-item-heading" data-ng-bind="location.name"></h4>
