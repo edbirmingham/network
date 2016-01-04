@@ -29,6 +29,13 @@
     					<input type="text" id="username" name="username" class="form-control" data-ng-model="user.username" placeholder="Username">
 					</div>
 				</div>
+				<div class="form-group">
+				    <label class="control-label">Roles</label>
+				    <div class="controls" data-dg-repeat="role in users.roles">
+				        <label for="lbl{{ role }}">{{ role }}</label>
+				        <input type="text" id="lbl{{ role }}" name="lbl{{ role }}admin" data-ng-model="role">
+				    </div>
+				</div>
                 <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-default">
                 </div>
