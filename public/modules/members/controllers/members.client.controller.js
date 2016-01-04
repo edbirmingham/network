@@ -83,15 +83,15 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 			});
 		};
 		
-		$scope.shirtFilterOn = true;
+		$scope.shirtFilterOn = false;
 
 		// Find a list of Members
 		$scope.find = function() {
-			if($scope.shirtFilterOn === false) {
-				$scope.members = Members.query();
-			} else {
-				$scope.members = Members.query({shirtReceived: false});
-			}
+			$scope.members = Members.query();
+		};
+		
+		$scope.shirtFilter = function(member) {
+			return $scope.shirtFilterOn || member.shirtReceived === false;
 		};
 		
 		// Find existing participants
