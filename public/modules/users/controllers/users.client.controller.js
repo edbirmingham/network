@@ -65,5 +65,26 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 				userId: $stateParams.userId
 			});
 		};
+		
+		// Add or remove the admin
+		$scope.setAdmin = function() {
+			if ($scope.isadmin == true) {
+				$scope.user.roles.push('admin');
+			} else {
+				var idx = $scope.user.roles.indexOf('admin');
+				if (idx > -1) {
+					$scope.user.roles.splice(idx, 1);
+				}
+			}
+		};
+		
+		// Checks for an admin
+		$scope.hasAdmin = function() {
+			if ($scope.user.roles.indexOf('admin') > -1) {
+				$scope.isadmin = true;
+			} else {
+				$scope.isadmin = false;
+			}
+		}
 	}
 ]);
