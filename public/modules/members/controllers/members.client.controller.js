@@ -92,7 +92,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 		$scope.showOnlyShirtlessMembers = false;
 		
 		$scope.shirtFilter = function(member) {
-			if($scope.showOnlyShirtlessMembers == true) {
+			if($scope.showOnlyShirtlessMembers === true) {
 				return member.shirtReceived === false;
 			} else {
 				return member;
