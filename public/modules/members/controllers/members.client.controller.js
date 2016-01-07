@@ -82,10 +82,21 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 				$scope.error = errorResponse.data.message;
 			});
 		};
+		
 
 		// Find a list of Members
 		$scope.find = function() {
 			$scope.members = Members.query();
+		};
+		
+		$scope.showOnlyShirtlessMembers = false;
+		
+		$scope.shirtFilter = function(member) {
+			if($scope.showOnlyShirtlessMembers == true) {
+				return member.shirtReceived === false;
+			} else {
+				return member;
+			}
 		};
 		
 		// Find existing participants
@@ -116,5 +127,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 			$scope.member.extraGroups = [];
 			$scope.member.otherNetworks = [];
 		};
+		
+	
 	}
 ]);
