@@ -82,6 +82,16 @@ angular.module('network-events').controller('NetworkEventsController', ['$scope'
 	        $scope.locations = Locations.query();
 		};
 		
+		$scope.initNew = function() {
+			$scope.findLocations();
+			$scope.networkEvent = new NetworkEvents({});
+			$scope.networkEvent.scheduled = new Date;
+			$scope.networkEvent.scheduled.setHours(19);
+			$scope.networkEvent.scheduled.setMinutes(0);
+			$scope.networkEvent.scheduled.setSeconds(0);
+			
+		};
+		
 		// Initialize the edit screen with the event and possible locations.
 		$scope.initEdit = function() {
 			$scope.findLocations();
