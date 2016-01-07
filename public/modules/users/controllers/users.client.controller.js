@@ -64,11 +64,13 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			$scope.user = Users.get({ 
 				userId: $stateParams.userId
 			});
+			
+			$scope.hasAdmin();
 		};
 		
 		// Add or remove the admin
 		$scope.setAdmin = function() {
-			if ($scope.isadmin == true) {
+			if ($scope.isadmin === true) {
 				$scope.user.roles.push('admin');
 			} else {
 				var idx = $scope.user.roles.indexOf('admin');
@@ -80,11 +82,13 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 		
 		// Checks for an admin
 		$scope.hasAdmin = function() {
-			if ($scope.user.roles.indexOf('admin') > -1) {
+			var idx = $scope.user.roles.indexOf('admin');
+			alert(idx);
+			if (idx > -1) {
 				$scope.isadmin = true;
 			} else {
 				$scope.isadmin = false;
 			}
-		}
+		};
 	}
 ]);
