@@ -17,6 +17,18 @@ var MemberSchema = Participant.discriminator('Member', new Schema({
 		type: String,
 		default: '',
 	},
+	city: {             
+		type: String,
+		default: '',
+	},
+	state: {             
+		type: String,
+		default: '',
+	},
+	zipCode: {             
+		type: String,
+		default: '',
+	},
 	shirtSize: {
 		type: String,
 		required: 'Please choose a shirt size'
@@ -39,9 +51,21 @@ var MemberSchema = Participant.discriminator('Member', new Schema({
 		type: String,
 		required: 'Please provide a recruiter.'
 	},
-	communityNetworks: [String],
-	extraGroups: [String],
-	otherNetworks: [String],
+	communityNetworks: {
+		type: String,
+		trim: true,
+		default: '',
+	},
+	extraGroups: {
+		type: String,
+		trim: true,
+		default: '',
+	},
+	otherNetworks: {
+		type: String,
+		trim: true,
+		default: '',
+	}
 }));
 
 

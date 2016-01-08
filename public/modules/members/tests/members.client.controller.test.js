@@ -61,14 +61,17 @@
 				identity: 'Educator',
 				affiliation: 'UAB',
 				address: '1234 Broadt Street',
+				city: 'Birmingham',
+				state: 'AL',
+				zipCode: '35204',
 				shirtSize: 'XL',
 				shirtReceived: true,
 				talent: 'Music',
 				placeOfWorship: 'Baptist Church',
 				recruitment: 'Network Night',
-				communityNetworks: ['cn1', 'cn2', 'cn3'],
-				extraGroups: ['eg1', 'eg2'],
-				otherNetworks: ['on1', 'on2', 'on3'],
+				communityNetworks: 'Community Network',
+				extraGroups: 'eg1, eg2',
+				otherNetworks: 'on1, on2, on3'
 			});
 
 			// Create a sample Members array that includes the new Member
@@ -96,14 +99,17 @@
 				identity: 'Educator',
 				affiliation: 'UAB',
 				address: '1234 Broadt Street',
+				city: 'Birmingham',
+				state: 'AL',
+				zipCode: '35204',
 				shirtSize: 'XL',
 				shirtReceived: true,
 				talent: 'Music',
 				placeOfWorship: 'Baptist Church',
 				recruitment: 'Network Night',
-				communityNetworks: ['cn1', 'cn2', 'cn3'],
-				extraGroups: ['eg1', 'eg2'],
-				otherNetworks: ['on1', 'on2', 'on3'],
+				communityNetworks: 'Community Network',
+				extraGroups: 'eg1, eg2',
+				otherNetworks: 'on1, on2, on3'
 			});
 
 			// Set the URL parameter
@@ -131,14 +137,17 @@
 				identity: 'Educator',
 				affiliation: 'UAB',
 				address: '1234 Broadt Street',
+				city: 'Birmingham',
+				state: 'AL',
+				zipCode: '35204',
 				shirtSize: 'XL',
 				shirtReceived: true,
 				talent: 'Music',
 				placeOfWorship: 'Baptist Church',
 				recruitment: 'Network Night',
-				communityNetworks: ['cn1', 'cn2', 'cn3'],
-				extraGroups: ['eg1', 'eg2'],
-				otherNetworks: ['on1', 'on2', 'on3'],
+				communityNetworks: 'Community Network',
+				extraGroups: 'eg1, eg2',
+				otherNetworks: 'on1, on2, on3'
 			});
 
 			// Create a sample Member response
@@ -152,14 +161,17 @@
 				identity: 'Educator',
 				affiliation: 'UAB',
 				address: '1234 Broadt Street',
+				city: 'Birmingham',
+				state: 'AL',
+				zipCode: '35204',
 				shirtSize: 'XL',
 				shirtReceived: true,
 				talent: 'Music',
 				placeOfWorship: 'Baptist Church',
 				recruitment: 'Network Night',
-				communityNetworks: ['cn1', 'cn2', 'cn3'],
-				extraGroups: ['eg1', 'eg2'],
-				otherNetworks: ['on1', 'on2', 'on3'],
+				communityNetworks: 'Community Network',
+				extraGroups: 'eg1, eg2',
+				otherNetworks: 'on1, on2, on3'
 			});
 
 			// Fixture mock form input values
@@ -191,14 +203,17 @@
 				identity: 'Educator',
 				affiliation: 'UAB',
 				address: '1234 Broadt Street',
+				city: 'Birmingham',
+				state: 'AL',
+				zipCode: '35204',
 				shirtSize: 'XL',
 				shirtReceived: true,
 				talent: 'Music',
 				placeOfWorship: 'Baptist Church',
 				recruitment: 'Network Night',
-				communityNetworks: ['cn1', 'cn2', 'cn3'],
-				extraGroups: ['eg1', 'eg2'],
-				otherNetworks: ['on1', 'on2', 'on3'],
+				communityNetworks: 'Community Network',
+				extraGroups: 'eg1, eg2',
+				otherNetworks: 'on1, on2, on3'
 			});
 
 			// Mock Member in scope

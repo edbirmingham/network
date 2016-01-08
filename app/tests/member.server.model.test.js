@@ -37,14 +37,17 @@ describe('Member Model Unit Tests:', function() {
 				identity: 'Educator',
 				affiliation: 'UAB',
 				address: '1234 Broadt Street',
+				city: 'Birmingham',
+				state: 'AL',
+				zipCode: '35203',
 				shirtSize: 'XL',
 				shirtReceived: true,
 				talent: 'Music',
 				placeOfWorship: 'Baptist Church',
 				recruitment: 'Network Night',
-				communityNetworks: ['cn1', 'cn2', 'cn3'],
-				extraGroups: ['eg1', 'eg2'],
-				otherNetworks: ['on1', 'on2', 'on3'],
+				communityNetworks: 'Community network',
+				extraGroups: 'Group1, Group2',
+				otherNetworks: 'on1, on2, on3',
 				user: user
 			});
 
