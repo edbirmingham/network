@@ -11,7 +11,7 @@
                 <div class="form-group">
                     <label class="control-label" for="firstName">First Name</label>
                     <div class="controls">
-                        <input type="text" required data-ng-model="member.firstName" id="firstName" class="form-control" placeholder="First ame" required>
+                        <input type="text" required data-ng-model="member.firstName" id="firstName" class="form-control" placeholder="First Name" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -55,7 +55,25 @@
 				<div class="form-group">
 					<label class="control-label" for="address">Address</label>
                     <div class="controls">
-    					<input type="address" id="address" name="address" class="form-control" data-ng-model="member.address" placeholder="Address">
+    					<input type="text" id="address" name="address" class="form-control" data-ng-model="member.address" placeholder="Address">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="city">City</label>
+                    <div class="controls">
+    					<input type="text" id="city" name="city" class="form-control" data-ng-model="member.city" placeholder="City">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="state">State</label>
+                    <div class="controls">
+    					<input type="text" id="state" name="state" class="form-control" data-ng-model="member.state" placeholder="State">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="zipCode">Zip Code</label>
+                    <div class="controls">
+    					<input type="text" id="zipCode" name="zipCode" class="form-control" data-ng-model="member.zipCode" placeholder="Zip Code">
 					</div>
 				</div>
 				<div class="form-group">
@@ -63,11 +81,12 @@
 					<span id="shirtSizeHelpBlock" class="help-block">Ask: What size T-shirt?</span>
                     <div class="controls">
     					<select id="shirtSize" name="shirtSize" class="form-control" data-ng-model="member.shirtSize" placeholder="Shirt Size?">
-    						<option>Small</option>
-    						<option>Medium</option>
-    						<option>Large</option>
-    						<option>X-Large</option>
-    						<option>XX-Large</option>
+    						<option>S</option>
+    						<option>M</option>
+    						<option>L</option>
+    						<option>XL</option>
+    						<option>2XL</option>
+    						<option>3XL</option>
 						</select>
 					</div>
 				</div>
@@ -107,57 +126,21 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label" for="communityNetwork1">Neighborhood/Community Network #1</label>
+					<label class="control-label" for="communityNetworks">Neighborhood/Community Network</label>
                     <div class="controls">
-    					<input type="text" id="communityNetwork1" name="communityNetwork1" class="form-control" data-ng-model="member.communityNetworks[0]" placeholder="Community Networks">
+    					<input type="text" id="communityNetworks" name="communityNetworks" class="form-control" data-ng-model="member.communityNetworks" placeholder="Community Networks">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label" for="communityNetwork2">Neighborhood/Community Networks #2</label>
+					<label class="control-label" for="extraGroups">Extracurricular Groups</label>
                     <div class="controls">
-    					<input type="text" id="communityNetwork2" name="communityNetwork2" class="form-control" data-ng-model="member.communityNetworks[1]" placeholder="Community Networks">
+    					<input type="text" id="extraGroups" name="extraGroups" class="form-control" data-ng-model="member.extraGroups" placeholder="Extra Groups">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label" for="communityNetwork3">Neightborhood/Community Network #3</label>
+					<label class="control-label" for="otherNetworks">Other Networks</label>
                     <div class="controls">
-    					<input type="text" id="communityNetwork3" name="communityNetwork3" class="form-control" data-ng-model="member.communityNetworks[2]" placeholder="Community Networks">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label" for="extraGroup1">Extracurricular Group #1</label>
-                    <div class="controls">
-    					<input type="text" id="extraGroup1" name="extraGroup1" class="form-control" data-ng-model="member.extraGroups[0]" placeholder="Extra Groups">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label" for="extraGroup2">Extracurricular Group #2</label>
-                    <div class="controls">
-    					<input type="text" id="extraGroup2" name="extraGroup2" class="form-control" data-ng-model="member.extraGroups[1]" placeholder="Extra Groups">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label" for="extraGroup3">Extracurricular Group #3</label>
-                    <div class="controls">
-    					<input type="text" id="extraGroup3" name="extraGroup3" class="form-control" data-ng-model="member.extraGroups[2]" placeholder="Extra Groups">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label" for="otherNetwork1">Other Network #1</label>
-                    <div class="controls">
-    					<input type="text" id="otherNetwork1" name="otherNetwork1" class="form-control" data-ng-model="member.otherNetworks[0]" placeholder="Other Networks">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label" for="otherNetwork2">Other Network #2</label>
-                    <div class="controls">
-    					<input type="text" id="otherNetwork2" name="otherNetwork2" class="form-control" data-ng-model="member.otherNetworks[1]" placeholder="Other Networks">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label" for="otherNetwork3">Other Network #3</label>
-                    <div class="controls">
-    					<input type="text" id="otherNetwork3" name="otherNetwork3" class="form-control" data-ng-model="member.otherNetworks[2]" placeholder="Other Networks">
+    					<input type="text" id="otherNetworks" name="otherNetworks" class="form-control" data-ng-model="member.otherNetworks" placeholder="Other Networks">
 					</div>
 				</div>
                 <div class="form-group">

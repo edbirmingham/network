@@ -32,12 +32,21 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label" for="scheduled">Scheduled Date (MM/DD/YYYY)</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" data-ng-model="networkEvent.scheduled" datepicker-popup="MM/dd/yyyy" is-open="status.dateOpen" ng-required="true" close-text="Close" ng-click="open($event)" />
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                        </span>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="control-label" for="scheduled">Scheduled Date (MM/DD/YYYY)</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" data-ng-model="networkEvent.scheduled" datepicker-popup="MM/dd/yyyy" is-open="status.dateOpen" ng-required="true" close-text="Close" ng-click="open($event)" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <timepicker ng-model="networkEvent.scheduled" hour-step="1" minute-step="15" show-meridian="true"></timepicker>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">

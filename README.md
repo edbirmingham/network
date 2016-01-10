@@ -1,4 +1,4 @@
-## We're the Birmingham Education Foundation.[![Build Status](https://travis-ci.org/edbirmingham/network.svg)](https://travis-ci.org/edbirmingham/network)
+## We're the Birmingham Education Foundation.
 You can call us, [Ed](http://edbirmingham.org).
 
 ## What We Do
@@ -10,7 +10,7 @@ and exchanging value between individuals and groups.
 
 To actively cultivate the Network, we provide direct programming for students and fun and interactive opportunities for Network members to build new relationships and strengthen existing ones. We serve as Connectors among five different stakeholder groups – students, educators, families, local residents, and community partners– bringing them together to create a new operating culture that sparks organic and objective-driven visions to increase student preparedness for college, career, and life.
 
-## Network Asset Database
+## Network Asset Database [![Build Status](https://travis-ci.org/edbirmingham/network.svg)](https://travis-ci.org/edbirmingham/network)
 In order to reach our Network membership and action goals it is imperative that we maintain organization of our data, communication, and progress. The Network Asset Database, aka [edbirmingham/network](https://github.com/edbirmingham/network), is being developed to increase Ed’s Network activity; maintaining Membership records, supporting stewardship (progress to requests/offers between Network members), and increasing access and awareness to school/community based assets.
 
 ## Contributing

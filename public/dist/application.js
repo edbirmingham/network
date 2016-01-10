@@ -629,20 +629,17 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 				$scope.member.identity = '';
 				$scope.member.affiliation = '';
 				$scope.member.address = '';
+				$scope.member.city = '';
+				$scope.member.state = '';
+				$scope.member.zipCode = '';
 				$scope.member.shirtSize = '';
 				$scope.member.shirtReceived = '';
 				$scope.member.talent = '';
 				$scope.member.placeOfWorship = '';
 				$scope.member.recruitment = '';
-				$scope.member.communityNetworks[0] = '';
-				$scope.member.communityNetworks[1] = '';
-				$scope.member.communityNetworks[2] = '';
-				$scope.member.extraGroups[0] = '';
-				$scope.member.extraGroups[1] = '';
-				$scope.member.extraGroups[2] = '';
-				$scope.member.otherNetworks[0] = '';
-				$scope.member.otherNetworks[1] = '';
-				$scope.member.otherNetworks[2] = '';
+				$scope.member.communityNetworks = '';
+				$scope.member.extraGroups = '';
+				$scope.member.otherNetworks = '';
 			};
 
 			// Create new Member
@@ -695,10 +692,21 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 				$scope.error = errorResponse.data.message;
 			});
 		};
+		
 
 		// Find a list of Members
 		$scope.find = function() {
 			$scope.members = Members.query();
+		};
+		
+		$scope.showOnlyShirtlessMembers = false;
+		
+		$scope.shirtFilter = function(member) {
+			if($scope.showOnlyShirtlessMembers == true) {
+				return member.shirtReceived === false;
+			} else {
+				return member;
+			}
 		};
 		
 		// Find existing participants
@@ -716,19 +724,21 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 		// Initialize a new Member
 		$scope.newMember = function() {
 			$scope.member = new Members({
-				communityNetworks: [],
-				extraGroups: [],
-				otherNetworks: []
+				communityNetworks: '',
+				extraGroups: '',
+				otherNetworks: ''
 			});
 		};
 		
 		// A member is selected from the typehead search
 		$scope.selectMember = function(participant) {
 			$scope.member = new Members(participant);
-			$scope.member.communityNetworks = [];
-			$scope.member.extraGroups = [];
-			$scope.member.otherNetworks = [];
+			$scope.member.communityNetworks = '';
+			$scope.member.extraGroups = '';
+			$scope.member.otherNetworks = '';
 		};
+		
+	
 	}
 ]);
 'use strict';
@@ -862,6 +872,16 @@ angular.module('network-events').controller('NetworkEventsController', ['$scope'
         // Retrieve the list of possible locations for the event.
 		$scope.findLocations = function() {
 	        $scope.locations = Locations.query();
+		};
+		
+		$scope.initNew = function() {
+			$scope.findLocations();
+			$scope.networkEvent = new NetworkEvents({});
+			$scope.networkEvent.scheduled = new Date;
+			$scope.networkEvent.scheduled.setHours(19);
+			$scope.networkEvent.scheduled.setMinutes(0);
+			$scope.networkEvent.scheduled.setSeconds(0);
+			
 		};
 		
 		// Initialize the edit screen with the event and possible locations.
