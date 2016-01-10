@@ -32,7 +32,7 @@
 				<div class="form-group">
 				    <label class="control-label" for="isadmin">Administrator</label>
 				    <div class="controls">
-				    	<input type="checkbox" id="isadmin" name="isadmin" data-ng-model="isadmin" data-ng-change="setAdmin()" data-ng-init="hasAdmin()">
+				    	<input type="checkbox" id="isadmin" name="isadmin" data-ng-init="user.isAdmin()" data-ng-change="setAdmin()">
 				    <br>{{user.roles}}</div>
 				</div>
                 <div class="form-group">

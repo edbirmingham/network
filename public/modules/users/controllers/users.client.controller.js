@@ -61,11 +61,10 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 
 		// Find existing User
 		$scope.findOne = function() {
+			var myPromise = function
 			$scope.user = Users.get({ 
 				userId: $stateParams.userId
 			});
-			
-			$scope.hasAdmin();
 		};
 		
 		// Add or remove the admin
@@ -73,8 +72,8 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			if ($scope.isadmin === true) {
 				$scope.user.roles.push('admin');
 			} else {
-				var idx = $scope.user.roles.indexOf('admin');
-				if (idx > -1) {
+				while($scope.user.roles.indexOf('admin') > -1) {
+					var idx = $scope.user.roles.indexOf('admin');
 					$scope.user.roles.splice(idx, 1);
 				}
 			}
@@ -83,7 +82,6 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 		// Checks for an admin
 		$scope.hasAdmin = function() {
 			var idx = $scope.user.roles.indexOf('admin');
-			alert(idx);
 			if (idx > -1) {
 				$scope.isadmin = true;
 			} else {
