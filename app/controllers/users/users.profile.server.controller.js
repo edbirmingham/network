@@ -32,7 +32,7 @@ exports.update = function(req, res) {
 					message: errorHandler.getErrorMessage(err)
 				});
 			} else {
-				if (req.user == null) {
+				if (req.user === null) {
 					req.login(user, function(err) {
 						if (err) {
 							res.status(400).send(err);
