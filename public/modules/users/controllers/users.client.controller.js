@@ -6,8 +6,6 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 		$scope.authentication = Authentication;
 		$scope.isadmin = null;
 
-		$scope.$on('$viewContentLoaded', function(event) { alert($scope.user.firstName); });
-
 		// Create new User
 		$scope.create = function() {
 			// Create new User object
