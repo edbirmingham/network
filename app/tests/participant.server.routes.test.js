@@ -148,7 +148,7 @@ describe('Participant CRUD tests', function() {
 						if (participantSaveErr) done(participantSaveErr);
 
 						// Update Participant name
-						participant.firstName = 'WHY YOU GOTTA BE SO MEAN?';
+						participant.firstName = 'Why you gotta be so mean?';
 
 						// Update existing Participant
 						agent.put('/participants/' + participantSaveRes.body._id)
@@ -160,7 +160,7 @@ describe('Participant CRUD tests', function() {
 
 								// Set assertions
 								(participantUpdateRes.body._id).should.equal(participantSaveRes.body._id);
-								(participantUpdateRes.body.firstName).should.match('WHY YOU GOTTA BE SO MEAN?');
+								(participantUpdateRes.body.firstName).should.match('Why you gotta be so mean?');
 
 								// Call the assertion callback
 								done();

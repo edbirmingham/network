@@ -13,6 +13,8 @@ var mongoose = require('mongoose'),
  */
 exports.create = function(req, res) {
 	var participant = new Participant(req.body);
+	participant.firstName = participant.firstName.charAt(0).toUpperCase() + participant.firstName.substr(1).toLowerCase();
+	participant.lastName = participant.lastName.charAt(0).toUpperCase() + participant.lastName.substr(1).toLowerCase();
 	participant.displayName = participant.firstName + ' ' + participant.lastName;
 	participant.user = req.user;
 
@@ -41,6 +43,8 @@ exports.update = function(req, res) {
 	var participant = req.participant ;
 
 	participant = _.extend(participant , req.body);
+	participant.firstName = participant.firstName.charAt(0).toUpperCase() + participant.firstName.substr(1).toLowerCase();
+	participant.lastName = participant.lastName.charAt(0).toUpperCase() + participant.lastName.substr(1).toLowerCase();
 	participant.displayName = participant.firstName + ' ' + participant.lastName;
 
 	participant.save(function(err) {

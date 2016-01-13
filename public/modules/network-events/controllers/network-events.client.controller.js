@@ -85,7 +85,7 @@ angular.module('network-events').controller('NetworkEventsController', ['$scope'
 		$scope.initNew = function() {
 			$scope.findLocations();
 			$scope.networkEvent = new NetworkEvents({});
-			$scope.networkEvent.scheduled = new Date;
+			$scope.networkEvent.scheduled = new Date();
 			$scope.networkEvent.scheduled.setHours(19);
 			$scope.networkEvent.scheduled.setMinutes(0);
 			$scope.networkEvent.scheduled.setSeconds(0);
