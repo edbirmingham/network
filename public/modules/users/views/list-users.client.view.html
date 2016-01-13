@@ -5,8 +5,14 @@
     <div class="list-group">
         <a data-ng-repeat="user in users" data-ng-href="#!/users/{{user._id}}" class="list-group-item">
 			<small class="list-group-item-text">
+			    User Name:
+			    <span data-ng-bind="user.username"></span>
+			    |
+			    Email:
+			    <span data-ng-bind="user.email"></span>
+			    |
 				Created:
-				<span data-ng-bind="user.created | date:'medium'"></span>
+				<span data-ng-bind="user.created | date:'shortDate'"></span>
 			</small>
 			<h4 class="list-group-item-heading" data-ng-bind="user.displayName"></h4>
         </a>
