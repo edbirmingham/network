@@ -4,6 +4,10 @@
     </div>
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="create()" novalidate autocomplete="off">
+			<!-- dummy fields to prevent browser from auto-filling the username/password on this form -->
+			<input type="text" style="display: none" id="fakeUsername" name="fakeUsername" value="" />
+			<input type="password" style="display: none" id="fakePassword" name="fakePassword" value="" />
+        	
             <fieldset>
 				<alert data-ng-show="error" data-ng-bind="error" type="danger"></alert>
 				<div class="form-group">
