@@ -40,3 +40,23 @@ exports.getErrorMessage = function(err) {
 
 	return message;
 };
+
+/**
+ * Get the error data from error object
+ */
+exports.getErrorData = function(err) {
+	var data = {
+		message: "",
+		messages: [],
+		fields: []
+	};
+	data.message = exports.getErrorMessage(err);
+	
+	for (var er in err.errors) {
+		data.messages.push(err.errors[er].message);
+		data.fields.push(err.errors[er].path);
+	}
+
+	return data;
+};
+

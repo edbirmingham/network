@@ -19,9 +19,7 @@ exports.create = function(req, res) {
 
 	member.save(function(err) {
 		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
+			return res.status(400).send(errorHandler.getErrorData(err));
 		} else {
 			res.jsonp(member);
 		}
@@ -48,21 +46,15 @@ exports.update = function(req, res) {
 	if (member.isNew) {
 		member.validate(function(err) {    
   			if(err) {
-  				return res.status(400).send({
-  					message: errorHandler.getErrorMessage(err)
-  				}); 
+  				return res.status(400).send(errorHandler.getErrorData(err)); 
   			} else {
   				Participant.update({_id: member._id}, {$set: {__t: 'Member'}}, {strict: false}, function (err) {
   					if (err) {
- 						return res.status(400).send({
- 							message: errorHandler.getErrorMessage(err)
- 						});
+ 						return res.status(400).send(errorHandler.getErrorData(err));
   					} else {
   						Member.update({_id: member._id }, { $set: member}, function(err){  
 							if (err) {
-								return res.status(400).send({
-									message: errorHandler.getErrorMessage(err)
-								});
+								return res.status(400).send(errorHandler.getErrorData(err));
 							} else {
 							//	console.log(member);
 								res.jsonp(member);
@@ -76,9 +68,7 @@ exports.update = function(req, res) {
 	} else {
 		member.save(function(err) {
 			if (err) {
-				return res.status(400).send({
-					message: errorHandler.getErrorMessage(err)
-				});	
+				return res.status(400).send(errorHandler.getErrorData(err));	
 			} else {
 				res.jsonp(member);
 			}
