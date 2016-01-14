@@ -52,3 +52,22 @@ exports.hasAuthorization = function(roles) {
 		});
 	};
 };
+
+/**
+ * Checks to see if User is an admin
+ */
+exports.hasAdmin = function() {
+	var _this = this;
+	
+	return function(req, res, next) {
+		_this.requiresLogin(req, res, function() {
+		    if (req.user.roles.indexOf('admin') > -1) {
+		    	return next();
+		    } else {
+		    	return res.status(403).send({
+		    		message: 'User is not an admin'	
+		    	});
+		    }
+		});
+	};
+}
