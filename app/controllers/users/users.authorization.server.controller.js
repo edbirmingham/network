@@ -39,6 +39,8 @@ exports.requiresLogin = function(req, res, next) {
  */
 exports.hasAuthorization = function(roles) {
 	var _this = this;
+	
+	console.log('hasAuthorization: '+roles);
 
 	return function(req, res, next) {
 		_this.requiresLogin(req, res, function() {
@@ -56,18 +58,18 @@ exports.hasAuthorization = function(roles) {
 /**
  * Checks to see if User is an admin
  */
-exports.hasAdmin = function() {
+exports.hasAdmin = function(req, res, next) {
 	var _this = this;
 	
-	return function(req, res, next) {
-		_this.requiresLogin(req, res, function() {
-		    if (req.user.roles.indexOf('admin') > -1) {
-		    	return next();
-		    } else {
-		    	return res.status(403).send({
-		    		message: 'User is not an admin'	
-		    	});
-		    }
-		});
-	};
-}
+	//console.log('hasAdmin: '+next);
+	
+	console.log(req.user);
+	
+    if (req.user.roles.indexOf('admin') > -1) {
+    	return next();
+    } else {
+    	return res.status(403).send({
+    		message: 'User is not an admin'	
+    	});
+    }
+};
