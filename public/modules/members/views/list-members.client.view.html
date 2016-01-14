@@ -18,6 +18,7 @@
 				<span data-ng-bind="member.created | date:'medium'"></span>
 				| Received Shirt:
 				<span data-ng-bind="member.shirtReceived"></span>
+				<input type="checkbox" id="shirtReceived" name="shirtReceived" data-ng-model="member.shirtReceived" placeholder="shirtReceived">
 			</small>
 			<h4 class="list-group-item-heading" data-ng-bind="member.displayName"></h4>
         </a>
