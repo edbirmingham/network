@@ -1,6 +1,9 @@
 <section data-ng-controller="MembersController" data-ng-init="findOne()">
 	<div class="page-header">
 		<h1 data-ng-bind="member.displayName"></h1>
+		<form class="form-horizontal" data-ng-submit="giveShirt()" novalidate>
+			<input type="submit" value="Give Shirt" data-ng-disabled="member.shirtReceived" class="btn btn-default">
+		</form>
 	</div>
 	<div class="clearfix">
 		<dl class="dl-horizontal">

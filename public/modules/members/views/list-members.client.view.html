@@ -3,7 +3,7 @@
         <h1>Members</h1>
     </div>
     <div class="filter-checkboxes">
-  		<label><input type="checkbox" value="false" data-ng-model="showOnlyShirtlessMembers">Members Yet to Receive T-Shirt</label>
+  		<label><input type="checkbox" value="false" data-ng-model="showOnlyShirtlessMembers">Show Members Yet to Receive T-Shirt</label>
 	</div>
     <div class="list-group">
         <a data-ng-repeat="member in members | filter:shirtFilter" data-ng-href="#!/members/{{member._id}}" class="list-group-item">
