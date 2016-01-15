@@ -1,6 +1,7 @@
 <section data-ng-controller="MembersController" data-ng-init="findOne()">
 	<div class="page-header">
 		<h1 data-ng-bind="member.displayName"></h1>
+		<label><input type="checkbox" id="shirtReceived" name="shirtReceived" data-ng-model="member.shirtReceived" placeholder="shirtReceived">Change T-Shirt Status</label>
 	</div>
 	<div class="clearfix">
 		<dl class="dl-horizontal">
