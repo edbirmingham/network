@@ -1,7 +1,10 @@
 <section data-ng-controller="MembersController" data-ng-init="findOne()">
 	<div class="page-header">
 		<h1 data-ng-bind="member.displayName"></h1>
-		<label><input type="checkbox" id="shirtReceived" name="shirtReceived" data-ng-model="member.shirtReceived" placeholder="shirtReceived">Change T-Shirt Status</label>
+		<form class="form-horizontal" data-ng-submit="update()" novalidate>
+			<label><input type="checkbox" id="shirtReceived" name="shirtReceived" data-ng-model="member.shirtReceived" placeholder="shirtReceived">Change T-Shirt Status</label>
+			<input type="submit" value="Update" class="btn btn-default">
+		</form>
 	</div>
 	<div class="clearfix">
 		<dl class="dl-horizontal">
