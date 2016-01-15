@@ -81,7 +81,11 @@ exports.delete = function(req, res) {
  * List of Actions
  */
 exports.list = function(req, res) { 
-	Action.find().sort('-created')
+	var query = {};
+	if (req.query.location) {
+		query.location = req.query.location;
+	}
+	Action.find(query).sort('-created')
 		.populate('user', 'displayName')
 		.populate('networkEvent', 'name scheduled')
 		.populate('actor', 'displayName')
