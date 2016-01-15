@@ -80,6 +80,17 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 			});
 		};
 		
+		$scope.giveShirt = function() {
+			var member = $scope.member;
+			member.shirtReceived = true;
+			member.$update(function() {
+				//redirect back to members list after update
+				$location.path('members');
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+		
 
 		// Find a list of Members
 		$scope.find = function() {
