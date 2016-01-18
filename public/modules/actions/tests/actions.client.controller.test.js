@@ -65,6 +65,7 @@
 			// Set GET response
 			$httpBackend.expectGET('network-events').respond([]);
 			$httpBackend.expectGET('actions').respond(sampleActions);
+			$httpBackend.expectGET('locations').respond([]);
 
 			// Run controller functionality
 			scope.find();
@@ -99,6 +100,7 @@
 			// Create a sample Action object
 			var sampleActionPostData = new Actions({
 				networkEvent: null,
+				location: null,
 				actor: '525a8422f6d0f87f0e407a33',
 				type: 'Request',
 				description: 'Action Description',

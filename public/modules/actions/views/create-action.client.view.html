@@ -10,7 +10,7 @@
                 <div class="form-group">
                     <label class="control-label" for="networkEvent">Network Event</label>
                     <div class="controls">
-                        <select id="networkEvent" class="form-control" data-ng-model="networkEvent._id" ng-options="networkEvent._id as networkEvent.listName() for networkEvent in networkEvents">
+                        <select id="networkEvent" class="form-control" data-ng-model="networkEvent" ng-options="networkEvent as networkEvent.listName() for networkEvent in networkEvents">
                             <option value="">-- Not associated with an event -- </option>
                         </select>
                     </div>

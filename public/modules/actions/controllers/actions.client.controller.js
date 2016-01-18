@@ -1,8 +1,8 @@
 'use strict';
 
 // Actions controller
-angular.module('actions').controller('ActionsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Actions', 'Participants', 'NetworkEvents',
-	function($scope, $stateParams, $location, Authentication, Actions, Participants, NetworkEvents) {
+angular.module('actions').controller('ActionsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Actions', 'Participants', 'NetworkEvents', 'Locations',
+	function($scope, $stateParams, $location, Authentication, Actions, Participants, NetworkEvents, Locations) {
 		$scope.authentication = Authentication;
 
         // Retrieve the list of possible events for the action.
@@ -18,8 +18,10 @@ angular.module('actions').controller('ActionsController', ['$scope', '$statePara
 			}, match_ids);
 			
 			var networkEventID = null;
+			var locationID = null;
 			if ($scope.networkEvent) {
 				networkEventID = $scope.networkEvent._id;
+				locationID = $scope.networkEvent.location._id;
 			}
 			
 			var actorID = null;
@@ -30,6 +32,7 @@ angular.module('actions').controller('ActionsController', ['$scope', '$statePara
 			// Create new Action object
 			var action = new Actions ({
 				networkEvent: networkEventID,
+				location: locationID,
 				actor: actorID,
 				type: $scope.action.type,
 				description: $scope.action.description,
@@ -92,6 +95,16 @@ angular.module('actions').controller('ActionsController', ['$scope', '$statePara
 		// Find a list of Actions
 		$scope.find = function() {
 			$scope.actions = Actions.query();
+			$scope.locations = Locations.query();
+		};
+		
+		// Filter list of actions by location
+		$scope.filterByLocation = function() {
+			if ($scope.location) {
+				$scope.actions = Actions.query({location: $scope.location._id});
+			} else {
+				$scope.actions = Actions.query();
+			}
 		};
 
 		// Find existing Action

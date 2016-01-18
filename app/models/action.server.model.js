@@ -14,6 +14,10 @@ var ActionSchema = new Schema({
 		type: Schema.ObjectId,
 		ref: 'NetworkEvent'
 	},
+	location: {
+		type: Schema.ObjectId,
+		ref: 'Location'
+	},
 	actor: {
 		type: Schema.ObjectId,
 		ref: 'Participant',

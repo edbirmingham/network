@@ -2,6 +2,14 @@
     <div class="page-header">
         <h1>Actions</h1>
     </div>
+    <div class="form-group">
+        <label class="control-label" for="location">Filter By Location</label>
+        <div class="controls">
+            <select id="location" class="form-control" data-ng-model="location" ng-change="filterByLocation()" ng-options="location as location.name for location in locations">
+                <option value="">-- All Locations -- </option>
+            </select>
+        </div>
+    </div>
     <div class="list-group">
         <a data-ng-repeat="action in actions" data-ng-href="#!/actions/{{action._id}}" class="list-group-item">
 			<small class="list-group-item-text">
@@ -22,7 +30,10 @@
 			<h4 class="list-group-item-heading" data-ng-bind="action.description"></h4>
         </a>
     </div>
-    <div class="alert alert-warning text-center" data-ng-hide="!actions.$resolved || actions.length">
+    <div class="alert alert-warning text-center" data-ng-hide="location || !actions.$resolved || actions.length">
     	No Actions yet, why don't you <a href="/#!/actions/create">create one</a>?
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!location || (location && (!actions.$resolved || actions.length))">
+    	There are no actions at {{location.name}}.
     </div>
 </section>
