@@ -25,6 +25,7 @@ exports.userByID = function(req, res, next, id) {
  * Require login routing middleware
  */
 exports.requiresLogin = function(req, res, next) {
+	console.log('requiresLogin');
 	if (!req.isAuthenticated()) {
 		return res.status(401).send({
 			message: 'User is not logged in'
@@ -37,14 +38,18 @@ exports.requiresLogin = function(req, res, next) {
 /**
  * User authorizations routing middleware
  */
+/**
+ * This code is overwritten in the User object by hasAuthorization in
+ * user.profile.server.controller.js
+ **
 exports.hasAuthorization = function(roles) {
+	console.log('b1');
 	var _this = this;
-	
-	console.log('hasAuthorization: '+roles);
 
 	return function(req, res, next) {
+		console.log('b2');
 		_this.requiresLogin(req, res, function() {
-			if (_.intersection(req.user.roles, roles).length) {
+			if (_.intersection(req.user.roles, _this.roles).length) {
 				return next();
 			} else {
 				return res.status(403).send({
@@ -53,23 +58,21 @@ exports.hasAuthorization = function(roles) {
 			}
 		});
 	};
+	console.log('b3');
 };
+*/
 
 /**
  * Checks to see if User is an admin
  */
 exports.hasAdmin = function(req, res, next) {
-	var _this = this;
+	console.log('hasAdmin');
 	
-	//console.log('hasAdmin: '+next);
-	
-	console.log(req.user);
-	
-    if (req.user.roles.indexOf('admin') > -1) {
-    	return next();
-    } else {
+    if (req.user.roles.indexOf('admin') == -1) {
     	return res.status(403).send({
-    		message: 'User is not an admin'	
+    		message: 'User is not an admin'
     	});
     }
+    
+    next();
 };

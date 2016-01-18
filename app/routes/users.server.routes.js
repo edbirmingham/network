@@ -32,7 +32,7 @@ module.exports = function(app) {
 
 	app.route('/users/:userId')
 		.get(users.requiresLogin, users.read)
-		.put(users.requiresLogin, users.hasAuthorization, users.update)
+		.put(users.requiresLogin, users.hasAuthorization, users.hasAdmin, users.update)
 		.delete(users.requiresLogin, users.hasAuthorization, users.hasAdmin, users.delete);
 
 	// Finish by binding the User middleware
