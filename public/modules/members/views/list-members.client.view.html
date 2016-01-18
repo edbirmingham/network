@@ -6,7 +6,7 @@
   		<label><input type="checkbox" value="false" data-ng-model="showOnlyShirtlessMembers">Members Yet to Receive T-Shirt</label>
 	</div>
     <div class="list-group">
-        <li data-ng-repeat="member in members | filter:shirtFilter" class="list-group-item">
+        <div data-ng-repeat="member in members | filter:shirtFilter" class="list-group-item">
 			<small class="list-group-item-text">
 			    Phone:
 			    <span data-ng-bind="member.phone"></span>
@@ -19,10 +19,10 @@
 				| Received Shirt:
 				<span data-ng-bind="member.shirtReceived"></span>
 			</small>
-			<a data-ng-href="#!/members/{{member._id}}">
+			<a data-ng-href="#!/members/{{member._id}}" class="list-group-item-text">
 				<h4 class="list-group-item-heading" data-ng-bind="member.displayName"></h4>
 			</a>
-        </li>
+        </div>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!members.$resolved || members.length">
     	No Members yet, why don't you <a href="/#!/members/create">create one</a>?

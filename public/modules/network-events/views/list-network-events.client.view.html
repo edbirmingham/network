@@ -3,7 +3,7 @@
         <h1>Network events</h1>
     </div>
     <div class="list-group">
-        <a data-ng-repeat="networkEvent in networkEvents" data-ng-href="#!/network-events/{{networkEvent._id}}" class="list-group-item">
+        <div data-ng-repeat="networkEvent in networkEvents" class="list-group-item">
 			<small class="list-group-item-text">
 				Creator:
 				<span data-ng-bind="networkEvent.user.displayName"></span>
@@ -14,8 +14,10 @@
 				| Type:
 				<span data-ng-bind="networkEvent.eventType"></span>
 			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="networkEvent.name"></h4>
-        </a>
+			<a  class="list-group-item-text" data-ng-href="#!/network-events/{{networkEvent._id}}">
+				<h4 class="list-group-item-heading" data-ng-bind="networkEvent.name"></h4>
+			</a>
+        </div>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!networkEvents.$resolved || networkEvents.length">
     	No Network events yet, why don't you <a href="/#!/network-events/create">create one</a>?
