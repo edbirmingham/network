@@ -25,7 +25,7 @@ exports.userByID = function(req, res, next, id) {
  * Require login routing middleware
  */
 exports.requiresLogin = function(req, res, next) {
-	console.log('requiresLogin');
+	
 	if (!req.isAuthenticated()) {
 		return res.status(401).send({
 			message: 'User is not logged in'
@@ -43,11 +43,9 @@ exports.requiresLogin = function(req, res, next) {
  * user.profile.server.controller.js
  **
 exports.hasAuthorization = function(roles) {
-	console.log('b1');
 	var _this = this;
 
 	return function(req, res, next) {
-		console.log('b2');
 		_this.requiresLogin(req, res, function() {
 			if (_.intersection(req.user.roles, _this.roles).length) {
 				return next();
@@ -58,7 +56,6 @@ exports.hasAuthorization = function(roles) {
 			}
 		});
 	};
-	console.log('b3');
 };
 */
 
@@ -66,7 +63,6 @@ exports.hasAuthorization = function(roles) {
  * Checks to see if User is an admin
  */
 exports.hasAdmin = function(req, res, next) {
-	console.log('hasAdmin');
 	
     if (req.user.roles.indexOf('admin') == -1) {
     	return res.status(403).send({
