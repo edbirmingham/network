@@ -17,7 +17,7 @@
 				| Member since: 
 				<span data-ng-bind="member.created | date:'medium'"></span>
 				| Received Shirt:
-				<span data-ng-bind="member.shirtReceived"></span>
+				<span data-ng-bind="member.shirtReceived" data-ng-click="giveShirt()"></span>
 			</small>
 			<a data-ng-href="#!/members/{{member._id}}" class="list-group-item-text">
 				<h4 class="list-group-item-heading" data-ng-bind="member.displayName"></h4>
