@@ -28,7 +28,7 @@ module.exports = function(app) {
 	// Setting up the users CRUD
 	app.route('/users')
 		.get(users.requiresLogin, users.list)
-		.post(users.requiresLogin, users.create);
+		.post(users.requiresLogin, users.hasAdmin, users.create);
 
 	app.route('/users/:userId')
 		.get(users.requiresLogin, users.read)
