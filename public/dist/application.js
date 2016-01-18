@@ -112,8 +112,8 @@ angular.module('actions').config(['$stateProvider',
 'use strict';
 
 // Actions controller
-angular.module('actions').controller('ActionsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Actions', 'Participants', 'NetworkEvents',
-	function($scope, $stateParams, $location, Authentication, Actions, Participants, NetworkEvents) {
+angular.module('actions').controller('ActionsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Actions', 'Participants', 'NetworkEvents', 'Locations',
+	function($scope, $stateParams, $location, Authentication, Actions, Participants, NetworkEvents, Locations) {
 		$scope.authentication = Authentication;
 
         // Retrieve the list of possible events for the action.
@@ -129,8 +129,10 @@ angular.module('actions').controller('ActionsController', ['$scope', '$statePara
 			}, match_ids);
 			
 			var networkEventID = null;
+			var locationID = null;
 			if ($scope.networkEvent) {
 				networkEventID = $scope.networkEvent._id;
+				locationID = $scope.networkEvent.location._id;
 			}
 			
 			var actorID = null;
@@ -141,6 +143,7 @@ angular.module('actions').controller('ActionsController', ['$scope', '$statePara
 			// Create new Action object
 			var action = new Actions ({
 				networkEvent: networkEventID,
+				location: locationID,
 				actor: actorID,
 				type: $scope.action.type,
 				description: $scope.action.description,
@@ -203,6 +206,16 @@ angular.module('actions').controller('ActionsController', ['$scope', '$statePara
 		// Find a list of Actions
 		$scope.find = function() {
 			$scope.actions = Actions.query();
+			$scope.locations = Locations.query();
+		};
+		
+		// Filter list of actions by location
+		$scope.filterByLocation = function() {
+			if ($scope.location) {
+				$scope.actions = Actions.query({location: $scope.location._id});
+			} else {
+				$scope.actions = Actions.query();
+			}
 		};
 
 		// Find existing Action
@@ -702,10 +715,23 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 		$scope.showOnlyShirtlessMembers = false;
 		
 		$scope.shirtFilter = function(member) {
-			if($scope.showOnlyShirtlessMembers == true) {
+			if($scope.showOnlyShirtlessMembers === true) {
 				return member.shirtReceived === false;
 			} else {
 				return member;
+			}
+		};
+		
+		$scope.giveShirt = function() {
+			var member = $scope.member;
+			if(member.shirtReceived === false) {
+				member.shirtReceived = true;
+				
+				member.$update(function() {
+					
+				}, function(errorResponse) {
+					$scope.error = errorResponse.data.message;
+				});
 			}
 		};
 		
@@ -877,7 +903,7 @@ angular.module('network-events').controller('NetworkEventsController', ['$scope'
 		$scope.initNew = function() {
 			$scope.findLocations();
 			$scope.networkEvent = new NetworkEvents({});
-			$scope.networkEvent.scheduled = new Date;
+			$scope.networkEvent.scheduled = new Date();
 			$scope.networkEvent.scheduled.setHours(19);
 			$scope.networkEvent.scheduled.setMinutes(0);
 			$scope.networkEvent.scheduled.setSeconds(0);
