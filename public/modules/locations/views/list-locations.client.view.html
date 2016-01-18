@@ -3,15 +3,17 @@
         <h1>Locations</h1>
     </div>
     <div class="list-group">
-        <a data-ng-repeat="location in locations" data-ng-href="#!/locations/{{location._id}}" class="list-group-item">
+        <div data-ng-repeat="location in locations" class="list-group-item">
 			<small class="list-group-item-text">
 				Created:
 				<span data-ng-bind="location.created | date:'medium'"></span>
 				| By:
 				<span data-ng-bind="location.user.displayName"></span>
 			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="location.name"></h4>
-        </a>
+			<a  class="list-group-item-text" data-ng-href="#!/locations/{{location._id}}">
+				<h4 class="list-group-item-heading" data-ng-bind="location.name"></h4>
+			</a>
+        </div>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!locations.$resolved || locations.length">
     	No Locations yet, why don't you <a href="/#!/locations/create">create one</a>?

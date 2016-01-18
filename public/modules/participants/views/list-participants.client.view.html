@@ -3,7 +3,7 @@
         <h1>Participants</h1>
     </div>
     <div class="list-group">
-        <a data-ng-repeat="participant in participants" data-ng-href="#!/participants/{{participant._id}}" class="list-group-item">
+        <div data-ng-repeat="participant in participants"  class="list-group-item">
 			<small class="list-group-item-text">
 			    Phone:
 				<span data-ng-bind="participant.phone"></span>
@@ -12,8 +12,10 @@
 				| Participant is a: 
 				<span data-ng-bind="participant.identity"></span>
 			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="participant.displayName"></h4>
-        </a>
+			<a  class="list-group-item-text"  data-ng-href="#!/participants/{{participant._id}}">
+				<h4 class="list-group-item-heading" data-ng-bind="participant.displayName"></h4>
+			</a>
+        </div>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!participants.$resolved || participants.length">
     	No Participants yet, why don't you <a href="/#!/participants/create">create one</a>?

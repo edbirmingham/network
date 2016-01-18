@@ -96,6 +96,19 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 			}
 		};
 		
+		$scope.giveShirt = function() {
+			var member = $scope.member;
+			if(member.shirtReceived === false) {
+				member.shirtReceived = true;
+				
+				member.$update(function() {
+					
+				}, function(errorResponse) {
+					$scope.error = errorResponse.data.message;
+				});
+			}
+		};
+		
 		// Find existing participants
 		$scope.findParticipants = function(name) {
 			return Participants.query({name: name}).$promise;
