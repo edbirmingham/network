@@ -31,7 +31,7 @@ var MemberSchema = Participant.discriminator('Member', new Schema({
 	},
 	shirtSize: {
 		type: String,
-		required: 'Please choose a shirt size'
+		default: ''
 	},
 	shirtReceived: {
 		type: Boolean,
@@ -40,7 +40,7 @@ var MemberSchema = Participant.discriminator('Member', new Schema({
 	talent: {
 		type: String,
 		trim: true,
-		required: 'Please provide a talent/passion.'
+		default: ''
 	},
 	placeOfWorship: {
 		type: String,
@@ -49,7 +49,7 @@ var MemberSchema = Participant.discriminator('Member', new Schema({
 	},
 	recruitment: {
 		type: String,
-		required: 'Please provide a recruiter.'
+		default: ''
 	},
 	communityNetworks: {
 		type: String,

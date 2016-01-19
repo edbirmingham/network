@@ -112,7 +112,7 @@ describe('Member Model Unit Tests:', function() {
 			member.shirtSize = '';
 
 			return member.save(function(err) {
-				should.exist(err);
+				should.not.exist(err);
 				done();
 			});
 		});
@@ -121,7 +121,7 @@ describe('Member Model Unit Tests:', function() {
 			member.talent = '';
 
 			return member.save(function(err) {
-				should.exist(err);
+				should.not.exist(err);
 				done();
 			});
 		});
@@ -130,7 +130,7 @@ describe('Member Model Unit Tests:', function() {
 			member.recruitment = '';
 
 			return member.save(function(err) {
-				should.exist(err);
+				should.not.exist(err);
 				done();
 			});
 		});
