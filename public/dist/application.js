@@ -722,8 +722,8 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 			}
 		};
 		
-		$scope.giveShirt = function() {
-			var member = $scope.member;
+		$scope.giveShirt = function(member) {
+			//var member = $scope.member;
 			if(member.shirtReceived === false) {
 				member.shirtReceived = true;
 				
