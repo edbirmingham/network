@@ -66,6 +66,7 @@
 			$httpBackend.expectGET('network-events').respond([]);
 			$httpBackend.expectGET('actions').respond(sampleActions);
 			$httpBackend.expectGET('locations').respond([]);
+			$httpBackend.expectGET('users').respond([]);
 
 			// Run controller functionality
 			scope.find();
@@ -87,6 +88,7 @@
 			// Set GET response
 			$httpBackend.expectGET('network-events').respond([]);
 			$httpBackend.expectGET(/actions\/([0-9a-fA-F]{24})$/).respond(sampleAction);
+			$httpBackend.expectGET('users').respond([]);
 
 			// Run controller functionality
 			scope.findOne();

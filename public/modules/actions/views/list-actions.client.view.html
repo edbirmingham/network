@@ -5,16 +5,25 @@
     <div class="form-group">
         <label class="control-label" for="location">Filter By Location</label>
         <div class="controls">
-            <select id="location" class="form-control" data-ng-model="location" ng-change="filterByLocation()" ng-options="location as location.name for location in locations">
+            <select id="location" class="form-control" data-ng-model="location" ng-change="filterActions()" ng-options="location as location.name for location in locations">
+                <option value="">-- All Locations -- </option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="connector">Filter By Connector</label>
+        <div class="controls">
+            <select id="connector" class="form-control" data-ng-model="connector" ng-change="filterActions()" ng-options="connector as connector.displayName for connector in connectors">
                 <option value="">-- All Locations -- </option>
             </select>
         </div>
     </div>
     <div class="list-group">
         <div data-ng-repeat="action in actions" class="list-group-item">
+			<span ng-class="{'Green':'bg-success', 'Yellow':'bg-warning', 'Red':'bg-danger'}[action.status]">
 			<small class="list-group-item-text">
 				Type: 
-				<span data-ng-bind="action.type"></span>
+				<span data-ng-bind="action.type" ng-class="{'Green':'bg-success', 'Yellow':'bg-warning', 'Red':'bg-danger', 'Complete':''}[action.status]"></span>
 				| Made:
 				<span data-ng-bind="action.created | date:'medium'"></span>
 				| By:
@@ -26,16 +35,25 @@
 				| With:
 				<span data-ng-bind="action.matches.length"></span>
 				match(es).
+				| Status:
+				<span data-ng-bind="action.status"></span>
 			</small>
+			</span>
 			<a  class="list-group-item-text"  data-ng-href="#!/actions/{{action._id}}">
 				<h4 class="list-group-item-heading" data-ng-bind="action.description" ></h4>
 			</a>
         </div>
     </div>
-    <div class="alert alert-warning text-center" data-ng-hide="location || !actions.$resolved || actions.length">
+    <div class="alert alert-warning text-center" data-ng-hide="location || connector || !actions.$resolved || actions.length">
     	No Actions yet, why don't you <a href="/#!/actions/create">create one</a>?
     </div>
-    <div class="alert alert-warning text-center" data-ng-hide="!location || (location && (!actions.$resolved || actions.length))">
+    <div class="alert alert-warning text-center" data-ng-hide="!location || connector || (location && (!actions.$resolved || actions.length))">
     	There are no actions at {{location.name}}.
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!connector || location || (connector && (!actions.$resolved || actions.length))">
+    	There are no actions for {{connector.displayName}}.
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!connector || !location || (connector && location && (!actions.$resolved || actions.length))">
+    	There are no actions at {{location.name}} for {{connector.displayName}}.
     </div>
 </section>
