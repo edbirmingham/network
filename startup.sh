@@ -1,5 +1,5 @@
 #!/bin/bash
-MONPATH="/home/ubuntu/workspace/mongo2"
+MONPATH="/home/ubuntu/workspace/mongo"
 LOGFILE="$MONPATH/mongod.log"
 ISNEW="0"
 
