@@ -16,6 +16,10 @@
 					<a data-ng-bind="match.displayName" data-ng-href="#!/participants/{{match._id}}"></a><span ng-if="!$last">, </span>
 				</span>
 			</dd>
+			<dt ng-if="action.connector">Connector</dt>
+			<dd ng-if="action.connector" data-ng-bind="action.connector.displayName"></dd>
+			<dt>Status</dt>
+			<dd data-ng-bind="action.status"></dd>
 		</dl>
 	</div>
 	<div class="pull-right" data-ng-show="authentication.user">

@@ -39,6 +39,17 @@ var ActionSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
+	connector: {
+		type: Schema.ObjectId,
+		ref: 'User'
+	},
+	status: {
+		type: [{
+			type: String,
+			enum: ['Red', 'Yellow', 'Green', 'Complete']
+		}],
+		default: ['Green']
+	},
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'

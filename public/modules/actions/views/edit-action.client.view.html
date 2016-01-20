@@ -15,6 +15,25 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="control-label" for="connector">Connector</label>
+                    <div class="controls">
+                        <select id="connector" class="form-control" data-ng-model="action.connector._id" ng-options="connector._id as connector.displayName for connector in connectors">
+                            <option value="">-- Not associated with a connector -- </option>
+                        </select>
+                    </div>
+                </div>
+				<div class="form-group">
+					<label class="control-label" for="status">Status</label>
+                    <div class="controls">
+    					<select id="status" name="status" class="form-control" data-ng-model="action.status" placeholder="Status">
+                            <option>Green</option>
+                            <option>Yellow</option>
+                            <option>Red</option>
+                            <option>Complete</option>
+    					</select>
+					</div>
+				</div>
+                <div class="form-group">
                     <label class="control-label" for="actor">Find actor</label>
                     <div class="controls">
                         <input id="actor" type="text" ng-model="action.actor.displayName" typeahead-editable="false" typeahead-on-select="action.actor = $item" typeahead="participant.listName() for participant in findParticipants($viewValue)" class="form-control" placeholder="Find actor">

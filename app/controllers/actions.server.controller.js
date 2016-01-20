@@ -42,8 +42,11 @@ exports.update = function(req, res) {
 
 	// This fixes a problem with assigning the network event when one
 	// was not originally assigned.
-	if (!action.networkEvent && req.body.networkEvent) {
-		req.body.networkEvent = req.body.networkEvent._id;
+	if (!action.networkevent && req.body.networkevent) {
+		req.body.networkevent = req.body.networkevent._id;
+	}
+	if (!action.connector && req.body.connector) {
+		req.body.connector = req.body.connector._id;
 	}
 	
 	action = _.extend(action, req.body);
@@ -85,6 +88,9 @@ exports.list = function(req, res) {
 	if (req.query.location) {
 		query.location = req.query.location;
 	}
+	if (req.query.connector) {
+		query.connector = req.query.connector;
+	}
 	Action.find(query).sort('-created')
 		.populate('user', 'displayName')
 		.populate('networkEvent', 'name scheduled')
@@ -110,6 +116,7 @@ exports.actionByID = function(req, res, next, id) {
 		.populate('networkEvent', 'name scheduled')
 		.populate('actor', 'displayName')
 		.populate('matches', 'displayName')
+		.populate('connector', 'displayName')
 		.exec(function(err, action) {
 			if (err) return next(err);
 			if (! action) return next(new Error('Failed to load Action ' + id));
