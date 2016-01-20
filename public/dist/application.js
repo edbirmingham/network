@@ -112,8 +112,8 @@ angular.module('actions').config(['$stateProvider',
 'use strict';
 
 // Actions controller
-angular.module('actions').controller('ActionsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Actions', 'Participants', 'NetworkEvents', 'Locations',
-	function($scope, $stateParams, $location, Authentication, Actions, Participants, NetworkEvents, Locations) {
+angular.module('actions').controller('ActionsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Actions', 'Participants', 'NetworkEvents', 'Locations', 'Users',
+	function($scope, $stateParams, $location, Authentication, Actions, Participants, NetworkEvents, Locations, Users) {
 		$scope.authentication = Authentication;
 
         // Retrieve the list of possible events for the action.
@@ -207,15 +207,20 @@ angular.module('actions').controller('ActionsController', ['$scope', '$statePara
 		$scope.find = function() {
 			$scope.actions = Actions.query();
 			$scope.locations = Locations.query();
+			$scope.connectors = Users.query();
 		};
 		
 		// Filter list of actions by location
-		$scope.filterByLocation = function() {
+		$scope.filterActions = function() {
+			var query = {};
 			if ($scope.location) {
-				$scope.actions = Actions.query({location: $scope.location._id});
-			} else {
-				$scope.actions = Actions.query();
+				query.location = $scope.location._id;
 			}
+			if ($scope.connector) {
+				query.connector = $scope.connector._id;
+			}
+			$scope.actions = Actions.query(query);
+			
 		};
 
 		// Find existing Action
@@ -223,6 +228,7 @@ angular.module('actions').controller('ActionsController', ['$scope', '$statePara
 			$scope.action = Actions.get({ 
 				actionId: $stateParams.actionId
 			});
+			$scope.connectors = Users.query();
 		};
 		
 		// Find existing participants
