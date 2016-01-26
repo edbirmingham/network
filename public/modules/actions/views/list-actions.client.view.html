@@ -18,6 +18,17 @@
             </select>
         </div>
     </div>
+    <div class="form-group">
+        <label class="control-label" for="status">Filter By Status</label>
+        <div class="controls">
+            <select multiple ng-multiple="true" id="status" name="status" class="form-control" data-ng-model="status" ng-change="filterActions()" placeholder="Status">
+                <option>Green</option>
+                <option>Yellow</option>
+                <option>Red</option>
+                <option>Complete</option>
+            </select>
+        </div>
+    </div>
     <div class="list-group">
         <div data-ng-repeat="action in actions" class="list-group-item">
 			<span ng-class="{'Green':'bg-success', 'Yellow':'bg-warning', 'Red':'bg-danger'}[action.status]">

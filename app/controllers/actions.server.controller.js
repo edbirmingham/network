@@ -91,6 +91,9 @@ exports.list = function(req, res) {
 	if (req.query.connector) {
 		query.connector = req.query.connector;
 	}
+	if (req.query.status) {
+		query.status = { $in: req.query.status.toString().split(',') };
+	}
 	Action.find(query).sort('-created')
 		.populate('user', 'displayName')
 		.populate('networkEvent', 'name scheduled')
