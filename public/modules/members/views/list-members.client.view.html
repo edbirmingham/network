@@ -7,6 +7,9 @@
 	</div>
     <div class="list-group">
         <div data-ng-repeat="member in members | filter:shirtFilter" class="list-group-item">
+			<a data-ng-href="#!/members/{{member._id}}" class="list-group-item-text">
+				<h4 class="list-group-item-heading" data-ng-bind="member.displayName"></h4>
+			</a>
 			<small class="list-group-item-text">
 			    Phone:
 			    <span data-ng-bind="member.phone"></span>
@@ -19,9 +22,6 @@
 				| Received Shirt:
 				<span data-ng-bind="member.shirtReceived" data-ng-click="giveShirt(member)"></span>
 			</small>
-			<a data-ng-href="#!/members/{{member._id}}" class="list-group-item-text">
-				<h4 class="list-group-item-heading" data-ng-bind="member.displayName"></h4>
-			</a>
         </div>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!members.$resolved || members.length">

@@ -4,6 +4,9 @@
     </div>
     <div class="list-group">
         <div data-ng-repeat="networkEvent in networkEvents" class="list-group-item">
+			<a  class="list-group-item-text" data-ng-href="#!/network-events/{{networkEvent._id}}">
+				<h4 class="list-group-item-heading" data-ng-bind="networkEvent.name"></h4>
+			</a>
 			<small class="list-group-item-text">
 				Creator:
 				<span data-ng-bind="networkEvent.user.displayName"></span>
@@ -14,9 +17,6 @@
 				| Type:
 				<span data-ng-bind="networkEvent.eventType"></span>
 			</small>
-			<a  class="list-group-item-text" data-ng-href="#!/network-events/{{networkEvent._id}}">
-				<h4 class="list-group-item-heading" data-ng-bind="networkEvent.name"></h4>
-			</a>
         </div>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!networkEvents.$resolved || networkEvents.length">
