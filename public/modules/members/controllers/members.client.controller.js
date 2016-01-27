@@ -92,6 +92,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 				$location.path('members/' + member._id);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
+			    $scope.errors = $scope.setErrors(errorResponse.data);
 			});
 		};
 		
