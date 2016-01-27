@@ -4,6 +4,7 @@
 angular.module('users').controller('UsersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Users',
 	function($scope, $stateParams, $location, Authentication, Users) {
 		$scope.authentication = Authentication;
+		$scope.isadmin = null;
 
 		// Create new User
 		$scope.create = function() {
@@ -64,6 +65,44 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			$scope.user = Users.get({ 
 				userId: $stateParams.userId
 			});
+			
+			$scope.checkAdmin();
+		};
+		
+		// Add or remove the admin
+		$scope.setAdmin = function() {
+			if ($scope.isadmin === true) {
+				$scope.user.roles.push('admin');
+			} else {
+				while($scope.user.roles.indexOf('admin') > -1) {
+					var idx = $scope.user.roles.indexOf('admin');
+					$scope.user.roles.splice(idx, 1);
+				}
+			}
+		};
+
+		// Checks for admin role
+		$scope.isAdmin = function() {
+			var idx = $scope.user.roles.indexOf('admin');
+			if (idx > -1) {
+				$scope.isadmin = true;
+			} else {
+				$scope.isadmin = false;
+			}
+			
+			// Gross and ugly and un-Angular but the only way to check the box.
+			// Someone with a better grasp of the AngularJS event loop please fix.
+			if (document.getElementById('isadmin') !== null)
+				document.getElementById('isadmin').checked = $scope.isadmin;
+		};
+		
+		// Angular/Mongoose has no way of lettng the code know when a req is done.
+		// This starts checking for admin as soon as the getter is fired off.
+		$scope.checkAdmin = function() {
+			if (typeof($scope.user.roles) !== 'undefined')
+				$scope.isAdmin();
+			if ($scope.isadmin === null)
+				setTimeout($scope.checkAdmin, 200);
 		};
 	}
 ]);

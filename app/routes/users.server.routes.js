@@ -28,12 +28,12 @@ module.exports = function(app) {
 	// Setting up the users CRUD
 	app.route('/users')
 		.get(users.requiresLogin, users.list)
-		.post(users.requiresLogin, users.create);
+		.post(users.requiresLogin, users.hasAdmin, users.create);
 
 	app.route('/users/:userId')
 		.get(users.requiresLogin, users.read)
-		.put(users.requiresLogin, users.hasAuthorization, users.update)
-		.delete(users.requiresLogin, users.hasAuthorization, users.delete);
+		.put(users.requiresLogin, users.hasAuthorization, users.hasAdmin, users.update)
+		.delete(users.requiresLogin, users.hasAuthorization, users.hasAdmin, users.delete);
 
 	// Finish by binding the User middleware
 	app.param('userId', users.userByID);
