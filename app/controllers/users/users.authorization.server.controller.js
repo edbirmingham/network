@@ -36,30 +36,6 @@ exports.requiresLogin = function(req, res, next) {
 };
 
 /**
- * User authorizations routing middleware
- */
-/**
- * This code is overwritten in the User object by hasAuthorization in
- * user.profile.server.controller.js
- **
-exports.hasAuthorization = function(roles) {
-	var _this = this;
-
-	return function(req, res, next) {
-		_this.requiresLogin(req, res, function() {
-			if (_.intersection(req.user.roles, _this.roles).length) {
-				return next();
-			} else {
-				return res.status(403).send({
-					message: 'User is not authorized'
-				});
-			}
-		});
-	};
-};
-*/
-
-/**
  * Checks to see if User is an admin
  */
 exports.hasAdmin = function(req, res, next) {
