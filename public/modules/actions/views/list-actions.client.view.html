@@ -20,6 +20,9 @@
     </div>
     <div class="list-group">
         <div data-ng-repeat="action in actions" class="list-group-item">
+			<a  class="list-group-item-text"  data-ng-href="#!/actions/{{action._id}}">
+				<h4 class="list-group-item-heading" data-ng-bind="action.description" ></h4>
+			</a>
 			<span ng-class="{'Green':'bg-success', 'Yellow':'bg-warning', 'Red':'bg-danger'}[action.status]">
 			<small class="list-group-item-text">
 				Type: 
@@ -39,9 +42,6 @@
 				<span data-ng-bind="action.status"></span>
 			</small>
 			</span>
-			<a  class="list-group-item-text"  data-ng-href="#!/actions/{{action._id}}">
-				<h4 class="list-group-item-heading" data-ng-bind="action.description" ></h4>
-			</a>
         </div>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="location || connector || !actions.$resolved || actions.length">

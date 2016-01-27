@@ -4,6 +4,9 @@
     </div>
     <div class="list-group">
         <div data-ng-repeat="participant in participants"  class="list-group-item">
+			<a  class="list-group-item-text"  data-ng-href="#!/participants/{{participant._id}}">
+				<h4 class="list-group-item-heading" data-ng-bind="participant.displayName"></h4>
+			</a>
 			<small class="list-group-item-text">
 			    Phone:
 				<span data-ng-bind="participant.phone"></span>
@@ -12,9 +15,6 @@
 				| Participant is a: 
 				<span data-ng-bind="participant.identity"></span>
 			</small>
-			<a  class="list-group-item-text"  data-ng-href="#!/participants/{{participant._id}}">
-				<h4 class="list-group-item-heading" data-ng-bind="participant.displayName"></h4>
-			</a>
         </div>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!participants.$resolved || participants.length">
