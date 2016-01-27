@@ -219,6 +219,9 @@ angular.module('actions').controller('ActionsController', ['$scope', '$statePara
 			if ($scope.connector) {
 				query.connector = $scope.connector._id;
 			}
+			if ($scope.status){
+				query.status = $scope.status;
+			}
 			$scope.actions = Actions.query(query);
 			
 		};
