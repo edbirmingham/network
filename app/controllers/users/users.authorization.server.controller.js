@@ -40,7 +40,7 @@ exports.requiresLogin = function(req, res, next) {
  */
 exports.hasAdmin = function(req, res, next) {
 	
-    if (req.user.roles.indexOf('admin') == -1) {
+    if (req.user.roles.indexOf('admin') === -1) {
     	return res.status(403).send({
     		message: 'User is not an admin'
     	});
