@@ -95,17 +95,7 @@ var UserSchema = new Schema({
 	resetPasswordExpires: {
 		type: Date
 	},
-	//Connector fields
-	membersRegistered: {
-		type: Schema.ObjectId,
-		ref: 'Member'
-	},
-	attendance: {
-		type: Number
-	},
-	oneToOnes: {
-		type: Number
-	}
+	
 });
 
 /**
