@@ -4,24 +4,11 @@
 angular.module('users').controller('UsersController', ['$scope', '$stateParams', '$location', 'Authentication','Actions', 'Members', 'Participations', 'Users',
 	function($scope, $stateParams, $location, Authentication, Actions, Members, Participations, Users) {
 		$scope.authentication = Authentication;
-<<<<<<< HEAD
-<<<<<<< HEAD
 		$scope.user = {};
 		$scope.isconnector = null;
-		var currentUser = $scope.authentication.user;
-		$scope.isconnector = null;
-=======
-		var currentUser = $scope.authentication.user;
-=======
 		$scope.currentUser = $scope.authentication.user;
->>>>>>> Changed some formatting, fixed Members metric
 		$scope.actions = Actions.query();
-<<<<<<< HEAD
-		
->>>>>>> Make Dashboard only visible to Connectors
-=======
 		$scope.members = Members.query();
->>>>>>> Added interctibility to Connector action on homepage
 
 		// Create new User
 		$scope.create = function() {
@@ -84,6 +71,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			});
 		};
 		
+<<<<<<< HEAD
 		$scope.isConnector = function(currentUser) {
 			if(currentUser.roles.indexOf('connector') > -1) {
 				return true;
@@ -91,6 +79,18 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			else {
 				return false;
 			}
+=======
+		$scope.isConnector = function() {
+			if($scope.user.roles.indexOf('connector') > -1) {
+				$scope.isconnector = true;
+			}
+			else {
+				$scope.isconnector = false;
+			}
+			
+			if (document.getElementById('isconnector') !== null)
+				document.getElementById('isconnector').checked = $scope.isconnector;
+>>>>>>> Add connector checkbox, methods.
 		};
 		
 		$scope.setConnector = function() {
@@ -105,6 +105,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 				}
 			}
 		};
+<<<<<<< HEAD
 		
 		$scope.getNoMatchesCount = function() {
 			console.log(Authentication.user._id);
@@ -115,5 +116,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 		$scope.getActions = function () {
 			return Actions.query();
 		};
+=======
+>>>>>>> Add connector checkbox, methods.
 	}
 ]);
