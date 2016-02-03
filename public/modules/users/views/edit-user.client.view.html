@@ -29,6 +29,12 @@
     					<input type="text" id="username" name="username" class="form-control" data-ng-model="user.username" placeholder="Username">
 					</div>
 				</div>
+				<div class="form-group">
+				    <label class="control-label" for="isconnector">Connector</label>
+				    <div class="controls">
+				    	<input type="checkbox" id="isconnector" name="isconnector" data-ng-model="isconnector" ng-change="setAdmin()">
+				    </div>
+				</div>
                 <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-default">
                 </div>
