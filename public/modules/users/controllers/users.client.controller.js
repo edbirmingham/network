@@ -4,13 +4,10 @@
 angular.module('users').controller('UsersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Users',
 	function($scope, $stateParams, $location, Authentication, Users) {
 		$scope.authentication = Authentication;
-<<<<<<< HEAD
 		$scope.user = {};
 		$scope.isconnector = null;
-=======
 		var currentUser = $scope.authentication.user;
-		
->>>>>>> Make Dashboard only visible to Connectors
+		$scope.isconnector = null;
 
 		// Create new User
 		$scope.create = function() {
@@ -74,12 +71,15 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 		};
 		
 		$scope.isConnector = function() {
-			if(currentUser.roles.indexOf('connector') > -1) {
-				return true;
+			if($scope.user.roles.indexOf('connector') > -1) {
+				$scope.isconnector = true;
 			}
 			else {
-				return false;
+				$scope.isconnector = false;
 			}
+			
+			if (document.getElementById('isconnector') !== null)
+				document.getElementById('isconnector').checked = $scope.isconnector;
 		};
 		
 		$scope.setConnector = function() {
