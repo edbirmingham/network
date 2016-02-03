@@ -13,7 +13,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 =======
 >>>>>>> Make Dashboard only visible to Connectors
 
-		$scope.isconnector = null;
+		$scope.isconnector = null
 		var currentUser = $scope.authentication.user;
 		
 		// Create new User
