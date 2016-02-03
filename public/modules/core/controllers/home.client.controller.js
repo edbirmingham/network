@@ -5,22 +5,12 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 	function($scope, Authentication, Actions, Users) {
 		// This provides Authentication context.
 		$scope.authentication = Authentication;
+
+		$scope.currentUser = $scope.authentication.user;
 		
-<<<<<<< HEAD
-=======
-		
+		$scope.showConnectorHome = false;
 		
 	}
 ]);
 
-angular.module('connector').controller('ConnController', ['$scope', 'Authentication', 'Actions', 'Members', 'Users',
-	function($scope, Authentication, Actions, Members, Users) {
-		// This provides Authentication context.
-		$scope.authentication = Authentication;
-		
-		
-		
->>>>>>> Added base formatting for Connector Home Page, connector methods
-	}
-]);
 
