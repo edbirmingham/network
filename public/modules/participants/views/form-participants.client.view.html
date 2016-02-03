@@ -1,29 +1,33 @@
-<alert data-ng-show="error" data-ng-bind="error" type="danger"></alert>
-<div class="form-group">
+ <alert data-ng-show="errorMessages" type="danger">
+ 	<ul>
+ 		<li data-ng-repeat="message in errorMessages">{{message}}</li>
+ 	</ul>
+ </alert>
+ <div class="form-group" data-ng-class="errorStatus.firstName">
 	<label class="control-label" for="firstName">First Name</label>
     <div class="controls">
 		<input type="text" required id="firstName" name="firstName" class="form-control" data-ng-model="participant.firstName" placeholder="First Name">
 	</div>
 </div>
-<div class="form-group">
+<div class="form-group" data-ng-class="errorStatus.lastName">
 	<label class="control-label" for="lastName">Last Name</label>
     <div class="controls">
 		<input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="participant.lastName" placeholder="Last Name">
 	</div>
 </div>
-<div class="form-group">
+<div class="form-group" data-ng-class="errorStatus.phone">
 	<label class="control-label" for="phone">Phone</label>
     <div class="controls">
 		<input type="phone" id="phone" name="phone" class="form-control" data-ng-model="participant.phone" placeholder="Phone">
 	</div>
 </div>
-<div class="form-group">
+<div class="form-group" data-ng-class="errorStatus.email">
 	<label class="control-label" for="email">Email</label>
     <div class="controls">
 		<input type="email" id="email" name="email" class="form-control" data-ng-model="participant.email" placeholder="Email">
 	</div>
 </div>
-<div class="form-group">
+<div class="form-group" data-ng-class="errorStatus.identity">
 	<label class="control-label" for="identity">Who are you?</label>
 	<span id="identityHelpBlock" class="help-block">Ask: Student/Parent/Educator/Resident/Community Partner (choose one)</span>
     <div class="controls">
@@ -36,7 +40,7 @@
 		</select>
 	</div>
 </div>
-<div class="form-group">
+<div class="form-group" data-ng-class="errorStatus.affiliation">
 	<label class="control-label" for="affiliation">Affiliation?</label>
 	<span id="identityHelpBlock" class="help-block">Where are you coming from? (Specific school, neighborhood, organization/group)</span>
     <div class="controls">
