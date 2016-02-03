@@ -7,6 +7,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 		$scope.errorStatus = {};
 		
 		$scope.setErrors = function(errors) {
+			$scope.errorStatus = {};
 			if (errors.fields) {
 				for (var ei in errors.fields) {
 					$scope.errorStatus[errors.fields[ei]] = "has-error";
