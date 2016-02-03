@@ -6,17 +6,10 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 		// This provides Authentication context.
 		$scope.authentication = Authentication;
 		
+		$scope.currentUser = $scope.authentication.user;
 		
+		$scope.showConnectorHome = false;
 		
 	}
 ]);
 
-angular.module('connector').controller('ConnController', ['$scope', 'Authentication', 'Actions', 'Members', 'Users',
-	function($scope, Authentication, Actions, Members, Users) {
-		// This provides Authentication context.
-		$scope.authentication = Authentication;
-		
-		
-		
-	}
-]);
