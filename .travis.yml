@@ -5,3 +5,8 @@ env:
   - NODE_ENV=travis
 services:
   - mongodb
+script:
+  - grunt csslint
+  - grunt jshint
+  - grunt env:test mochaTest
+  - grunt env:test karma:unit
