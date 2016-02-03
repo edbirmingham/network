@@ -77,5 +77,8 @@ angular.module('participants').controller('ParticipantsController', ['$scope', '
 				participantId: $stateParams.participantId
 			});
 		};
+		$scope.initNew = function() {
+		   $scope.participant = new Participants({});
+		}
 	}
 ]);
