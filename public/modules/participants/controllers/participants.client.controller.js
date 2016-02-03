@@ -4,6 +4,16 @@
 angular.module('participants').controller('ParticipantsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Participants',
 	function($scope, $stateParams, $location, Authentication, Participants) {
 		$scope.authentication = Authentication;
+		$scope.errorStatus = {};
+
+		$scope.setErrors = function(errors) {
+			if (errors.fields) {
+				for (var ei in errors.fields) {
+					$scope.errorStatus[errors.fields[ei]] = "has-error";
+				}
+			}
+			$scope.errorMessages = errors.messages;
+		}
 
 		// Create new Participant
 		$scope.create = function() {
@@ -22,6 +32,7 @@ angular.module('participants').controller('ParticipantsController', ['$scope', '
 				$scope.participant.identity = '';
 				$scope.participant.affiliation = '';
 			}, function(errorResponse) {
+				$scope.errors = $scope.setErrors(errorResponse.data);
 				$scope.error = errorResponse.data.message;
 			});
 		};
@@ -50,6 +61,7 @@ angular.module('participants').controller('ParticipantsController', ['$scope', '
 			participant.$update(function() {
 				$location.path('participants/' + participant._id);
 			}, function(errorResponse) {
+				$scope.errors = $scope.setErrors(errorResponse.data);
 				$scope.error = errorResponse.data.message;
 			});
 		};

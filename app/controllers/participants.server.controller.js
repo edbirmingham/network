@@ -20,9 +20,7 @@ exports.create = function(req, res) {
 
 	participant.save(function(err) {
 		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
+			return res.status(400).send(errorHandler.getErrorData(err));
 		} else {
 			res.jsonp(participant);
 		}
@@ -49,9 +47,7 @@ exports.update = function(req, res) {
 
 	participant.save(function(err) {
 		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
+			return res.status(400).send(errorHandler.getErrorData(err));
 		} else {
 			res.jsonp(participant);
 		}
