@@ -4,11 +4,23 @@
 angular.module('members').controller('MembersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Members', 'Participants',
 	function($scope, $stateParams, $location, Authentication, Members, Participants) {
 		$scope.authentication = Authentication;
+		$scope.errorStatus = {};
+		
+		$scope.setErrors = function(errors) {
+			if (errors.fields) {
+				for (var ei in errors.fields) {
+					$scope.errorStatus[errors.fields[ei]] = "has-error";
+				}
+			}
+			$scope.errorMessages = errors.messages;
+		}
 
 		// Create new Member
 		$scope.create = function() {
 			
 			var clearFields = function(Participant) {
+				$scope.errorMessages = null;
+				$scope.errorStatus = {};
 				$scope.member.firstName = '';
 				$scope.member.lastName = '';
 				$scope.member.phone = '';
@@ -38,6 +50,8 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 					clearFields(response);
 				}, function(errorResponse) {
 				    $scope.error = errorResponse.data.message;
+				    $scope.errors = $scope.setErrors(errorResponse.data);
+
 				});
 				
 			} else {                 
@@ -47,6 +61,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 					clearFields(response);
 				}, function(errorResponse) {
 					$scope.error = errorResponse.data.message;
+				    $scope.errors = $scope.setErrors(errorResponse.data);
 				});
 				
 			} 
@@ -77,6 +92,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 				$location.path('members/' + member._id);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
+			    $scope.errors = $scope.setErrors(errorResponse.data);
 			});
 		};
 		
