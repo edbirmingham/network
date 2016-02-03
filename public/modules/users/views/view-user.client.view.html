@@ -8,6 +8,8 @@
 		  <dd data-ng-bind="user.email"></dd>
 		  <dt>Username</dt>
 		  <dd data-ng-bind="user.username"></dd>
+		  <dt>Connector</dt>
+		  <dd data-ng-bind="user.roles.indexOf('connector') > -1"></dd>
 		</dl>
 	</div>
 	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id != user._id))">
