@@ -5,6 +5,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 	function($scope, $stateParams, $location, Authentication, Users) {
 		$scope.authentication = Authentication;
 		$scope.user = {};
+		$scope.isconnector = null;
 
 		// Create new User
 		$scope.create = function() {
@@ -65,6 +66,31 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			$scope.user = Users.get({ 
 				userId: $stateParams.userId
 			});
+		};
+		
+		$scope.isConnector = function() {
+			if($scope.user.roles.indexOf('connector') > -1) {
+				$scope.isconnector = true;
+			}
+			else {
+				$scope.isconnector = false;
+			}
+			
+			if (document.getElementById('isconnector') !== null)
+				document.getElementById('isconnector').checked = $scope.isconnector;
+		};
+		
+		$scope.setConnector = function() {
+			if($scope.isconnector) {
+				$scope.user.roles.push('connector');
+			} else {
+				
+				while (true) {
+			  		var idx = $scope.user.roles.indexOf('connector');
+			  		if (idx === -1) break;
+			  		$scope.user.roles.splice(idx, 1);
+				}
+			}
 		};
 	}
 ]);
