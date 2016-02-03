@@ -6,7 +6,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 		$scope.authentication = Authentication;
 		$scope.user = {};
 
-		$scope.isconnector = null;
+		$scope.isconnector = null
 		var currentUser = $scope.authentication.user;
 		
 		// Create new User
