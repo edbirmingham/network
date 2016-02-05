@@ -1,5 +1,10 @@
 <section data-ng-controller="ParticipantsController" data-ng-init="findOne()">
     <div class="page-header">
+    	<ol class="breadcrumb">
+  			<li><a href="/#!/participants">Participants</a></li>
+ 			<li><a href="/#!/participants/{{participant._id}}">{{participant.displayName}}</a></li>
+  			<li class="active">Edit</li>
+		</ol>
         <h1>Edit Participant</h1>
     </div>
     <div class="col-md-12">

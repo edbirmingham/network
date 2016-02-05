@@ -1,5 +1,9 @@
 <section data-ng-controller="NetworkEventsController" data-ng-init="initView()">
 	<div class="page-header">
+		<ol class="breadcrumb">
+  			<li><a href="/#!/network-events">Events</a></li>
+  			<li class="active">{{networkEvent.name}}</li>
+		</ol>
 		<h1 data-ng-bind="networkEvent.name"></h1>
 	</div>
 	<div class="clearfix">
