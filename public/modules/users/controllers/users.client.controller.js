@@ -5,16 +5,11 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 	function($scope, $stateParams, $location, Authentication, Actions, Members, Participations, Users) {
 		$scope.authentication = Authentication;
 		$scope.user = {};
-<<<<<<< HEAD
 		$scope.isconnector = null;
-		$scope.currentUser = $scope.authentication.user;
 		$scope.actions = Actions.query();
 		$scope.members = Members.query();
-=======
->>>>>>> Make Dashboard only visible to Connectors
-
+		
 		$scope.isconnector = null
-		var currentUser = $scope.authentication.user;
 		
 		// Create new User
 		$scope.create = function() {
@@ -77,7 +72,6 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			});
 		};
 		
-<<<<<<< HEAD
 		$scope.isConnector = function(currentUser) {
 			if(currentUser.roles.indexOf('connector') > -1) {
 				return true;
@@ -85,21 +79,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			else {
 				return false;
 			}
-=======
-		$scope.isConnector = function() {
-			if(currentUser.roles.indexOf('connector') > -1) {
-				return true;
-			}
-			else {
-				return false;
-			}
-<<<<<<< HEAD
 			
-			if (document.getElementById('isconnector') !== null)
-				document.getElementById('isconnector').checked = $scope.isconnector;
->>>>>>> Add connector checkbox, methods.
-=======
->>>>>>> Make Dashboard only visible to Connectors
 		};
 		
 		$scope.setConnector = function() {
@@ -114,7 +94,6 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 				}
 			}
 		};
-<<<<<<< HEAD
 		
 		$scope.getNoMatchesCount = function() {
 			console.log(Authentication.user._id);
@@ -125,7 +104,6 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 		$scope.getActions = function () {
 			return Actions.query();
 		};
-=======
->>>>>>> Add connector checkbox, methods.
+
 	}
 ]);
