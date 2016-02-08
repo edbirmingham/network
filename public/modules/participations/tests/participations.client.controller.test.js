@@ -85,6 +85,7 @@
 			};
 
 			// Fixture mock form input values
+			$stateParams.networkEventId = '525a8422f6d0f87f0e407a33';
 			scope.networkEvent = '525cf20451979dea2c000001';
 			scope.attendee = sampleAttendeePostData;
 
