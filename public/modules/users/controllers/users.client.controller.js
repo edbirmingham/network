@@ -10,7 +10,9 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 		$scope.create = function() {
 			// Create new User object
 			var user = new Users ($scope.user);
-
+			
+			$scope.roles = [];
+			
 			// Redirect after save
 			user.$save(function(response) {
 				$location.path('users/' + response._id);
@@ -65,6 +67,17 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			$scope.user = Users.get({ 
 				userId: $stateParams.userId
 			});
+		};
+		
+			// Add the selected role to the roles list.
+		$scope.addRole = function(roles, role) {
+			roles.push(role);
+			$scope.selectedMatch = null;
+		};
+		
+		// Remove role from the role list.
+		$scope.removeRole = function(roles, roleIndex) {
+			roles.splice(roleIndex, 1);
 		};
 	}
 ]);
