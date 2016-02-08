@@ -4,12 +4,11 @@
 angular.module('users').controller('UsersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Users',
 	function($scope, $stateParams, $location, Authentication, Users) {
 		$scope.authentication = Authentication;
-<<<<<<< HEAD
 		$scope.user = {};
-=======
-		$scope.isconnector = null;
->>>>>>> Add connector checkbox, methods.
 
+		$scope.isconnector = null;
+		var currentUser = $scope.authentication.user;
+		
 		// Create new User
 		$scope.create = function() {
 			// Create new User object
@@ -72,15 +71,12 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 		};
 		
 		$scope.isConnector = function() {
-			if($scope.user.roles.indexOf('connector') > -1) {
-				$scope.isconnector = true;
+			if(currentUser.roles.indexOf('connector') > -1) {
+				return true;
 			}
 			else {
-				$scope.isconnector = false;
+				return false;
 			}
-			
-			if (document.getElementById('isconnector') !== null)
-				document.getElementById('isconnector').checked = $scope.isconnector;
 		};
 		
 		$scope.setConnector = function() {
