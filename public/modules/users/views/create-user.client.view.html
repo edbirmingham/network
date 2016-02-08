@@ -23,6 +23,7 @@
 				</div>
 				<div class="form-group">
                     <label class="control-label" for="match">Add Role</label>
+<<<<<<< HEAD
                     <div class="dropdown">
 					  <button class="btn btn-default dropdown-toggle" type="button" id="addRole" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 					    Add Role
@@ -32,12 +33,22 @@
 					    <li><a data-ng-click="addRole(roles, 'connector');">Connector</a></li>
 					    <li><a data-ng-click="addRole(roles, 'admin');" >Admin</a></li>
 					  </ul>
+=======
+                   <div class="btn-group" role="group" aria-label="...">
+					  <button type="button" class="btn btn-default" data-ng-click="addRole(roles, 'connector');">
+					  	<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Connector
+					  </button>
+>>>>>>> Add list and button to add roles for user creation
 					</div>
                 </div>
 				<div class="list-group">
                     <span data-ng-repeat="role in roles" class="list-group-item">
                     	<span>
+<<<<<<< HEAD
                 			<span data-ng-bind="role"></span>
+=======
+                			<span data-ng-bind="user.roles"></span>
+>>>>>>> Add list and button to add roles for user creation
                     		<a class="btn" data-ng-click="removeRole(roles, $index);">
                     			<i class="glyphicon glyphicon-remove"></i>
                     		</a>

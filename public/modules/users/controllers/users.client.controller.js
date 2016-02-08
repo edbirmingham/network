@@ -12,11 +12,15 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			// Create new User object
 			var user = new Users ($scope.user);
 			
+<<<<<<< HEAD
 			
 			
 			angular.forEach($scope.user.roles, function(role){
 				this.push(role);
 			}, $scope.roles);
+=======
+			$scope.roles = [];
+>>>>>>> Add list and button to add roles for user creation
 			
 			// Redirect after save
 			user.$save(function(response) {
@@ -78,6 +82,10 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			// Add the selected role to the roles list.
 		$scope.addRole = function(roles, role) {
 			roles.push(role);
+<<<<<<< HEAD
+=======
+			$scope.selectedMatch = null;
+>>>>>>> Add list and button to add roles for user creation
 		};
 		
 		// Remove role from the role list.
