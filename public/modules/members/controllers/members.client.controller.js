@@ -10,11 +10,11 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 			$scope.errorStatus = {};
 			if (errors.fields) {
 				for (var ei in errors.fields) {
-					$scope.errorStatus[errors.fields[ei]] = "has-error";
+					$scope.errorStatus[errors.fields[ei]] = 'has-error';
 				}
 			}
 			$scope.errorMessages = errors.messages;
-		}
+		};
 
 		// Create new Member
 		$scope.create = function() {

@@ -10,11 +10,11 @@ angular.module('participants').controller('ParticipantsController', ['$scope', '
 			$scope.errorStatus = {};
 			if (errors.fields) {
 				for (var ei in errors.fields) {
-					$scope.errorStatus[errors.fields[ei]] = "has-error";
+					$scope.errorStatus[errors.fields[ei]] = 'has-error';
 				}
 			}
 			$scope.errorMessages = errors.messages;
-		}
+		};
 
 		// Create new Participant
 		$scope.create = function() {
@@ -80,6 +80,6 @@ angular.module('participants').controller('ParticipantsController', ['$scope', '
 		};
 		$scope.initNew = function() {
 		   $scope.participant = new Participants({});
-		}
+		};
 	}
 ]);
