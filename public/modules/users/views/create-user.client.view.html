@@ -17,6 +17,24 @@
 						<input type="password" id="password" name="password" class="form-control" data-ng-model="user.password" placeholder="Password">
 					</div>
 				</div>
+				<div class="form-group">
+                    <label class="control-label" for="match">Add Role</label>
+                   <div class="btn-group" role="group" aria-label="...">
+					  <button type="button" class="btn btn-default" data-ng-click="addRole(roles, 'connector');">
+					  	<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Connector
+					  </button>
+					</div>
+                </div>
+				<div class="list-group">
+                    <span data-ng-repeat="role in roles" class="list-group-item">
+                    	<span>
+                			<span data-ng-bind="user.roles"></span>
+                    		<a class="btn" data-ng-click="removeRole(roles, $index);">
+                    			<i class="glyphicon glyphicon-remove"></i>
+                    		</a>
+                    	</span>
+                    </span>
+                </div>
                 <div class="form-group">
                     <input type="submit" class="btn btn-default">
                 </div>
