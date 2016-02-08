@@ -46,7 +46,7 @@ exports.getErrorMessage = function(err) {
  */
 exports.getErrorData = function(err) {
 	var data = {
-		message: "",
+		message: '',
 		messages: [],
 		fields: []
 	};
