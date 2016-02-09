@@ -1,8 +1,8 @@
 'use strict';
 
 // Users controller
-angular.module('users').controller('UsersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Users',
-	function($scope, $stateParams, $location, Authentication, Users) {
+angular.module('users').controller('UsersController', ['$scope', '$stateParams', '$location', 'Authentication','Actions', 'Members', 'Users',
+	function($scope, $stateParams, $location, Authentication, Actions, Members, Users) {
 		$scope.authentication = Authentication;
 <<<<<<< HEAD
 		$scope.user = {};
@@ -95,6 +95,22 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			  		$scope.user.roles.splice(idx, 1);
 				}
 			}
+		};
+		
+		$scope.getRegisteredMembersMonth = function() {
+			
+		};
+		
+		$scope.getRegisteredMembersSem = function() {
+			
+		};
+		
+		$scope.getRegisteredMembersYTD = function() {
+			
+		};
+		
+		$scope.getActions = function () {
+			return Actions.query();
 		};
 	}
 ]);
