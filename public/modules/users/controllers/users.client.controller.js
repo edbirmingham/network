@@ -6,7 +6,6 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 		$scope.authentication = Authentication;
 		var currentUser = $scope.authentication.user;
 		$scope.actions = Actions.query();
-		
 
 		// Create new User
 		$scope.create = function() {
@@ -90,7 +89,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 				}
 			}
 		};
-		
+
 		$scope.getNoMatchesCount = function() {
 			console.log(Authentication.user._id);
 			return Actions.where( {status: ['Red']} ).count();
@@ -100,5 +99,6 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 		$scope.getActions = function () {
 			return Actions.query();
 		};
+
 	}
 ]);
