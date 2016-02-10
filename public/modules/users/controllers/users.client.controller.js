@@ -10,7 +10,11 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			// Create new User object
 			var user = new Users ($scope.user);
 			
-			$scope.roles = [];
+			var userRoles = [];
+			
+			angular.forEach($scope.roles, function(role){
+				this.push(role);
+			}, userRoles);
 			
 			// Redirect after save
 			user.$save(function(response) {
@@ -23,6 +27,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 				$scope.user.email = '';
 				$scope.user.username = '';
 				$scope.user.password = '';
+				$scope.user.roles = [];
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -71,7 +76,6 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			// Add the selected role to the roles list.
 		$scope.addRole = function(roles, role) {
 			roles.push(role);
-			$scope.selectedMatch = null;
 		};
 		
 		// Remove role from the role list.
