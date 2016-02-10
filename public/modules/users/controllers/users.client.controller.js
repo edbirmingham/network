@@ -1,8 +1,8 @@
 'use strict';
 
 // Users controller
-angular.module('users').controller('UsersController', ['$scope', '$stateParams', '$location', 'Authentication','Actions', 'Members', 'Users',
-	function($scope, $stateParams, $location, Authentication, Actions, Members, Users) {
+angular.module('users').controller('UsersController', ['$scope', '$stateParams', '$location', 'Authentication','Actions', 'Members', 'Participations', 'Users',
+	function($scope, $stateParams, $location, Authentication, Actions, Members, Participations, Users) {
 		$scope.authentication = Authentication;
 <<<<<<< HEAD
 		$scope.user = {};
@@ -12,8 +12,12 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 =======
 		var currentUser = $scope.authentication.user;
 		$scope.actions = Actions.query();
+<<<<<<< HEAD
 		
 >>>>>>> Make Dashboard only visible to Connectors
+=======
+		$scope.members = Members.query();
+>>>>>>> Added interctibility to Connector action on homepage
 
 		// Create new User
 		$scope.create = function() {
