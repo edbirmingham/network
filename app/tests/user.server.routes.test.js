@@ -31,7 +31,8 @@ describe('User CRUD tests', function() {
 			email: 'test@test.com',
 			username: credentials.username,
 			password: credentials.password,
-			provider: 'local'
+			provider: 'local',
+			roles: ['user', 'admin']
 		});
 
 		// Save a user to the test db and create new User
@@ -88,10 +89,10 @@ describe('User CRUD tests', function() {
 					});
 			});
 	});
-
+	
 	it('should not be able to save User instance if not logged in', function(done) {
 		agent.post('/users')
-			.send(user)
+			.send(credentials)
 			.expect(401)
 			.end(function(userSaveErr, userSaveRes) {
 				// Call the assertion callback
