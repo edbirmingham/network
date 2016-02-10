@@ -38,27 +38,32 @@
 				</div>
 			</div>
 			<div class="row">
+				<h4 class="text-center">Actions Status</h4>
 				<div class="col-md-3">
-					<h3>No Matches</h3>
-					<div data-ng-repeat="action in actions | filter: {connector: authentication.user._id, status:['Red']}" class="list-group-item">
+					<h5 class="text-center">No Matches</h5>
+					<h6 class="text-center">{{(actions | filter: {connector: authentication.user._id, status: ['Red']}).length}}</h6>
+					<div data-ng-repeat="action in actions | filter: {connector: authentication.user._id, status: ['Red'] }" class="list-group-item">
 						{{action.description}}
 					</div>
 				</div>
 				<div class="col-md-3">
-					<h3>Pending Matches</h3>
-					<div data-ng-repeat="action in actions | filter: {connector: authentication.user._id, status:['Yellow']}" class="list-group-item">
+					<h5 class="text-center">Pending Matches</h5>
+					<h6 class="text-center">{{(actions | filter: {connector: authentication.user._id, status: ['Yellow']}).length}}</h6>
+					<div data-ng-repeat="action in actions | filter: {connector: authentication.user._id, status: ['Yellow'] }" class="list-group-item">
 						{{action.description}}
 					</div>
 				</div>
 				<div class="col-md-3">
-					<h3>Active Matches</h3>
-					<div data-ng-repeat="action in actions | filter: {connector: authentication.user._id, status:['Green']}" class="list-group-item">
+					<h5 class="text-center">Active Matches</h5>
+					<h6 class="text-center">{{(actions | filter: {connector: authentication.user._id, status: ['Green']}).length}}</h6>
+					<div data-ng-repeat="action in actions | filter: {connector: authentication.user._id, status: ['Green'] }" class="list-group-item">
 						{{action.description}}
 					</div>
 				</div>
 				<div class="col-md-3">
-					<h3>Completed Matches</h3>
-					<div data-ng-repeat="action in actions | filter: {connector: authentication.user._id, status:['Complete']}" class="list-group-item">
+					<h5 class="text-center">Completed Matches</h5>
+					<h6 class="text-center">{{(actions | filter: {connector: authentication.user._id, status: ['Complete']}).length}}</h6>
+					<div data-ng-repeat="action in actions | filter: {connector: authentication.user._id, status: ['Complete'] }" class="list-group-item">
 						{{action.description}}
 					</div>
 				</div>
