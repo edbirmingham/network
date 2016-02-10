@@ -1,18 +1,12 @@
 'use strict';
 
 // Users controller
-<<<<<<< HEAD
-angular.module('users').controller('UsersController', ['$scope', '$stateParams', '$location', 'Authentication','Actions', 'Members', 'Participations', 'Users',
-	function($scope, $stateParams, $location, Authentication, Actions, Members, Participations, Users) {
-=======
 angular.module('users').controller('UsersController', ['$scope', '$stateParams', '$location', 'Authentication','Actions', 'Members', 'Users',
 	function($scope, $stateParams, $location, Authentication, Actions, Members, Users) {
->>>>>>> Changed some Formatting
 		$scope.authentication = Authentication;
 		$scope.user = {};
-		$scope.isconnector = null;
+		var currentUser = $scope.authentication.user;
 		$scope.actions = Actions.query();
-		$scope.members = Members.query();
 		
 		$scope.isconnector = null
 		
@@ -100,13 +94,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			}
 		};
 		
-<<<<<<< HEAD
-		$scope.getNoMatchesCount = function() {
-			console.log(Authentication.user._id);
-			return Actions.where( {status: ['Red']} ).count();
-		};
-		
-=======
+
 		$scope.getRegisteredMembersMonth = function() {
 			
 		};
@@ -118,14 +106,15 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 		$scope.getRegisteredMembersYTD = function() {
 			
 		};
->>>>>>> Changed some Formatting
+
+		$scope.getNoMatchesCount = function() {
+			console.log(Authentication.user._id);
+			return Actions.where( {status: ['Red']} ).count();
+		};
+		
 		
 		$scope.getActions = function () {
 			return Actions.query();
 		};
-<<<<<<< HEAD
-
-=======
->>>>>>> Changed some Formatting
 	}
 ]);
