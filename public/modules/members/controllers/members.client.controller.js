@@ -155,6 +155,62 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 			$scope.member.otherNetworks = '';
 		};
 		
+		$scope.exportToExcel = function() {
+			var csvData = [[
+				"Name",
+				"Phone",
+				"Email",
+				"Identity",
+				"Affiliation",
+				"Address",
+				"City",
+				"State",
+				"Zip Code",
+				"Shirt Size",
+				"Shirt Received",
+				"Talent",
+				"Place of Worship",
+				"Recruitment",
+				"Community Networks",
+				"Extra Groups",
+				"Other Networks"
+			]];
+
+			for (var i = 0; i < $scope.members.length; i++) {
+				var member = $scope.members[i];
+				if ($scope.shirtFilter(member)) {
+					csvData.push([
+						member.displayName,
+						member.phone,
+						member.email,
+						member.identity,
+						member.affiliation,
+						member.address,
+						member.city,
+						member.state,
+						member.zipCode,
+						member.shirtSize,
+						member.shirtReceived ? "Yes" : "No",
+						member.talent,
+						member.placeOfWorship,
+						member.recruitment,
+						member.communityNetworks,
+						member.extraGroups,
+						member.otherNetworks
+					].join(','))
+				}
+			}
+			var el = document.createElement("a");
+			el.id = "downloadFile";
+			el.href = 'data:text/csv;charset=utf8,' + encodeURIComponent(csvData.join("\n"));
+			el.download = "members.csv";
+			
+			var before = document.getElementById("exportLink");
+			before.parentNode.insertBefore(el, before);
+			el.click();
+			el.remove();
+		}
+		
 	
 	}
 ]);
