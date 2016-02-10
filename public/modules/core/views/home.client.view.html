@@ -38,8 +38,29 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-12">
-					<h4 class="text-center">Actions Status</h4>
+				<div class="col-md-3">
+					<h3>No Matches</h3>
+					<div data-ng-repeat="action in actions | filter: {connector: authentication.user._id, status:['Red']}" class="list-group-item">
+						{{action.description}}
+					</div>
+				</div>
+				<div class="col-md-3">
+					<h3>Pending Matches</h3>
+					<div data-ng-repeat="action in actions | filter: {connector: authentication.user._id, status:['Yellow']}" class="list-group-item">
+						{{action.description}}
+					</div>
+				</div>
+				<div class="col-md-3">
+					<h3>Active Matches</h3>
+					<div data-ng-repeat="action in actions | filter: {connector: authentication.user._id, status:['Green']}" class="list-group-item">
+						{{action.description}}
+					</div>
+				</div>
+				<div class="col-md-3">
+					<h3>Completed Matches</h3>
+					<div data-ng-repeat="action in actions | filter: {connector: authentication.user._id, status:['Complete']}" class="list-group-item">
+						{{action.description}}
+					</div>
 				</div>
 			</div>
 			<div class="row">

@@ -5,6 +5,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 	function($scope, $stateParams, $location, Authentication, Actions, Members, Users) {
 		$scope.authentication = Authentication;
 		var currentUser = $scope.authentication.user;
+		$scope.actions = Actions.query();
 		
 
 		// Create new User
@@ -90,17 +91,11 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			}
 		};
 		
-		$scope.getRegisteredMembersMonth = function() {
-			
+		$scope.getNoMatchesCount = function() {
+			console.log(Authentication.user._id);
+			return Actions.where( {status: ['Red']} ).count();
 		};
 		
-		$scope.getRegisteredMembersSem = function() {
-			
-		};
-		
-		$scope.getRegisteredMembersYTD = function() {
-			
-		};
 		
 		$scope.getActions = function () {
 			return Actions.query();
