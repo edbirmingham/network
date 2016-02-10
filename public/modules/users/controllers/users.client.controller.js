@@ -11,6 +11,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 		$scope.isconnector = null;
 =======
 		var currentUser = $scope.authentication.user;
+		$scope.actions = Actions.query();
 		
 >>>>>>> Make Dashboard only visible to Connectors
 
@@ -97,17 +98,11 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			}
 		};
 		
-		$scope.getRegisteredMembersMonth = function() {
-			
+		$scope.getNoMatchesCount = function() {
+			console.log(Authentication.user._id);
+			return Actions.where( {status: ['Red']} ).count();
 		};
 		
-		$scope.getRegisteredMembersSem = function() {
-			
-		};
-		
-		$scope.getRegisteredMembersYTD = function() {
-			
-		};
 		
 		$scope.getActions = function () {
 			return Actions.query();
