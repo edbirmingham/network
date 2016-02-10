@@ -19,11 +19,12 @@
 				<div class="col-md-6">
 					<h4 class="text-center">Network Members Registered</h4>
 					<div class="col-md-3">
-						<h5 class="text-center"> 32 YTD since August</h5>
+						<h3 class="text-center">{{members.length}}</h5>
+						<h6>YTD since August</h6>
 					</div>
 					<div class="col-md-3">
-						<h5 class="text-center">83 last semester</h5>
-						<h5 class="text-center">17 last month</h5>
+						<h5 class="text-center">last semester</h5>
+						<h5 class="text-center">last month</h5>
 					</div>
 				</div>
 				<div class="col-md-6">
@@ -42,28 +43,104 @@
 					<h5 class="text-center">No Matches</h5>
 					<h6 class="text-center">{{(actions | filter: {connector: authentication.user._id, status: ['Red']}).length}}</h6>
 					<div data-ng-repeat="action in actions | filter: {connector: authentication.user._id, status: ['Red'] }" class="list-group-item">
-						{{action.description}}
+						<a  class="list-group-item-text"  data-ng-href="#!/actions/{{action._id}}">
+							<h4 class="list-group-item-heading" data-ng-bind="action.description" ></h4>
+						</a>
+						<span ng-class="{'Green':'bg-success', 'Yellow':'bg-warning', 'Red':'bg-danger'}[action.status]">
+						<small class="list-group-item-text">
+							Type: 
+							<span data-ng-bind="action.type" ng-class="{'Green':'bg-success', 'Yellow':'bg-warning', 'Red':'bg-danger', 'Complete':''}[action.status]"></span>
+							| Made:
+							<span data-ng-bind="action.created | date:'medium'"></span>
+							| By:
+							<span data-ng-bind="action.actor.displayName"></span>
+							| At:
+							<span ng-if="action.networkEvent">
+								<span data-ng-bind="action.networkEvent.name"></span>
+							</span>
+							| With:
+							<span data-ng-bind="action.matches.length"></span>
+							match(es).
+						</small>
+						</span>
 					</div>
 				</div>
 				<div class="col-md-3">
 					<h5 class="text-center">Pending Matches</h5>
 					<h6 class="text-center">{{(actions | filter: {connector: authentication.user._id, status: ['Yellow']}).length}}</h6>
 					<div data-ng-repeat="action in actions | filter: {connector: authentication.user._id, status: ['Yellow'] }" class="list-group-item">
-						{{action.description}}
+						<a  class="list-group-item-text"  data-ng-href="#!/actions/{{action._id}}">
+							<h4 class="list-group-item-heading" data-ng-bind="action.description" ></h4>
+						</a>
+						<span ng-class="{'Green':'bg-success', 'Yellow':'bg-warning', 'Red':'bg-danger'}[action.status]">
+						<small class="list-group-item-text">
+							Type: 
+							<span data-ng-bind="action.type" ng-class="{'Green':'bg-success', 'Yellow':'bg-warning', 'Red':'bg-danger', 'Complete':''}[action.status]"></span>
+							| Made:
+							<span data-ng-bind="action.created | date:'medium'"></span>
+							| By:
+							<span data-ng-bind="action.actor.displayName"></span>
+							| At:
+							<span ng-if="action.networkEvent">
+								<span data-ng-bind="action.networkEvent.name"></span>
+							</span>
+							| With:
+							<span data-ng-bind="action.matches.length"></span>
+							match(es).
+						</small>
+						</span>
 					</div>
 				</div>
 				<div class="col-md-3">
 					<h5 class="text-center">Active Matches</h5>
 					<h6 class="text-center">{{(actions | filter: {connector: authentication.user._id, status: ['Green']}).length}}</h6>
 					<div data-ng-repeat="action in actions | filter: {connector: authentication.user._id, status: ['Green'] }" class="list-group-item">
-						{{action.description}}
+						<a  class="list-group-item-text"  data-ng-href="#!/actions/{{action._id}}">
+							<h4 class="list-group-item-heading" data-ng-bind="action.description" ></h4>
+						</a>
+						<span ng-class="{'Green':'bg-success', 'Yellow':'bg-warning', 'Red':'bg-danger'}[action.status]">
+						<small class="list-group-item-text">
+							Type: 
+							<span data-ng-bind="action.type" ng-class="{'Green':'bg-success', 'Yellow':'bg-warning', 'Red':'bg-danger', 'Complete':''}[action.status]"></span>
+							| Made:
+							<span data-ng-bind="action.created | date:'medium'"></span>
+							| By:
+							<span data-ng-bind="action.actor.displayName"></span>
+							| At:
+							<span ng-if="action.networkEvent">
+								<span data-ng-bind="action.networkEvent.name"></span>
+							</span>
+							| With:
+							<span data-ng-bind="action.matches.length"></span>
+							match(es).
+						</small>
+						</span>
 					</div>
 				</div>
 				<div class="col-md-3">
 					<h5 class="text-center">Completed Matches</h5>
 					<h6 class="text-center">{{(actions | filter: {connector: authentication.user._id, status: ['Complete']}).length}}</h6>
 					<div data-ng-repeat="action in actions | filter: {connector: authentication.user._id, status: ['Complete'] }" class="list-group-item">
-						{{action.description}}
+						<a  class="list-group-item-text"  data-ng-href="#!/actions/{{action._id}}">
+							<h4 class="list-group-item-heading" data-ng-bind="action.description" ></h4>
+						</a>
+						<span ng-class="{'Green':'bg-success', 'Yellow':'bg-warning', 'Red':'bg-danger'}[action.status]">
+						<small class="list-group-item-text">
+							Type: 
+							<span data-ng-bind="action.type" ng-class="{'Green':'bg-success', 'Yellow':'bg-warning', 'Red':'bg-danger', 'Complete':''}[action.status]"></span>
+							| Made:
+							<span data-ng-bind="action.created | date:'medium'"></span>
+							| By:
+							<span data-ng-bind="action.actor.displayName"></span>
+							| At:
+							<span ng-if="action.networkEvent">
+								<span data-ng-bind="action.networkEvent.name"></span>
+							</span>
+							| With:
+							<span data-ng-bind="action.matches.length"></span>
+							match(es).
+						</small>
+						</span>
 					</div>
 				</div>
 			</div>

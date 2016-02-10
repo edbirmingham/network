@@ -1,15 +1,14 @@
 'use strict';
 
 // Users controller
-angular.module('users').controller('UsersController', ['$scope', '$stateParams', '$location', 'Authentication','Actions', 'Members', 'Users',
-	function($scope, $stateParams, $location, Authentication, Actions, Members, Users) {
+angular.module('users').controller('UsersController', ['$scope', '$stateParams', '$location', 'Authentication','Actions', 'Members', 'Participations', 'Users',
+	function($scope, $stateParams, $location, Authentication, Actions, Members, Participations, Users) {
 		$scope.authentication = Authentication;
 		$scope.user = {};
 		var currentUser = $scope.authentication.user;
 		$scope.actions = Actions.query();
-		
-		$scope.isconnector = null
-		
+		$scope.members = Members.query();
+
 		// Create new User
 		$scope.create = function() {
 			// Create new User object
