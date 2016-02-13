@@ -5,6 +5,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 	function($scope, $stateParams, $location, Authentication, Members, Participants) {
 		$scope.authentication = Authentication;
 		$scope.errorStatus = {};
+		$scope.dateToFilterBy = null;
 		
 		$scope.setErrors = function(errors) {
 			$scope.errorStatus = {};
@@ -111,6 +112,15 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 			} else {
 				return member;
 			}
+		};
+		
+		$scope.filterByDate = function(member) {
+			if($scope.dateToFilterBy) {
+				return member.created >= $scope.dateToFilterBy;
+			} else {
+				return member;
+			}
+			
 		};
 		
 		$scope.giveShirt = function(member) {
