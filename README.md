@@ -20,6 +20,7 @@ Network is 100% free and open-source. We encourage and support an active, health
 * Wondering how to setup a development environment?  See the [Super Easy](#super-easy-setup), [Not Too Difficult](#not-too-difficult-setup) and [Really Difficult](#really-difficult-setup) setup instructions below.
 * Want to learn about the technology being used?  See the [Built with MEAN.JS](#built-with-meanjs) section below.
 * Please use the [Official Yo Generator](http://meanjs.org/generator.html) when adding functionality.
+* Code style for CSS and Javascript is enforced by the automated lint tools CSSlint and JShint respectively.  Execute `grunt lint` to ensure code conforms to project coding style.
 
 ## Super Easy Setup
 This setup uses Cloud9 for your development environment.  Cloud9 provides an online development environment and server for you to use.  All you need is a browser and good internet connection.  Everything else is available on Cloud9's site.
