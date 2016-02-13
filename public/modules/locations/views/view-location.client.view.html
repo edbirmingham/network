@@ -1,5 +1,9 @@
 <section data-ng-controller="LocationsController" data-ng-init="findOne()">
 	<div class="page-header">
+			<ol class="breadcrumb">
+  			<li><a href="/#!/locations">Locations</a></li>
+  			<li class="active">{{location.name}}</li>
+		</ol>
 		<h1 data-ng-bind="location.name"></h1>
 	</div>
 	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == location.user._id))">

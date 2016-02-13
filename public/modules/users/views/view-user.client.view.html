@@ -1,5 +1,9 @@
 <section data-ng-controller="UsersController" data-ng-init="findOne()">
 	<div class="page-header">
+		<ol class="breadcrumb">
+  			<li><a href="/#!/users">Users</a></li>
+  			<li class="active">{{user.displayName}}</li>
+		</ol>
 		<h1 data-ng-bind="user.displayName"></h1>
 	</div>
 	<div class="clearfix">

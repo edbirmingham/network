@@ -1,5 +1,9 @@
 <section data-ng-controller="ActionsController" data-ng-init="findOne()">
 	<div class="page-header">
+			<ol class="breadcrumb">
+  			<li><a href="/#!/actions">Actions</a></li>
+  			<li class="active">{{action.type}} by {{action.actor.displayName}}</li>
+		</ol>
 		<h1 data-ng-bind="action.description"></h1>
 	</div>
 	<div class="clearfix">

@@ -1,5 +1,10 @@
 <section data-ng-controller="NetworkEventsController" data-ng-init="initEdit()">
     <div class="page-header">
+        <ol class="breadcrumb">
+  			<li><a href="/#!/network-events">Events</a></li>
+ 			<li><a href="/#!/network-events/{{networkEvent._id}}">{{networkEvent.name}}</a></li>
+  			<li class="active">Edit</li>
+		</ol>
         <h1>Edit Network event</h1>
     </div>
     <div class="col-md-12">
