@@ -9,7 +9,7 @@
 			</a>
 			<small class="list-group-item-text">
 			    Phone:
-				<span data-ng-bind="participant.phone"></span>
+				<span><a href="tel:{{participant.phone}}">{{participant.phone}}</a></span>
 				| Email: 
 				<a ng-href="mailto:participant.email"><span data-ng-bind="participant.email"></span></a>
 				| Participant is a: 

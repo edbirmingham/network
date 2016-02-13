@@ -5,7 +5,7 @@
 	<div class="clearfix">
 		<dl class="dl-horizontal">
 		  <dt>Phone</dt>
-		  <dd data-ng-bind="participant.phone"></dd>
+		  <dd ><a href="tel:{{participant.phone}}">{{participant.phone}}</a></dd>
 		  <dt>Email</dt>
 		  <a ng-href="mailto:participant.email"><dd data-ng-bind="participant.email"></dd></a>
 		  <dt>Identity</dt>
