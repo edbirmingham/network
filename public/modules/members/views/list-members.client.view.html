@@ -14,7 +14,7 @@
 			    Phone:
 			    <span data-ng-bind="member.phone"></span>
 			    | Email:
-				<span data-ng-bind="member.email"></span>
+				<a ng-href="mailto:{{member.email}}"><span data-ng-bind="member.email"></span></a>
 				| Member is a: 
 				<span data-ng-bind="member.identity"></span>
 				| Member since: 

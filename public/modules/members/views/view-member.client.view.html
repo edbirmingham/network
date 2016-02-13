@@ -7,7 +7,7 @@
 		  <dt>Phone</dt>
 		  <dd data-ng-bind="member.phone"></dd>
 		  <dt>Email</dt>
-		  <dd data-ng-bind="member.email"></dd>
+		  <dd><a ng-href="mailto:{{member.email}}" data-ng-bind="member.email"></a></dd>
 		  <dt>Identity</dt>
 		  <dd data-ng-bind="member.identity"></dd>
 		  <dt>Affiliation</dt>

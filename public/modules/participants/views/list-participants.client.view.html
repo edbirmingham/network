@@ -11,7 +11,7 @@
 			    Phone:
 				<span data-ng-bind="participant.phone"></span>
 				| Email: 
-				<span data-ng-bind="participant.email"></span>
+				<a ng-href="mailto:participant.email"><span data-ng-bind="participant.email"></span></a>
 				| Participant is a: 
 				<span data-ng-bind="participant.identity"></span>
 			</small>

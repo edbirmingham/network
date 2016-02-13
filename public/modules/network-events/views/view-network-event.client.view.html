@@ -47,7 +47,7 @@
 				<tr data-ng-repeat="participation in participations | orderBy: 'participant.displayName'">
 					<td data-ng-bind="participation.participant.displayName"></td>
 					<td data-ng-bind="participation.participant.phone"></td>
-					<td data-ng-bind="participation.participant.email"></td>
+					<td><a ng-href="mailto:participation.participant.email" data-ng-bind="participation.participant.email"></td>
 					<td data-ng-bind="participation.participant.identity"></td>
 					<td data-ng-bind="participation.participant.affiliation"></td>
 				</tr>
