@@ -12,7 +12,7 @@
 			    <span data-ng-bind="user.username"></span>
 			    |
 			    Email:
-			    <span data-ng-bind="user.email"></span>
+			    <a ng-href="mailto:{{user.email}}" ><span data-ng-bind="user.email"></span></a>
 			    |
 				Created:
 				<span data-ng-bind="user.created | date:'shortDate'"></span>
