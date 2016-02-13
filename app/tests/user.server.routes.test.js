@@ -89,10 +89,10 @@ describe('User CRUD tests', function() {
 					});
 			});
 	});
-	
+
 	it('should not be able to save User instance if not logged in', function(done) {
 		agent.post('/users')
-			.send(credentials)
+			.send(user)
 			.expect(401)
 			.end(function(userSaveErr, userSaveRes) {
 				// Call the assertion callback
