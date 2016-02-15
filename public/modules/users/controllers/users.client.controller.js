@@ -74,9 +74,10 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			if ($scope.isadmin === true) {
 				$scope.user.roles.push('admin');
 			} else {
-				while($scope.user.roles.indexOf('admin') > -1) {
-					var idx = $scope.user.roles.indexOf('admin');
-					$scope.user.roles.splice(idx, 1);
+				while (true) {
+				  var idx = $scope.user.roles.indexOf('admin');
+				  if (idx === -1) break;
+				  $scope.user.roles.splice(idx, 1);
 				}
 			}
 		};
