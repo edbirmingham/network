@@ -10,7 +10,7 @@ var should = require('should'),
 /**
  * Globals
  */
-var credentials, logged_in_user, user;
+var credentials, logged_in_user, user, not_admin_user, nacreds;
 
 /**
  * User routes tests
@@ -22,6 +22,7 @@ describe('User CRUD tests', function() {
 			username: 'username',
 			password: 'password'
 		};
+		
 
 		// Create a new user
 		logged_in_user = new User({
@@ -35,6 +36,30 @@ describe('User CRUD tests', function() {
 			roles: ['user', 'admin']
 		});
 
+		nacreds = {
+			username: 'notadmin',
+			password: 'password'
+		};
+		
+		// Create a new user
+		not_admin_user = new User({
+			firstName: 'Notadmin',
+			lastName: 'Name',
+			displayName: 'Notadmin Name',
+			email: 'notadmin@test.com',
+			username: nacreds.username,
+			password: nacreds.password,
+			provider: 'local',
+			roles: ['user']
+		});
+
+		// Save a user to the test db and create new User
+		not_admin_user.save(function(err) {
+			if (err) {
+				done(err);
+			}
+		});
+
 		// Save a user to the test db and create new User
 		logged_in_user.save(function() {
 			user = {
@@ -44,14 +69,15 @@ describe('User CRUD tests', function() {
 				email: 'testname@test.com',
 				username: 'testusername',
 				password: 'testpassword',
-				provider: 'local'
+				provider: 'local',
+				roles: ['user']
 			};
 
 			done();
 		});
 	});
 
-	it('should be able to save User instance if logged in', function(done) {
+	it('should be able to save User instance if logged in as admin', function(done) {
 		agent.post('/auth/signin')
 			.send(credentials)
 			.expect(200)
@@ -89,6 +115,31 @@ describe('User CRUD tests', function() {
 					});
 			});
 	});
+
+	// NEW TEST 02/12/2016
+	it('nyan nyan nyan', function(done) {
+
+
+		agent.post('/auth/signin')
+			.send(nacreds)
+			.expect(200)
+			.end(function(signinErr, signinRes) {
+				// Handle signin error
+				if(signinErr) done(signinErr);
+				
+				var userId = not_admin_user.id;
+				
+				// Save a new User
+				agent.post('/users')
+					.send(user)
+					.expect(403)
+					.end(function(userSaveErr, userSaveRes) {
+						// Handle User save error
+						done(userSaveErr);
+					});				
+			});
+	});
+
 
 	it('should not be able to save User instance if not logged in', function(done) {
 		agent.post('/users')
