@@ -116,18 +116,14 @@ describe('User CRUD tests', function() {
 			});
 	});
 
-	// NEW TEST 02/12/2016
-	it('nyan nyan nyan', function(done) {
-
-
+	// NEW TEST AS OF 02/12/2016
+	it('should not be able to create user as nonadmin', function(done) {
 		agent.post('/auth/signin')
 			.send(nacreds)
 			.expect(200)
 			.end(function(signinErr, signinRes) {
 				// Handle signin error
 				if(signinErr) done(signinErr);
-				
-				var userId = not_admin_user.id;
 				
 				// Save a new User
 				agent.post('/users')
@@ -139,6 +135,51 @@ describe('User CRUD tests', function() {
 					});				
 			});
 	});
+
+	it('should not be able to update user as nonadmin', function(done) {
+		agent.post('/auth/signin')
+			.send(credentials)
+			.expect(200)
+			.end(function(signinErr, signinRes) {
+				// Handle signin error
+				if(signinErr) done(signinErr);
+				
+				// Save a new User
+				agent.post('/users')
+					.send(user)
+					.expect(200)
+					.end(function(userSaveErr, userSaveRes) {
+						// Handle User save error
+						if (userSaveErr) done(userSaveErr);
+						
+						var userId = userSaveRes.body._id;
+						user.firstName = 'EZRA';
+						user.lastName = 'BRIDGER';
+						
+						agent.get('/auth/signout')
+							.send()
+							.expect(302)
+							.end(function(logOutErr, logOutRes) {
+								if (logOutErr) done(logOutErr);
+								
+								agent.post('/auth/signin')
+									.send(nacreds)
+									.expect(200)
+									.end(function(signinErr, signinRes) {
+										if (signinErr) done(signinErr);
+										
+										agent.put('/users/' + userId)
+											.send(user)
+											.expect(403)
+											.end(function(userUpdateErr, userUpdateRes) {
+											    done(userUpdateErr);
+											})
+									});
+							});
+					});				
+			});
+	});
+
 
 
 	it('should not be able to save User instance if not logged in', function(done) {
@@ -233,7 +274,6 @@ describe('User CRUD tests', function() {
 					// Call the assertion callback
 					done(userSaveErr);
 				});
-
 		});
 	});
 
@@ -316,6 +356,7 @@ describe('User CRUD tests', function() {
 	afterEach(function(done) {
 		User.remove().exec();
 		User.remove().exec();
+		User.remove().exec(); // May be excessive, but this test creates three users.
 		done();
 	});
 });
