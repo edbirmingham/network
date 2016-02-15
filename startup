@@ -2,6 +2,7 @@
 MONPATH="/home/ubuntu/workspace/mongo"
 LOGFILE="$MONPATH/mongod.log"
 ISNEW="0"
+DOMAIN="http://localhost:8080/status"
 
 echo "Checking for mongo installation."
 if [ ! -d $MONPATH ];
@@ -26,12 +27,12 @@ if [ "$ISNEW" = "1" ]; then
 fi
 
 echo "Checking for existing instance of Network."
-GRUNTRUN="$(pidof grunt | wc -l)"
-if [ "$GRUNTRUN" = 0 ]; then
+GRUNTRUN="$(curl $DOMAIN 2> /dev/null)"
+if [ "$GRUNTRUN" = "OK" ]; then
+    echo "The Network is already running."
+else
     echo "Starting Network."
     grunt
-else
-    echo "The Network is already running."
 fi
 
 exit 0
