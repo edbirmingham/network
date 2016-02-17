@@ -2,11 +2,24 @@
     <div class="page-header">
         <h1>Members</h1>
     </div>
+    <div class="form-group">
+    <div class="row">
+        <div class="col-md-6">
+            <label class="control-label" for="dateFilter">Filtered Date (MM/DD/YYYY)</label>
+            <div class="input-group">
+                <input type="text" class="form-control" data-ng-model="dateToFilterBy" datepicker-popup="MM/dd/yyyy" close-text="Close" is-open="status.dateOpen" close-text="Close" ng-click="open($event)" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+    </div>
+	</div>
     <div class="filter-checkboxes">
   		<label><input type="checkbox" value="false" data-ng-model="showOnlyShirtlessMembers">Members Yet to Receive T-Shirt</label>
 	</div>
     <div class="list-group">
-        <div data-ng-repeat="member in members | filter:shirtFilter" class="list-group-item">
+        <div data-ng-repeat="member in members | filter: shirtFilter | filter: filterByDate" class="list-group-item">
 			<a data-ng-href="#!/members/{{member._id}}" class="list-group-item-text">
 				<h4 class="list-group-item-heading" data-ng-bind="member.displayName"></h4>
 			</a>

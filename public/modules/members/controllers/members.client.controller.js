@@ -8,6 +8,16 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 
 		if (!$scope.authentication.user) $location.path('/signin');
 
+		$scope.dateToFilterBy = null;
+		$scope.status = { dateOpen: false };
+
+		$scope.open = function($event) {
+		    $event.preventDefault();
+		    $event.stopPropagation();
+
+		    $scope.status.dateOpen = !$scope.status.dateOpen;
+		  };
+
 		$scope.setErrors = function(errors) {
 			$scope.errorStatus = {};
 			if (errors.fields) {
@@ -20,7 +30,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 
 		// Create new Member
 		$scope.create = function() {
-			
+
 			var clearFields = function(Participant) {
 				$scope.errorMessages = null;
 				$scope.errorStatus = {};
@@ -46,7 +56,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 
 			// Create new Member
 			var member = $scope.member;
-			
+
 			if(member && member._id) {
 				member.$update(function(response) {
 					$location.path('members/' + response._id);
@@ -56,8 +66,8 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 				    $scope.errors = $scope.setErrors(errorResponse.data);
 
 				});
-				
-			} else {                 
+
+			} else {
 				// Redirect after save
 				member.$save(function(response) {
 					$location.path('members/' + response._id);
@@ -66,13 +76,13 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 					$scope.error = errorResponse.data.message;
 				    $scope.errors = $scope.setErrors(errorResponse.data);
 				});
-				
-			} 
+
+			}
 		};
 
 		// Remove existing Member
 		$scope.remove = function(member) {
-			if ( member ) { 
+			if ( member ) {
 				member.$remove();
 
 				for (var i in $scope.members) {
@@ -98,15 +108,15 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 			    $scope.errors = $scope.setErrors(errorResponse.data);
 			});
 		};
-		
+
 
 		// Find a list of Members
 		$scope.find = function() {
 			$scope.members = Members.query();
 		};
-		
+
 		$scope.showOnlyShirtlessMembers = false;
-		
+
 		$scope.shirtFilter = function(member) {
 			if($scope.showOnlyShirtlessMembers === true) {
 				return member.shirtReceived === false;
@@ -114,20 +124,30 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 				return member;
 			}
 		};
-		
+
+		$scope.filterByDate = function(member) {
+			if($scope.dateToFilterBy) {
+				var newDate = new Date(member.created);
+				return newDate >= $scope.dateToFilterBy;
+			} else {
+				return member;
+			}
+
+		};
+
 		$scope.giveShirt = function(member) {
 			//var member = $scope.member;
 			if(member.shirtReceived === false) {
 				member.shirtReceived = true;
-				
+
 				member.$update(function() {
-					
+
 				}, function(errorResponse) {
 					$scope.error = errorResponse.data.message;
 				});
 			}
 		};
-		
+
 		// Find existing participants
 		$scope.findParticipants = function(name) {
 			return Participants.query({name: name}).$promise;
@@ -135,11 +155,11 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 
 		// Find existing Member
 		$scope.findOne = function() {
-			$scope.member = Members.get({ 
+			$scope.member = Members.get({
 				memberId: $stateParams.memberId
 			});
 		};
-		
+
 		// Initialize a new Member
 		$scope.newMember = function() {
 			$scope.member = new Members({
@@ -148,7 +168,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 				otherNetworks: ''
 			});
 		};
-		
+
 		// A member is selected from the typehead search
 		$scope.selectMember = function(participant) {
 			$scope.member = new Members(participant);
@@ -156,7 +176,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 			$scope.member.extraGroups = '';
 			$scope.member.otherNetworks = '';
 		};
-		
-	
+
+
 	}
 ]);
