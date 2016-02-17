@@ -157,23 +157,23 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 		
 		$scope.exportToExcel = function() {
 			var csvData = [[
-				"Name",
-				"Phone",
-				"Email",
-				"Identity",
-				"Affiliation",
-				"Address",
-				"City",
-				"State",
-				"Zip Code",
-				"Shirt Size",
-				"Shirt Received",
-				"Talent",
-				"Place of Worship",
-				"Recruitment",
-				"Community Networks",
-				"Extra Groups",
-				"Other Networks"
+				'Name',
+				'Phone',
+				'Email',
+				'Identity',
+				'Affiliation',
+				'Address',
+				'City',
+				'State',
+				'Zip Code',
+				'Shirt Size',
+				'Shirt Received',
+				'Talent',
+				'Place of Worship',
+				'Recruitment',
+				'Community Networks',
+				'Extra Groups',
+				'Other Networks'
 			]];
 
 			for (var i = 0; i < $scope.members.length; i++) {
@@ -190,7 +190,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 						member.state,
 						member.zipCode,
 						member.shirtSize,
-						member.shirtReceived ? "Yes" : "No",
+						member.shirtReceived ? 'Yes' : 'No',
 						member.talent,
 						member.placeOfWorship,
 						member.recruitment,
@@ -200,17 +200,15 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 					].join(','))
 				}
 			}
-			var el = document.createElement("a");
-			el.id = "downloadFile";
-			el.href = 'data:text/csv;charset=utf8,' + encodeURIComponent(csvData.join("\n"));
-			el.download = "members.csv";
+			var el = document.createElement('a');
+			el.id = 'downloadFile';
+			el.href = 'data:text/csv;charset=utf8,' + encodeURIComponent(csvData.join('\n'));
+			el.download = 'members.csv';
 			
-			var before = document.getElementById("exportLink");
+			var before = document.getElementById('exportLink');
 			before.parentNode.insertBefore(el, before);
 			el.click();
 			el.remove();
-		}
-		
-	
+		};
 	}
 ]);
