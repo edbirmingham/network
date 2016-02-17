@@ -6,29 +6,17 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 		$scope.authentication = Authentication;
 		$scope.user = {};
 		$scope.roles = [];
-		
+
 		// Create new User
 		$scope.create = function() {
 			// Create new User object
 			var user = new Users ($scope.user);
 			
-<<<<<<< HEAD
-<<<<<<< HEAD
-			
 			
 			angular.forEach($scope.user.roles, function(role){
 				this.push(role);
 			}, $scope.roles);
-=======
-			$scope.roles = [];
->>>>>>> Add list and button to add roles for user creation
-=======
-			var userRoles = [];
 			
-			angular.forEach($scope.roles, function(role){
-				this.push(role);
-			}, userRoles);
->>>>>>> Work on Adding connector in New Connector Form
 			
 			// Redirect after save
 			user.$save(function(response) {
@@ -90,13 +78,8 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			// Add the selected role to the roles list.
 		$scope.addRole = function(roles, role) {
 			roles.push(role);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 			$scope.selectedMatch = null;
->>>>>>> Add list and button to add roles for user creation
-=======
->>>>>>> Work on Adding connector in New Connector Form
+
 		};
 		
 		// Remove role from the role list.
