@@ -197,7 +197,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 						member.communityNetworks,
 						member.extraGroups,
 						member.otherNetworks
-					].join(','))
+					].join(','));
 				}
 			}
 			var el = document.createElement('a');
