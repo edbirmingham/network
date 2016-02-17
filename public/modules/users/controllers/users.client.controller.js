@@ -10,8 +10,6 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			// Create new User object
 			var user = new Users ($scope.user);
 			
-			
-			
 			angular.forEach($scope.user.roles, function(role){
 				this.push(role);
 			}, $scope.roles);
