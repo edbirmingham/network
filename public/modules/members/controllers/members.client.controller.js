@@ -6,7 +6,15 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 		$scope.authentication = Authentication;
 		$scope.errorStatus = {};
 		$scope.dateToFilterBy = null;
+		$scope.status = { dateOpen: false };
+
+		$scope.open = function($event) {
+		    $event.preventDefault();
+		    $event.stopPropagation();
 		
+		    $scope.status.dateOpen = !$scope.status.dateOpen;
+		  };
+		  
 		$scope.setErrors = function(errors) {
 			$scope.errorStatus = {};
 			if (errors.fields) {
@@ -116,10 +124,11 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 		
 		$scope.filterByDate = function(member) {
 			if($scope.dateToFilterBy) {
-				return member.created >= $scope.dateToFilterBy;
-			} else {
-				return member;
-			}
+				var newDate = new Date(member.created);
+				return newDate >= $scope.dateToFilterBy;
+			} //else {
+			//	return member;
+			//}
 			
 		};
 		
