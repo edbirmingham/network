@@ -29,7 +29,7 @@ exports.create = function(req, res) {
 };
 
 /**
- * Delete an Participant
+ * Delete an Participation
  */
 exports.delete = function(req, res) {
 	var participation = req.participation ;
