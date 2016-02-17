@@ -6,6 +6,8 @@ angular.module('participants').controller('ParticipantsController', ['$scope', '
 		$scope.authentication = Authentication;
 		$scope.errorStatus = {};
 
+		if (!$scope.authentication.user) $location.path('/signin');
+
 		$scope.setErrors = function(errors) {
 			$scope.errorStatus = {};
 			if (errors.fields) {

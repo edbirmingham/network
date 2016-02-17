@@ -5,6 +5,8 @@ angular.module('locations').controller('LocationsController', ['$scope', '$state
 	function($scope, $stateParams, $location, Authentication, Locations) {
 		$scope.authentication = Authentication;
 
+		if (!$scope.authentication.user) $location.path('/signin');
+
 		// Create new Location
 		$scope.create = function() {
 			// Create new Location object

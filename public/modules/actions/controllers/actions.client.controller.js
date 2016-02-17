@@ -5,6 +5,8 @@ angular.module('actions').controller('ActionsController', ['$scope', '$statePara
 	function($scope, $stateParams, $location, Authentication, Actions, Participants, NetworkEvents, Locations, Users) {
 		$scope.authentication = Authentication;
 
+		if (!$scope.authentication.user) $location.path('/signin');
+
         // Retrieve the list of possible events for the action.
         $scope.networkEvents = NetworkEvents.query();
         

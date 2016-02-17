@@ -6,6 +6,8 @@ angular.module('network-events').controller('NetworkEventsController', ['$scope'
 		$scope.authentication = Authentication;
 		$scope.status = { dateOpen: false };
 
+		if (!$scope.authentication.user) $location.path('/signin');
+
 		$scope.open = function($event) {
 		    $event.preventDefault();
 		    $event.stopPropagation();

@@ -5,7 +5,9 @@ angular.module('participations').controller('ParticipationsController', ['$scope
 	function($scope, $stateParams, $location, Authentication, Participations, NetworkEvents, Participants) {
 		$scope.authentication = Authentication;
 		$scope.isSelectionEditable = false;
-		
+
+		if (!$scope.authentication.user) $location.path('/signin');
+
 		// Create new Participation
 		$scope.create = function() {
 			var saveParticipation = function(attendee) {
