@@ -4,6 +4,7 @@
 angular.module('users').controller('UsersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Users',
 	function($scope, $stateParams, $location, Authentication, Users) {
 		$scope.authentication = Authentication;
+		$scope.user = {};
 
 		// Create new User
 		$scope.create = function() {
