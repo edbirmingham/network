@@ -126,9 +126,9 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 			if($scope.dateToFilterBy) {
 				var newDate = new Date(member.created);
 				return newDate >= $scope.dateToFilterBy;
-			} //else {
-			//	return member;
-			//}
+			} else {
+				return member;
+			}
 			
 		};
 		
