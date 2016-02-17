@@ -29,17 +29,9 @@
 					    <span class="caret"></span>
 					  </button>
 					  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-					    <li><a href="#">Connector</a></li>
-					    <li><a href="#">Admin</a></li>
+					    <li><a data-ng-click="addRole(roles, 'connector');">Connector</a></li>
+					    <li><a data-ng-click="addRole(roles, 'admin');" >Admin</a></li>
 					  </ul>
-					</div>
-                   <div class="btn-group" role="group" aria-label="...">
-					  <button type="button" class="btn btn-default" data-ng-click="addRole(roles, 'connector');">
-					  	<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Connector
-					  </button>
-					  <button type="button" class="btn btn-default" data-ng-click="addRole(roles, 'admin');">
-					  	<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Admin
-					  </button>
 					</div>
                 </div>
 				<div class="list-group">
