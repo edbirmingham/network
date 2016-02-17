@@ -45,6 +45,7 @@
 					<th>Email</th>
 					<th>Who?</th>
 					<th>Affiliation</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -54,6 +55,7 @@
 					<td><a ng-href="mailto:participation.participant.email" data-ng-bind="participation.participant.email"></td>
 					<td data-ng-bind="participation.participant.identity"></td>
 					<td data-ng-bind="participation.participant.affiliation"></td>
+					<td><a ng-click="removeParticipation(participation)">Remove</a></td>
 				</tr>
 			</tbody>
 		</table>

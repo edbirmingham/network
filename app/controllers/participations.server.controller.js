@@ -29,6 +29,22 @@ exports.create = function(req, res) {
 };
 
 /**
+ * Delete an Participant
+ */
+exports.delete = function(req, res) {
+	var participation = req.participation ;
+
+	participation.remove(function(err) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(participation);
+		}
+	});
+};
+/**
  * List of Participations
  */
 exports.list = function(req, res) { 
@@ -69,6 +85,18 @@ exports.parentNetworkEventByID = function(req, res, next, id) {
 		if (err) return next(err);
 		if (! networkEvent) return next(new Error('Failed to load Event participated in ' + id));
 		req.networkEvent = networkEvent ;
+		next();
+	});
+};
+
+/**
+ * Participation middleware
+ */
+exports.participationById = function(req, res, next, id) { 
+	Participation.findById(id).exec(function(err, participation) {
+		if (err) return next(err);
+		if (! participation) return next(new Error('Failed to load Participation ' + id));
+		req.participation = participation ;
 		next();
 	});
 };

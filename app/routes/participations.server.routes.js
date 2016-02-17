@@ -13,7 +13,11 @@ module.exports = function(app) {
 	app.route('/network-events/:parentNetworkEventId/participations')
 		.get(users.requiresLogin, participations.list)
 		.post(users.requiresLogin, participations.create);
+		
+	app.route('/network-events/participations/:participationId')
+		.delete(users.requiresLogin, participations.delete);
 
 	// Finish by binding the Participation middleware
 	app.param('parentNetworkEventId', participations.parentNetworkEventByID);
+	app.param('participationId', participations.participationById);
 };
