@@ -15,8 +15,13 @@
         </div>
     </div>
 	</div>
-    <div class="filter-checkboxes">
-  		<label><input type="checkbox" value="false" data-ng-model="showOnlyShirtlessMembers">Members Yet to Receive T-Shirt</label>
+    <div class="filter-checkboxes row">
+    	<div class="col-md-3">
+  			<label><input type="checkbox" value="false" data-ng-model="showOnlyShirtlessMembers">Members Yet to Receive T-Shirt</label>
+  		</div>
+  		<div class="col-md-2 col-md-offset-7">
+  			<a class="btn btn-primary" id="exportLink" data-ng-click="exportToExcel()">Export Members to Excel</a>
+  		</div>
 	</div>
     <div class="list-group">
         <div data-ng-repeat="member in members | filter: shirtFilter | filter: filterByDate" class="list-group-item">
