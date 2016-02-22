@@ -53,7 +53,11 @@ var ActionSchema = new Schema({
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
-	}
+  },
+  notes: {
+    type: String,
+    trim: true
+  }
 });
 
 mongoose.model('Action', ActionSchema);
