@@ -34,4 +34,5 @@ var ParticipationSchema = new Schema({
 	}
 });
 
+ParticipationSchema.index({ participant: 1, networkEvent: 1 }, { unique: true, dropDups: true });
 mongoose.model('Participation', ParticipationSchema);

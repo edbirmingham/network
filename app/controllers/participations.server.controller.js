@@ -19,9 +19,16 @@ exports.create = function(req, res) {
 
 	participation.save(function(err) {
 		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
+      var errorMessage = errorHandler.getErrorMessage(err);
+
+      if (errorMessage === 'Participant_1_networkEvent already exists') {
+        res.jsonp(participation);
+      } else {
+        return res.status(400).send({
+          message: errorMessage
+        });
+      }
+
 		} else {
 			res.jsonp(participation);
 		}
