@@ -56,6 +56,17 @@ angular.module('network-events').controller('NetworkEventsController', ['$scope'
 			}
 		};
 
+		$scope.removeParticipation = function(participation) {
+			if (participation) {
+				var $participation = new Participations(participation);
+				$participation.$remove(function() {
+					$scope.participations = Participations.query({
+						networkEventId: $stateParams.networkEventId
+					});
+				});
+			}
+		};
+
 		// Update existing Network event
 		$scope.update = function() {
 			var networkEvent = $scope.networkEvent;
