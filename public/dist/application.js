@@ -116,6 +116,8 @@ angular.module('actions').controller('ActionsController', ['$scope', '$statePara
 	function($scope, $stateParams, $location, Authentication, Actions, Participants, NetworkEvents, Locations, Users) {
 		$scope.authentication = Authentication;
 
+		if (!$scope.authentication.user) $location.path('/signin');
+
         // Retrieve the list of possible events for the action.
         $scope.networkEvents = NetworkEvents.query();
         
@@ -525,6 +527,8 @@ angular.module('locations').controller('LocationsController', ['$scope', '$state
 	function($scope, $stateParams, $location, Authentication, Locations) {
 		$scope.authentication = Authentication;
 
+		if (!$scope.authentication.user) $location.path('/signin');
+
 		// Create new Location
 		$scope.create = function() {
 			// Create new Location object
@@ -640,7 +644,19 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 	function($scope, $stateParams, $location, Authentication, Members, Participants) {
 		$scope.authentication = Authentication;
 		$scope.errorStatus = {};
-		
+
+		if (!$scope.authentication.user) $location.path('/signin');
+
+		$scope.dateToFilterBy = null;
+		$scope.status = { dateOpen: false };
+
+		$scope.open = function($event) {
+		    $event.preventDefault();
+		    $event.stopPropagation();
+
+		    $scope.status.dateOpen = !$scope.status.dateOpen;
+		  };
+
 		$scope.setErrors = function(errors) {
 			$scope.errorStatus = {};
 			if (errors.fields) {
@@ -653,7 +669,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 
 		// Create new Member
 		$scope.create = function() {
-			
+
 			var clearFields = function(Participant) {
 				$scope.errorMessages = null;
 				$scope.errorStatus = {};
@@ -679,7 +695,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 
 			// Create new Member
 			var member = $scope.member;
-			
+
 			if(member && member._id) {
 				member.$update(function(response) {
 					$location.path('members/' + response._id);
@@ -689,8 +705,8 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 				    $scope.errors = $scope.setErrors(errorResponse.data);
 
 				});
-				
-			} else {                 
+
+			} else {
 				// Redirect after save
 				member.$save(function(response) {
 					$location.path('members/' + response._id);
@@ -699,13 +715,13 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 					$scope.error = errorResponse.data.message;
 				    $scope.errors = $scope.setErrors(errorResponse.data);
 				});
-				
-			} 
+
+			}
 		};
 
 		// Remove existing Member
 		$scope.remove = function(member) {
-			if ( member ) { 
+			if ( member ) {
 				member.$remove();
 
 				for (var i in $scope.members) {
@@ -731,15 +747,15 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 			    $scope.errors = $scope.setErrors(errorResponse.data);
 			});
 		};
-		
+
 
 		// Find a list of Members
 		$scope.find = function() {
 			$scope.members = Members.query();
 		};
-		
+
 		$scope.showOnlyShirtlessMembers = false;
-		
+
 		$scope.shirtFilter = function(member) {
 			if($scope.showOnlyShirtlessMembers === true) {
 				return member.shirtReceived === false;
@@ -747,20 +763,30 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 				return member;
 			}
 		};
-		
+
+		$scope.filterByDate = function(member) {
+			if($scope.dateToFilterBy) {
+				var newDate = new Date(member.created);
+				return newDate >= $scope.dateToFilterBy;
+			} else {
+				return member;
+			}
+
+		};
+
 		$scope.giveShirt = function(member) {
 			//var member = $scope.member;
 			if(member.shirtReceived === false) {
 				member.shirtReceived = true;
-				
+
 				member.$update(function() {
-					
+
 				}, function(errorResponse) {
 					$scope.error = errorResponse.data.message;
 				});
 			}
 		};
-		
+
 		// Find existing participants
 		$scope.findParticipants = function(name) {
 			return Participants.query({name: name}).$promise;
@@ -768,11 +794,11 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 
 		// Find existing Member
 		$scope.findOne = function() {
-			$scope.member = Members.get({ 
+			$scope.member = Members.get({
 				memberId: $stateParams.memberId
 			});
 		};
-		
+
 		// Initialize a new Member
 		$scope.newMember = function() {
 			$scope.member = new Members({
@@ -781,7 +807,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 				otherNetworks: ''
 			});
 		};
-		
+
 		// A member is selected from the typehead search
 		$scope.selectMember = function(participant) {
 			$scope.member = new Members(participant);
@@ -790,9 +816,64 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 			$scope.member.otherNetworks = '';
 		};
 		
-	
+		$scope.exportToExcel = function() {
+			var csvData = [[
+				'Name',
+				'Phone',
+				'Email',
+				'Identity',
+				'Affiliation',
+				'Address',
+				'City',
+				'State',
+				'Zip Code',
+				'Shirt Size',
+				'Shirt Received',
+				'Talent',
+				'Place of Worship',
+				'Recruitment',
+				'Community Networks',
+				'Extra Groups',
+				'Other Networks'
+			]];
+
+			for (var i = 0; i < $scope.members.length; i++) {
+				var member = $scope.members[i];
+				if ($scope.shirtFilter(member)) {
+					csvData.push([
+						member.displayName,
+						member.phone,
+						member.email,
+						member.identity,
+						member.affiliation,
+						member.address,
+						member.city,
+						member.state,
+						member.zipCode,
+						member.shirtSize,
+						member.shirtReceived ? 'Yes' : 'No',
+						member.talent,
+						member.placeOfWorship,
+						member.recruitment,
+						member.communityNetworks,
+						member.extraGroups,
+						member.otherNetworks
+					].join(','));
+				}
+			}
+			var el = document.createElement('a');
+			el.id = 'downloadFile';
+			el.href = 'data:text/csv;charset=utf8,' + encodeURIComponent(csvData.join('\n'));
+			el.download = 'members.csv';
+			
+			var before = document.getElementById('exportLink');
+			before.parentNode.insertBefore(el, before);
+			el.click();
+			el.remove();
+		};
 	}
 ]);
+
 'use strict';
 
 //Members service used to communicate Members REST endpoints
@@ -850,6 +931,8 @@ angular.module('network-events').controller('NetworkEventsController', ['$scope'
 		$scope.authentication = Authentication;
 		$scope.status = { dateOpen: false };
 
+		if (!$scope.authentication.user) $location.path('/signin');
+
 		$scope.open = function($event) {
 		    $event.preventDefault();
 		    $event.stopPropagation();
@@ -894,6 +977,17 @@ angular.module('network-events').controller('NetworkEventsController', ['$scope'
 			} else {
 				$scope.networkEvent.$remove(function() {
 					$location.path('network-events');
+				});
+			}
+		};
+
+		$scope.removeParticipation = function(participation) {
+			if (participation) {
+				var $participation = new Participations(participation);
+				$participation.$remove(function() {
+					$scope.participations = Participations.query({
+						networkEventId: $stateParams.networkEventId
+					});
 				});
 			}
 		};
@@ -1016,6 +1110,8 @@ angular.module('participants').controller('ParticipantsController', ['$scope', '
 		$scope.authentication = Authentication;
 		$scope.errorStatus = {};
 
+		if (!$scope.authentication.user) $location.path('/signin');
+
 		$scope.setErrors = function(errors) {
 			$scope.errorStatus = {};
 			if (errors.fields) {
@@ -1134,7 +1230,9 @@ angular.module('participations').controller('ParticipationsController', ['$scope
 	function($scope, $stateParams, $location, Authentication, Participations, NetworkEvents, Participants) {
 		$scope.authentication = Authentication;
 		$scope.isSelectionEditable = false;
-		
+
+		if (!$scope.authentication.user) $location.path('/signin');
+
 		// Create new Participation
 		$scope.create = function() {
 			var saveParticipation = function(attendee) {
@@ -1501,6 +1599,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 angular.module('users').controller('UsersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Users',
 	function($scope, $stateParams, $location, Authentication, Users) {
 		$scope.authentication = Authentication;
+		$scope.user = {};
 
 		// Create new User
 		$scope.create = function() {
