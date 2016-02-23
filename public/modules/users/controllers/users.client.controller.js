@@ -4,7 +4,7 @@
 angular.module('users').controller('UsersController', ['$scope', '$stateParams', '$location', 'Authentication','Actions', 'Members', 'Participations', 'Users',
 	function($scope, $stateParams, $location, Authentication, Actions, Members, Participations, Users) {
 		$scope.authentication = Authentication;
-		var currentUser = $scope.authentication.user;
+		$scope.currentUser = $scope.authentication.user;
 		$scope.actions = Actions.query();
 		$scope.members = Members.query();
 
@@ -69,7 +69,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			});
 		};
 		
-		$scope.isConnector = function() {
+		$scope.isConnector = function(currentUser) {
 			if(currentUser.roles.indexOf('connector') > -1) {
 				return true;
 			}
