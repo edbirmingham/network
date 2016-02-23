@@ -12,14 +12,14 @@
 		<br>
 	</div>
 </section>
-<section data-ng-controller="UsersController" data-ng-show="authentication.user.roles.indexOf('connector') > -1;">
+<section data-ng-controller="UsersController" data-ng-show="isConnector">
 	<body>
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-6">
 					<h4 class="text-center">Network Members Registered</h4>
 					<div class="col-md-3">
-						<h3 class="text-center">{{members.length}}</h5>
+						<h3 class="text-center">{{(members | filter: { user: authentication.user._id }).length}}</h3>
 						<h6>YTD since August</h6>
 					</div>
 					<div class="col-md-3">
@@ -30,7 +30,7 @@
 				<div class="col-md-6">
 					<h4 class="text-center">One to One Reflections Completed</h4>
 					<div class="col-md-3">
-						
+						<h3>15</h3>
 					</div>
 					<div class="col-md-3">
 						
