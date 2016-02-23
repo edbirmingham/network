@@ -5,12 +5,16 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 	function($scope, $stateParams, $location, Authentication, Actions, Members, Participations, Users) {
 		$scope.authentication = Authentication;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		$scope.user = {};
 		$scope.isconnector = null;
 		var currentUser = $scope.authentication.user;
 		$scope.isconnector = null;
 =======
 		var currentUser = $scope.authentication.user;
+=======
+		$scope.currentUser = $scope.authentication.user;
+>>>>>>> Changed some formatting, fixed Members metric
 		$scope.actions = Actions.query();
 <<<<<<< HEAD
 		
@@ -80,7 +84,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			});
 		};
 		
-		$scope.isConnector = function() {
+		$scope.isConnector = function(currentUser) {
 			if(currentUser.roles.indexOf('connector') > -1) {
 				return true;
 			}
