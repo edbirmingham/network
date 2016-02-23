@@ -70,7 +70,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			});
 		};
 		
-		$scope.isConnector = function() {
+		$scope.isConnector = function(currentUser) {
 			if(currentUser.roles.indexOf('connector') > -1) {
 				return true;
 			}
