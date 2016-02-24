@@ -5,17 +5,23 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 	function($scope, $stateParams, $location, Authentication, Users) {
 		$scope.authentication = Authentication;
 		$scope.user = {};
-		$scope.roles = [];
 
+		$scope.roles = ['user'];
+		
 		// Create new User
 		$scope.create = function() {
 			// Create new User object
 			var user = new Users ($scope.user);
+			$scope.user.roles = [];
+			for(var i = 0; i < $scope.roles.length; i++) {
+				$scope.user.roles = $scope.user.roles.push($scope.roles[i]);
+			}
 			
 			
-			angular.forEach($scope.user.roles, function(role){
-				this.push(role);
-			}, $scope.roles);
+
+			//angular.forEach($scope.user.roles, function(role){
+			//	this.push(role);
+		//}, $scope.roles);
 			
 			
 			// Redirect after save
