@@ -5,12 +5,22 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 	function($scope, $stateParams, $location, Authentication, Users) {
 		$scope.authentication = Authentication;
 		$scope.user = {};
-
+		$scope.roles = ['user'];
 		// Create new User
 		$scope.create = function() {
 			// Create new User object
 			var user = new Users ($scope.user);
+			$scope.user.roles = [];
+			for(var i = 0; i < $scope.roles.length; i++) {
+				$scope.user.roles = $scope.user.roles.push($scope.roles[i]);
+			}
+			
+			
+			//angular.forEach($scope.user.roles, function(role){
+			//	this.push(role);
+		//}, $scope.roles);
 
+			
 			// Redirect after save
 			user.$save(function(response) {
 				$location.path('users/' + response._id);
@@ -22,6 +32,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 				$scope.user.email = '';
 				$scope.user.username = '';
 				$scope.user.password = '';
+				$scope.user.roles = [];
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -65,6 +76,16 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			$scope.user = Users.get({ 
 				userId: $stateParams.userId
 			});
+		};
+		
+			// Add the selected role to the roles list.
+		$scope.addRole = function(roles, role) {
+			roles.push(role);
+		};
+		
+		// Remove role from the role list.
+		$scope.removeRole = function(roles, roleIndex) {
+			roles.splice(roleIndex, 1);
 		};
 	}
 ]);
