@@ -56,6 +56,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 
 			// Create new Member
 			var member = $scope.member;
+			member.became_member = new Date;
 
 			if(member && member._id) {
 				member.$update(function(response) {
@@ -134,7 +135,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 
 		$scope.filterByDate = function(member) {
 			if($scope.dateToFilterBy) {
-				var newDate = new Date(member.created);
+				var newDate = new Date(member.became_member);
 				return newDate >= $scope.dateToFilterBy;
 			} else {
 				return true;

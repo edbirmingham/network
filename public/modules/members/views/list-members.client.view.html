@@ -2,47 +2,60 @@
     <div class="page-header">
         <h1>Members</h1>
     </div>
-    <div class="form-group">
-    <div class="row">
-        <div class="col-md-6">
-            <label class="control-label" for="dateFilter">Filtered Date (MM/DD/YYYY)</label>
-            <div class="input-group">
-                <input type="text" class="form-control" data-ng-model="dateToFilterBy" datepicker-popup="MM/dd/yyyy" close-text="Close" is-open="status.dateOpen" close-text="Close" ng-click="open($event)" />
-                <span class="input-group-btn">
+    <for class="form form-horizontal">
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label" for="dateFilter">Filtered Date (MM/DD/YYYY)</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" data-ng-model="dateToFilterBy" datepicker-popup="MM/dd/yyyy" close-text="Close" is-open="status.dateOpen" close-text="Close" ng-click="open($event)" />
+                    <span class="input-group-btn">
                     <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                 </span>
+                </div>
             </div>
         </div>
-    </div>
-	</div>
-    <div class="filter-checkboxes row">
-    	<div class="col-md-3">
-  			<label><input type="checkbox" value="false" data-ng-model="showOnlyShirtlessMembers">Members Yet to Receive T-Shirt</label>
-  		</div>
-  		<div class="col-md-2 col-md-offset-7">
-  			<a class="btn btn-primary" id="exportLink" data-ng-click="exportToExcel()">Export Members to Excel</a>
-  		</div>
-	</div>
-    <div class="list-group">
-        <div data-ng-repeat="member in members | filter: filterMember" class="list-group-item">
-			<a data-ng-href="#!/members/{{member._id}}" class="list-group-item-text">
-				<h4 class="list-group-item-heading" data-ng-bind="member.displayName"></h4>
-			</a>
-			<small class="list-group-item-text">
-			    Phone:
-			    <span><a href="tel:{{member.phone}}">{{member.phone}}</a></span>
-			    | Email:
-				<a ng-href="mailto:{{member.email}}"><span data-ng-bind="member.email"></span></a>
-				| Member is a: 
-				<span data-ng-bind="member.identity"></span>
-				| Member since: 
-				<span data-ng-bind="member.created | date:'medium'"></span>
-				| Received Shirt:
-				<span data-ng-bind="member.shirtReceived" data-ng-click="giveShirt(member)"></span>
-			</small>
         </div>
-    </div>
-    <div class="alert alert-warning text-center" data-ng-hide="!members.$resolved || members.length">
-    	No Members yet, why don't you <a href="/#!/members/create">create one</a>?
-    </div>
+        <div class="filter-checkboxes row">
+            <div class="col-md-3">
+                <label>
+                    <input type="checkbox" value="false" data-ng-model="showOnlyShirtlessMembers">Members Yet to Receive T-Shirt</label>
+            </div>
+            <div class="col-md-2 col-md-offset-7">
+                <a class="btn btn-primary" id="exportLink" data-ng-click="exportToExcel()">Export Members to Excel</a>
+            </div>
+        </div>
+        <div class="list-group">
+            <div data-ng-repeat="member in members | filter: filterMember" class="list-group-item">
+                <a data-ng-href="#!/members/{{member._id}}" class="list-group-item-text">
+                    <h4 class="list-group-item-heading" data-ng-bind="member.displayName"></h4>
+                </a>
+                <div class="row">
+                    <small class="list-group-item-text">
+        			    <div class="col-md-2">
+            			    Phone:
+            			    <span><a href="tel:{{member.phone}}">{{member.phone}}</a></span>
+        			    </div>
+			    		 <div class="col-md-2">
+            			    Email:
+            				<a ng-href="mailto:{{member.email}}"><span data-ng-bind="member.email"></span></a>
+        				</div>
+						<div class="col-md-3">
+            				Member is a: 
+            				<span data-ng-bind="member.identity"></span>
+				        </div>
+						<div class="col-md-3">
+            				Member since: 
+            				<span data-ng-bind="member.became_member | date:'medium'"></span>
+				        </div>
+						<div class="col-md-2">
+            				Received Shirt:
+            				<span data-ng-bind="member.shirtReceived" data-ng-click="giveShirt(member)"></span>
+				        </div>
+			</small>
+                </div>
+            </div>
+        </div>
+        <div class="alert alert-warning text-center" data-ng-hide="!members.$resolved || members.length">
+            No Members yet, why don't you <a href="/#!/members/create">create one</a>?
+        </div>
 </section>

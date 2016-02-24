@@ -65,6 +65,10 @@ var MemberSchema = Participant.discriminator('Member', new Schema({
 		type: String,
 		trim: true,
 		default: '',
+	},
+	became_member: {
+		type: Date,
+		default: new Date(2016, 0, 1, 18, 0 , 0)
 	}
 }));
 
