@@ -14,7 +14,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 	    
 	    $scope.getNetworkNightPercent = function() {
 	    	var networkNights = networkEvents.filter( function (event) {
-	    		return event.type == 'Raise Up Initiatives';
+	    		return event.type === 'Raise Up Initiatives';
 	    	});
 	    	return networkNights.length;
 	    };
