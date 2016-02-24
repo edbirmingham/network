@@ -8,7 +8,37 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 		var currentUser = $scope.authentication.user;
 		$scope.actions = Actions.query();
 		$scope.members = Members.query();
-
+		var currentDate = new Date();
+		
+		$scope.memSinceMonth = function(member) {
+			var newDate = new Date(member.created);
+			var testDate = new Date();
+			testDate.setMonth(testDate.getMonth() - 1);
+			if(newDate >= testDate) {
+				return member;
+			}
+			//return member;
+		};
+		
+		$scope.memSinceYear = function(member) {
+			var newDate = new Date(member.created);
+			var testDate = new Date();
+			testDate.setYear(testDate.getYear() - 1);
+			if(newDate >= testDate) {
+				return member;
+			}
+		};
+		
+		$scope.memSinceSem = function(member) {
+			var newDate = new Date(member.created);
+			var testDate = new Date();
+			testDate.setMonth(testDate.getMonth() - 4);
+			if(newDate >= testDate) {
+				return member;
+			}
+		};
+		
+	
 		// Create new User
 		$scope.create = function() {
 			// Create new User object
