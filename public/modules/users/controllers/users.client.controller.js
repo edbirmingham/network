@@ -7,14 +7,21 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 		$scope.user = {};
 		$scope.roles = [];
 		$scope.user.roles = ['user'];
+<<<<<<< HEAD
 		
+=======
+		$scope.isConnector = false;
+>>>>>>> Made dropdown radiobox to prevent multiple roles
 		// Create new User
 		$scope.create = function() {
 			// Create new User object
-			
-			for(var i = 0; i < $scope.roles.length; i++) {
-				$scope.user.roles.push($scope.roles[i]);
+			if($scope.isConnector === true) {
+				$scope.user.roles = ['user', 'connector'];
 			}
+			
+			//for(var i = 0; i < $scope.roles.length; i++) {
+			//	$scope.user.roles.push($scope.roles[i]);
+			//}
 			
 			var user = new Users ($scope.user);
 			
