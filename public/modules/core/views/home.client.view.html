@@ -43,106 +43,59 @@
 				<h4 class="text-center">Actions Status</h4>
 				<div class="col-md-3">
 					<h5 class="text-center">No Matches</h5>
-					<h6 class="text-center">{{(actions | filter: {connector: authentication.user._id, status: ['Red']}).length}}</h6>
-					<div data-ng-repeat="action in actions | filter: {connector: authentication.user._id, status: ['Red'] }" class="list-group-item">
-						<a  class="list-group-item-text"  data-ng-href="#!/actions/{{action._id}}">
-							<h4 class="list-group-item-heading" data-ng-bind="action.description" ></h4>
-						</a>
-						<span ng-class="{'Green':'bg-success', 'Yellow':'bg-warning', 'Red':'bg-danger'}[action.status]">
-						<small class="list-group-item-text">
-							Type: 
-							<span data-ng-bind="action.type" ng-class="{'Green':'bg-success', 'Yellow':'bg-warning', 'Red':'bg-danger', 'Complete':''}[action.status]"></span>
-							| Made:
-							<span data-ng-bind="action.created | date:'medium'"></span>
-							| By:
-							<span data-ng-bind="action.actor.displayName"></span>
-							| At:
-							<span ng-if="action.networkEvent">
-								<span data-ng-bind="action.networkEvent.name"></span>
-							</span>
-							| With:
-							<span data-ng-bind="action.matches.length"></span>
-							match(es).
-						</small>
-						</span>
+					<h4 class="text-center"><a href="#">{{(actions | filter: {connector: authentication.user._id, status: ['Red']}).length}}</a></h4>
+					<h2></h2>
+					<!-- Drop down-->
+					<div class="dropdown">
+					  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+					    <span class="caret"></span>
+					  </button>
+					  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+					    <li data-ng-repeat="action in actions | filter: {connector: authentication.user._id, status: ['Red'] }">
+					    	<a href="#!/actions/{{action._id}}">{{action.description}} -- {{action.type}}</a></li>
+					  </ul>
 					</div>
 				</div>
 				<div class="col-md-3">
 					<h5 class="text-center">Pending Matches</h5>
-					<h6 class="text-center">{{(actions | filter: {connector: authentication.user._id, status: ['Yellow']}).length}}</h6>
-					<div data-ng-repeat="action in actions | filter: {connector: authentication.user._id, status: ['Yellow'] }" class="list-group-item">
-						<a  class="list-group-item-text"  data-ng-href="#!/actions/{{action._id}}">
-							<h4 class="list-group-item-heading" data-ng-bind="action.description" ></h4>
-						</a>
-						<span ng-class="{'Green':'bg-success', 'Yellow':'bg-warning', 'Red':'bg-danger'}[action.status]">
-						<small class="list-group-item-text">
-							Type: 
-							<span data-ng-bind="action.type" ng-class="{'Green':'bg-success', 'Yellow':'bg-warning', 'Red':'bg-danger', 'Complete':''}[action.status]"></span>
-							| Made:
-							<span data-ng-bind="action.created | date:'medium'"></span>
-							| By:
-							<span data-ng-bind="action.actor.displayName"></span>
-							| At:
-							<span ng-if="action.networkEvent">
-								<span data-ng-bind="action.networkEvent.name"></span>
-							</span>
-							| With:
-							<span data-ng-bind="action.matches.length"></span>
-							match(es).
-						</small>
-						</span>
+					<h4 class="text-center"><a href="#">{{(actions | filter: {connector: authentication.user._id, status: ['Yellow']}).length}}</a></h4>
+					<!-- Drop down-->
+					<div class="dropdown">
+					  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+					    <span class="caret"></span>
+					  </button>
+					  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+					    <li data-ng-repeat="action in actions | filter: {connector: authentication.user._id, status: ['Yellow'] }">
+					    	<a href="#!/actions/{{action._id}}">{{action.description}} -- {{action.type}}</a></li>
+					  </ul>
 					</div>
 				</div>
 				<div class="col-md-3">
 					<h5 class="text-center">Active Matches</h5>
-					<h6 class="text-center">{{(actions | filter: {connector: authentication.user._id, status: ['Green']}).length}}</h6>
-					<div data-ng-repeat="action in actions | filter: {connector: authentication.user._id, status: ['Green'] }" class="list-group-item">
-						<a  class="list-group-item-text"  data-ng-href="#!/actions/{{action._id}}">
-							<h4 class="list-group-item-heading" data-ng-bind="action.description" ></h4>
-						</a>
-						<span ng-class="{'Green':'bg-success', 'Yellow':'bg-warning', 'Red':'bg-danger'}[action.status]">
-						<small class="list-group-item-text">
-							Type: 
-							<span data-ng-bind="action.type" ng-class="{'Green':'bg-success', 'Yellow':'bg-warning', 'Red':'bg-danger', 'Complete':''}[action.status]"></span>
-							| Made:
-							<span data-ng-bind="action.created | date:'medium'"></span>
-							| By:
-							<span data-ng-bind="action.actor.displayName"></span>
-							| At:
-							<span ng-if="action.networkEvent">
-								<span data-ng-bind="action.networkEvent.name"></span>
-							</span>
-							| With:
-							<span data-ng-bind="action.matches.length"></span>
-							match(es).
-						</small>
-						</span>
+					<h4 class="text-center"><a href="#">{{(actions | filter: {connector: authentication.user._id, status: ['Green']}).length}}</a></h4>
+					<!-- Drop down-->
+					<div class="dropdown">
+					  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+					    <span class="caret"></span>
+					  </button>
+					  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+					    <li data-ng-repeat="action in actions | filter: {connector: authentication.user._id, status: ['Green'] }">
+					    	<a href="#!/actions/{{action._id}}">{{action.description}} -- {{action.type}}</a></li>
+					  </ul>
 					</div>
 				</div>
 				<div class="col-md-3">
 					<h5 class="text-center">Completed Matches</h5>
-					<h6 class="text-center">{{(actions | filter: {connector: authentication.user._id, status: ['Complete']}).length}}</h6>
-					<div data-ng-repeat="action in actions | filter: {connector: authentication.user._id, status: ['Complete'] }" class="list-group-item">
-						<a  class="list-group-item-text"  data-ng-href="#!/actions/{{action._id}}">
-							<h4 class="list-group-item-heading" data-ng-bind="action.description" ></h4>
-						</a>
-						<span ng-class="{'Green':'bg-success', 'Yellow':'bg-warning', 'Red':'bg-danger'}[action.status]">
-						<small class="list-group-item-text">
-							Type: 
-							<span data-ng-bind="action.type" ng-class="{'Green':'bg-success', 'Yellow':'bg-warning', 'Red':'bg-danger', 'Complete':''}[action.status]"></span>
-							| Made:
-							<span data-ng-bind="action.created | date:'medium'"></span>
-							| By:
-							<span data-ng-bind="action.actor.displayName"></span>
-							| At:
-							<span ng-if="action.networkEvent">
-								<span data-ng-bind="action.networkEvent.name"></span>
-							</span>
-							| With:
-							<span data-ng-bind="action.matches.length"></span>
-							match(es).
-						</small>
-						</span>
+					<h4 class="text-center"><a href="#">{{(actions | filter: {connector: authentication.user._id, status: ['Complete']}).length}}</a></h4>
+					<!-- Drop down-->
+					<div class="dropdown">
+					  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+					    <span class="caret"></span>
+					  </button>
+					  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+					    <li data-ng-repeat="action in actions | filter: {connector: authentication.user._id, status: ['Complete'] }">
+					    	<a href="#!/actions/{{action._id}}">{{action.description}} -- {{action.type}}</a></li>
+					  </ul>
 					</div>
 				</div>
 			</div>
@@ -150,7 +103,7 @@
 				<h4 class="text-center">Attendance Percentage</h4>
 				<div class="col-md-4">
 					<h5 class="text-center">Network Nights</h5>
-					<h3 class="text-center">50%</h3>
+					<h3 class="text-center">%</h3>
 				</div>
 				<div class="col-md-4">
 					<h5 class="text-center">Connector Table Meetings</h5>

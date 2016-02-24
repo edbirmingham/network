@@ -1,15 +1,24 @@
 'use strict';
 
 // Users controller
-angular.module('users').controller('UsersController', ['$scope', '$stateParams', '$location', 'Authentication','Actions', 'Members', 'Participations', 'Users',
-	function($scope, $stateParams, $location, Authentication, Actions, Members, Participations, Users) {
+angular.module('users').controller('UsersController', ['$scope', '$stateParams', '$location', 'Authentication','Actions', 'Members','NetworkEvents', 'Participants', 'Participations', 'Users',
+	function($scope, $stateParams, $location, Authentication, Actions, Members, NetworkEvents, Participants, Participations, Users) {
 		$scope.authentication = Authentication;
 		$scope.user = {};
 		var currentUser = $scope.authentication.user;
 		$scope.actions = Actions.query();
 		$scope.members = Members.query();
-		var currentDate = new Date();
-		
+		// var participations = Participations.query();
+	    var networkEvents = NetworkEvents.query();
+	    //$scope.total = $scope.getNetworkNightPercent();
+	    
+	    $scope.getNetworkNightPercent = function() {
+	    	var networkNights = networkEvents.filter( function (event) {
+	    		return event.type == 'Raise Up Initiatives';
+	    	});
+	    	return networkNights.length;
+	    };
+	    
 		$scope.memSinceMonth = function(member) {
 			var newDate = new Date(member.created);
 			var testDate = new Date();
@@ -17,7 +26,6 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			if(newDate >= testDate) {
 				return member;
 			}
-			//return member;
 		};
 		
 		$scope.memSinceYear = function(member) {
