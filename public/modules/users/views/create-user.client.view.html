@@ -22,17 +22,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-                    <label class="control-label" for="match">Add Role</label>
-                    <div class="dropdown">
-					  <button class="btn btn-default dropdown-toggle" type="button" id="addRole" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-					    Add Role
-					    <span class="caret"></span>
-					  </button>
-					  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-					    <li><a data-ng-click="addRole(roles, 'connector');">Connector</a></li>
-					    <li><a data-ng-click="addRole(roles, 'admin');" >Admin</a></li>
-					  </ul>
-					</div>
+					<input type="radio" name="connector" data-ng-bind="isConnector = true">Connector<br>
                 </div>
 				<div class="list-group">
                     <span data-ng-repeat="role in roles" class="list-group-item">
