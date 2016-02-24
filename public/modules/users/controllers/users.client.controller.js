@@ -19,6 +19,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			//angular.forEach($scope.user.roles, function(role){
 			//	this.push(role);
 		//}, $scope.roles);
+
 			
 			// Redirect after save
 			user.$save(function(response) {
