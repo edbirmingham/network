@@ -116,11 +116,11 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 		};
 
 		$scope.filterMember = function(member) {
-			if (!$scope.shirtFilter(member)) { return false };
-			if (!$scope.filterByDate(member)) { return false };
+			if (!$scope.shirtFilter(member)) { return false; }
+			if (!$scope.filterByDate(member)) { return false; }
 
 			return true;
-		}
+		};
 
 		$scope.showOnlyShirtlessMembers = false;
 
