@@ -115,13 +115,20 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 			$scope.members = Members.query();
 		};
 
+		$scope.filterMember = function(member) {
+			if (!$scope.shirtFilter(member)) { return false };
+			if (!$scope.filterByDate(member)) { return false };
+
+			return true;
+		}
+
 		$scope.showOnlyShirtlessMembers = false;
 
 		$scope.shirtFilter = function(member) {
 			if($scope.showOnlyShirtlessMembers === true) {
 				return member.shirtReceived === false;
 			} else {
-				return member;
+				return true;
 			}
 		};
 
@@ -130,7 +137,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 				var newDate = new Date(member.created);
 				return newDate >= $scope.dateToFilterBy;
 			} else {
-				return member;
+				return true;
 			}
 
 		};
@@ -200,7 +207,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 
 			for (var i = 0; i < $scope.members.length; i++) {
 				var member = $scope.members[i];
-				if ($scope.shirtFilter(member)) {
+				if ($scope.filterMember(member)) {
 					csvData.push([
 						member.displayName,
 						member.phone,
