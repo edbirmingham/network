@@ -15,18 +15,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 				$scope.user.roles = ['user', 'connector'];
 			}
 			
-			//for(var i = 0; i < $scope.roles.length; i++) {
-			//	$scope.user.roles.push($scope.roles[i]);
-			//}
-			
 			var user = new Users ($scope.user);
-			
-			
-			
-			//angular.forEach($scope.user.roles, function(role){
-			//	this.push(role);
-		//}, $scope.roles);
-
 			
 			// Redirect after save
 			user.$save(function(response) {
@@ -83,16 +72,6 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			$scope.user = Users.get({ 
 				userId: $stateParams.userId
 			});
-		};
-		
-			// Add the selected role to the roles list.
-		$scope.addRole = function(roles, role) {
-			roles.push(role);
-		};
-		
-		// Remove role from the role list.
-		$scope.removeRole = function(roles, roleIndex) {
-			roles.splice(roleIndex, 1);
 		};
 	}
 ]);
