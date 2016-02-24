@@ -129,7 +129,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 				}
 			}
 		};
-		
+
 		$scope.getNoMatchesCount = function() {
 			console.log(Authentication.user._id);
 			return Actions.where( {status: ['Red']} ).count();
@@ -139,5 +139,6 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 		$scope.getActions = function () {
 			return Actions.query();
 		};
+
 	}
 ]);
