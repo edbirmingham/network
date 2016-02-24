@@ -12,7 +12,7 @@
 		<br>
 	</div>
 </section>
-<section data-ng-controller="UsersController" data-ng-show="isConnector">
+<section data-ng-controller="UsersController" ng-show="isConnector" class="ng-cloak">
 	<body>
 		<div class="container-fluid">
 			<div class="row">
@@ -44,7 +44,6 @@
 				<div class="col-md-3">
 					<h5 class="text-center">No Matches</h5>
 					<h4 class="text-center"><a href="#">{{(actions | filter: {connector: authentication.user._id, status: ['Red']}).length}}</a></h4>
-					<h2></h2>
 					<!-- Drop down-->
 					<div class="dropdown">
 					  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
