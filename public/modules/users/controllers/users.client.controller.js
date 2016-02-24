@@ -5,15 +5,18 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 	function($scope, $stateParams, $location, Authentication, Users) {
 		$scope.authentication = Authentication;
 		$scope.user = {};
-		$scope.roles = ['user'];
+		$scope.roles = [];
+		$scope.user.roles = ['user'];
 		// Create new User
 		$scope.create = function() {
 			// Create new User object
-			var user = new Users ($scope.user);
-			$scope.user.roles = [];
+			
 			for(var i = 0; i < $scope.roles.length; i++) {
-				$scope.user.roles = $scope.user.roles.push($scope.roles[i]);
+				$scope.user.roles.push($scope.roles[i]);
 			}
+			
+			var user = new Users ($scope.user);
+			
 			
 			
 			//angular.forEach($scope.user.roles, function(role){
@@ -32,7 +35,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 				$scope.user.email = '';
 				$scope.user.username = '';
 				$scope.user.password = '';
-				$scope.user.roles = [];
+				$scope.user.roles = ['user'];
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
