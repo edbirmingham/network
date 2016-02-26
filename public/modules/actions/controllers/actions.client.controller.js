@@ -99,6 +99,7 @@ angular.module('actions').controller('ActionsController', ['$scope', '$statePara
 			$scope.actions = Actions.query();
 			$scope.locations = Locations.query();
 			$scope.connectors = Users.query();
+			$scope.actionStatuses = Actions.statuses();
 		};
 		
 		// Filter list of actions by location
@@ -123,6 +124,7 @@ angular.module('actions').controller('ActionsController', ['$scope', '$statePara
 				actionId: $stateParams.actionId
 			});
 			$scope.connectors = Users.query();
+			$scope.actionStatuses = Actions.statuses();
 		};
 		
 		// Find existing participants
