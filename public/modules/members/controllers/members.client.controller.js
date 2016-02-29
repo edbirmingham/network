@@ -56,7 +56,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 
 			// Create new Member
 			var member = $scope.member;
-			member.became_member = new Date;
+			member.became_member = new Date();
 
 			if(member && member._id) {
 				member.$update(function(response) {
