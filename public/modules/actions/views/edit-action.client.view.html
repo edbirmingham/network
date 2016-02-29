@@ -1,16 +1,16 @@
 <section data-ng-controller="ActionsController" data-ng-init="findOne()">
     <div class="page-header">
         <ol class="breadcrumb">
-  			<li><a href="/#!/actions">Actions</a></li>
- 			<li><a href="/#!/actions/{{action._id}}">{{action.type}} by {{action.actor.displayName}}</a></li>
-  			<li class="active">Edit</li>
-		</ol>
+        <li><a href="/#!/actions">Actions</a></li>
+      <li><a href="/#!/actions/{{action._id}}">{{action.type}} by {{action.actor.displayName}}</a></li>
+        <li class="active">Edit</li>
+    </ol>
         <h1>Edit Action</h1>
     </div>
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="update()" novalidate autocomplete="off">
             <fieldset>
-				<alert data-ng-show="error" data-ng-bind="error" type="danger"></alert>
+        <alert data-ng-show="error" data-ng-bind="error" type="danger"></alert>
                 <div class="form-group">
                     <label class="control-label" for="networkEvent">Network Event</label>
                     <div class="controls">
@@ -27,8 +27,8 @@
                         </select>
                     </div>
                 </div>
-				<div class="form-group">
-					<label class="control-label" for="status">Status</label>
+        <div class="form-group">
+          <label class="control-label" for="status">Status</label>
                     <div class="controls">
     					<select id="status" name="status" class="form-control" data-ng-model="action.status" placeholder="Status" ng-options="status for status in actionStatuses">
     					</select>
@@ -40,18 +40,18 @@
                         <input id="actor" type="text" ng-model="action.actor.displayName" typeahead-editable="false" typeahead-on-select="action.actor = $item" typeahead="participant.listName() for participant in findParticipants($viewValue)" class="form-control" placeholder="Find actor">
                     </div>
                 </div>
-				<div class="form-group">
-					<label class="control-label" for="type">Type of action?</label>
-					<span id="identityHelpBlock" class="help-block">Action: Offering, Request, Declaration, BOTN</span>
+        <div class="form-group">
+          <label class="control-label" for="type">Type of action?</label>
+          <span id="identityHelpBlock" class="help-block">Action: Offering, Request, Declaration, BOTN</span>
                     <div class="controls">
-    					<select id="type" name="type" class="form-control" data-ng-model="action.type" placeholder="Action?">
-    						<option>Offering</option>
-    						<option>Request</option>
-    						<option>Declaration</option>
-    						<option>BOTN</option>
-						</select>
-					</div>
-				</div>
+              <select id="type" name="type" class="form-control" data-ng-model="action.type" placeholder="Action?">
+                <option>Offering</option>
+                <option>Request</option>
+                <option>Declaration</option>
+                <option>BOTN</option>
+            </select>
+          </div>
+        </div>
                 <div class="form-group">
                     <label class="control-label" for="description">Description</label>
                     <div class="controls">
@@ -66,13 +66,19 @@
                 </div>
                 <div class="list-group">
                     <span data-ng-repeat="match in action.matches" class="list-group-item">
-                    	<span>
-                			<span data-ng-bind="match.displayName"></span>
-                    		<a class="btn" data-ng-click="removeMatch(action.matches, $index);">
-                    			<i class="glyphicon glyphicon-remove"></i>
-                    		</a>
-                    	</span>
+                      <span>
+                      <span data-ng-bind="match.displayName"></span>
+                        <a class="btn" data-ng-click="removeMatch(action.matches, $index);">
+                          <i class="glyphicon glyphicon-remove"></i>
+                        </a>
+                      </span>
                     </span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="notes">Notes</label>
+                    <div class="controls">
+                        <textarea rows="20" data-ng-model="action.notes" id="notes" class="form-control" placeholder="Notes"></textarea>
+                    </div>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-default">
