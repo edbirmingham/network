@@ -210,6 +210,7 @@ angular.module('actions').controller('ActionsController', ['$scope', '$statePara
 			$scope.actions = Actions.query();
 			$scope.locations = Locations.query();
 			$scope.connectors = Users.query();
+			$scope.actionStatuses = Actions.statuses();
 		};
 		
 		// Filter list of actions by location
@@ -234,6 +235,7 @@ angular.module('actions').controller('ActionsController', ['$scope', '$statePara
 				actionId: $stateParams.actionId
 			});
 			$scope.connectors = Users.query();
+			$scope.actionStatuses = Actions.statuses();
 		};
 		
 		// Find existing participants
@@ -268,6 +270,12 @@ angular.module('actions').factory('Actions', ['$resource',
 		}, {
 			update: {
 				method: 'PUT'
+			}
+		});
+		
+		angular.extend(Action, {
+			statuses: function() {
+				return ['No match', 'Match pending', 'Match active', 'Match complete'];
 			}
 		});
 		
@@ -695,6 +703,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 
 			// Create new Member
 			var member = $scope.member;
+			member.became_member = new Date();
 
 			if(member && member._id) {
 				member.$update(function(response) {
@@ -754,22 +763,29 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 			$scope.members = Members.query();
 		};
 
+		$scope.filterMember = function(member) {
+			if (!$scope.shirtFilter(member)) { return false; }
+			if (!$scope.filterByDate(member)) { return false; }
+
+			return true;
+		};
+
 		$scope.showOnlyShirtlessMembers = false;
 
 		$scope.shirtFilter = function(member) {
 			if($scope.showOnlyShirtlessMembers === true) {
 				return member.shirtReceived === false;
 			} else {
-				return member;
+				return true;
 			}
 		};
 
 		$scope.filterByDate = function(member) {
 			if($scope.dateToFilterBy) {
-				var newDate = new Date(member.created);
+				var newDate = new Date(member.became_member);
 				return newDate >= $scope.dateToFilterBy;
 			} else {
-				return member;
+				return true;
 			}
 
 		};
@@ -839,7 +855,7 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 
 			for (var i = 0; i < $scope.members.length; i++) {
 				var member = $scope.members[i];
-				if ($scope.shirtFilter(member)) {
+				if ($scope.filterMember(member)) {
 					csvData.push([
 						member.displayName,
 						member.phone,
