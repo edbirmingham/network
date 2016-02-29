@@ -30,11 +30,7 @@
 				<div class="form-group">
 					<label class="control-label" for="status">Status</label>
                     <div class="controls">
-    					<select id="status" name="status" class="form-control" data-ng-model="action.status" placeholder="Status">
-                            <option>Green</option>
-                            <option>Yellow</option>
-                            <option>Red</option>
-                            <option>Complete</option>
+    					<select id="status" name="status" class="form-control" data-ng-model="action.status" placeholder="Status" ng-options="status for status in actionStatuses">
     					</select>
 					</div>
 				</div>

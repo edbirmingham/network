@@ -21,11 +21,7 @@
     <div class="form-group">
         <label class="control-label" for="status">Filter By Status</label>
         <div class="controls">
-            <select multiple ng-multiple="true" id="status" name="status" class="form-control" data-ng-model="status" ng-change="filterActions()" placeholder="Status">
-                <option>Green</option>
-                <option>Yellow</option>
-                <option>Red</option>
-                <option>Complete</option>
+            <select multiple ng-multiple="true" id="status" name="status" class="form-control" data-ng-model="status" ng-change="filterActions()" placeholder="Status" ng-options="status for status in actionStatuses">
             </select>
         </div>
     </div>
@@ -34,10 +30,10 @@
 			<a  class="list-group-item-text"  data-ng-href="#!/actions/{{action._id}}">
 				<h4 class="list-group-item-heading" data-ng-bind="action.description" ></h4>
 			</a>
-			<span ng-class="{'Green':'bg-success', 'Yellow':'bg-warning', 'Red':'bg-danger'}[action.status]">
+			<span ng-class="{'Match active':'bg-success', 'Match pending':'bg-warning', 'No match':'bg-danger'}[action.status]">
 			<small class="list-group-item-text">
 				Type: 
-				<span data-ng-bind="action.type" ng-class="{'Green':'bg-success', 'Yellow':'bg-warning', 'Red':'bg-danger', 'Complete':''}[action.status]"></span>
+				<span data-ng-bind="action.type"></span>
 				| Made:
 				<span data-ng-bind="action.created | date:'medium'"></span>
 				| By:
@@ -55,16 +51,18 @@
 			</span>
         </div>
     </div>
-    <div class="alert alert-warning text-center" data-ng-hide="location || connector || !actions.$resolved || actions.length">
+    <div class="alert alert-warning text-center" data-ng-hide="location || connector || status || !actions.$resolved || actions.length">
     	No Actions yet, why don't you <a href="/#!/actions/create">create one</a>?
     </div>
-    <div class="alert alert-warning text-center" data-ng-hide="!location || connector || (location && (!actions.$resolved || actions.length))">
-    	There are no actions at {{location.name}}.
-    </div>
-    <div class="alert alert-warning text-center" data-ng-hide="!connector || location || (connector && (!actions.$resolved || actions.length))">
-    	There are no actions for {{connector.displayName}}.
-    </div>
-    <div class="alert alert-warning text-center" data-ng-hide="!connector || !location || (connector && location && (!actions.$resolved || actions.length))">
-    	There are no actions at {{location.name}} for {{connector.displayName}}.
+    <div class="alert alert-warning text-center" data-ng-hide="(!location && !connector && (!status || status.length === 0)) || !actions.$resolved || actions.length">
+    	There are no actions 
+    	<span data-ng-hide="!location">at {{location.name}}</span>
+    	<span data-ng-hide="!connector">for {{connector.displayName}}</span>
+    	<span data-ng-hide="!status || status.length === 0">with a status of
+    		<span data-ng-repeat="name in status">
+    			<span data-ng-bind="name"></span><span ng-if="!$last"> or </span>
+    		</span>
+    	 </span>
+    	.
     </div>
 </section>

@@ -44,11 +44,9 @@ var ActionSchema = new Schema({
 		ref: 'User'
 	},
 	status: {
-		type: [{
-			type: String,
-			enum: ['Red', 'Yellow', 'Green', 'Complete']
-		}],
-		default: ['Green']
+		type: String,
+		enum: ['No match', 'Match pending', 'Match active', 'Match complete'],
+		default: 'Match pending'
 	},
 	user: {
 		type: Schema.ObjectId,

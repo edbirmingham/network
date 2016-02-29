@@ -10,6 +10,12 @@ angular.module('actions').factory('Actions', ['$resource',
 			}
 		});
 		
+		angular.extend(Action, {
+			statuses: function() {
+				return ['No match', 'Match pending', 'Match active', 'Match complete'];
+			}
+		});
+		
 		return Action;
 	}
 ]);
