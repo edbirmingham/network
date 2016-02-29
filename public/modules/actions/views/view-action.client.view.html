@@ -24,6 +24,8 @@
 			<dd ng-if="action.connector" data-ng-bind="action.connector.displayName"></dd>
 			<dt>Status</dt>
 			<dd data-ng-bind="action.status"></dd>
+			<dt>Notes</dt>
+			<dd><pre ng-if="action.notes" data-ng-bind="action.notes"></pre></dd>
 		</dl>
 	</div>
 	<div class="pull-right" data-ng-show="authentication.user">
