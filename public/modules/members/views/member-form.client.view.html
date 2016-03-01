@@ -3,12 +3,6 @@
  		<li data-ng-repeat="message in errorMessages.slice().reverse()">{{message}}</li>
  	</ul>
  </alert>
- <div class="form-group">
-    <label class="control-label" for="name">Find participant</label>
-    <div class="controls">
-        <input id="participant" type="text" ng-model="selected" ng-change="member = null" typeahead-editable="false" typeahead-on-select="selectMember($item)" typeahead="participant.displayName for participant in findParticipants($viewValue)" class="form-control" placeholder="Find participant">
-    </div>
-</div>
 <div class="form-group" data-ng-class="errorStatus.firstName">
 	<label class="control-label" for="firstName">First Name</label>
     <div class="controls">
