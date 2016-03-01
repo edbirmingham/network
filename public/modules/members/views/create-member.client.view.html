@@ -9,6 +9,12 @@
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="create()" novalidate autocomplete="off">
             <fieldset>
+                 <div class="form-group">
+                    <label class="control-label" for="name">Find participant</label>
+                    <div class="controls">
+                        <input id="participant" type="text" ng-model="selected" ng-change="member = null" typeahead-editable="false" typeahead-on-select="selectMember($item)" typeahead="participant.displayName for participant in findParticipants($viewValue)" class="form-control" placeholder="Find participant">
+                    </div>
+                </div>
 				<ng-include src="'/modules/members/views/member-form.client.view.html'"></ng-include>
                 <div class="form-group">
                     <input type="submit" class="btn btn-default">
