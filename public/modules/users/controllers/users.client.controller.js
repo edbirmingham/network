@@ -5,16 +5,15 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 	function($scope, $stateParams, $location, Authentication, Users) {
 		$scope.authentication = Authentication;
 		$scope.user = {};
-		$scope.roles = [];
 		$scope.user.roles = ['user'];
-		$scope.isConnector = false;
-		
+
 		// Create new User
 		$scope.create = function() {
 			// Create new User object
-			if($scope.isConnector === true) {
-				$scope.user.roles = ['user', 'connector'];
-			}
+			
+			//for(var i = 0; i < $scope.roles.length; i++) {
+		//		$scope.user.roles.push($scope.roles[i]);
+		//	}
 			
 			var user = new Users ($scope.user);
 			
@@ -55,7 +54,9 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 
 		// Update existing User
 		$scope.update = function() {
+			
 			var user = $scope.user;
+			user.roles = $scope.user.roles;
 
 			user.$update(function() {
 				$location.path('users/' + user._id);
@@ -76,16 +77,19 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			});
 		};
 		
-			// Add the selected role to the roles list.
+		// Add the selected role to the roles list.
 		$scope.addRole = function(roles, role) {
-			roles.push(role);
-			$scope.selectedMatch = null;
-
+			if (roles.indexOf(role) < 0) {
+				roles.push(role);
+			}
+			
 		};
 		
 		// Remove role from the role list.
 		$scope.removeRole = function(roles, roleIndex) {
 			roles.splice(roleIndex, 1);
 		};
+
+		
 	}
 ]);
