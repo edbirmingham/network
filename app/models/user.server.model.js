@@ -77,6 +77,10 @@ var UserSchema = new Schema({
 		}],
 		default: ['user']
 	},
+	participant: {
+		type: Schema.ObjectId,
+		ref: 'Participant'
+	},
 	updated: {
 		type: Date
 	},

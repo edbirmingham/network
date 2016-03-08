@@ -149,6 +149,10 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			return Actions.where( {status: ['Red']} ).count();
 		};
 		
+		// Find existing participants
+		$scope.findParticipants = function(name) {
+			return Participants.query({name: name}).$promise;
+		};
 		
 		$scope.getActions = function () {
 			return Actions.query();
