@@ -3,6 +3,8 @@
 // Participants controller
 angular.module('participants').controller('ParticipantsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Participants',
 	function($scope, $stateParams, $location, Authentication, Participants) {
+		$scope.currentPage = 1;
+		$scope.participantCount = 0;
 		$scope.authentication = Authentication;
 		$scope.errorStatus = {};
 
@@ -71,7 +73,10 @@ angular.module('participants').controller('ParticipantsController', ['$scope', '
 
 		// Find a list of Participants
 		$scope.find = function() {
-			$scope.participants = Participants.query();
+			Participants.query({page: $scope.currentPage}).$promise.then(function(data) {
+				$scope.participants = data.results;
+				$scope.participantCount = data.count;
+			});
 		};
 
 		// Find existing Participant
@@ -83,5 +88,9 @@ angular.module('participants').controller('ParticipantsController', ['$scope', '
 		$scope.initNew = function() {
 		   $scope.participant = new Participants({});
 		};
+		$scope.$watch('currentPage', function(n, o) {
+			console.log(n,o);
+			$scope.find();	
+		});
 	}
 ]);

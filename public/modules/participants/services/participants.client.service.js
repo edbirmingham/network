@@ -7,6 +7,10 @@ angular.module('participants').factory('Participants', ['$resource',
 		}, {
 			update: {
 				method: 'PUT'
+			},
+			query: {
+				method: 'GET',
+				isArray: false
 			}
 		});
 		
