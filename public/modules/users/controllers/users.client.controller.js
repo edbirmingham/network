@@ -10,14 +10,8 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 		// Create new User
 		$scope.create = function() {
 			// Create new User object
-			//for(var i = 0; i < $scope.roles.length; i++) {
-		//		$scope.user.roles.push($scope.roles[i]);
-		//	}
-			var user = new Users ($scope.user);
 			
-		//	angular.forEach($scope.roles, function(role) {
-		//		this.push(role);
-		//	}, user.roles);
+			var user = new Users ($scope.user);
 			
 			// Redirect after save
 			user.$save(function(response) {
