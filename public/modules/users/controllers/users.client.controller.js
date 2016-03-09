@@ -9,15 +9,33 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 		$scope.actions = Actions.query();
 		$scope.members = Members.query();
 		// var participations = Participations.query();
-	    var networkEvents = NetworkEvents.query();
-	   // $scope.total = getNetworkNightPercent();
+	    $scope.networkEvents = NetworkEvents.query();
+	    
 	    
 	    var getNetworkNightPercent = function() {
-	    	var networkNights = networkEvents.filter( function (event) {
-	    		return event.type === 'Raise Up Initiatives';
+	    	var networkNights = $scope.networkEvents.filter( function (event) {
+	    		return event.eventType === 'Raise Up Initiatives';
 	    	});
-	    	return networkNights.length;
+	    	return $scope.networkEvents.length;
 	    };
+	    
+	    var getCorePercent = function() {
+	    	var coreMeetings = $scope.networkEvents.filter( function (event) {
+	    		return event.eventType === 'Core Meeting';
+	    	});
+	    	return coreMeetings.length;
+	    };
+	    
+	    var getTablePercent = function() {
+	    	var connectorMeetings = $scope.networkEvents.filter( function (event) {
+	    		return event.eventType === 'Connector Table Meeting';
+	    	});
+	    	return connectorMeetings.length;
+	    };
+	    
+	    $scope.networkPercent = getNetworkNightPercent();
+	    $scope.corePercent = getCorePercent();
+	    $scope.tablePercent = getTablePercent();
 	    
 		$scope.memSinceMonth = function(member) {
 			var newDate = new Date(member.created);
