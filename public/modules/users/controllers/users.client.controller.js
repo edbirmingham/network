@@ -11,6 +11,11 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 		// var participations = Participations.query();
 	    $scope.networkEvents = NetworkEvents.query();
 	    
+	    $scope.setParticipant = function(participant) {
+	    	$scope.selectedPart = participant._id;
+	    	$scope.user.participant = participant._id;
+	    };
+	    
 	    
 	    var getNetworkNightPercent = function() {
 	    	var networkNights = $scope.networkEvents.filter( function (event) {
@@ -82,6 +87,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 				$scope.user.email = '';
 				$scope.user.username = '';
 				$scope.user.password = '';
+				$scope.selectedPart = null;
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});

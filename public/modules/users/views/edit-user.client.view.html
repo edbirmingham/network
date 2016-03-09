@@ -14,7 +14,8 @@
 				<div class="form-group">
                 	<label class="control-label" for="participant">Link Participant</label>
                     <div class="controls">
-                		<input type="text" id="participant" name="participant" ng-model="selected" typeahead-editable="false" typeahead="participant.listName() for participant in findParticipants($viewValue)" class="form-control" placeholder="Link Participant"> 
+                		<input type="text" id="participantSearch" name="participant" ng-model="selected" typeahead-on-select="setParticipant($item)" typeahead-editable="false" typeahead="participant.listName() for participant in findParticipants($viewValue)" class="form-control" placeholder="Link Participant">
+                		<span data-ng-bind="user.participant.displayName"></span>
                 	</div>
                 </div>
                 <div class="form-group">
