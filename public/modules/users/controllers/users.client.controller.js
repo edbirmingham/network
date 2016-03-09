@@ -5,6 +5,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 	function($scope, $stateParams, $location, Authentication, Users) {
 		$scope.authentication = Authentication;
 		$scope.user = {};
+<<<<<<< HEAD
 		$scope.user.roles = ['user'];
 
 		// Create new User
@@ -19,6 +20,20 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 		//		this.push(role);
 		//	}, user.roles);
 			
+=======
+		$scope.roles = [];
+		$scope.user.roles = ['user'];
+		$scope.isConnector = false;
+		// Create new User
+		$scope.create = function() {
+			// Create new User object
+			if($scope.isConnector === true) {
+				$scope.user.roles = ['user', 'connector'];
+			}
+			
+			var user = new Users ($scope.user);
+			
+>>>>>>> 8a0b78252aceac44c2b981994d5323ef33ae5f85
 			// Redirect after save
 			user.$save(function(response) {
 				$location.path('users/' + response._id);
