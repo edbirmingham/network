@@ -37,6 +37,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 	    $scope.corePercent = getCorePercent();
 	    $scope.tablePercent = getTablePercent();
 	    
+
 		$scope.memSinceMonth = function(member) {
 			var newDate = new Date(member.created);
 			var testDate = new Date();
@@ -133,7 +134,6 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			else {
 				return false;
 			}
-			
 		};
 		
 		$scope.setConnector = function() {
@@ -148,7 +148,6 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 				}
 			}
 		};
-		
 
 		$scope.getRegisteredMembersMonth = function() {
 			
@@ -175,5 +174,6 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 		$scope.getActions = function () {
 			return Actions.query();
 		};
+
 	}
 ]);
