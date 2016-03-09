@@ -10,9 +10,9 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 		$scope.members = Members.query();
 		// var participations = Participations.query();
 	    var networkEvents = NetworkEvents.query();
-	    //$scope.total = $scope.getNetworkNightPercent();
+	   // $scope.total = getNetworkNightPercent();
 	    
-	    $scope.getNetworkNightPercent = function() {
+	    var getNetworkNightPercent = function() {
 	    	var networkNights = networkEvents.filter( function (event) {
 	    		return event.type === 'Raise Up Initiatives';
 	    	});
