@@ -6,11 +6,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 		$scope.authentication = Authentication;
 		$scope.user = {};
 		$scope.user.roles = ['user'];
-<<<<<<< HEAD
 
-=======
-		
->>>>>>> Made updating roles possible
 		// Create new User
 		$scope.create = function() {
 			// Create new User object
@@ -19,14 +15,10 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 		//	}
 			var user = new Users ($scope.user);
 			
-<<<<<<< HEAD
-
-=======
 		//	angular.forEach($scope.roles, function(role) {
 		//		this.push(role);
 		//	}, user.roles);
 			
->>>>>>> Made updating roles possible
 			// Redirect after save
 			user.$save(function(response) {
 				$location.path('users/' + response._id);
@@ -97,10 +89,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 		$scope.removeRole = function(roles, roleIndex) {
 			roles.splice(roleIndex, 1);
 		};
-<<<<<<< HEAD
 
-=======
->>>>>>> Made updating roles possible
 		
 	}
 ]);
