@@ -15,7 +15,7 @@
 		  <dt>Connector</dt>
 		  <dd data-ng-bind="user.roles.indexOf('connector') > -1"></dd>
 		  <dt>Linked Participant</dt>
-		  <dd data-ng-bind="user.participant"></dd>
+		  <dd data-ng-bind="user.participant.displayName"></dd>
 		</dl>
 	</div>
 	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id != user._id))">
