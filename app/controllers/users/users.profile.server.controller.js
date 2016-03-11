@@ -20,6 +20,7 @@ exports.update = function(req, res) {
 	// If authenticated user isn't admin, disallow from
 	// updating user roles
 	if(req.user.roles.indexOf('admin') < 0) {
+		// Set updated array to original array
 		req.body.roles = user.roles;
 	}
 
