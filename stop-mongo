@@ -1,0 +1,6 @@
+#!/bin/bash
+MONPATH="/home/ubuntu/workspace/mongo"
+
+echo "Stopping mongo."
+mongod --shutdown --dbpath $MONPATH
+exit 0

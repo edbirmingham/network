@@ -1,0 +1,30 @@
+#!/bin/bash
+MONPATH="/home/ubuntu/workspace/mongo"
+SAMPATH="/home/ubuntu/workspace/sample_data"
+DBNAME="network-dev"
+LOGFILE="$MONPATH/mongod.log"
+
+echo "Checking for mongo installation."
+if [ ! -d $MONPATH ];
+then
+    echo "Creating new mongo directory."
+    mkdir $MONPATH
+fi
+
+echo "Checking to see if mongo is running."
+MONGORUN="$(pidof mongod | wc -l)"
+if [ $MONGORUN = "0" ]; then
+    echo "Staring mongo."
+    mongod --dbpath $MONPATH --smallfiles --fork --logpath $LOGFILE
+else
+    echo "Mongo already running."
+fi
+
+echo "Restoring data to create sample database."
+for f in $SAMPATH/$DBNAME/*bson
+do
+    JUSTFILE=$(basename $f)
+    JUSTCOLL=$(echo "$JUSTFILE" | cut -d'.' -f 1)
+    mongorestore --collection $JUSTCOLL --db $DBNAME $f
+done
+exit 0
