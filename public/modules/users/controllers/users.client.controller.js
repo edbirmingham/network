@@ -1,48 +1,45 @@
 'use strict';
 
 // Users controller
-angular.module('users').controller('UsersController', ['$scope', '$stateParams', '$location', 'Authentication','Actions', 'Members','NetworkEvents', 'Participants', 'Participations', 'Users',
-	function($scope, $stateParams, $location, Authentication, Actions, Members, NetworkEvents, Participants, Participations, Users) {
+angular.module('users').controller('UsersController', ['$scope', '$filter', '$stateParams', '$location', 'Authentication','Actions', 'Members','NetworkEvents', 'Participants', 'Participations', 'Users',
+	function($scope, $filter, $stateParams, $location, Authentication, Actions, Members, NetworkEvents, Participants, Participations, Users) {
 		$scope.authentication = Authentication;
 		$scope.user = {};
 		var currentUser = $scope.authentication.user;
 		$scope.actions = Actions.query();
 		$scope.members = Members.query();
-		// var participations = Participations.query();
-	    $scope.networkEvents = NetworkEvents.query();
-	    
+		$scope.networkEvents = NetworkEvents.query();
+		//$scope.participations = Participations.query();
+		
 	    $scope.setParticipant = function(participant) {
 	    	$scope.selectedPart = participant._id;
 	    	$scope.user.participant = participant._id;
 	    };
 	    
-	    
-	    var getNetworkNightPercent = function() {
-	    	var networkNights = $scope.networkEvents.filter( function (event) {
-	    		return event.eventType === 'Raise Up Initiatives';
-	    	});
-	    	return $scope.networkEvents.length;
+	    $scope.getMeetingPercentage = function(meetingType) {
+	    	var networkEvents = $scope.networkEvents;
+	    	
+	    	function getTypeOfMeeting(event) {
+	    		return event.eventType === meetingType;
+	    	}
+	    	
+	    	var events = networkEvents.filter(getTypeOfMeeting);
+	    	var typeTotal = events.length;
+	    	if(typeTotal === 0) {
+	    		return 100;
+	    	}
+	    	else {
+	    		var userParticipations = 0;	
+		    //	for (var i = 0; i < events.length; i++) {
+		    		//var participations = Participations.query({networkEvent: events[i]._id});
+		    		
+		    //	}
+	    		userParticipations += 1;
+	    		return userParticipations / typeTotal * 100;
+	    	}
 	    };
 	    
-	    var getCorePercent = function() {
-	    	var coreMeetings = $scope.networkEvents.filter( function (event) {
-	    		return event.eventType === 'Core Meeting';
-	    	});
-	    	return coreMeetings.length;
-	    };
 	    
-	    var getTablePercent = function() {
-	    	var connectorMeetings = $scope.networkEvents.filter( function (event) {
-	    		return event.eventType === 'Connector Table Meeting';
-	    	});
-	    	return connectorMeetings.length;
-	    };
-	    
-	    $scope.networkPercent = getNetworkNightPercent();
-	    $scope.corePercent = getCorePercent();
-	    $scope.tablePercent = getTablePercent();
-	    
-
 		$scope.memSinceMonth = function(member) {
 			var newDate = new Date(member.created);
 			var testDate = new Date();
@@ -153,18 +150,6 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			  		$scope.user.roles.splice(idx, 1);
 				}
 			}
-		};
-
-		$scope.getRegisteredMembersMonth = function() {
-			
-		};
-		
-		$scope.getRegisteredMembersSem = function() {
-			
-		};
-		
-		$scope.getRegisteredMembersYTD = function() {
-			
 		};
 
 		$scope.getNoMatchesCount = function() {
