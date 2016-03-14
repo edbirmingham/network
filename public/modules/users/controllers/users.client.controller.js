@@ -5,6 +5,7 @@ angular.module('users').controller('UsersController', ['$scope', '$filter', '$st
 	function($scope, $filter, $stateParams, $location, Authentication, Actions, Members, NetworkEvents, Participants, Participations, Users) {
 		$scope.authentication = Authentication;
 		$scope.user = {};
+		$scope.user.roles = ['user'];
 		var currentUser = $scope.authentication.user;
 		$scope.actions = Actions.query();
 		$scope.members = Members.query();
@@ -67,12 +68,13 @@ angular.module('users').controller('UsersController', ['$scope', '$filter', '$st
 			}
 		};
 		
-	
+
 		// Create new User
 		$scope.create = function() {
 			// Create new User object
+			
 			var user = new Users ($scope.user);
-
+			
 			// Redirect after save
 			user.$save(function(response) {
 				$location.path('users/' + response._id);
@@ -85,6 +87,7 @@ angular.module('users').controller('UsersController', ['$scope', '$filter', '$st
 				$scope.user.username = '';
 				$scope.user.password = '';
 				$scope.selectedPart = null;
+				$scope.user.roles = ['user'];
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -109,6 +112,7 @@ angular.module('users').controller('UsersController', ['$scope', '$filter', '$st
 
 		// Update existing User
 		$scope.update = function() {
+			
 			var user = $scope.user;
 
 			user.$update(function() {
@@ -164,6 +168,19 @@ angular.module('users').controller('UsersController', ['$scope', '$filter', '$st
 		
 		$scope.getActions = function () {
 			return Actions.query();
+		};
+
+		// Add the selected role to the roles list.
+		$scope.addRole = function(roles, role) {
+			if (roles.indexOf(role) < 0) {
+				roles.push(role);
+			}
+			
+		};
+		
+		// Remove role from the role list.
+		$scope.removeRole = function(roles, roleIndex) {
+			roles.splice(roleIndex, 1);
 		};
 
 	}
