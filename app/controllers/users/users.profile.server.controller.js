@@ -17,17 +17,12 @@ exports.update = function(req, res) {
 	var user = req.requested_user;
 	var message = null;
 
-<<<<<<< HEAD
-	// For security measurement we remove the roles from the req.body object
-//	delete req.body.roles;
-=======
 	// If authenticated user isn't admin, disallow from
 	// updating user roles
 	if(req.user.roles.indexOf('admin') < 0) {
-		// Set updated array to original array
+		 //Set updated array to original array
 		req.body.roles = user.roles;
 	}
->>>>>>> make-connector
 
 	if (user) {
 		// Merge existing user

@@ -6,7 +6,8 @@ angular.module('users').controller('UsersController', ['$scope', '$filter', '$st
 		$scope.authentication = Authentication;
 		$scope.user = {};
 		$scope.user.roles = ['user'];
-		var currentUser = $scope.authentication.user;
+		$scope.user.participant = null;
+		$scope.currentUser = $scope.authentication.user;
 		$scope.actions = Actions.query();
 		$scope.members = Members.query();
 		$scope.networkEvents = NetworkEvents.query();
@@ -87,6 +88,7 @@ angular.module('users').controller('UsersController', ['$scope', '$filter', '$st
 				$scope.user.username = '';
 				$scope.user.password = '';
 				$scope.selectedPart = null;
+				$scope.user.participant = null;
 				$scope.user.roles = ['user'];
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
@@ -134,7 +136,7 @@ angular.module('users').controller('UsersController', ['$scope', '$filter', '$st
 			});
 		};
 		
-		$scope.isConnector = function(currentUser) {
+		$scope.isConnector = function() {
 			if(currentUser.roles.indexOf('connector') > -1) {
 				return true;
 			}
