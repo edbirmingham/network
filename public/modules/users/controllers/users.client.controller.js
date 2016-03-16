@@ -32,6 +32,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 
 		// Remove existing User
 		$scope.remove = function(user) {
+			
 			if ( user ) { 
 				user.$remove();
 
