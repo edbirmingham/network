@@ -66,7 +66,7 @@
 			var sampleParticipants = [sampleParticipant];
 
 			// Set GET response
-			$httpBackend.expectGET('participants').respond(sampleParticipants);
+			$httpBackend.expectGET('participants?page=1').respond({count: 1, results: sampleParticipants});
 
 			// Run controller functionality
 			scope.find();
