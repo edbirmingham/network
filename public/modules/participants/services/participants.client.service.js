@@ -10,7 +10,6 @@ angular.module('participants').factory('Participants', ['$resource',
 			},
 			query: {
 				method: 'GET',
-				isArray: false
 			}
 		});
 		

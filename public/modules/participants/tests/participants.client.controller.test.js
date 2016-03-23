@@ -63,17 +63,18 @@
 			});
 
 			// Create a sample Participants array that includes the new Participant
-			var sampleParticipants = [sampleParticipant];
+			var sampleParticipants = {count: 1, results: [sampleParticipant]};
 
 			// Set GET response
-			$httpBackend.expectGET('participants?page=1').respond({count: 1, results: sampleParticipants});
+			$httpBackend.expectGET('participants?page=1').respond(sampleParticipants);
+			$httpBackend.expectGET('participants?page=1').respond(sampleParticipants);
 
 			// Run controller functionality
 			scope.find();
 			$httpBackend.flush();
 
 			// Test scope value
-			expect(scope.participants).toEqualData(sampleParticipants);
+			expect(scope.participants).toEqualData([sampleParticipant]);
 		}));
 
 		it('$scope.findOne() should create an array with one Participant object fetched from XHR using a participantId URL parameter', inject(function(Participants) {
@@ -93,6 +94,9 @@
 
 			// Set GET response
 			$httpBackend.expectGET(/participants\/([0-9a-fA-F]{24})$/).respond(sampleParticipant);
+			// deal with $watch
+			$httpBackend.expectGET('participants?page=1').respond({count: 0, results: []});
+
 
 			// Run controller functionality
 			scope.findOne();
@@ -128,9 +132,11 @@
 
 			// Fixture mock form input values
 			scope.participant = sampleParticipantPostData;
-
+			
 			// Set POST response
 			$httpBackend.expectPOST('participants', sampleParticipantPostData).respond(sampleParticipantResponse);
+			// deal with $watch
+			$httpBackend.expectGET('participants?page=1').respond({count: 0, results: []});			
 
 			// Run controller functionality
 			scope.create();
@@ -161,6 +167,8 @@
 
 			// Set PUT response
 			$httpBackend.expectPUT(/participants\/([0-9a-fA-F]{24})$/).respond();
+			// deal with $watch
+			$httpBackend.expectGET('participants?page=1').respond({count: 0, results: []});			
 
 			// Run controller functionality
 			scope.update();
@@ -178,9 +186,11 @@
 
 			// Create new Participants array and include the Participant
 			scope.participants = [sampleParticipant];
-
+			
 			// Set expected DELETE response
 			$httpBackend.expectDELETE(/participants\/([0-9a-fA-F]{24})$/).respond(204);
+			// deal with $watch
+			$httpBackend.expectGET('participants?page=1').respond({count: 0, results: []});			
 
 			// Run controller functionality
 			scope.remove(sampleParticipant);
