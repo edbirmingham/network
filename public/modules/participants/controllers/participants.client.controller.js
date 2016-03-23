@@ -89,7 +89,6 @@ angular.module('participants').controller('ParticipantsController', ['$scope', '
 		   $scope.participant = new Participants({});
 		};
 		$scope.$watch('currentPage', function(n, o) {
-			console.log(n,o);
 			$scope.find();	
 		});
 	}
