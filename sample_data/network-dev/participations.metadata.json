@@ -1,0 +1,1 @@
+{ "indexes" : [ { "v" : 1, "key" : { "_id" : 1 }, "name" : "_id_", "ns" : "network-dev.participations" }, { "v" : 1, "unique" : true, "key" : { "participant" : 1, "networkEvent" : 1 }, "name" : "participant_1_networkEvent_1", "ns" : "network-dev.participations", "dropDups" : true, "background" : true, "safe" : null } ] }

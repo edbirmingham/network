@@ -1,0 +1,14 @@
+#!/bin/bash
+MONPATH="/home/ubuntu/workspace/mongo"
+LOGFILE="$MONPATH/mongod.log"
+
+echo "Checking to see if mongo is running."
+MONGORUN="$(pidof mongod | wc -l)"
+if [ $MONGORUN = "0" ]; then
+    echo "Staring mongo."
+    mongod --dbpath $MONPATH --smallfiles --fork --logpath $LOGFILE
+else
+    echo "Mongo already running."
+fi
+
+exit 0

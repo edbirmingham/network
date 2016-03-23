@@ -1,0 +1,39 @@
+#!/bin/bash
+MONPATH="/home/ubuntu/workspace/mongo"
+SAMPATH="/home/ubuntu/workspace/sample_data"
+DBNAME="network-dev"
+LOGFILE="$MONPATH/mongod.log"
+
+echo "Checking for mongo installation."
+if [ ! -d $MONPATH ];
+then
+    echo "Creating new mongo directory."
+    mkdir $MONPATH
+fi
+
+echo "Checking to see if mongo is running."
+MONGORUN="$(pidof mongod | wc -l)"
+if [ $MONGORUN = "0" ]; then
+    echo "Staring mongo."
+    mongod --dbpath $MONPATH --smallfiles --fork --logpath $LOGFILE
+else
+    echo "Mongo already running."
+fi
+
+echo "Ensure the path for export exists."
+if [ ! -d $SAMPATH ]; then
+    mkdir $SAMPATH
+
+    if [ ! -d $SAMPATH ]; then
+        echo "Could not create export path."
+        exit 1
+    fi
+    
+    echo "Export path created."
+else
+    echo "Path exists."
+fi
+
+echo "Exporting data to create sample database source."
+mongodump --db $DBNAME --out $SAMPATH
+exit 0
