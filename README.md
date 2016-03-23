@@ -60,8 +60,9 @@ git pull upstream master
 This setup uses Vagrant to create a virtual machine for the development environment.  The virtual machine runs on your computer.  Therefore you will need a good computer with plenty of memory and hard-disk space. The virtual machine keeps all the development safely isolated to avoid conflicts with other stuff on your computer.
 * Create a Github account
 * Fork [Network](https://github.com/edbirmingham/network)
-* Install VirtualBox
-* Install Vagrant
+* Install Ruby using [RVM](https://rvm.io/) (use --disable-binaries to install from source)
+* Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+* Install [Vagrant](https://www.vagrantup.com/downloads.html)
 * Clone your forked Network repo
 ```
 git clone git@github.com:<your-github-id>/network.git
