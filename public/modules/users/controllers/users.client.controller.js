@@ -5,12 +5,14 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 	function($scope, $stateParams, $location, Authentication, Users) {
 		$scope.authentication = Authentication;
 		$scope.user = {};
+		$scope.user.roles = ['user'];
 
 		// Create new User
 		$scope.create = function() {
 			// Create new User object
+			
 			var user = new Users ($scope.user);
-
+			
 			// Redirect after save
 			user.$save(function(response) {
 				$location.path('users/' + response._id);
@@ -22,6 +24,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 				$scope.user.email = '';
 				$scope.user.username = '';
 				$scope.user.password = '';
+				$scope.user.roles = ['user'];
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -29,6 +32,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 
 		// Remove existing User
 		$scope.remove = function(user) {
+			
 			if ( user ) { 
 				user.$remove();
 
@@ -46,6 +50,7 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 
 		// Update existing User
 		$scope.update = function() {
+			
 			var user = $scope.user;
 
 			user.$update(function() {
@@ -66,5 +71,20 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 				userId: $stateParams.userId
 			});
 		};
+		
+		// Add the selected role to the roles list.
+		$scope.addRole = function(roles, role) {
+			if (roles.indexOf(role) < 0) {
+				roles.push(role);
+			}
+			
+		};
+		
+		// Remove role from the role list.
+		$scope.removeRole = function(roles, roleIndex) {
+			roles.splice(roleIndex, 1);
+		};
+
+		
 	}
 ]);

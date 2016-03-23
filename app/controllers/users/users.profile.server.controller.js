@@ -17,14 +17,19 @@ exports.update = function(req, res) {
 	var user = req.requested_user;
 	var message = null;
 
-	// For security measurement we remove the roles from the req.body object
-	delete req.body.roles;
+	// If authenticated user isn't admin, disallow from
+	// updating user roles
+	if(req.user.roles.indexOf('admin') < 0) {
+		// Set updated array to original array
+		req.body.roles = user.roles;
+	}
 
 	if (user) {
 		// Merge existing user
 		user = _.extend(user, req.body);
 		user.updated = Date.now();
 		user.displayName = user.firstName + ' ' + user.lastName;
+		
 
 		user.save(function(err) {
 			if (err) {

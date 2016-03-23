@@ -12,6 +12,8 @@
 		  <a ng-href="mailto:user.email"><dd data-ng-bind="user.email"></dd></a>
 		  <dt>Username</dt>
 		  <dd data-ng-bind="user.username"></dd>
+		  <dt>Type</dt>
+		  <dd data-ng-bind="user.roles"></dd>
 		</dl>
 	</div>
 	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id != user._id))">
