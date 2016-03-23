@@ -8,4 +8,5 @@ exports.index = function(req, res) {
 		user: req.user || null,
 		request: req
 	});
+	
 };

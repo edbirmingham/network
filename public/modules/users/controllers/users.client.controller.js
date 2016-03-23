@@ -24,7 +24,7 @@ angular.module('users').controller('UsersController', ['$scope', '$filter', '$st
 	    	function getTypeOfMeeting(event) {
 	    		return event.eventType === meetingType;
 	    	}
-	    	
+	    	var query = {};
 	    	var events = networkEvents.filter(getTypeOfMeeting);
 	    	var typeTotal = events.length;
 	    	if(typeTotal === 0) {
@@ -137,7 +137,7 @@ angular.module('users').controller('UsersController', ['$scope', '$filter', '$st
 		};
 		
 		$scope.isConnector = function() {
-			if(currentUser.roles.indexOf('connector') > -1) {
+			if($scope.currentUser.roles.indexOf('connector') > -1) {
 				return true;
 			}
 			else {
