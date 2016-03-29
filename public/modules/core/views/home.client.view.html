@@ -12,20 +12,20 @@
 		<br>
 	</div>
 </section>
-<section data-ng-controller="UsersController" ng-show="authentication.user.roles.indexOf('connector') > -1" ng-model-options=" { debounce: 1500 }">
+<section data-ng-controller="DashController" ng-show="authentication.user.roles.indexOf('connector') > -1" ng-model-options=" { debounce: 1500 }">
 	<body>
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-6">
 					<h4 class="text-center">Network Members Registered</h4>
 					<div class="col-md-6">
-						<h3 class="text-center">{{ (members | filter: { user: authentication.user._id } | filter: memSinceYear ).length }}</h3>
+						<h3 class="text-center">{{dash.yearMembers}}</h3>
 						<h6 class="text-center">YTD since August</h6>
 					</div>
 					<div class="col-md-6">
-						<h3 class="text-center">{{ (members | filter: { user: authentication.user._id } | filter: memSinceSem ).length }}</h3>
+						<h3 class="text-center">{{ dash.semMembers }}</h3>
 						<h5 class="text-center">last semester</h5>
-						<h3 class="text-center">{{ (members | filter: { user: authentication.user._id } | filter: memSinceMonth ).length }}</h3>
+						<h3 class="text-center">{{ dash.monthMembers }}</h3>
 						<h5 class="text-center">last month</h5>
 					</div>
 				</div>
@@ -52,11 +52,11 @@
 						<!-- Drop down-->
 						<div class="dropdown">
 						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-						  	<h4>{{(actions | filter: {connector: authentication.user._id, status: 'No match'}).length}}</h4>
+						  	<h4>{{connectedActions.length}}</h4>
 						    <span class="caret"></span>
 						  </button>
 						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-						    <li data-ng-repeat="action in actions | filter: {connector: authentication.user._id, status: ['No match'] }">
+						    <li data-ng-repeat="action in connectedActions | filter: {status: ['No match'] }">
 						    	<a href="#!/actions/{{action._id}}">{{action.description}} -- {{action.type}}</a></li>
 						  </ul>
 						</div>
@@ -66,11 +66,11 @@
 						<!-- Drop down-->
 						<div class="dropdown">
 						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							<h4 class="text-center">{{(actions | filter: {connector: authentication.user._id, status: 'Match pending'}).length}}</h4>
+							<h4 class="text-center">{{connectedActions.length}}</h4>
 						    <span class="caret"></span>
 						  </button>
 						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-						    <li data-ng-repeat="action in actions | filter: {connector: authentication.user._id, status: 'Match pending' }">
+						    <li data-ng-repeat="action in connectedActions | filter: {status: 'Match pending' }">
 						    	<a href="#!/actions/{{action._id}}">{{action.description}} -- {{action.type}}</a></li>
 						  </ul>
 						</div>
@@ -80,11 +80,11 @@
 						<!-- Drop down-->
 						<div class="dropdown">
 						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							<h4 class="text-center">{{(actions | filter: {connector: authentication.user._id, status: ['Match active']}).length}}</h4>
+							<h4 class="text-center">{{connectedActions.length}}</h4>
 						    <span class="caret"></span>
 						  </button>
 						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-						    <li data-ng-repeat="action in actions | filter: {connector: authentication.user._id, status: 'Match active' }">
+						    <li data-ng-repeat="action in connectedActions | filter: {status: 'Match active' }">
 						    	<a href="#!/actions/{{action._id}}">{{action.description}} -- {{action.type}}</a></li>
 						  </ul>
 						</div>
@@ -94,11 +94,11 @@
 						<!-- Drop down-->
 						<div class="dropdown">
 						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							<h4 class="text-center">{{(actions | filter: {connector: authentication.user._id, status: 'Match complete'}).length}}</h4>
+							<h4 class="text-center">{{connectedActions.length}}</h4>
 						    <span class="caret"></span>
 						  </button>
 						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-						    <li data-ng-repeat="action in actions | filter: {connector: authentication.user._id, status: 'Match complete' }">
+						    <li data-ng-repeat="action in connectedActions | filter: {status: 'Match complete' }">
 						    	<a href="#!/actions/{{action._id}}">{{action.description}} -- {{action.type}}</a></li>
 						  </ul>
 						</div>
@@ -109,15 +109,15 @@
 				<h4 class="text-center">Attendance Percentage</h4>
 				<div class="col-md-4">
 					<h5 class="text-center">Network Nights</h5>
-					<h3 class="text-center">{{ getMeetingPercentage('Raise Up Initiatives') }}%</h3>
+					<h3 class="text-center">{{netPercent}}%</h3>
 				</div>
 				<div class="col-md-4">
 					<h5 class="text-center">Connector Table Meetings</h5>
-					<h3 class="text-center" >{{ getMeetingPercentage('Connector Table Meeting') }}%</h3>
+					<h3 class="text-center" >{{tablePercent}}%</h3>
 				</div>
 				<div class="col-md-4">
 					<h5 class="text-center">Core Meetings</h5>
-					<h3 class="text-center">{{ getMeetingPercentage('Core Team Meeting')}}%</h3>
+					<h3 class="text-center">{{corePercent}}%</h3>
 				</div>
 			</div>
 		</div>

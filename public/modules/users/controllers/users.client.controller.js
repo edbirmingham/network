@@ -7,69 +7,12 @@ angular.module('users').controller('UsersController', ['$scope', '$filter', '$st
 		$scope.user = {};
 		$scope.user.roles = ['user'];
 		$scope.user.participant = null;
-		$scope.currentUser = $scope.authentication.user;
-		$scope.actions = Actions.query();
-		$scope.members = Members.query();
-		$scope.networkEvents = NetworkEvents.query();
-		//$scope.participations = Participations.query();
 		
 	    $scope.setParticipant = function(participant) {
 	    	$scope.selectedPart = participant._id;
 	    	$scope.user.participant = participant._id;
 	    };
 	    
-	    $scope.getMeetingPercentage = function(meetingType) {
-	    	var networkEvents = $scope.networkEvents;
-	    	
-	    	function getTypeOfMeeting(event) {
-	    		return event.eventType === meetingType;
-	    	}
-	    	var query = {};
-	    	var events = networkEvents.filter(getTypeOfMeeting);
-	    	var typeTotal = events.length;
-	    	if(typeTotal === 0) {
-	    		return 100;
-	    	}
-	    	else {
-	    		var userParticipations = 0;	
-		    //	for (var i = 0; i < events.length; i++) {
-		    		//var participations = Participations.query({networkEvent: events[i]._id});
-		    		
-		    //	}
-	    		userParticipations += 1;
-	    		return userParticipations / typeTotal * 100;
-	    	}
-	    };
-	    
-	    
-		$scope.memSinceMonth = function(member) {
-			var newDate = new Date(member.created);
-			var testDate = new Date();
-			testDate.setMonth(testDate.getMonth() - 1);
-			if(newDate >= testDate) {
-				return member;
-			}
-		};
-		
-		$scope.memSinceYear = function(member) {
-			var newDate = new Date(member.created);
-			var testDate = new Date();
-			testDate.setYear(testDate.getYear() - 1);
-			if(newDate >= testDate) {
-				return member;
-			}
-		};
-		
-		$scope.memSinceSem = function(member) {
-			var newDate = new Date(member.created);
-			var testDate = new Date();
-			testDate.setMonth(testDate.getMonth() - 4);
-			if(newDate >= testDate) {
-				return member;
-			}
-		};
-		
-
 		// Create new User
 		$scope.create = function() {
 			// Create new User object
@@ -134,33 +77,6 @@ angular.module('users').controller('UsersController', ['$scope', '$filter', '$st
 			$scope.user = Users.get({ 
 				userId: $stateParams.userId
 			});
-		};
-		
-		$scope.isConnector = function() {
-			if($scope.currentUser.roles.indexOf('connector') > -1) {
-				return true;
-			}
-			else {
-				return false;
-			}
-		};
-		
-		$scope.setConnector = function() {
-			if($scope.isconnector) {
-				$scope.user.roles.push('connector');
-			} else {
-				
-				while (true) {
-			  		var idx = $scope.user.roles.indexOf('connector');
-			  		if (idx === -1) break;
-			  		$scope.user.roles.splice(idx, 1);
-				}
-			}
-		};
-
-		$scope.getNoMatchesCount = function() {
-			console.log(Authentication.user._id);
-			return Actions.where( {status: ['Red']} ).count();
 		};
 		
 		// Find existing participants

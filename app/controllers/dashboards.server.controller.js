@@ -9,6 +9,7 @@ var mongoose = require('mongoose'),
 	Action = mongoose.model('Action'),
 	NetworkEvent = mongoose.model('NetworkEvent'),
 	Participation = mongoose.model('Participation'),
+	User = mongoose.model('User'),
 	_ = require('lodash');
 	
 
@@ -64,7 +65,7 @@ var lastMonth = getLastMonth();
 
 
 // get list of all members registered by connector
-exports.getRegisteredMembers = function(req, res) {
+var getRegisteredMembers = function(req, res) {
 	var query = {};
 	if(req.query.connector) {
 		query.connector = req.query.connector;
@@ -83,36 +84,24 @@ exports.getRegisteredMembers = function(req, res) {
 };
 
 //  return list of all connected actions
-exports.getActions = function(req, res) {
-	var query = {};
-	if(req.query.connector) {
-		query.connector = req.query.connector;
-	}
-   	Action.find(query)
-   		.exec(function(err, actions) {
-   			if(err) {
-   				return res.status(400).send({
-   					message: errorHandler.getErrorMessage(err)
-   				});
-   			} else {
-   				res.jsonp(actions);
-   			}
-   		});
+var getActions = function(connId) {
+   	var conActions = Action.find({connector: connId}).exec() ;
+   	return conActions;
 };
 
-exports.getPercentage = function(req, res) {
+var getPercentage = function(eventType, connId) {
 	var query = {};
-	query.eventType = req.query.eventType;
+	query.eventType = eventType;
 	
-}
+};
 
-exports.getParticipationCount = function(req, res) {
+var getParticipationCount = function(req, res) {
 	var query = {};
 	if(req.query.participant) {
 		query.participant = req.query.participant;	
 	}
 	
-}
+};
 
 var getEvents = function() {
 	var events = {};
@@ -133,21 +122,40 @@ var getAttendances = function(connParticipant) {
 	Participation.find({participant: connParticipant}).count();
 };
 
+
+// return dashboard information
+exports.read = function(req, res) {
+	// compile dashboard information
+	var userId = req.query.userId;
+	var dashInfo = {};
+	//dashInfo.registeredMembers = getRegisteredMembers(userId);
+	//dashInfo.connectedActions = getActions(userId);
+	//dashInfo.netPercent = getPercentage('Raise Up Initiatives', userId);
+	//dashInfo.tablePercent = getPercentage('Connector Table Meeting', userId);
+	//dashInfo.corePercent = getPercentage('Core Team Meeting', userId);
+	dashInfo.yearMembers = 15;
+	dashInfo.semMembers = 10;
+	dashInfo.monthMembers = 5;
+	dashInfo.connectedActions = [1,2,3];
+	dashInfo.netPercent = 25;
+	dashInfo.tablePercent = 35;
+	dashInfo.corePercent = 45;
 	
-/*
-*  Get Dashoard Information
-*/
-exports.getDashboard = function(req, res) {
-    var results = {
-    	message: 'Hello from the server'
-    };
-    
-    var dashInfo = {};
-   //	dashInfo.memberCount = findRegisteredMembers(req.connector);
-   // dashInfo.connectedActions = getConnectedActions(req.connector);
-	dashInfo.attendances = getAttendances(req.connector);
-    res.jsonp(results);
+	res.jsonp(dashInfo);
 };
 
+/**
+ * Connector middleware
+ */
+exports.connectorByID = function(req, res, next, id) { 
+	User.findById(id)
+		.populate('participant', 'displayName')
+		.exec(function(err, user) {
+		if (err) return next(err);
+		if (! user) return next(new Error('Failed to load Connector ' + id));
+		req.requested_user = user ;
+		next();
+	});
+};
 
 	
