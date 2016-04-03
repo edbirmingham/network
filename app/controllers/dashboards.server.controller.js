@@ -126,7 +126,7 @@ var getAttendances = function(connParticipant) {
 // return dashboard information
 exports.read = function(req, res) {
 	// compile dashboard information
-	var userId = req.query.userId;
+	var userId = req.params.connectorId;
 	var dashInfo = {};
 	//dashInfo.registeredMembers = getRegisteredMembers(userId);
 	//dashInfo.connectedActions = getActions(userId);
@@ -140,6 +140,9 @@ exports.read = function(req, res) {
 	dashInfo.netPercent = 25;
 	dashInfo.tablePercent = 35;
 	dashInfo.corePercent = 45;
+	
+	var promise = Member.find({_id: userId,}).count().exec();
+	
 	
 	res.jsonp(dashInfo);
 };

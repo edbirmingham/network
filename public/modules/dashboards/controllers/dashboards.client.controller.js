@@ -1,22 +1,28 @@
 'use strict';
 
 // Dashboard controller
-angular.module('dashboard').controller('DashController', ['$scope', '$stateParams', '$location', 'Authentication', 'Dashboards', 'Participants',
-	function($scope, $stateParams, $location, Authentication, Dashboards, Participants) {
+angular.module('dashboards').controller('DashController', ['$scope', '$stateParams', '$location', 'Authentication', 'Dashboards',
+	function($scope, $stateParams, $location, Authentication, Dashboards) {
 		$scope.authentication = Authentication;
-		var currentUser = $scope.authentication.user;
+		var user = Authentication.user;
+		$scope.currentUser = $scope.authentication.user;
 		var query = {};
+		$scope.info = 25;
+		
 		query.userId = Authentication.user._id;
 		
 		// Check if current user is a Connector
 		$scope.isConnector = function(user) {
-			return user.roles.indexOf('connector') > -1;
+			return user && user.roles.indexOf('connector') > -1;
 		};
 		
 		// get dash info only if current user is a Connector
-	//	if (currentUser.indexOf('connector') > -1) {
-			$scope.dash = Dashboards.read(query);
-	//	}
+		if (user && user.roles.indexOf('connector') > -1) {
+			$scope.dash = Dashboards.read();
+		//	$scope.info = 50;
+		}
+		
+	//	$scope.dash.netPercent;
 		
 		
 			
