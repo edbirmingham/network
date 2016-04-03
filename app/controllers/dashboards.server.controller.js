@@ -124,7 +124,7 @@ var getAttendances = function(connParticipant) {
 
 
 // return dashboard information
-exports.read = function(req, res) {
+exports.get = function(req, res) {
 	// compile dashboard information
 	var userId = req.params.connectorId;
 	var dashInfo = {};

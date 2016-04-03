@@ -6,7 +6,8 @@ module.exports = function(app) {
 	
 	// GET route for connector Dashboard Information
 	app.route('/dashboards/:connectorId')
-	    .get(users.requiresLogin, dashboards.read);
+	    .get(users.requiresLogin, dashboards.get);
+	
 	// Finish by binding the Dashboard middleware
 	app.param('connectorId', dashboards.connectorByID);
 };
