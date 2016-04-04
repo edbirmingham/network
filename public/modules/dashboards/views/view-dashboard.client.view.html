@@ -5,13 +5,13 @@
 				<div class="col-md-6">
 					<h4 class="text-center">Network Members Registered</h4>
 					<div class="col-md-6">
-						<h3 class="text-center">{{info}}</h3>
+						<h3 class="text-center">{{dash.yearMembers}}</h3>
 						<h6 class="text-center">YTD since August</h6>
 					</div>
 					<div class="col-md-6">
-						<h3 class="text-center">{{ info }}</h3>
+						<h3 class="text-center">{{ dash.semMembers }}</h3>
 						<h5 class="text-center">last semester</h5>
-						<h3 class="text-center">{{ info }}</h3>
+						<h3 class="text-center">{{ dash.monthMembers }}</h3>
 						<h5 class="text-center">last month</h5>
 					</div>
 				</div>
@@ -38,11 +38,11 @@
 						<!-- Drop down-->
 						<div class="dropdown">
 						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-						  	<h4>{{info}}</h4>
+						  	<h4>{{dash.actions.length}}</h4>
 						    <span class="caret"></span>
 						  </button>
 						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-						    <li data-ng-repeat="action in dash.connectedActions">
+						    <li data-ng-repeat="action in dash.actions">
 						    	<a></a>{{action}}</li>
 						  </ul>
 						</div>
@@ -52,12 +52,12 @@
 						<!-- Drop down-->
 						<div class="dropdown">
 						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							<h4 class="text-center">{{info}}</h4>
+							<h4 class="text-center">{{dash.actions.length}}</h4>
 						    <span class="caret"></span>
 						  </button>
 						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-						    <li data-ng-repeat="action in dash.connectedActions">
-						    	<a></a>{{action}}</li>
+						    <li data-ng-repeat="action in dash.actions">
+						    	<a></a>{{action.description}}</li>
 						  </ul>
 						</div>
 					</div>
@@ -66,12 +66,12 @@
 						<!-- Drop down-->
 						<div class="dropdown">
 						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							<h4 class="text-center">{{ info }}</h4>
+							<h4 class="text-center">{{dash.actions.length}}</h4>
 						    <span class="caret"></span>
 						  </button>
 						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-						    <li data-ng-repeat="action in dash.connectedActions">
-						    	<a></a>{{action}}</li>
+						    <li data-ng-repeat="action in dash.actions">
+						    	<a></a>{{action.description}}</li>
 						  </ul>
 						</div>
 					</div>
@@ -80,12 +80,12 @@
 						<!-- Drop down-->
 						<div class="dropdown">
 						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							<h4 class="text-center">{{ info }}</h4>
+							<h4 class="text-center">{{ dash.actions.length }}</h4>
 						    <span class="caret"></span>
 						  </button>
 						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-						    <li data-ng-repeat="action in dash.connectedActions">
-						    	<a></a>{{action}}</li>
+						    <li data-ng-repeat="action in dash.actions">
+						    	<a></a>{{action.description}}</li>
 						  </ul>
 						</div>
 					</div>

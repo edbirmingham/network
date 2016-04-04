@@ -21,16 +21,7 @@ angular.module('dashboards').controller('DashController', ['$scope', '$statePara
 			$scope.dash = Dashboards.get({
 				connectorId: user._id
 			});
-		//	$scope.info = 50;
 		}
-		
-	//	$scope.dash.netPercent;
-		
-		
-			
-		
-		
-		
 	
 	}
 ]);

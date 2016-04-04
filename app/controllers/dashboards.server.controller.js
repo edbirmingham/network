@@ -141,10 +141,54 @@ exports.read = function(req, res) {
 	dashInfo.tablePercent = 35;
 	dashInfo.corePercent = 45;
 	
+	var id  = req.params.connectorId;
+	
+	var conQuery = {connector: id};
+	
+	var memQuery = {
+		user: id 
+		//became_member: {$gt: yearToDate}
+	};
+	
+	// Get list of connected actions
+	var promise = Action.find(conQuery).exec();
+	var dash  = {};
+	
+	promise.then(function(actions) {
+		dash.actions = [];
+		dash.actions = actions;
+		
+		// get year members
+		return Member.count(memQuery).exec();
+	})
+	.then(function(yearMembers) {
+		dash.yearMembers = yearMembers;
+		//memQuery.became_member = semester;
+		// Get semester members
+		return Member.count(memQuery).exec();
+	})
+	.then(function(semMembers) {
+		dash.semMembers = semMembers;
+		//memQuery.became_member = month;
+		// Get month members
+		return Member.count(memQuery).exec();
+	})
+	.then(function(monthMembers) {
+		dash.monthMembers = monthMembers;
+		//memQuery.became_member = month;
+		// Return data
+	//	res.jsonp(dash);
+	})
+	
+	.then(function(yearMembers) {
+		dash.yearMembers = yearMembers;
+		res.jsonp(dash);
+	});
+	
 //	var promise = Member.find({_id: userId,}).count().exec();
 	
 	
-	res.jsonp(dashInfo);
+	res.jsonp(dash);
 };
 
 /**
