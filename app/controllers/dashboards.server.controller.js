@@ -126,21 +126,12 @@ var getAttendances = function(connParticipant) {
 // return dashboard information
 exports.read = function(req, res) {
 	// compile dashboard information
-	var userId = req.params.connectorId;
-	var dashInfo = {};
 	//dashInfo.registeredMembers = getRegisteredMembers(userId);
 	//dashInfo.connectedActions = getActions(userId);
 	//dashInfo.netPercent = getPercentage('Raise Up Initiatives', userId);
 	//dashInfo.tablePercent = getPercentage('Connector Table Meeting', userId);
 	//dashInfo.corePercent = getPercentage('Core Team Meeting', userId);
-	dashInfo.yearMembers = 15;
-	dashInfo.semMembers = 10;
-	dashInfo.monthMembers = 5;
-	dashInfo.connectedActions = [1,2,3];
-	dashInfo.netPercent = 25;
-	dashInfo.tablePercent = 35;
-	dashInfo.corePercent = 45;
-	
+
 	var id  = req.params.connectorId;
 	
 	var conQuery = {connector: id};
@@ -150,17 +141,18 @@ exports.read = function(req, res) {
 		//became_member: {$gt: yearToDate}
 	};
 	
-	// Get list of connected actions
-	var promise = Action.find(conQuery).exec();
 	var dash  = {};
 	
+	// Get list of connected actions
+	var promise = Action.find(conQuery).exec();
+	
 	promise.then(function(actions) {
-		dash.actions = [];
+		//dash.actions = [];
 		dash.actions = actions;
-		
-		// get year members
 		return Member.count(memQuery).exec();
 	})
+	
+	// get members
 	.then(function(yearMembers) {
 		dash.yearMembers = yearMembers;
 		//memQuery.became_member = semester;
@@ -176,19 +168,25 @@ exports.read = function(req, res) {
 	.then(function(monthMembers) {
 		dash.monthMembers = monthMembers;
 		//memQuery.became_member = month;
-		// Return data
-	//	res.jsonp(dash);
+		return NetworkEvent.count({eventType: 'Raise Up Initiatives'}).exec();
 	})
 	
-	.then(function(yearMembers) {
-		dash.yearMembers = yearMembers;
+	
+	//get Raise Up attendance
+	.then(function(raiseUpNights) {
+		dash.raiseUpNights = raiseUpNights;
+		return Participation.count({participant: id}).exec();
+	})
+	.then(function(parts) {
+		dash.netPercent = dash.raiseUpNights / parts;
 		res.jsonp(dash);
 	});
+	
 	
 //	var promise = Member.find({_id: userId,}).count().exec();
 	
 	
-	res.jsonp(dash);
+	//res.jsonp(dash);
 };
 
 /**

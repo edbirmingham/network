@@ -38,12 +38,12 @@
 						<!-- Drop down-->
 						<div class="dropdown">
 						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-						  	<h4>{{dash.actions.length}}</h4>
+						  	<h4>{{(dash.actions | filter: {status: 'No match'}).length}}</h4>
 						    <span class="caret"></span>
 						  </button>
 						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-						    <li data-ng-repeat="action in dash.actions">
-						    	<a></a>{{action}}</li>
+						    <li data-ng-repeat="action in dash.actions | filter:{status:'No match'}">
+						    	<a></a>{{action.description}}</li>
 						  </ul>
 						</div>
 					</div>
@@ -52,11 +52,11 @@
 						<!-- Drop down-->
 						<div class="dropdown">
 						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							<h4 class="text-center">{{dash.actions.length}}</h4>
+							<h4 class="text-center">{{(dash.actions | filter:{status:'Match pending'}).length}}</h4>
 						    <span class="caret"></span>
 						  </button>
 						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-						    <li data-ng-repeat="action in dash.actions">
+						    <li data-ng-repeat="action in dash.actions | filter:{status:'Match pending'}">
 						    	<a></a>{{action.description}}</li>
 						  </ul>
 						</div>
@@ -66,11 +66,11 @@
 						<!-- Drop down-->
 						<div class="dropdown">
 						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							<h4 class="text-center">{{dash.actions.length}}</h4>
+							<h4 class="text-center">{{(dash.actions | filter:{status:'Match active'}).length}}</h4>
 						    <span class="caret"></span>
 						  </button>
 						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-						    <li data-ng-repeat="action in dash.actions">
+						    <li data-ng-repeat="action in dash.actions | filter:{status:'Match active'}">
 						    	<a></a>{{action.description}}</li>
 						  </ul>
 						</div>
@@ -80,11 +80,11 @@
 						<!-- Drop down-->
 						<div class="dropdown">
 						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							<h4 class="text-center">{{ dash.actions.length }}</h4>
+							<h4 class="text-center">{{(dash.actions | filter:{status:'Match complete'}).length}}</h4>
 						    <span class="caret"></span>
 						  </button>
 						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-						    <li data-ng-repeat="action in dash.actions">
+						    <li data-ng-repeat="action in dash.actions | filter:{status:'Match complete'}">
 						    	<a></a>{{action.description}}</li>
 						  </ul>
 						</div>

@@ -7,7 +7,6 @@ angular.module('dashboards').controller('DashController', ['$scope', '$statePara
 		var user = Authentication.user;
 		$scope.currentUser = $scope.authentication.user;
 		var query = {};
-		$scope.info = 25;
 		
 		query.userId = Authentication.user._id;
 		
