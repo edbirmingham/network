@@ -77,7 +77,7 @@ describe('Participant CRUD tests', function() {
 								if (participantsGetErr) done(participantsGetErr);
 
 								// Get Participants list
-								var participants = participantsGetRes.body;
+								var participants = participantsGetRes.body.results;
 
 								// Set assertions
 								(participants[0].user._id).should.equal(userId);

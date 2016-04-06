@@ -86,13 +86,22 @@ exports.list = function(req, res) {
 		conditions = { $or: or_conditions };
 	}
 	
-	Participant.find(conditions).sort('firstName lastName').populate('user', 'displayName').exec(function(err, participants) {
+	var page = req.query.page || 1;
+	Participant.find(conditions).count(function(err, count) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
-			});
+			});			
 		} else {
-			res.jsonp(participants);
+				Participant.find(conditions).skip((page-1)*10).sort('firstName lastName').populate('user', 'displayName').limit(10).exec(function(err, participants) {
+				if (err) {
+					return res.status(400).send({
+						message: errorHandler.getErrorMessage(err)
+					});	
+				} else {
+					res.jsonp({count: count, results: participants});
+				}
+			});
 		}
 	});
 };
