@@ -18,7 +18,8 @@ angular.module('dashboards').controller('DashController', ['$scope', '$statePara
 		// get dash info only if current user is a Connector
 		if (user && user.roles.indexOf('connector') > -1) {
 			$scope.dash = Dashboards.get({
-				connectorId: user._id
+				connectorId: user._id,
+				participantId: user.participant
 			});
 		}
 	

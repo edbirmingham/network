@@ -22,10 +22,10 @@ var getYearToDate = function() {
 	// if currently after August
 	var dateStart;
 	if(now.getMonth() >= 7) {
-		dateStart = new Date(now.getYear(), 7, 1);
+		dateStart = new Date(now.getFullYear(), 7, 1);
 	}
 	else {
-		dateStart = new Date(now.getYear() - 1, 7, 1);
+		dateStart = new Date(now.getFullYear() - 1, 7, 1);
 	}
 	return dateStart;
 };
@@ -36,12 +36,12 @@ var getLastSem = function() {
 	var startDate;
 	var endDate;
 	if(now.getMonth() >= 7) {
-		startDate = new Date(now.getYear(),1,1 );
-		endDate = startDate;
+		startDate = new Date(now.getFullYear(),0,1);
+		endDate = new Date(startDate.getFullYear(),7,0);
 	} else {
 		// TODO FIX this part
-		startDate = new Date(now.getYear() - 1,1,1 );
-		endDate = startDate;
+		startDate = new Date(now.getFullYear() - 1,7,1);
+		endDate = new Date(now.getFullYear(),0,0);
 	}
 	
 	dateRange[0] = startDate;
@@ -53,7 +53,7 @@ var getLastMonth = function() {
 	var dateRange = [];
 	var lastMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1);
 	dateRange[0] = lastMonthStart;
-	dateRange[1] = new Date(lastMonthStart.getYear(), lastMonthStart.getMonth() + 1, 0);
+	dateRange[1] = new Date(lastMonthStart.getFullYear(), lastMonthStart.getMonth() + 1, 0);
 	return dateRange;
 };
 
@@ -61,29 +61,9 @@ var getLastMonth = function() {
 var yearToDate = getYearToDate();
 var lastSem = getLastSem();
 var lastMonth = getLastMonth();
-
-
-// get list of all members registered by connector
-var getRegisteredMembers = function(req, res) {
-	var query = {};
-	if(req.query.connector) {
-		query.connector = req.query.connector;
-	}
-	query.became_member = {$gt: yearToDate[0]};
-	Member.find(query)
-		.exec(function(err, members) {
-   			if(err) {
-   				return res.status(400).send({
-   					message: errorHandler.getErrorMessage(err)
-   				});
-   			} else {
-   				res.jsonp(members);
-   			}
-   		});
-};
-
-
-
+console.log(yearToDate);
+console.log(lastSem[0], lastSem[1]);
+console.log(lastMonth[0], lastMonth[1]);
 
 // return dashboard information
 exports.read = function(req, res) {
@@ -95,6 +75,7 @@ exports.read = function(req, res) {
 	var monStart = (lastMonth[0].getTime() / 1000).toFixed(0);
 	var monEnd = (lastMonth[1].getTime() / 1000).toFixed(0);
 	var id  = req.params.connectorId;
+	var participant = req.params.participantId;
 	
 	var conQuery = {connector: id};
 	
@@ -106,9 +87,9 @@ exports.read = function(req, res) {
 	var dash  = {};
 	
 	// Get list of connected actions
-	var promise = Action.find(conQuery).exec();
+	var actionPromise = Action.find(conQuery).exec();
 	
-	promise.then(function(actions) {
+	actionPromise.then(function(actions) {
 		//dash.actions = [];
 		dash.actions = actions;
 		return Member.count(memQuery).exec();
@@ -129,47 +110,35 @@ exports.read = function(req, res) {
 	})
 	.then(function(monthMembers) {
 		dash.monthMembers = monthMembers;
-		//memQuery.became_member = month;
-		return NetworkEvent.count({eventType:'Raise Up Initiatives'}).exec();
+		return Participation.find({participant: participant}).exec();
 	})
 	
 	
 	//get Raise Up attendance
-	.then(function(raiseUpNights) {
-		dash.raiseUpNights = raiseUpNights;
-		return Participation.count({participant: id, }).exec();
+	.then(function(participations) {
+		console.log('Participations' + participations.length);
+		dash.participations = participations;
+		return NetworkEvent.count({eventType:'Raise Up Initiatives'}).exec();
 	})
-	.then(function(parts) {
-		dash.netPercent = dash.raiseUpNights / parts;
-		dash.participations = parts;
-		//res.jsonp(dash);
+	
+	.then(function(raiseCount) {
+		dash.netPercent = raiseCount/dash.participations.length;
 		return NetworkEvent.count({eventType:'Connector Table Meeting'}).exec();
 	})
 	
 	// Get Connector Table Meetings Percentage
-	.then(function(tableMeetings) {
-		dash.tablePercent = tableMeetings;
-		return Participation.count({participant: id}).exec();
-	})
-	.then(function(tableParts) {
-		return NetworkEvent.count({eventType:'Core Team Member'}).exec();
+	.then(function(tableCount) {
+		dash.tablePercent = tableCount/dash.participations.length;
+		return NetworkEvent.count({eventType:'Core Team Meeting'}).exec();
 	})
 	
 	// Get 
-	.then(function(coreMeetings) {
-		dash.corePercent = coreMeetings;
-		return Participation.count({participant: id}).exec();
-	})
-	.then(function(coreParts) {
-		dash.corePercent = coreParts;
+	.then(function(coreCount) {
+		dash.corePercent = dash.participations.length;
 		res.jsonp(dash);
+		//return Participation.count({participant: id}).exec();
 	});
-	
-	
-//	var promise = Member.find({_id: userId,}).count().exec();
-	
-	
-	//res.jsonp(dash);
+
 };
 
 /**
