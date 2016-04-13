@@ -1,21 +1,29 @@
-/*'use strict';
+'use strict';
 
 var should = require('should'),
 	request = require('supertest'),
 	app = require('../../server'),
 	mongoose = require('mongoose'),
-	Participant = require('Participant');
+	Participant = mongoose.model('Participant'),
 	User = mongoose.model('User'),
+	Action = mongoose.model('Action'),
+	Member = mongoose.model('Member'),
+	NetworkEvent = mongoose.model('NetworkEvent'),
 	agent = request.agent(app);
 
 /**
  * Globals
- *//*
-var credentials, logged_in_user, user, participant;
+ */
+var credentials, logged_in_user, user, participant, member, action, networkEvent;
 
 describe('Connector Dashboard tests', function() {
     
     beforeEach(function(done) {
+    	credentials = {
+    		username:'username',
+    		password: 'password'
+    	}
+    	// create new participant
         participant = new Participant({
             firstName: 'Test',
             lastName: 'Participant',
@@ -25,61 +33,67 @@ describe('Connector Dashboard tests', function() {
         });
         
         participant.save(function() {
-            // Create a new user
-    		user = new User({
+        	var user_roles = ['user', 'connector'];
+            // Create a new user with participant
+    		logged_in_user = new User({
     			firstName: 'Full',
     			lastName: 'Name',
     			displayName: 'Full Name',
     			email: 'test@test.com',
     			username: credentials.username,
     			password: credentials.password,
-    			provider: 'local'
+    			provider: 'local',
+    			participant: participant,
+    			roles: user_roles
     		});
     		
-    		user.save(function())
-        })
+    		logged_in_user.save(function() {
+    			//save member
+    			member = new Member({
+	    			firstName: 'Member',
+					lastName: 'Name',
+					displayName: 'MemberName',
+					phone: '2055558888',
+					email: 'mem@email.com',
+					identity: 'Educator',
+					affiliation: 'UAB',
+					address: '1234 Broadt Street',
+					city: 'Birmingham',
+					state: 'AL',
+					zipCode: '35204',
+					shirtSize: 'XL',
+					shirtReceived: true,
+					talent: 'Music',
+					placeOfWorship: 'Baptist Church',
+					recruitment: 'Network Night',
+					communityNetworks: 'Community Network',
+					extraGroups: 'Group1, Group2',
+					otherNetworks: 'on1, on2, on3',
+					user: logged_in_user
+    			});
+    			
+    			member.save(function(saveErr, saveRes) {
+    				if(saveErr) done(saveErr);
+					action = new Action({
+						actor: participant,
+						type: 'Request',
+						description: 'Action Description',
+						matches: [participant],
+						user: user,
+						connector: logged_in_user
+					});
+					
+					action.save(function() {
+						done();
+					});
+    			});
+    		});
+    		
+    		
+        });
         
     });
     
-    beforeEach(function(done) {
-		// Create user credentials
-		credentials = {
-			username: 'username',
-			password: 'password'
-		};
-
-		// Create a new user
-		user = new User({
-			firstName: 'Full',
-			lastName: 'Name',
-			displayName: 'Full Name',
-			email: 'test@test.com',
-			username: credentials.username,
-			password: credentials.password,
-			provider: 'local'
-		});
-
-		// Save a user to the test db and create new Participant
-		user.save(function() {
-			participant = {
-				firstName: 'Par',
-				lastName: 'Ticipant',
-				displayName: 'Par Ticipant',
-				phone: '2059999999',
-				email: 'participant@example.com',
-				identity: 'Student',
-				affiliation: 'UAB'
-			};
-
-			done();
-		});
-	});
-    
-    
-    beforeEach(function(done) {
-       
-        
-    });
     
     it('should be able to get Dashboard info if signed in', function(done) {
         agent.post('/auth/signin')
@@ -89,12 +103,16 @@ describe('Connector Dashboard tests', function() {
 				// Handle signin error
 				if (signinErr) done(signinErr);
 	
+				var userId = logged_in_user.id;
+				
 				agent.get('/dashboards/' + userId)
 					.expect(200)
-					.end(function(req, res) {
+					.end(function(dashGetErr, dashGetRes) {
 						// Set assertion
-                        res.body.dash.should.be.an.Object;
-                        res.body.dash.actions.should.be.an.Array.with.lengthOf(1);
+                        //dashGetRes.body.dash.should.be.an.Object;
+                        var dash = dashGetRes.body;
+                        var mem = dash.yearMembers;
+                        mem.should.equal(1);
 						// Call the assertion callback
 						done();
 					});
@@ -103,10 +121,21 @@ describe('Connector Dashboard tests', function() {
     });
     
     it('should not be able to get Dashboard info if  not signed in', function(done) {
-        
+    	agent.get('/dashboards/' + logged_in_user.id)
+    		.expect(401)
+    		.end(function(req, res) {
+    			console.log(res.body);
+    			res.body.message.should.match('User is not logged in');
+    			done();
+    		})
     });
     
     afterEach(function(done) {
         // Remove info from test db
-    })
-});*/
+        User.remove().exec();
+        Participant.remove().exec();
+        Member.remove().exec();
+        Action.remove().exec();
+        done();
+    });
+});

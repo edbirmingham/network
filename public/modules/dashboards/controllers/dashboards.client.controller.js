@@ -6,6 +6,7 @@ angular.module('dashboards').controller('DashController', ['$scope', '$statePara
 		$scope.authentication = Authentication;
 		var user = Authentication.user;
 		$scope.currentUser = $scope.authentication.user;
+		if (!$scope.authentication.user) $location.path('/signin');
 		var query = {};
 		
 		query.userId = Authentication.user._id;

@@ -183,6 +183,12 @@ exports.read = function(req, res) {
 	.then(function(participations) {
 		dash.corePercent = getPercentage(participations, dash.coreIds.length);
 		res.jsonp(dash);
+	})
+	
+	.then(null, function(err) {
+		return res.status(401).send({
+			message: errorHandler.getErrorMessage(err)
+		})
 	});
 };
 

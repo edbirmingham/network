@@ -103,7 +103,7 @@ angular.module('users').controller('UsersController', ['$scope', '$filter', '$st
 		
 		var isConnector = function(user) {
 			return user.roles.indexOf('connector') > -1;
-		}
+		};
 
 	}
 ]);
