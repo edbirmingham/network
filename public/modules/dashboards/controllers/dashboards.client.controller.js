@@ -23,9 +23,6 @@ angular.module('dashboards').controller('DashController', ['$scope', '$statePara
 			});
 			
 			$scope.dash = dash;
-			
-			
-			
 		}
 	
 	}

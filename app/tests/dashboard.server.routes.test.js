@@ -7,6 +7,7 @@ var should = require('should'),
 	Participant = mongoose.model('Participant'),
 	User = mongoose.model('User'),
 	Action = mongoose.model('Action'),
+	Location = mongoose.model('Location'),
 	Member = mongoose.model('Member'),
 	NetworkEvent = mongoose.model('NetworkEvent'),
 	agent = request.agent(app);
@@ -14,7 +15,8 @@ var should = require('should'),
 /**
  * Globals
  */
-var credentials, logged_in_user, user, participant, member, action, networkEvent;
+var credentials, logged_in_user, user, participant, member, action, 
+	networkEvent, eventLocation;
 
 describe('Connector Dashboard tests', function() {
     
@@ -84,6 +86,7 @@ describe('Connector Dashboard tests', function() {
 					});
 					
 					action.save(function() {
+						
 						done();
 					});
     			});
@@ -112,7 +115,13 @@ describe('Connector Dashboard tests', function() {
                         //dashGetRes.body.dash.should.be.an.Object;
                         var dash = dashGetRes.body;
                         var mem = dash.yearMembers;
+                        var connectedActions = dash.actions;
+                        
+                        // test action get
+                        connectedActions.length.should.equal(1);
+                        // get yearly member
                         mem.should.equal(1);
+                        
 						// Call the assertion callback
 						done();
 					});
@@ -120,11 +129,11 @@ describe('Connector Dashboard tests', function() {
 			});        
     });
     
-    it('should not be able to get Dashboard info if  not signed in', function(done) {
+    it('should not be able to get Dashboard info if  not signed in', 
+    function(done) {
     	agent.get('/dashboards/' + logged_in_user.id)
     		.expect(401)
     		.end(function(req, res) {
-    			console.log(res.body);
     			res.body.message.should.match('User is not logged in');
     			done();
     		})
