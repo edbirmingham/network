@@ -43,7 +43,7 @@
 						  </button>
 						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 						    <li data-ng-repeat="action in dash.actions | filter:{status:'No match'}">
-						    	<a href="#/actions/action._id">{{action.description}}</a></li>
+						    	<a href="/actions/">{{action.description}}</a></li>
 						  </ul>
 						</div>
 					</div>
@@ -95,7 +95,7 @@
 				<h4 class="text-center">Attendance Percentage</h4>
 				<div class="col-md-4">
 					<h5 class="text-center">Network Nights</h5>
-					<h3 class="text-center">{{dash.raiseUpNights}}%</h3>
+					<h3 class="text-center">{{dash.raisePercent}}%</h3>
 				</div>
 				<div class="col-md-4">
 					<h5 class="text-center">Connector Table Meetings</h5>

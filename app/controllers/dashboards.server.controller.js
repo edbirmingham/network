@@ -15,7 +15,6 @@ var mongoose = require('mongoose'),
 
 var now = new Date();
 
-
 var getYearToDate = function() {
 	// get start of previous Sept.
 	var dateRange = [];
@@ -108,37 +107,79 @@ exports.read = function(req, res) {
 		// Get month members
 		return Member.count(memQuery).exec();
 	})
+	
 	.then(function(monthMembers) {
 		dash.monthMembers = monthMembers;
-		return Participation.find({participant: participant}).exec();
+	//	console.log('Participant field: ' + participant);
+		return NetworkEvent.find({eventType:'Raise Up Initiatives'}).exec();
 	})
-	
+	.then(function(raiseUps) {
+		var raiseIds = [];
+		for(var idx = 0; idx < raiseUps.length; idx++) {
+			raiseIds.push(raiseUps[idx]._id);
+		}
+		dash.raiseIds = raiseIds;
+		console.log('Array: ' + dash.raiseIds);
+		console.log(dash.raiseIds.length);
+		return Participation.count({participant: '56e5bc7a30c2b2cf032038d8'})
+							.where('networkEvent')
+							.in(raiseIds)
+							.exec();
+	})
 	
 	//get Raise Up attendance
 	.then(function(participations) {
-		console.log('Participations' + participations.length);
-		dash.participations = participations;
-		return NetworkEvent.count({eventType:'Raise Up Initiatives'}).exec();
+		console.log('Participation Count: ' + participations);
+		dash.raisePercent = (participations / parseFloat(dash.raiseIds.length) * 100).toFixed(0);
+		return NetworkEvent.find({eventType:'Connector Table Meeting'}).exec();
+	
 	})
 	
-	.then(function(raiseCount) {
-		dash.netPercent = raiseCount/dash.participations.length;
-		return NetworkEvent.count({eventType:'Connector Table Meeting'}).exec();
-	})
+	
+	
 	
 	// Get Connector Table Meetings Percentage
-	.then(function(tableCount) {
-		dash.tablePercent = tableCount/dash.participations.length;
-		return NetworkEvent.count({eventType:'Core Team Meeting'}).exec();
+	.then(function(tableMeetings) {
+		var tableIds = [];
+		for(var idx = 0; idx < tableMeetings.length; idx++) {
+			tableIds.push(tableMeetings[idx]._id);
+		}
+		dash.tableIds = tableIds;
+		console.log('Array: ' + tableIds);
+		console.log('Count: ' + tableIds.length);
+		return Participation.count({participant: '56e5bc7a30c2b2cf032038d8'})
+							.where('networkEvent')
+							.in(tableIds)
+							.exec();
 	})
 	
 	// Get 
-	.then(function(coreCount) {
-		dash.corePercent = dash.participations.length;
+	.then(function(participations) {
+		console.log('Participation Count: ' + participations);
+		dash.tablePercent = (participations / parseFloat(dash.tableIds.length) * 100).toFixed(0);
+		return NetworkEvent.find({eventType:'Core Team Meeting'}).exec();
+	})
+	
+	
+	
+	
+	.then(function(coreMeetings) {
+		var coreIds = [];
+		for(var idx = 0; idx < coreMeetings.length; idx++) {
+			coreIds.push(coreMeetings[idx]._id);
+		}
+		dash.coreIds = coreIds;
+		console.log('Array: ' + coreIds);
+		console.log('Count: ' + coreIds.length);
+		return Participation.count({participant: '56e5bc7a30c2b2cf032038d8'})
+							.where('networkEvent')
+							.in(coreIds)
+							.exec();
+	})
+	.then(function(participations) {
+		dash.corePercent = (participations / parseFloat(dash.coreIds.length) * 100).toFixed(0);
 		res.jsonp(dash);
-		//return Participation.count({participant: id}).exec();
 	});
-
 };
 
 /**
