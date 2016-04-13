@@ -15,6 +15,7 @@ var mongoose = require('mongoose'),
 
 var now = new Date();
 
+
 var getYearToDate = function() {
 	// get start of previous Sept.
 	var dateRange = [];
@@ -56,32 +57,34 @@ var getLastMonth = function() {
 	return dateRange;
 };
 
+var getPercentage = function(part, total) {
+	if(total === 0) {
+		return parseFloat(100).toFixed(0);
+	}
+	else {
+		var percent = (part / parseFloat(total) * 100);
+		return percent.toFixed(0);
+	}
+};
 
-var yearToDate = getYearToDate();
-var lastSem = getLastSem();
-var lastMonth = getLastMonth();
-console.log(yearToDate);
-console.log(lastSem[0], lastSem[1]);
-console.log(lastMonth[0], lastMonth[1]);
+
+//console.log(yearToDate);
+//console.log(lastSem[0], lastSem[1]);
+//console.log(lastMonth[0].getTime(), lastMonth[1].getTime());
 
 // return dashboard information
 exports.read = function(req, res) {
+
+	var yearToDate = getYearToDate();
+	var lastSem = getLastSem();
+	var lastMonth = getLastMonth();
+	
 	// compile dashboard information
-	
-	var YTDsec = (yearToDate.getTime() / 1000).toFixed(0);
-	var semStart = (lastSem[0].getTime() / 1000).toFixed(0);
-	var semEnd = (lastSem[1].getTime() / 1000).toFixed(0);
-	var monStart = (lastMonth[0].getTime() / 1000).toFixed(0);
-	var monEnd = (lastMonth[1].getTime() / 1000).toFixed(0);
+	var participantId = req.user.participant;
+	var participantQuery = { participant: participantId };
 	var id  = req.params.connectorId;
-	var participant = req.params.participantId;
-	
-	var conQuery = {connector: id};
-	
-	var memQuery = {
-		user: id, 
-		became_member: {$gte: YTDsec}
-	};
+	var conQuery = { connector: id };
+	var memQuery = { user : id };
 	
 	var dash  = {};
 	
@@ -89,28 +92,37 @@ exports.read = function(req, res) {
 	var actionPromise = Action.find(conQuery).exec();
 	
 	actionPromise.then(function(actions) {
-		//dash.actions = [];
 		dash.actions = actions;
-		return Member.count(memQuery).exec();
+		
+		return Member
+				.count(memQuery)
+				.where('became_member').gt(yearToDate)
+				.exec();
 	})
 	
 	// get members
 	.then(function(yearMembers) {
 		dash.yearMembers = yearMembers;
-		memQuery.became_member = {$gte: semStart, $lt: semEnd};
+	//	console.log(yearMembers[0].became_member);
+	//	console.log(yearMembers[1].became_member);
+//		console.log(yearMembers);
 		// Get semester members
-		return Member.count(memQuery).exec();
+		return Member
+				.count(memQuery)
+				.where('became_member').gt(lastSem[0]).lt(lastSem[1])
+				.exec();
 	})
 	.then(function(semMembers) {
 		dash.semMembers = semMembers;
-		memQuery.became_member = {$gte: monStart, $lt: monEnd};
 		// Get month members
-		return Member.count(memQuery).exec();
+		return Member
+				.count(memQuery)
+				.where('became_member').gt(lastMonth[0]).lt(lastMonth[1])
+				.exec();
 	})
 	
 	.then(function(monthMembers) {
 		dash.monthMembers = monthMembers;
-	//	console.log('Participant field: ' + participant);
 		return NetworkEvent.find({eventType:'Raise Up Initiatives'}).exec();
 	})
 	.then(function(raiseUps) {
@@ -119,9 +131,7 @@ exports.read = function(req, res) {
 			raiseIds.push(raiseUps[idx]._id);
 		}
 		dash.raiseIds = raiseIds;
-		console.log('Array: ' + dash.raiseIds);
-		console.log(dash.raiseIds.length);
-		return Participation.count({participant: '56e5bc7a30c2b2cf032038d8'})
+		return Participation.count({participant: participantId})
 							.where('networkEvent')
 							.in(raiseIds)
 							.exec();
@@ -129,13 +139,10 @@ exports.read = function(req, res) {
 	
 	//get Raise Up attendance
 	.then(function(participations) {
-		console.log('Participation Count: ' + participations);
-		dash.raisePercent = (participations / parseFloat(dash.raiseIds.length) * 100).toFixed(0);
+		dash.raisePercent = getPercentage(participations, dash.raiseIds.length);
 		return NetworkEvent.find({eventType:'Connector Table Meeting'}).exec();
 	
 	})
-	
-	
 	
 	
 	// Get Connector Table Meetings Percentage
@@ -145,9 +152,7 @@ exports.read = function(req, res) {
 			tableIds.push(tableMeetings[idx]._id);
 		}
 		dash.tableIds = tableIds;
-		console.log('Array: ' + tableIds);
-		console.log('Count: ' + tableIds.length);
-		return Participation.count({participant: '56e5bc7a30c2b2cf032038d8'})
+		return Participation.count({participant: participantId})
 							.where('networkEvent')
 							.in(tableIds)
 							.exec();
@@ -155,8 +160,7 @@ exports.read = function(req, res) {
 	
 	// Get 
 	.then(function(participations) {
-		console.log('Participation Count: ' + participations);
-		dash.tablePercent = (participations / parseFloat(dash.tableIds.length) * 100).toFixed(0);
+		dash.tablePercent = getPercentage(participations, dash.tableIds.length);
 		return NetworkEvent.find({eventType:'Core Team Meeting'}).exec();
 	})
 	
@@ -169,15 +173,15 @@ exports.read = function(req, res) {
 			coreIds.push(coreMeetings[idx]._id);
 		}
 		dash.coreIds = coreIds;
-		console.log('Array: ' + coreIds);
-		console.log('Count: ' + coreIds.length);
-		return Participation.count({participant: '56e5bc7a30c2b2cf032038d8'})
+	//	console.log('Array: ' + coreIds);
+	//	console.log('Count: ' + coreIds.length);
+		return Participation.count({participant: participantId})
 							.where('networkEvent')
 							.in(coreIds)
 							.exec();
 	})
 	.then(function(participations) {
-		dash.corePercent = (participations / parseFloat(dash.coreIds.length) * 100).toFixed(0);
+		dash.corePercent = getPercentage(participations, dash.coreIds.length);
 		res.jsonp(dash);
 	});
 };

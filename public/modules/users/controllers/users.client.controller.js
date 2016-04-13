@@ -100,6 +100,10 @@ angular.module('users').controller('UsersController', ['$scope', '$filter', '$st
 		$scope.removeRole = function(roles, roleIndex) {
 			roles.splice(roleIndex, 1);
 		};
+		
+		var isConnector = function(user) {
+			return user.roles.indexOf('connector') > -1;
+		}
 
 	}
 ]);
