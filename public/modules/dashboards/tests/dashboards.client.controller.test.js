@@ -52,7 +52,7 @@
 
 		it('$scope.get() should create an object with dashboard object fetched from XHR', inject(function(Dashboards) {
 			// Create sample Dash object
-			var sampleDashResponse = {
+			var sampleDash = {
 				yearMembers: 2,
 				semMembers: 1,
 				monthMembers: 0,
@@ -63,17 +63,17 @@
 			
 			$stateParams.connectorId = '525cf20451979dea2c000001';
 			var connId = $stateParams.connectorId;
-
+			$location.path('/dashboards/' + connId);
 
 			// Set GET response
-			$httpBackend.expectGET(/dashboards\/([0-9a-fA-F]{24})$/).respond(sampleDashResponse);
+			$httpBackend.expectGET(/dashboards\/([0-9a-fA-F]{24})$/).respond(sampleDash);
 
 			// Run controller functionality
 			scope.get();
 			$httpBackend.flush();
 
 			// Test scope value
-			expect(scope.dash).toEqualData(sampleDashResponse);
+			expect(scope.dash).toEqualData(sampleDash);
 			expect($location.path()).toBe('/dashboards/' + connId );
 		}));
 
