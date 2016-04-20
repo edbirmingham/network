@@ -17,6 +17,8 @@
 			</small>
         </div>
     </div>
+    <pagination total-items="participantCount" ng-change="changePage()" items-per-page="10" ng-model="currentPage"></pagination>
+
     <div class="alert alert-warning text-center" data-ng-hide="!participants.$resolved || participants.length">
     	No Participants yet, why don't you <a href="/#!/participants/create">create one</a>?
     </div>
