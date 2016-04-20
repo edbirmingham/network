@@ -43,7 +43,7 @@
 						  </button>
 						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 						    <li data-ng-repeat="action in dash.actions | filter:{status:'No match'}">
-						    	<a href="/actions/">{{action.description}}</a></li>
+						    	<a href="/#!/actions/{{action._id}}">{{action.description}} -- {{action.type}}</a></li>
 						  </ul>
 						</div>
 					</div>
@@ -57,7 +57,7 @@
 						  </button>
 						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 						    <li data-ng-repeat="action in dash.actions | filter:{status:'Match pending'}">
-						    	<a>{{action.description}}</a></li>
+						    	<a href="/#!/actions/{{action._id}}">{{action.description}} -- {{action.type}}</a></li>
 						  </ul>
 						</div>
 					</div>
@@ -71,7 +71,7 @@
 						  </button>
 						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 						    <li data-ng-repeat="action in dash.actions | filter:{status:'Match active'}">
-						    	<a>{{action.description}}</a></li>
+						    	<a href="/#!/actions/{{action._id}}">{{action.description}} -- {{action.type}}</a></li>
 						  </ul>
 						</div>
 					</div>
@@ -85,7 +85,7 @@
 						  </button>
 						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 						    <li data-ng-repeat="action in dash.actions | filter:{status:'Match complete'}">
-						    	<a>{{action.description}}</a></li>
+						    	<a href="/#!/actions/{{action._id}}">{{action.description}} -- {{action.type}}</a></li>
 						  </ul>
 						</div>
 					</div>
