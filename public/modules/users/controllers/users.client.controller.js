@@ -8,10 +8,6 @@ angular.module('users').controller('UsersController', ['$scope', '$filter', '$st
 		$scope.user.roles = ['user'];
 		$scope.user.participant = null;
 		
-	    $scope.setParticipant = function(participant) {
-	    	$scope.selectedPart = participant._id;
-	    	$scope.user.participant = participant._id;
-	    };
 	    
 		// Create new User
 		$scope.create = function() {
@@ -104,6 +100,11 @@ angular.module('users').controller('UsersController', ['$scope', '$filter', '$st
 		var isConnector = function(user) {
 			return user.roles.indexOf('connector') > -1;
 		};
+		
+	    $scope.setParticipant = function(participant) {
+	    	$scope.selectedPart = participant.listName();
+	    	$scope.user.participant = participant._id;
+	    };
 
 	}
 ]);

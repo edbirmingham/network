@@ -24,7 +24,7 @@ describe('Connector Dashboard tests', function() {
     	credentials = {
     		username:'username',
     		password: 'password'
-    	}
+    	};
     	// create new participant
         participant = new Participant({
             firstName: 'Test',
@@ -136,7 +136,7 @@ describe('Connector Dashboard tests', function() {
     		.end(function(req, res) {
     			res.body.message.should.match('User is not logged in');
     			done();
-    		})
+    		});
     });
     
     afterEach(function(done) {

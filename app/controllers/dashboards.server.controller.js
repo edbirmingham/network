@@ -68,10 +68,6 @@ var getPercentage = function(part, total) {
 };
 
 
-//console.log(yearToDate);
-//console.log(lastSem[0], lastSem[1]);
-//console.log(lastMonth[0].getTime(), lastMonth[1].getTime());
-
 // return dashboard information
 exports.read = function(req, res) {
 
@@ -100,50 +96,52 @@ exports.read = function(req, res) {
 				.exec();
 	})
 	
-	// get members
+	// Get year member count, query for semester count
 	.then(function(yearMembers) {
 		dash.yearMembers = yearMembers;
-	//	console.log(yearMembers[0].became_member);
-	//	console.log(yearMembers[1].became_member);
-//		console.log(yearMembers);
 		// Get semester members
 		return Member
 				.count(memQuery)
 				.where('became_member').gt(lastSem[0]).lt(lastSem[1])
 				.exec();
 	})
+	//Get semester member count, query for month count
 	.then(function(semMembers) {
 		dash.semMembers = semMembers;
-		// Get month members
 		return Member
 				.count(memQuery)
 				.where('became_member').gt(lastMonth[0]).lt(lastMonth[1])
 				.exec();
 	})
-	
+	// Get month member count, query for RaiseUp Initiatives
 	.then(function(monthMembers) {
 		dash.monthMembers = monthMembers;
-		return NetworkEvent.find({eventType:'Raise Up Initiatives'}).exec();
+		return NetworkEvent
+				.find({eventType:'Raise Up Initiatives'})
+				.where('scheduled').gt(yearToDate)
+				.exec();
 	})
+	// handle ids, query raise participations
 	.then(function(raiseUps) {
 		var raiseIds = [];
 		for(var idx = 0; idx < raiseUps.length; idx++) {
 			raiseIds.push(raiseUps[idx]._id);
 		}
-		dash.raiseIds = raiseIds;
+		dash.raiseTotal = raiseIds.length;
 		return Participation.count({participant: participantId})
 							.where('networkEvent')
 							.in(raiseIds)
 							.exec();
 	})
 	
-	//get Raise Up attendance
+	//get Raise Up percentage, query for Table ids
 	.then(function(participations) {
-		dash.raisePercent = getPercentage(participations, dash.raiseIds.length);
-		return NetworkEvent.find({eventType:'Connector Table Meeting'}).exec();
-	
+		dash.raisePercent = getPercentage(participations, dash.raiseTotal);
+		return NetworkEvent
+				.find({eventType:'Connector Table Meeting'})
+				.where('scheduled').gt(yearToDate)
+				.exec();
 	})
-	
 	
 	// Get Connector Table Meetings Percentage
 	.then(function(tableMeetings) {
@@ -151,44 +149,44 @@ exports.read = function(req, res) {
 		for(var idx = 0; idx < tableMeetings.length; idx++) {
 			tableIds.push(tableMeetings[idx]._id);
 		}
-		dash.tableIds = tableIds;
+		dash.tableTotal = tableIds.length;
 		return Participation.count({participant: participantId})
 							.where('networkEvent')
 							.in(tableIds)
 							.exec();
 	})
 	
-	// Get 
+	// calculate table percentage, query core meetings
 	.then(function(participations) {
-		dash.tablePercent = getPercentage(participations, dash.tableIds.length);
-		return NetworkEvent.find({eventType:'Core Team Meeting'}).exec();
+		dash.tablePercent = getPercentage(participations, dash.tableTotal);
+		return NetworkEvent
+				.find({eventType:'Core Team Meeting'})
+				.where('scheduled').gt(yearToDate)
+				.exec();
 	})
-	
-	
-	
-	
+	// handle core ids, query for core participations
 	.then(function(coreMeetings) {
 		var coreIds = [];
 		for(var idx = 0; idx < coreMeetings.length; idx++) {
 			coreIds.push(coreMeetings[idx]._id);
 		}
-		dash.coreIds = coreIds;
-	//	console.log('Array: ' + coreIds);
-	//	console.log('Count: ' + coreIds.length);
+		dash.coreTotal = coreIds.length;
 		return Participation.count({participant: participantId})
 							.where('networkEvent')
 							.in(coreIds)
 							.exec();
 	})
+	// calculate core Table percentage, send dashboard
 	.then(function(participations) {
-		dash.corePercent = getPercentage(participations, dash.coreIds.length);
+		dash.corePercent = getPercentage(participations, dash.coreTotal);
 		res.jsonp(dash);
 	})
 	
+	// Catch any errors	
 	.then(null, function(err) {
 		return res.status(401).send({
 			message: errorHandler.getErrorMessage(err)
-		})
+		});
 	});
 };
 
