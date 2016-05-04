@@ -50,7 +50,7 @@
 			});
 		}));
 
-		it('$scope.get() should create an object with dashboard object fetched from XHR', inject(function(Dashboards) {
+		it('$scope.findOne() should create an object with dashboard object fetched from XHR', inject(function(Dashboards) {
 			// Create sample Dash object
 			var sampleDash = {
 				yearMembers: 2,
@@ -69,7 +69,7 @@
 			$httpBackend.expectGET(/dashboards\/([0-9a-fA-F]{24})$/).respond(sampleDash);
 
 			// Run controller functionality
-			scope.get();
+			scope.findOne();
 			$httpBackend.flush();
 
 			// Test scope value

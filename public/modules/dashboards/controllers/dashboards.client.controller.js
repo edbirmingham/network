@@ -24,7 +24,7 @@ angular.module('dashboards').controller('DashController', ['$scope', '$statePara
 		
 		$scope.findOne = function() {
 			$scope.dash = Dashboards.get({
-				connectorId: user._id
+				connectorId: $stateParams.connectorId
 			});	
 		};
 	
