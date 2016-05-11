@@ -30,7 +30,7 @@ var getYearToDate = function() {
 	return dateStart;
 };
 
-var getLastSem = function() {
+var getLastSemesterDateRange = function() {
 	var dateRange = [];
 	// get start of previous semester
 	var startDate;
@@ -49,7 +49,7 @@ var getLastSem = function() {
 	return dateRange;
 };
 
-var getLastMonth = function() {
+var getLastMonthDateRange = function() {
 	var dateRange = [];
 	var lastMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1);
 	dateRange[0] = lastMonthStart;
@@ -72,50 +72,50 @@ var getPercentage = function(part, total) {
 exports.read = function(req, res) {
 
 	var yearToDate = getYearToDate();
-	var lastSem = getLastSem();
-	var lastMonth = getLastMonth();
+	var lastSemester = getLastSemesterDateRange();
+	var lastMonth = getLastMonthDateRange();
 	
 	// compile dashboard information
 	var participantId = req.user.participant;
 	var participantQuery = { participant: participantId };
 	var id  = req.params.connectorId;
-	var conQuery = { connector: id };
-	var memQuery = { user : id };
+	var connectorQuery = { connector: id };
+	var memberQuery = { user : id };
 	
 	var dash  = {};
 	
 	// Get list of connected actions
-	var actionPromise = Action.find(conQuery).exec();
+	var actionPromise = Action.find(connectorQuery).exec();
 	
 	actionPromise.then(function(actions) {
 		dash.actions = actions;
 		
 		return Member
-				.count(memQuery)
+				.count(memberQuery)
 				.where('became_member').gt(yearToDate)
 				.exec();
 	})
 	
 	// Get year member count, query for semester count
 	.then(function(yearMembers) {
-		dash.yearMembers = yearMembers;
+		dash.yearMemberCount = yearMembers;
 		// Get semester members
 		return Member
-				.count(memQuery)
-				.where('became_member').gt(lastSem[0]).lt(lastSem[1])
+				.count(memberQuery)
+				.where('became_member').gt(lastSemester[0]).lt(lastSemester[1])
 				.exec();
 	})
 	//Get semester member count, query for month count
 	.then(function(semMembers) {
-		dash.semMembers = semMembers;
+		dash.semesterMemberCount = semMembers;
 		return Member
-				.count(memQuery)
+				.count(memberQuery)
 				.where('became_member').gt(lastMonth[0]).lt(lastMonth[1])
 				.exec();
 	})
 	// Get month member count, query for RaiseUp Initiatives
 	.then(function(monthMembers) {
-		dash.monthMembers = monthMembers;
+		dash.monthMemberCount = monthMembers;
 		return NetworkEvent
 				.find({eventType:'Raise Up Initiatives'})
 				.where('scheduled').gt(yearToDate)
