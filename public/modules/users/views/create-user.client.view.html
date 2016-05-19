@@ -36,15 +36,23 @@
                 </div>
                 <h5>Current Roles</h5>
 				<div class="list-group">
-                    <span data-ng-repeat="role in user.roles | filter: '!user'" class="list-group-item">
+                    <span data-ng-repeat="role in user.roles" class="list-group-item">
                     	<span>
                 			<span data-ng-bind="role"></span>
-                    		<a class="btn" data-ng-click="removeRole(user.roles, $index + 1);">
+                    		<a class="btn" data-ng-click="removeRole(user.roles, $index);">
                     			<i class="glyphicon glyphicon-remove"></i>
                     		</a>
                     	</span>
                     </span>
                 </div>
+                <div class="form-group">
+					<label class="control-label" for="participant">Link Participant</label>
+	            		<span data-ng-bind="selectedPart"></span>
+	                <div class="controls">
+	            		<input type="text" id="participantSearch" name="participant" ng-model="selected" ng-change="selectedPart = null" typeahead-on-select="setParticipant($item)" 
+	            		    typeahead-editable="false" typeahead="participant.listName() for participant in findParticipants($viewValue)" class="form-control" placeholder="Find Participant">
+	            	</div>
+            	</div>
                 <div class="form-group">
                     <input type="submit" class="btn btn-default">
                 </div>

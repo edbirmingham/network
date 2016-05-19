@@ -35,6 +35,13 @@
                     </span>
                 </div>
                 <div class="form-group">
+					<label class="control-label" for="participant">Link Participant</label>
+	            		<span data-ng-bind="selectedPart"></span>
+	                <div class="controls">
+	            		<input type="text" id="participantSearch" name="participant" ng-model="selected" ng-change="selectedPart = null" typeahead-on-select="setParticipant($item)" typeahead-editable="false" typeahead="participant.listName() for participant in findParticipants($viewValue)" class="form-control" placeholder="Link Participant">
+	            	</div>
+            	</div>
+                <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-default">
                 </div>
 				<alert data-ng-show="error" data-ng-bind="error" type="danger"></alert>

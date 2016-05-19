@@ -77,6 +77,10 @@ var UserSchema = new Schema({
 		}],
 		default: ['user']
 	},
+	participant: {
+		type: Schema.ObjectId,
+		ref: 'Participant'
+	},
 	updated: {
 		type: Date
 	},
@@ -95,17 +99,7 @@ var UserSchema = new Schema({
 	resetPasswordExpires: {
 		type: Date
 	},
-	//Connector fields
-	membersRegistered: {
-		type: Schema.ObjectId,
-		ref: 'Member'
-	},
-	attendance: {
-		type: Number
-	},
-	oneToOnes: {
-		type: Number
-	}
+	
 });
 
 /**

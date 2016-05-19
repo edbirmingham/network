@@ -1,12 +1,14 @@
 'use strict';
 
 // Users controller
-angular.module('users').controller('UsersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Users',
-	function($scope, $stateParams, $location, Authentication, Users) {
+angular.module('users').controller('UsersController', ['$scope', '$filter', '$stateParams', '$location', 'Authentication','Actions', 'Members','NetworkEvents', 'Participants', 'Participations', 'Users',
+	function($scope, $filter, $stateParams, $location, Authentication, Actions, Members, NetworkEvents, Participants, Participations, Users) {
 		$scope.authentication = Authentication;
 		$scope.user = {};
 		$scope.user.roles = ['user'];
-
+		$scope.user.participant = null;
+		
+	    
 		// Create new User
 		$scope.create = function() {
 			// Create new User object
@@ -24,6 +26,8 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 				$scope.user.email = '';
 				$scope.user.username = '';
 				$scope.user.password = '';
+				$scope.selectedPart = null;
+				$scope.user.participant = null;
 				$scope.user.roles = ['user'];
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
@@ -72,6 +76,15 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 			});
 		};
 		
+		// Find existing participants
+		$scope.findParticipants = function(name) {
+			return Participants.query({name: name}).$promise;
+		};
+		
+		$scope.getActions = function () {
+			return Actions.query();
+		};
+
 		// Add the selected role to the roles list.
 		$scope.addRole = function(roles, role) {
 			if (roles.indexOf(role) < 0) {
@@ -84,7 +97,15 @@ angular.module('users').controller('UsersController', ['$scope', '$stateParams',
 		$scope.removeRole = function(roles, roleIndex) {
 			roles.splice(roleIndex, 1);
 		};
-
 		
+		var isConnector = function(user) {
+			return user.roles.indexOf('connector') > -1;
+		};
+		
+	    $scope.setParticipant = function(participant) {
+	    	$scope.selectedPart = participant.listName();
+	    	$scope.user.participant = participant._id;
+	    };
+
 	}
 ]);

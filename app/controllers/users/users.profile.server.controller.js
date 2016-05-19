@@ -20,7 +20,7 @@ exports.update = function(req, res) {
 	// If authenticated user isn't admin, disallow from
 	// updating user roles
 	if(req.user.roles.indexOf('admin') < 0) {
-		// Set updated array to original array
+		 //Set updated array to original array
 		req.body.roles = user.roles;
 	}
 
@@ -127,7 +127,10 @@ exports.list = function(req, res) {
  * User middleware
  */
 exports.userByID = function(req, res, next, id) { 
-	User.findById(id).populate('user', 'displayName').exec(function(err, user) {
+	User.findById(id)
+		.populate('user', 'displayName')
+		.populate('participant', 'displayName')
+		.exec(function(err, user) {
 		if (err) return next(err);
 		if (! user) return next(new Error('Failed to load User ' + id));
 		req.requested_user = user ;

@@ -1,0 +1,111 @@
+<section data-ng-controller="DashController" data-ng-init="findOne()">
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-6">
+					<h4 class="text-center">Network Members Registered</h4>
+					<div class="col-md-6">
+						<h3 class="text-center">{{dash.yearMemberCount}}</h3>
+						<h6 class="text-center">YTD since August</h6>
+					</div>
+					<div class="col-md-6">
+						<h3 class="text-center">{{ dash.semesterMemberCount}}</h3>
+						<h5 class="text-center">last semester</h5>
+						<h3 class="text-center">{{ dash.monthMemberCount }}</h3>
+						<h5 class="text-center">last month</h5>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<h4 class="text-center">One to One Reflections Completed</h4>
+					<div class="col-md-6">
+						<h3 class="text-center">"20"</h3>
+						<h5 class="text-center">YTD since August</h5>
+					</div>
+					<div class="col-md-6">
+						<h3 class="text-center">"15"</h3>
+						<h5 class="text-center">last semester</h5>
+						<h3 class="text-center">"15"</h3>
+						<h5 class="text-center">last month</h5>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<h4 class="text-center">Actions Status</h4>
+					<div class="col-md-3">
+						<h5 class="text-center">No Matches</h5>
+						
+						<!-- Drop down-->
+						<div class="dropdown">
+						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						  	<h4>{{(dash.actions | filter: {status: 'No match'}).length}}</h4>
+						    <span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+						    <li data-ng-repeat="action in dash.actions | filter:{status:'No match'}">
+						    	<a href="/#!/actions/{{action._id}}">{{action.description}} -- {{action.type}}</a></li>
+						  </ul>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<h5 class="text-center">Pending Matches</h5>
+						<!-- Drop down-->
+						<div class="dropdown">
+						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+							<h4 class="text-center">{{(dash.actions | filter:{status:'Match pending'}).length}}</h4>
+						    <span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+						    <li data-ng-repeat="action in dash.actions | filter:{status:'Match pending'}">
+						    	<a href="/#!/actions/{{action._id}}">{{action.description}} -- {{action.type}}</a></li>
+						  </ul>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<h5 class="text-center">Active Matches</h5>
+						<!-- Drop down-->
+						<div class="dropdown">
+						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+							<h4 class="text-center">{{(dash.actions | filter:{status:'Match active'}).length}}</h4>
+						    <span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+						    <li data-ng-repeat="action in dash.actions | filter:{status:'Match active'}">
+						    	<a href="/#!/actions/{{action._id}}">{{action.description}} -- {{action.type}}</a></li>
+						  </ul>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<h5 class="text-center">Completed Matches</h5>
+						<!-- Drop down-->
+						<div class="dropdown">
+						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+							<h4 class="text-center">{{(dash.actions | filter:{status:'Match complete'}).length}}</h4>
+						    <span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+						    <li data-ng-repeat="action in dash.actions | filter:{status:'Match complete'}">
+						    	<a href="/#!/actions/{{action._id}}">{{action.description}} -- {{action.type}}</a></li>
+						  </ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<h4 class="text-center">Attendance Percentage</h4>
+				<div class="col-md-4">
+					<h5 class="text-center">Network Nights</h5>
+					<h3 class="text-center">{{dash.raisePercent}}%</h3>
+				</div>
+				<div class="col-md-4">
+					<h5 class="text-center">Connector Table Meetings</h5>
+					<h3 class="text-center" >{{dash.tablePercent}}%</h3>
+				</div>
+				<div class="col-md-4">
+					<h5 class="text-center">Core Meetings</h5>
+					<h3 class="text-center">{{dash.corePercent}}%</h3>
+				</div>
+			</div>
+		</div>
+	</body>
+</section>
