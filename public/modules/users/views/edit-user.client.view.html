@@ -11,7 +11,7 @@
         <form class="form-horizontal" data-ng-submit="update()" novalidate autocomplete="off">
             <fieldset>
 				<ng-include src="'/modules/users/views/form-user.client.view.html'"></ng-include>
-				<div class="form-group">
+				<div class="form-group" ng-show="authentication.user.roles.indexOf('admin') > 0">
                     <label class="control-label" for="role">Add Role</label>
                     <div class="dropdown">
 					  <button class="btn btn-default dropdown-toggle" type="button" id="addRole" aria-haspopup="true" aria-expanded="true">
@@ -24,7 +24,8 @@
 					  </ul>
 					</div>
                 </div>
-                <div class="list-group">
+                <div class="list-group" ng-show="authentication.user.roles.indexOf('admin') > 0">
+                   <h5>Current Roles</h5>
                     <span data-ng-repeat="role in user.roles | filter: '!user' " class="list-group-item">
                     	<span>
                 			<span data-ng-bind="role"></span>

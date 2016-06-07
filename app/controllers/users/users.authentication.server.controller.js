@@ -14,7 +14,11 @@ var _ = require('lodash'),
  */
 exports.signup = function(req, res) {
 	// For security measurement we remove the roles from the req.body object
-	delete req.body.roles;
+	// unless creating user is an admin
+	if(req.authentication.user.roles.indexOf('admin') < 0) {
+	    delete req.body.roles;
+	}
+	
 
 	// Init Variables
 	var user = new User(req.body);
