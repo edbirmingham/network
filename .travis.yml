@@ -1,12 +1,9 @@
-language: node_js
-node_js:
-  - "0.10"
+language: ruby
+rvm:
+  - 2.2
 env:
-  - NODE_ENV=travis
-services:
-  - mongodb
+  - RAILS_ENV=test
 script:
-  - grunt csslint
-  - grunt jshint
-  - grunt env:test mochaTest
-  - grunt env:test karma:unit
+  - bundle install
+  - bundle exec rake db:test:prepare
+  - bundle exec rake test
