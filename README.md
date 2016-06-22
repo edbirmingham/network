@@ -36,7 +36,7 @@ This setup uses Cloud9 for your development environment.  Cloud9 provides an onl
   git remote add upstream https://github.com/edbirmingham/network.git
   git pull upstream master
   ```
-  * In the bash tab, install Node.js modules by entering the following command:
+  * In the bash tab, install the Ruby gems used by the project and setup the data in the database by entering the following commands:
   ```
   bundle install
   rake db:migrate
@@ -44,7 +44,10 @@ This setup uses Cloud9 for your development environment.  Cloud9 provides an onl
   ```
   > Note: If the command fails, you can restart the workspace by clicking in the top right corner where it says "Memory, CPU, and Disk". Then click restart in that menu. 
 
-  * To start the app select Run Project from the editor menu.
+  * To start the app run the following from the command line:
+  ```
+  rails server -p $PORT -b $IP
+  ```
   * To view the app in the browser, select Preview from the editor menu and then select Preview Running Application.  This will open the application in a tab of the editor.  Log into the application with email `jane.doe@example.com` and password `password`.
 * Hack away
 * Send lots of pull requests!!
