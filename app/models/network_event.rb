@@ -5,6 +5,7 @@ class NetworkEvent < ActiveRecord::Base
   validates :location_id, presence: true
   
   belongs_to :location
+  belongs_to :user
   
   def self.event_types
     [

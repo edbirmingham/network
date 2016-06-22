@@ -19,7 +19,7 @@ one:
   community_networks: MyString
   extra_groups: MyString
   other_networks: MyString
-  user_id: 1
+  user: one
 
 two:
   first_name: MyString
@@ -40,4 +40,4 @@ two:
   community_networks: MyString
   extra_groups: MyString
   other_networks: MyString
-  user_id: 1
+  user: two

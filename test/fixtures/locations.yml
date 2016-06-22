@@ -2,6 +2,8 @@
 
 one:
   name: One Elementary
+  user: one
 
 two:
   name: Two Place
+  user: two
