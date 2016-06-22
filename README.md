@@ -34,16 +34,18 @@ This setup uses Cloud9 for your development environment.  Cloud9 provides an onl
   * In the bash tab (bottom of the screen), setup a git remote to the main project:
   ```
   git remote add upstream https://github.com/edbirmingham/network.git
+  git pull upstream master
   ```
   * In the bash tab, install Node.js modules by entering the following command:
   ```
   bundle install
   rake db:migrate
+  rake db:seed
   ```
   > Note: If the command fails, you can restart the workspace by clicking in the top right corner where it says "Memory, CPU, and Disk". Then click restart in that menu. 
 
   * To start the app select Run Project from the editor menu.
-  * To view the app in the browser, select Preview from the editor menu and then select Preview Running Application.  This will open the application in a tab of the editor.  Log into the application with username `janedoe` and password `password`.
+  * To view the app in the browser, select Preview from the editor menu and then select Preview Running Application.  This will open the application in a tab of the editor.  Log into the application with email `jane.doe@example.com` and password `password`.
 * Hack away
 * Send lots of pull requests!!
 * In order to get updates from the main project use the following command in the bash tab:
