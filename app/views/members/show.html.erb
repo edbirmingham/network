@@ -1,0 +1,71 @@
+<div class="page-header">
+  <%= link_to members_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to edit_member_path(@member), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Edit
+  <% end %>
+  <h1>Show member</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>First name:</dt>
+  <dd><%= @member.first_name %></dd>
+
+  <dt>Last name:</dt>
+  <dd><%= @member.last_name %></dd>
+
+  <dt>Phone:</dt>
+  <dd><%= phone_to @member.phone %></dd>
+
+  <dt>Email:</dt>
+  <dd><%= mail_to @member.email %></dd>
+
+  <dt>Identity:</dt>
+  <dd><%= @member.identity %></dd>
+
+  <dt>Affiliation:</dt>
+  <dd><%= @member.affiliation %></dd>
+
+  <dt>Address:</dt>
+  <dd><%= @member.address %></dd>
+
+  <dt>City:</dt>
+  <dd><%= @member.city %></dd>
+
+  <dt>State:</dt>
+  <dd><%= @member.state %></dd>
+
+  <dt>Zip code:</dt>
+  <dd><%= @member.zip_code %></dd>
+
+  <dt>Shirt size:</dt>
+  <dd><%= @member.shirt_size %></dd>
+
+  <dt>Shirt received:</dt>
+  <dd><%= @member.shirt_received %></dd>
+
+  <dt>Talent:</dt>
+  <dd><%= @member.talent %></dd>
+
+  <dt>Place of worship:</dt>
+  <dd><%= @member.place_of_worship %></dd>
+
+  <dt>Recruitment:</dt>
+  <dd><%= @member.recruitment %></dd>
+
+  <dt>Community networks:</dt>
+  <dd><%= @member.community_networks %></dd>
+
+  <dt>Extra groups:</dt>
+  <dd><%= @member.extra_groups %></dd>
+
+  <dt>Other networks:</dt>
+  <dd><%= @member.other_networks %></dd>
+
+  <dt>User:</dt>
+  <dd><%= @member.user_id %></dd>
+
+</dl>

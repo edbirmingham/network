@@ -1,0 +1,37 @@
+<div class="page-header">
+  <%= link_to new_network_event_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Event
+  <% end %>
+  <h1>Listing events</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Location</th>
+            <th>Scheduled at</th>
+            <th>Creator</th>
+            <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @network_events) do |network_event| %>
+            <td><%= network_event.name %></td>
+            <td><%= network_event.event_type %></td>
+            <td><%= network_event.location.name %></td>
+            <td><%= network_event.scheduled_at %></td>
+            <td><%= network_event.user_id %></td>
+            <td><%= link_to 'Show', network_event %></td>
+        <td><%= link_to 'Edit', edit_network_event_path(network_event) %></td>
+        <td><%= link_to 'Destroy', network_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>

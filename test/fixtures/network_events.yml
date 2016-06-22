@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  event_type: Raise Up Initiatives
+  location_id: 1
+  scheduled_at: 2016-06-20 01:59:56
+  user_id: 1
+
+two:
+  name: MyString
+  event_type: College 101
+  location_id: 1
+  scheduled_at: 2016-06-20 01:59:56
+  user_id: 1

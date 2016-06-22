@@ -1,0 +1,13 @@
+<div class="page-header">
+  <%= link_to network_events_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to @network_event, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-info-sign"></span>
+    Show
+  <% end %>
+  <h1>Editing event</h1>
+</div>
+
+<%= render 'form' %>

@@ -1,0 +1,2 @@
+module NetworkEventsHelper
+end
