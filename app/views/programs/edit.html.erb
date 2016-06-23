@@ -1,0 +1,13 @@
+<div class="page-header">
+  <%= link_to programs_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to @program, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-info-sign"></span>
+    Show
+  <% end %>
+  <h1>Editing program</h1>
+</div>
+
+<%= render 'form' %>
