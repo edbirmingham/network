@@ -11,7 +11,7 @@
     <thead>
       <tr>
             <th>Name</th>
-            <th>Type</th>
+            <th>Program</th>
             <th>Location</th>
             <th>Scheduled at</th>
             <th>Creator</th>
@@ -24,7 +24,7 @@
     <tbody>
       <%= content_tag_for(:tr, @network_events) do |network_event| %>
             <td><%= network_event.name %></td>
-            <td><%= network_event.event_type %></td>
+            <td><%= network_event.program.name %></td>
             <td><%= network_event.location.name %></td>
             <td><%= network_event.scheduled_at %></td>
             <td><%= network_event.user_id %></td>
