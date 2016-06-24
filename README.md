@@ -33,7 +33,7 @@ This setup uses Cloud9 for your development environment.  Cloud9 provides an onl
     * Enter a workspace name, network will probably be fine.
     * Enter a description.
     * Choose the Rails Ruby template.
-    * Click the Create a workspace button.
+    * Click the "Create workspace" button.
   * Cloud9 will soon display the development environment.
   * In the bash tab (bottom of the screen), setup a git remote to the main project:
   ```
