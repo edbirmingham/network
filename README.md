@@ -30,6 +30,10 @@ This setup uses Cloud9 for your development environment.  Cloud9 provides an onl
   * Goto the Repositories link in Cloud9 IDE
   * Select "Clone to edit" on *your* fork of Network.
     * Note, you may see two options for Network.  One is "edbirmingham/network", which you do not want to select.  The other is "*your name*/network" which is the correct repository to select.
+    * Enter a workspace name, network will probably be fine.
+    * Enter a description.
+    * Choose the Rails Ruby template.
+    * Click the Create a workspace button.
   * Cloud9 will soon display the development environment.
   * In the bash tab (bottom of the screen), setup a git remote to the main project:
   ```
@@ -39,8 +43,7 @@ This setup uses Cloud9 for your development environment.  Cloud9 provides an onl
   * In the bash tab, install the Ruby gems used by the project and setup the data in the database by entering the following commands:
   ```
   bundle install
-  rake db:migrate
-  rake db:seed
+  rake db:setup
   ```
   > Note: If the command fails, you can restart the workspace by clicking in the top right corner where it says "Memory, CPU, and Disk". Then click restart in that menu. 
 
