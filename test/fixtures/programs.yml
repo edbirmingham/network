@@ -2,8 +2,10 @@
 
 one:
   name: MyString
+  abbreviation: MS
   user: one
 
 two:
   name: MyString
+  abbreviation: MS
   user: one

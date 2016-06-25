@@ -11,8 +11,8 @@
     <thead>
       <tr>
             <th>Name</th>
+            <th>Abbreviation</th>
             <th>User</th>
-            <th></th>
         <th></th>
         <th></th>
       </tr>
@@ -21,6 +21,7 @@
     <tbody>
       <%= content_tag_for(:tr, @programs) do |program| %>
             <td><%= program.name %></td>
+            <td><%= program.abbreviation %></td>
             <td><%= program.user_id %></td>
             <td><%= link_to 'Show', program %></td>
         <td><%= link_to 'Edit', edit_program_path(program) %></td>
