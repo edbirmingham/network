@@ -14,7 +14,6 @@
             <th>Program</th>
             <th>Location</th>
             <th>Scheduled at</th>
-            <th>Creator</th>
             <th></th>
         <th></th>
         <th></th>
@@ -27,7 +26,6 @@
             <td><%= network_event.program.name %></td>
             <td><%= network_event.location.name %></td>
             <td><%= network_event.scheduled_at %></td>
-            <td><%= network_event.user_id %></td>
             <td><%= link_to 'Show', network_event %></td>
         <td><%= link_to 'Edit', edit_network_event_path(network_event) %></td>
         <td><%= link_to 'Destroy', network_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>

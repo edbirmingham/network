@@ -66,6 +66,6 @@
   <dd><%= @member.other_networks %></dd>
 
   <dt>User:</dt>
-  <dd><%= @member.user_id %></dd>
+  <dd><%= @member.user.try(:email) %></dd>
 
 </dl>

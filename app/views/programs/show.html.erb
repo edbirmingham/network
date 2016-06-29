@@ -17,7 +17,7 @@
   <dt>Abbreviation:</dt>
   <dd><%= @program.abbreviation %></dd>
 
-  <dt>User:</dt>
-  <dd><%= @program.user_id %></dd>
+  <dt>Creator:</dt>
+  <dd><%= @program.user.try(:email) %></dd>
 
 </dl>

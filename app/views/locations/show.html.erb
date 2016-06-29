@@ -13,5 +13,8 @@
 <dl class="dl-horizontal">
   <dt>Name:</dt>
   <dd><%= @location.name %></dd>
+  
+  <dt>Creator:</dt>
+  <dd><%= @location.user.try(:email) %></dd>
 
 </dl>
