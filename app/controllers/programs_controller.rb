@@ -25,7 +25,7 @@ class ProgramsController < ApplicationController
   # POST /programs.json
   def create
     @program = Program.new(program_params)
-
+    @program.user = current_user
     respond_to do |format|
       if @program.save
         format.html { redirect_to @program, notice: 'Program was successfully created.' }

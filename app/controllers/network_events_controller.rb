@@ -25,7 +25,7 @@ class NetworkEventsController < ApplicationController
   # POST /network_events.json
   def create
     @network_event = NetworkEvent.new(network_event_params)
-
+    @network_event.user = current_user
     respond_to do |format|
       if @network_event.save
         format.html { redirect_to @network_event, notice: 'Network event was successfully created.' }
