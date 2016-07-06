@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   devise_for :users
-  resources :users
+  resources :users, only: [:index, :destroy]
   
   get 'welcome/index'
 
