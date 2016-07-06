@@ -14,6 +14,11 @@ class UsersControllerTest < ActionController::TestCase
     assert_not_nil assigns(:users)
   end
 
+  test "should show user" do
+    get :show, id: @user
+    assert_response :success
+  end
+
   test "should destroy user" do
     assert_difference('User.count', -1) do
       delete :destroy, id: @user
