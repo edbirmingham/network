@@ -14,4 +14,12 @@ class UsersControllerTest < ActionController::TestCase
     assert_not_nil assigns(:users)
   end
 
+  test "should destroy user" do
+    assert_difference('User.count', -1) do
+      delete :destroy, id: @user
+    end
+
+    assert_redirected_to users_path
+  end
+
 end
