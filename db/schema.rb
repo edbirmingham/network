@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160623202242) do
+ActiveRecord::Schema.define(version: 20160710130433) do
 
   create_table "locations", force: :cascade do |t|
     t.string   "name"
@@ -55,6 +55,13 @@ ActiveRecord::Schema.define(version: 20160623202242) do
   end
 
   add_index "network_events", ["program_id"], name: "index_network_events_on_program_id"
+
+  create_table "organizations", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "created_by_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   create_table "programs", force: :cascade do |t|
     t.string   "name"
