@@ -20,7 +20,7 @@ class OrganizationsControllerTest < ActionController::TestCase
   end
 
   test "should create organization" do
-    assert_difference('Organization.count') do
+    assert_difference('Organization.where(created_by_id: users(:one).id).count') do
       post :create, organization: { name: @organization.name }
     end
 
