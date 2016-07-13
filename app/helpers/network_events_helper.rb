@@ -12,7 +12,7 @@ module NetworkEventsHelper
     if params[:end_date].present?
       params[:end_date] 
     else 
-      Date.today + 1.week + 1.day
+      Date.today + 6.days
     end
   end
   
