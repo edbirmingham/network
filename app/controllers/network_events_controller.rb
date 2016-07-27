@@ -4,7 +4,11 @@ class NetworkEventsController < ApplicationController
   # GET /network_events
   # GET /network_events.json
   def index
-    @network_events = NetworkEvent.all
+    if params[:start_date].present? && params[:end_date].present?
+      @network_events = NetworkEvent.in_date_range( params[:start_date], params[:end_date])
+    else
+      @network_events = NetworkEvent.default_date_range
+    end
   end
 
   # GET /network_events/1
