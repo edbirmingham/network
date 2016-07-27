@@ -49,6 +49,11 @@ Program.create(name: 'Educator Round Table', user_id: user.id)
 Program.create(name: 'Connector Table Meeting', user_id: user.id)
 Program.create(name: 'Core Team Meeting', user_id: user.id)
 
+Organization.create(name: 'EAB', created_by_id: user.id)
+Organization.create(name: 'Regions Bank', created_by_id: user.id)
+Organization.create(name: 'Publix', created_by_id: user.id)
+Organization.create(name: 'Code for Birmingham', created_by_id: user.id)
+Organization.create(name: 'Birmingham Chamber of Commerce', created_by_id: user.id)
 
 Location.all.each do |location|
   Program.all.each do |program|
