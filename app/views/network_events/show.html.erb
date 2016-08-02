@@ -22,7 +22,10 @@
 
   <dt>Scheduled at:</dt>
   <dd><%= @network_event.scheduled_at %></dd>
-  
+
+  <dt>Ends At:</dt>
+  <dd><%= @network_event.scheduled_at + @network_event.duration.minutes %></dd>
+
   <dt>Creator:</dt>
   <dd><%= @network_event.user.try(:email) %></dd>
 
