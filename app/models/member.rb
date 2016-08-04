@@ -3,6 +3,8 @@ class Member < ActiveRecord::Base
   validates :last_name, presence: true
   
   belongs_to :user
+  has_many :affiliations
+  has_many :organizations, through: :affiliations
   
   def self.shirt_sizes
     %w{ S M L XL 2XL 3XL }

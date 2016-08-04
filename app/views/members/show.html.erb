@@ -25,9 +25,14 @@
 
   <dt>Identity:</dt>
   <dd><%= @member.identity %></dd>
-
+  
   <dt>Affiliation:</dt>
   <dd><%= @member.affiliation %></dd>
+
+  <dt>Organizations:</dt>
+  <% @member.organizations.each do |organization|%>
+  <dd><%= organization.name %></dd>
+  <% end %>
 
   <dt>Graduation Class:</dt>
   <dd><%= @member.graduation_year %></dd>
