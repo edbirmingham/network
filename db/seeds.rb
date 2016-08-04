@@ -9,10 +9,38 @@
 user = User.create(email: 'jane.doe@example.com', password: 'password')
 User.create(email: 'john.doe@example.com', password: 'password')
 
-Location.create(name: 'Tuggle Elementary', user_id: user.id)
-Location.create(name: 'Carver High School', user_id: user.id)
-Location.create(name: 'Hudson K-8', user_id: user.id)
-Location.create(name: 'Ramsay High School', user_id: user.id)
+Location.create(
+  name: 'Tuggle Elementary', 
+  address_one: '1234 Broad St N', 
+  city: 'Birmingham', 
+  state: 'AL', 
+  zip_code: '35204', 
+  user_id: user.id
+)
+Location.create(
+  name: 'Carver High School', 
+  address_one: '3200 24th St N', 
+  city: 'Birmingham', 
+  state: 'AL', 
+  zip_code: '35207', 
+  user_id: user.id
+)
+Location.create(
+  name: 'Hudson K-8', 
+  address_one: '3300 F L Shuttlesworth Dr', 
+  city: 'Birmingham', 
+  state: 'AL', 
+  zip_code: '35204', 
+  user_id: user.id
+)
+Location.create(
+  name: 'Ramsay High School', 
+  address_one: '1800 13th Ave S', 
+  city: 'Birmingham', 
+  state: 'AL', 
+  zip_code: '35205', 
+  user_id: user.id
+)
 
 Member.create(
   first_name: 'Victoria', 
