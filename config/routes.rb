@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :network_actions
   resources :programs
   resources :network_events
   # The priority is based upon order of creation: first created -> highest priority.

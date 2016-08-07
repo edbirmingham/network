@@ -42,28 +42,28 @@ Location.create(
   user_id: user.id
 )
 
-Member.create(
+victoria = Member.create(
   first_name: 'Victoria', 
   last_name: 'Hollis',
   email: 'victoria@example.com',
   phone: '205 999-9999',
   user_id: user.id
 )
-Member.create(
+chris = Member.create(
   first_name: 'Chris', 
   last_name: 'Collins',
   email: 'chris@example.com',
   phone: '205 999-9999',
   user_id: user.id
 )
-Member.create(
+andrew = Member.create(
   first_name: 'Andrew', 
   last_name: 'Sellers',
   email: 'andrew@example.com',
   phone: '205 999-9999',
   user_id: user.id
 )
-Member.create(
+sean = Member.create(
   first_name: 'Sean', 
   last_name: 'Abdoli',
   email: 'sean@example.com',
@@ -83,9 +83,10 @@ Organization.create(name: 'Publix', created_by_id: user.id)
 Organization.create(name: 'Code for Birmingham', created_by_id: user.id)
 Organization.create(name: 'Birmingham Chamber of Commerce', created_by_id: user.id)
 
+network_event = nil
 Location.all.each do |location|
   Program.all.each do |program|
-    NetworkEvent.create(
+    network_event = NetworkEvent.create(
       name: "#{location.name} #{program.name}",
       program: program,
       location: location,
@@ -94,3 +95,12 @@ Location.all.each do |location|
     )
   end
 end
+
+network_action = NetworkAction.create(
+  network_event: network_event,
+  actor: victoria,
+  action_type: 'Offer',
+  description: 'Need chaperones for College 101 at UAB.',
+  members: [sean, andrew],
+  user: user
+)

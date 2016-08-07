@@ -4,7 +4,10 @@ class MembersController < ApplicationController
   # GET /members
   # GET /members.json
   def index
-    @members = Member.all
+    @members = Member.order(:first_name, :last_name)
+    if request.xhr?
+      @members = @members.limit(25).search(params[:q])
+    end
   end
 
   # GET /members/1
