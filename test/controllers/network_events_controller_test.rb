@@ -21,7 +21,7 @@ class NetworkEventsControllerTest < ActionController::TestCase
 
   test "should create network_event" do
     assert_difference('NetworkEvent.count') do
-      post :create, network_event: { location_id: @network_event.location_id, name: @network_event.name, scheduled_at: @network_event.scheduled_at, program_id: @network_event.program_id }
+      post :create, network_event: { location_id: @network_event.location_id, organization_id: @network_event.organization_id, name: @network_event.name, scheduled_at: @network_event.scheduled_at, program_id: @network_event.program_id }
     end
 
     assert_redirected_to network_event_path(assigns(:network_event))
@@ -38,7 +38,7 @@ class NetworkEventsControllerTest < ActionController::TestCase
   end
 
   test "should update network_event" do
-    patch :update, id: @network_event, network_event: { location_id: @network_event.location_id, name: @network_event.name, scheduled_at: @network_event.scheduled_at, program_id: @network_event.program_id }
+    patch :update, id: @network_event, network_event: { location_id: @network_event.location_id, organization_id: @network_event.organization_id, name: @network_event.name, scheduled_at: @network_event.scheduled_at, program_id: @network_event.program_id }
     assert_redirected_to network_event_path(assigns(:network_event))
   end
 

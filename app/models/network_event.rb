@@ -7,6 +7,7 @@ class NetworkEvent < ActiveRecord::Base
   belongs_to :location
   belongs_to :user
   belongs_to :program
+  belongs_to :organization
   
   
   def self.in_date_range(start_date, end_date)

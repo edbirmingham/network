@@ -77,7 +77,7 @@ Program.create(name: 'Educator Round Table', user_id: user.id)
 Program.create(name: 'Connector Table Meeting', user_id: user.id)
 Program.create(name: 'Core Team Meeting', user_id: user.id)
 
-Organization.create(name: 'EAB', created_by_id: user.id)
+eab = Organization.create(name: 'EAB', created_by_id: user.id)
 Organization.create(name: 'Regions Bank', created_by_id: user.id)
 Organization.create(name: 'Publix', created_by_id: user.id)
 Organization.create(name: 'Code for Birmingham', created_by_id: user.id)
@@ -90,6 +90,7 @@ Location.all.each do |location|
       name: "#{location.name} #{program.name}",
       program: program,
       location: location,
+      organization: eab,
       scheduled_at: rand(14).days.from_now,
       user_id: user.id
     )

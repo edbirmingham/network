@@ -4,6 +4,7 @@ one:
   name: MyString
   program: one
   location: one
+  organization: one
   scheduled_at: 2016-06-20 01:59:56
   user: one
 
@@ -11,5 +12,6 @@ two:
   name: MyString
   program: two
   location: two
+  organization: two
   scheduled_at: 2016-06-20 01:59:56
   user: two
