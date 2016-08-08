@@ -21,4 +21,7 @@ class NetworkEvent < ActiveRecord::Base
     where(scheduled_at: start_date.beginning_of_day..end_date.end_of_day)
   end
   
+  def name_with_date
+    name + ' (' + scheduled_at.to_formatted_s(:long) + ')'
+  end
 end

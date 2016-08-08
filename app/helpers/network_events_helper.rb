@@ -16,4 +16,11 @@ module NetworkEventsHelper
     end
   end
   
+  def event_button_name(event)
+    if event.new_record?
+      'Create Event'
+    else
+      'Update Event'
+    end
+  end
 end

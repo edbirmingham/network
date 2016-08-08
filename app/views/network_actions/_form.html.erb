@@ -1,0 +1,68 @@
+<%= form_for(@network_action, html: { class: "form-horizontal", role: "form" }) do |f| %>
+  <% if @network_action.errors.any? %>
+    <div class="alert alert-danger alert-dismissable" role="alert">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <h4><%= pluralize(@network_action.errors.count, "error") %> prohibited this action from being saved:</h4>
+
+      <ul>
+      <% @network_action.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :network_event_id, 'Event', class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.collection_select :network_event_id, 
+            NetworkEvent.order(:name).all, 
+            :id, 
+            :name_with_date, 
+            {}, 
+            class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :actor_id, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.collection_select :actor_id, 
+            [@network_action.actor].compact, 
+            :id, 
+            :text, 
+            {}, 
+            class: "select2 ajax form-control", 
+            data: { ajax: { url: members_path }, placeholder: 'Find Actor' }  %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :action_type, 'Type', class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.select :action_type, NetworkAction.types, {}, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :description, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :member_ids, 'Matches', class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.collection_select :member_ids, 
+            @network_action.members, 
+            :id, 
+            :text, 
+            {}, 
+            class: "select2 ajax form-control", 
+            multiple: true, 
+            data: { ajax: { url: members_path }, placeholder: 'Find Matches' }  %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit action_button_name(f.object), class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>

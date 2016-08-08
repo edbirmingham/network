@@ -1,0 +1,13 @@
+<div class="page-header">
+  <%= link_to network_actions_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to @network_action, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-info-sign"></span>
+    Show
+  <% end %>
+  <h1>Editing action</h1>
+</div>
+
+<%= render 'form' %>

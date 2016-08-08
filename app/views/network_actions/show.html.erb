@@ -1,0 +1,38 @@
+<div class="page-header">
+  <%= link_to network_actions_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to edit_network_action_path(@network_action), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Edit
+  <% end %>
+  <h1>Show action</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Event:</dt>
+  <dd><%= link_to @network_action.network_event.try(:name), @network_action.network_event %></dd>
+
+  <dt>Actor:</dt>
+  <dd><%= link_to @network_action.actor.try(:name), @network_action.actor %></dd>
+
+  <dt>Type:</dt>
+  <dd><%= @network_action.action_type %></dd>
+
+  <dt>Description:</dt>
+  <dd><%= @network_action.description %></dd>
+
+  <dt>Matches:</dt>
+  <% if @network_action.members.present? %>
+    <%= content_tag_for(:dd, @network_action.members) do |member| %>
+      <%= link_to member.name, member %>
+    <% end %>
+  <% else %>
+    <dd></dd>
+  <% end %>
+
+  <dt>User:</dt>
+  <dd><%= @network_action.user.try(:email) %></dd>
+
+</dl>

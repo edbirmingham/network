@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  actor_id: 1
+  network_event_id: 1
+  action_type: MyString
+  description: MyString
+  user_id: 1
+
+two:
+  actor_id: 1
+  network_event_id: 1
+  action_type: MyString
+  description: MyString
+  user_id: 1

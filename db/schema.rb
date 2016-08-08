@@ -32,6 +32,14 @@ ActiveRecord::Schema.define(version: 20160804154639) do
     t.string   "zip_code"
   end
 
+  create_table "matches", force: :cascade do |t|
+    t.integer  "network_action_id"
+    t.integer  "member_id"
+    t.integer  "user_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
   create_table "members", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -55,6 +63,16 @@ ActiveRecord::Schema.define(version: 20160804154639) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.integer  "graduation_year"
+  end
+
+  create_table "network_actions", force: :cascade do |t|
+    t.integer  "actor_id"
+    t.integer  "network_event_id"
+    t.string   "action_type"
+    t.string   "description"
+    t.integer  "user_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "network_events", force: :cascade do |t|

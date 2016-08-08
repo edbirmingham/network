@@ -1,0 +1,35 @@
+<div class="page-header">
+  <%= link_to new_network_action_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Action
+  <% end %>
+  <h1>Listing actions</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Actor</th>
+        <th>Event</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @network_actions) do |network_action| %>
+        <td><%= link_to network_action.actor.try(:name), network_action.actor %></td>
+        <td><%= link_to network_action.network_event.try(:name), network_action.network_event %></td>
+        <td><%= network_action.action_type %></td>
+        <td><%= network_action.description %></td>
+        <td><%= link_to 'Show', network_action %></td>
+        <td><%= link_to 'Edit', edit_network_action_path(network_action) %></td>
+        <td><%= link_to 'Destroy', network_action, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>
