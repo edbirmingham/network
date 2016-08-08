@@ -15,10 +15,13 @@
   <dd><%= @network_event.name %></dd>
 
   <dt>Program:</dt>
-  <dd><%= @network_event.program.name %></dd>
+  <dd><%= @network_event.program.try(:name) %></dd>
 
   <dt>Location:</dt>
-  <dd><%= @network_event.location.name %></dd>
+  <dd><%= @network_event.location.try(:name) %></dd>
+
+  <dt>Organization:</dt>
+  <dd><%= @network_event.organization.try(:name) %></dd>
 
   <dt>Scheduled at:</dt>
   <dd><%= @network_event.scheduled_at %></dd>

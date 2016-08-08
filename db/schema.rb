@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160804154639) do
+ActiveRecord::Schema.define(version: 20160808011414) do
 
   create_table "affiliations", force: :cascade do |t|
     t.integer  "member_id"
@@ -80,10 +80,11 @@ ActiveRecord::Schema.define(version: 20160804154639) do
     t.integer  "location_id"
     t.datetime "scheduled_at"
     t.integer  "user_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.integer  "program_id"
-    t.integer  "duration",     default: 60
+    t.integer  "duration",        default: 60
+    t.integer  "organization_id"
   end
 
   add_index "network_events", ["program_id"], name: "index_network_events_on_program_id"
