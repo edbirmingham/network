@@ -9,6 +9,8 @@ class NetworkEvent < ActiveRecord::Base
   belongs_to :program
   belongs_to :organization
   
+  has_many :site_assignments
+  has_many :site_contacts, through: :site_assignments, source: :member
   
   def self.in_date_range(start_date, end_date)
     start_date = Date.strptime(start_date, '%A %B %d %Y')

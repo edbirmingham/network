@@ -23,6 +23,15 @@
   <dt>Organization:</dt>
   <dd><%= @network_event.organization.try(:name) %></dd>
 
+  <dt>Site Contacts:</dt>
+  <% if @network_event.site_contacts.present? %>
+    <%= content_tag_for(:dd, @network_event.site_contacts) do |contact| %>
+      <%= link_to contact.name, contact %>
+    <% end %>
+  <% else %>
+    <dd></dd>
+  <% end %>
+  
   <dt>Scheduled at:</dt>
   <dd><%= @network_event.scheduled_at %></dd>
 
