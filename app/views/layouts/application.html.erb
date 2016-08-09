@@ -30,10 +30,6 @@
               <li><%= link_to('Members', members_path) %></li>
               <li><%= link_to('Events', network_events_path) %></li>
               <li><%= link_to('Actions', network_actions_path) %></li>
-              <li><%= link_to('Locations', locations_path) %></li>
-              <li><%= link_to('Organizations', organizations_path) %></li>
-              <li><%= link_to('Programs', programs_path) %></li>
-              <li><%= link_to('Users', '#') %></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li class="dropdown">
@@ -41,6 +37,11 @@
                   <%= current_user.email %> <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
+                  <li><%= link_to('Locations', locations_path) %></li>
+                  <li><%= link_to('Organizations', organizations_path) %></li>
+                  <li><%= link_to('Programs', programs_path) %></li>
+                  <li><%= link_to('Users', '#') %></li>
+                  <li role="separator" class="divider"></li>
                   <li><%= link_to('Edit profile', edit_user_registration_path) %></li>
                   <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
                 </ul>
