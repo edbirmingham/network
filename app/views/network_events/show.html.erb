@@ -32,6 +32,15 @@
     <dd></dd>
   <% end %>
   
+  <dt>School Contacts:</dt>
+  <% if @network_event.school_contacts.present? %>
+    <%= content_tag_for(:dd, @network_event.school_contacts) do |contact| %>
+      <%= link_to contact.name, contact %>
+    <% end %>
+  <% else %>
+    <dd></dd>
+  <% end %>
+  
   <dt>Scheduled at:</dt>
   <dd><%= @network_event.scheduled_at %></dd>
 

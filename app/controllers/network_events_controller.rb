@@ -80,7 +80,8 @@ class NetworkEventsController < ApplicationController
         :scheduled_at, 
         :duration, 
         :organization_id, 
-        :site_contact_ids => []
+        :site_contact_ids => [],
+        :school_contact_ids => []
       )
     end
 end
