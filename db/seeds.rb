@@ -93,6 +93,7 @@ Location.all.each do |location|
       organization: eab,
       site_contacts: [sean, victoria],
       school_contacts: [chris],
+      volunteers: [andrew],
       scheduled_at: rand(14).days.from_now,
       user_id: user.id
     )

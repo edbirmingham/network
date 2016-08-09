@@ -81,7 +81,8 @@ class NetworkEventsController < ApplicationController
         :duration, 
         :organization_id, 
         :site_contact_ids => [],
-        :school_contact_ids => []
+        :school_contact_ids => [],
+        :volunteer_ids => []
       )
     end
 end
