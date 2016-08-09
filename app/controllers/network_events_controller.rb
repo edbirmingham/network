@@ -73,6 +73,14 @@ class NetworkEventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def network_event_params
-      params.require(:network_event).permit(:name, :program_id, :location_id, :scheduled_at, :duration, :organization_id)
+      params.require(:network_event).permit(
+        :name, 
+        :program_id, 
+        :location_id, 
+        :scheduled_at, 
+        :duration, 
+        :organization_id, 
+        :site_contact_ids => []
+      )
     end
 end
