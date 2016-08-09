@@ -41,6 +41,15 @@
     <dd></dd>
   <% end %>
   
+  <dt>Volunteers:</dt>
+  <% if @network_event.volunteers.present? %>
+    <%= content_tag_for(:dd, @network_event.volunteers) do |volunteer| %>
+      <%= link_to volunteer.name, volunteer %>
+    <% end %>
+  <% else %>
+    <dd></dd>
+  <% end %>
+  
   <dt>Scheduled at:</dt>
   <dd><%= @network_event.scheduled_at %></dd>
 
