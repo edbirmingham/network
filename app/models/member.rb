@@ -7,9 +7,9 @@ class Member < ActiveRecord::Base
   has_many :organizations, through: :affiliations
   
   def self.search(query)
-    if query.present? && query[:term].present?
+    if query.present?
       condition = 'first_name LIKE :search OR last_name LIKE :search'
-      query[:term].split(' ').inject(self) do |conditions, term|
+      query.split(' ').inject(self) do |conditions, term|
         conditions.where([condition, search: "#{term}%"])
       end
     else
