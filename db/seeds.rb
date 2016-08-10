@@ -9,6 +9,12 @@
 user = User.create(email: 'jane.doe@example.com', password: 'password')
 User.create(email: 'john.doe@example.com', password: 'password')
 
+GraduatingClass.create(year: 2016, user_id: user.id)
+GraduatingClass.create(year: 2017, user_id: user.id)
+GraduatingClass.create(year: 2018, user_id: user.id)
+GraduatingClass.create(year: 2019, user_id: user.id)
+GraduatingClass.create(year: 2020, user_id: user.id)
+
 Location.create(
   name: 'Tuggle Elementary', 
   address_one: '1234 Broad St N', 
