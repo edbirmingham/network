@@ -1,0 +1,33 @@
+<div class="page-header">
+  <%= link_to users_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <h1>Show user</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Email:</dt>
+  <dd><%= @user.email %></dd>
+
+  <dt>Sign in count:</dt>
+  <dd><%= @user.sign_in_count %></dd>
+
+  <dt>Current sign in at:</dt>
+  <dd><%= @user.current_sign_in_at %></dd>
+
+  <dt>Last sign in at:</dt>
+  <dd><%= @user.last_sign_in_at %></dd>
+
+  <dt>Current sign in IP:</dt>
+  <dd><%= @user.current_sign_in_ip %></dd>
+
+  <dt>Last sign in IP:</dt>
+  <dd><%= @user.last_sign_in_ip %></dd>
+
+  <dt>Created at:</dt>
+  <dd><%= @user.created_at %></dd>
+
+  <dt>Updated at:</dt>
+  <dd><%= @user.updated_at %></dd>
+</dl>
