@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :graduating_classes
   resources :network_actions
   resources :programs
   resources :network_events

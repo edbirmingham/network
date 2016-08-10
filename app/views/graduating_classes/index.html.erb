@@ -1,0 +1,29 @@
+<div class="page-header">
+  <%= link_to new_graduating_class_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Graduating Class
+  <% end %>
+  <h1>Listing graduating classes</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+            <th>Year</th>
+            <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @graduating_classes) do |graduating_class| %>
+            <td><%= graduating_class.year %></td>
+            <td><%= link_to 'Show', graduating_class %></td>
+        <td><%= link_to 'Edit', edit_graduating_class_path(graduating_class) %></td>
+        <td><%= link_to 'Destroy', graduating_class, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>
