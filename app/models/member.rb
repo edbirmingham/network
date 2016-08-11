@@ -13,7 +13,7 @@ class Member < ActiveRecord::Base
         conditions.where([condition, search: "#{term}%"])
       end
     else
-      none
+      all
     end
   end
   
