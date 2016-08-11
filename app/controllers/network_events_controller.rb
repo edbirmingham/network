@@ -32,8 +32,13 @@ class NetworkEventsController < ApplicationController
     @network_event.user = current_user
     respond_to do |format|
       if @network_event.save
-        format.html { redirect_to @network_event, notice: 'Network event was successfully created.' }
-        format.json { render :show, status: :created, location: @network_event }
+        if params[:commit] == 'Save & Create Another'
+          format.html { redirect_to new_network_event_path, alert: 'Network event was successfully created.' }
+          format.json { render :new, status: :created, location: @network_event }
+        elsif params[:commit] == 'Create Event'
+          format.html { redirect_to @network_event, notice: 'Network event was successfully created.' }
+          format.json { render :show, status: :created, location: @network_event }
+        end
       else
         format.html { render :new }
         format.json { render json: @network_event.errors, status: :unprocessable_entity }
