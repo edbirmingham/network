@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  graduating_class_id: 1
+  network_event_id: 1
+  user_id: 1
+
+two:
+  graduating_class_id: 1
+  network_event_id: 1
+  user_id: 1
