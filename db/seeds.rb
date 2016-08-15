@@ -96,7 +96,7 @@ Location.all.each do |location|
       name: "#{location.name} #{program.name}",
       program: program,
       location: location,
-      organization: eab,
+      organizations: [eab],
       site_contacts: [sean, victoria],
       school_contacts: [chris],
       volunteers: [andrew],
