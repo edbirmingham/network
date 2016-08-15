@@ -60,7 +60,7 @@
         <th>Name</th>
         <th>Program</th>
         <th>Location</th>
-        <th>Organization</th>
+        <th>Organization(s)</th>
         <th>Scheduled at</th>
         <th></th>
         <th></th>
@@ -73,7 +73,7 @@
         <td><%= network_event.name %></td>
         <td><%= network_event.program.try(:name) %></td>
         <td><%= network_event.location.try(:name) %></td>
-        <td><%= network_event.organization.try(:name) %></td>
+        <td><%= network_event.organizations.map(&:name).join(', ') %></td>
         <td><%= network_event.scheduled_at %></td>
         <td><%= link_to 'Show', network_event %></td>
         <td><%= link_to 'Edit', edit_network_event_path(network_event) %></td>

@@ -79,7 +79,7 @@ class NetworkEventsController < ApplicationController
         :location_id, 
         :scheduled_at, 
         :duration, 
-        :organization_id, 
+        :organization_ids => [], 
         :site_contact_ids => [],
         :school_contact_ids => [],
         :volunteer_ids => [],

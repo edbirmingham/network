@@ -20,8 +20,14 @@
   <dt>Location:</dt>
   <dd><%= @network_event.location.try(:name) %></dd>
 
-  <dt>Organization:</dt>
-  <dd><%= @network_event.organization.try(:name) %></dd>
+  <dt>Organizations:</dt>
+  <% if @network_event.organizations.present? %>
+    <%= content_tag_for(:dd, @network_event.organizations) do |organization| %>
+      <%= link_to organization.name, organization %>
+    <% end %>
+  <% else %>
+    <dd></dd>
+  <% end %>
 
   <dt>Site Contacts:</dt>
   <% if @network_event.site_contacts.present? %>
