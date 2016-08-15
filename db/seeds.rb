@@ -9,8 +9,8 @@
 user = User.create(email: 'jane.doe@example.com', password: 'password')
 User.create(email: 'john.doe@example.com', password: 'password')
 
-GraduatingClass.create(year: 2016, user_id: user.id)
-GraduatingClass.create(year: 2017, user_id: user.id)
+class_of_2016 = GraduatingClass.create(year: 2016, user_id: user.id)
+class_of_2017 = GraduatingClass.create(year: 2017, user_id: user.id)
 GraduatingClass.create(year: 2018, user_id: user.id)
 GraduatingClass.create(year: 2019, user_id: user.id)
 GraduatingClass.create(year: 2020, user_id: user.id)
@@ -100,6 +100,7 @@ Location.all.each do |location|
       site_contacts: [sean, victoria],
       school_contacts: [chris],
       volunteers: [andrew],
+      graduating_classes: [class_of_2016, class_of_2017],
       scheduled_at: rand(14).days.from_now,
       user_id: user.id
     )
