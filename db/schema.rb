@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160815023831) do
+ActiveRecord::Schema.define(version: 20160815233719) do
 
   create_table "affiliations", force: :cascade do |t|
     t.integer  "member_id"
@@ -75,9 +75,9 @@ ActiveRecord::Schema.define(version: 20160815023831) do
     t.string   "extra_groups"
     t.string   "other_networks"
     t.integer  "user_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.integer  "graduation_year"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "graduating_class_id"
   end
 
   create_table "network_actions", force: :cascade do |t|
