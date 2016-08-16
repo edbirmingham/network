@@ -6,6 +6,8 @@ class Member < ActiveRecord::Base
   belongs_to :graduating_class, class_name: 'GraduatingClass', foreign_key: :graduating_class_id
   has_many :affiliations
   has_many :organizations, through: :affiliations
+  has_many :talent_assignments
+  has_many :talents, through: :talent_assignments
 
   def self.search(query)
     if query.present?
