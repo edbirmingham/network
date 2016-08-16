@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :schools
   resources :cohorts
   resources :graduating_classes
   resources :network_actions
