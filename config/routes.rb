@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+<<<<<<< HEAD
+=======
+  resources :schools
+>>>>>>> edbirmingham/master
   resources :cohorts
   resources :graduating_classes
   resources :network_actions

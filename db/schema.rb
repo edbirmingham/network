@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20160816020706) do
+=======
+ActiveRecord::Schema.define(version: 20160816022321) do
+>>>>>>> edbirmingham/master
 
   create_table "affiliations", force: :cascade do |t|
     t.integer  "member_id"
@@ -139,6 +143,13 @@ ActiveRecord::Schema.define(version: 20160816020706) do
     t.integer  "user_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+  end
+
+  create_table "schools", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "site_assignments", force: :cascade do |t|

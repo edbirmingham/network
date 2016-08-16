@@ -93,6 +93,12 @@ gear_up = Cohort.create(name: 'Gear-Up', user_id: user.id)
 health_academy = Cohort.create(name: 'Academy of Health Sciences', user_id: user.id)
 educator_academy = Cohort.create(name: 'Academy of Urban Educators', user_id: user.id)
 
+<<<<<<< HEAD
+=======
+carver = School.create(name: 'Carver High School', user_id: user.id)
+tuggle = School.create(name: 'Tuggle Elementary School', user_id: user.id)
+
+>>>>>>> edbirmingham/master
 network_event = nil
 Location.all.each do |location|
   Program.all.each do |program|
