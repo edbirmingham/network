@@ -89,6 +89,10 @@ Organization.create(name: 'Publix', created_by_id: user.id)
 Organization.create(name: 'Code for Birmingham', created_by_id: user.id)
 Organization.create(name: 'Birmingham Chamber of Commerce', created_by_id: user.id)
 
+gear_up = Cohort.create(name: 'Gear-Up', user_id: user.id)
+health_academy = Cohort.create(name: 'Academy of Health Sciences', user_id: user.id)
+educator_academy = Cohort.create(name: 'Academy of Urban Educators', user_id: user.id)
+
 network_event = nil
 Location.all.each do |location|
   Program.all.each do |program|

@@ -11,13 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160815023831) do
+ActiveRecord::Schema.define(version: 20160816020706) do
 
   create_table "affiliations", force: :cascade do |t|
     t.integer  "member_id"
     t.integer  "organization_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+  end
+
+  create_table "cohorts", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "graduating_class_assignments", force: :cascade do |t|
