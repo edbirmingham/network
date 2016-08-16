@@ -156,6 +156,21 @@ ActiveRecord::Schema.define(version: 20160817021519) do
     t.datetime "updated_at",       null: false
   end
 
+  create_table "talent_assignments", force: :cascade do |t|
+    t.integer  "talent_id"
+    t.integer  "member_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "talents", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
