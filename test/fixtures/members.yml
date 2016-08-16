@@ -20,6 +20,7 @@ one:
   extra_groups: MyString
   other_networks: MyString
   user: one
+  graduating_class: one
 
 two:
   first_name: MyString
@@ -41,3 +42,4 @@ two:
   extra_groups: MyString
   other_networks: MyString
   user: two
+  graduating_class: one
