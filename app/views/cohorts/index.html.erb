@@ -1,0 +1,29 @@
+<div class="page-header">
+  <%= link_to new_cohort_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Cohort
+  <% end %>
+  <h1>Listing cohorts</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+            <th>Name</th>
+            <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @cohorts) do |cohort| %>
+            <td><%= cohort.name %></td>
+            <td><%= link_to 'Show', cohort %></td>
+        <td><%= link_to 'Edit', edit_cohort_path(cohort) %></td>
+        <td><%= link_to 'Destroy', cohort, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>
