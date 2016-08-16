@@ -122,3 +122,18 @@ network_action = NetworkAction.create(
   members: [sean, andrew],
   user: user
 )
+
+Talent.create(
+  name: 'Arts',
+  user: user
+)
+
+Talent.create(
+  name: 'Math',
+  user: user
+)
+
+Talent.create(
+  name: 'Technology',
+  user: user
+)
