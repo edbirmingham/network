@@ -39,4 +39,12 @@ class Member < ActiveRecord::Base
   def text
     name
   end
+
+  def graduation_year
+    if graduating_class
+      graduating_class.year
+    else
+      ''
+    end
+  end
 end
