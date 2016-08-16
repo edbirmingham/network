@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20160816020706) do
-=======
 ActiveRecord::Schema.define(version: 20160816022321) do
->>>>>>> edbirmingham/master
 
   create_table "affiliations", force: :cascade do |t|
     t.integer  "member_id"
