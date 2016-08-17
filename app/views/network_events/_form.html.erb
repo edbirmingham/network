@@ -93,6 +93,19 @@
     </div>
   </div>
   <div class="form-group">
+    <%= f.label :school_ids, 'Schools', class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.collection_select :school_ids, 
+            School.order(:name).all, 
+            :id, 
+            :name, 
+            {}, 
+            class: "select2 form-control", 
+            multiple: true, 
+            data: { placeholder: 'Find Schools' }  %>
+    </div>
+  </div>
+  <div class="form-group">
     <%= f.label :graduating_class_ids, 'Graduating Classes', class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
       <%= f.collection_select :graduating_class_ids, 
