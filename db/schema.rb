@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160817112254) do
+ActiveRecord::Schema.define(version: 20160822211424) do
 
   create_table "affiliations", force: :cascade do |t|
     t.integer  "member_id"
@@ -86,6 +86,13 @@ ActiveRecord::Schema.define(version: 20160817112254) do
     t.integer  "graduating_class_id"
   end
 
+  create_table "neighborhoods", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "network_actions", force: :cascade do |t|
     t.integer  "actor_id"
     t.integer  "network_event_id"
@@ -130,6 +137,14 @@ ActiveRecord::Schema.define(version: 20160817112254) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.string   "abbreviation"
+  end
+
+  create_table "residences", force: :cascade do |t|
+    t.integer  "member_id"
+    t.integer  "neighborhood_id"
+    t.integer  "user_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "school_contact_assignments", force: :cascade do |t|
