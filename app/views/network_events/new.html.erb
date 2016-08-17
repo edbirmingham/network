@@ -6,4 +6,9 @@
   <h1>New event</h1>
 </div>
 
+<% if flash[:alert] %>
+  <div class="alert alert-success" role="alert">
+    <h4><%= alert %></h4>
+  </div>
+<% end %>
 <%= render 'form' %>
