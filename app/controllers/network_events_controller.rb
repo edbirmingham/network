@@ -78,7 +78,11 @@ class NetworkEventsController < ApplicationController
     
     def sort_column
       if %w[location program organization].include? params[:sort]
+<<<<<<< HEAD
         params[:sort] + "s.name"
+=======
+        params[:sort].pluralize + ".name"
+>>>>>>> 98a20cadebbb010fe9bcbf59f318affa265415c0
       else
         NetworkEvent.column_names.include?(params[:sort]) ? params[:sort] : "scheduled_at"
       end
