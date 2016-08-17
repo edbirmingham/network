@@ -49,4 +49,8 @@ class Member < ActiveRecord::Base
       ''
     end
   end
+
+  def talent_list
+    talents.map(&:name).compact.sort.join(', ')
+  end
 end
