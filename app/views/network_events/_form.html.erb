@@ -120,6 +120,9 @@
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <%= f.submit event_button_name(f.object), class: "btn btn-primary" %>
+      <% if controller.action_name == 'new' %>
+        <%= f.submit "Save & Create Another", class: "btn btn-primary" %>
+      <%end%>
     </div>
   </div>
 <% end %>
