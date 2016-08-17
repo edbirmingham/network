@@ -56,6 +56,15 @@
     <dd></dd>
   <% end %>
   
+  <dt>Schools:</dt>
+  <% if @network_event.schools.present? %>
+    <%= content_tag_for(:dd, @network_event.schools) do |school| %>
+      <%= school.name %>
+    <% end %>
+  <% else %>
+    <dd></dd>
+  <% end %>
+  
   <dt>Graduating Classes:</dt>
   <% if @network_event.graduating_classes.present? %>
     <%= content_tag_for(:dd, @network_event.graduating_classes) do |graduating_class| %>

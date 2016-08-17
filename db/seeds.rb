@@ -107,6 +107,7 @@ Location.all.each do |location|
       site_contacts: [sean, victoria],
       school_contacts: [chris],
       volunteers: [andrew],
+      schools: [carver, tuggle],
       graduating_classes: [class_of_2016, class_of_2017],
       scheduled_at: rand(14).days.from_now,
       user_id: user.id
