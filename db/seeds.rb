@@ -16,61 +16,61 @@ GraduatingClass.create(year: 2019, user_id: user.id)
 GraduatingClass.create(year: 2020, user_id: user.id)
 
 Location.create(
-  name: 'Tuggle Elementary', 
-  address_one: '1234 Broad St N', 
-  city: 'Birmingham', 
-  state: 'AL', 
-  zip_code: '35204', 
+  name: 'Tuggle Elementary',
+  address_one: '1234 Broad St N',
+  city: 'Birmingham',
+  state: 'AL',
+  zip_code: '35204',
   user_id: user.id
 )
 Location.create(
-  name: 'Carver High School', 
-  address_one: '3200 24th St N', 
-  city: 'Birmingham', 
-  state: 'AL', 
-  zip_code: '35207', 
+  name: 'Carver High School',
+  address_one: '3200 24th St N',
+  city: 'Birmingham',
+  state: 'AL',
+  zip_code: '35207',
   user_id: user.id
 )
 Location.create(
-  name: 'Hudson K-8', 
-  address_one: '3300 F L Shuttlesworth Dr', 
-  city: 'Birmingham', 
-  state: 'AL', 
-  zip_code: '35204', 
+  name: 'Hudson K-8',
+  address_one: '3300 F L Shuttlesworth Dr',
+  city: 'Birmingham',
+  state: 'AL',
+  zip_code: '35204',
   user_id: user.id
 )
 Location.create(
-  name: 'Ramsay High School', 
-  address_one: '1800 13th Ave S', 
-  city: 'Birmingham', 
-  state: 'AL', 
-  zip_code: '35205', 
+  name: 'Ramsay High School',
+  address_one: '1800 13th Ave S',
+  city: 'Birmingham',
+  state: 'AL',
+  zip_code: '35205',
   user_id: user.id
 )
 
 victoria = Member.create(
-  first_name: 'Victoria', 
+  first_name: 'Victoria',
   last_name: 'Hollis',
   email: 'victoria@example.com',
   phone: '205 999-9999',
   user_id: user.id
 )
 chris = Member.create(
-  first_name: 'Chris', 
+  first_name: 'Chris',
   last_name: 'Collins',
   email: 'chris@example.com',
   phone: '205 999-9999',
   user_id: user.id
 )
 andrew = Member.create(
-  first_name: 'Andrew', 
+  first_name: 'Andrew',
   last_name: 'Sellers',
   email: 'andrew@example.com',
   phone: '205 999-9999',
   user_id: user.id
 )
 sean = Member.create(
-  first_name: 'Sean', 
+  first_name: 'Sean',
   last_name: 'Abdoli',
   email: 'sean@example.com',
   phone: '205 999-9999',

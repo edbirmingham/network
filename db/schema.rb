@@ -82,9 +82,9 @@ ActiveRecord::Schema.define(version: 20160816022321) do
     t.string   "extra_groups"
     t.string   "other_networks"
     t.integer  "user_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.integer  "graduation_year"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "graduating_class_id"
   end
 
   create_table "network_actions", force: :cascade do |t|
