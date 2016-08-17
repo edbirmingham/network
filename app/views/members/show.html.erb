@@ -36,6 +36,11 @@
 
   <dt>Graduation Class:</dt>
   <dd><%= @member.graduation_year %></dd>
+  
+  <dt>Neighborhoods:</dt>
+  <% @member.neighborhoods.each do |neighborhood|%>
+  <dd><%= neighborhood.name %></dd>
+  <% end %>
 
   <dt>Address:</dt>
   <dd><%= @member.address %></dd>

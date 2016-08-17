@@ -1,0 +1,29 @@
+<div class="page-header">
+  <%= link_to new_neighborhood_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Neighborhood
+  <% end %>
+  <h1>Listing neighborhoods</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+            <th>Name</th>
+            <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @neighborhoods) do |neighborhood| %>
+            <td><%= neighborhood.name %></td>
+            <td><%= link_to 'Show', neighborhood %></td>
+        <td><%= link_to 'Edit', edit_neighborhood_path(neighborhood) %></td>
+        <td><%= link_to 'Destroy', neighborhood, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>
