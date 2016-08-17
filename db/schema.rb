@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160816022321) do
+ActiveRecord::Schema.define(version: 20160817021519) do
 
   create_table "affiliations", force: :cascade do |t|
     t.integer  "member_id"
@@ -133,7 +133,7 @@ ActiveRecord::Schema.define(version: 20160816022321) do
     t.string   "abbreviation"
   end
 
-  create_table "school_assignments", force: :cascade do |t|
+  create_table "school_contact_assignments", force: :cascade do |t|
     t.integer  "member_id"
     t.integer  "network_event_id"
     t.integer  "user_id"
@@ -148,7 +148,7 @@ ActiveRecord::Schema.define(version: 20160816022321) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "site_assignments", force: :cascade do |t|
+  create_table "site_contact_assignments", force: :cascade do |t|
     t.integer  "network_event_id"
     t.integer  "member_id"
     t.integer  "user_id"

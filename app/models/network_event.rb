@@ -8,11 +8,11 @@ class NetworkEvent < ActiveRecord::Base
   belongs_to :user
   belongs_to :program
   
-  has_many :site_assignments
-  has_many :site_contacts, through: :site_assignments, source: :member
+  has_many :site_contact_assignments
+  has_many :site_contacts, through: :site_contact_assignments, source: :member
   
-  has_many :school_assignments
-  has_many :school_contacts, through: :school_assignments, source: :member
+  has_many :school_contact_assignments
+  has_many :school_contacts, through: :school_contact_assignments, source: :member
   
   has_many :volunteer_assignments
   has_many :volunteers, through: :volunteer_assignments, source: :member
