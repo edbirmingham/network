@@ -109,6 +109,7 @@ Location.all.each do |location|
       volunteers: [andrew],
       schools: [carver, tuggle],
       graduating_classes: [class_of_2016, class_of_2017],
+      cohorts: [gear_up],
       scheduled_at: rand(14).days.from_now,
       user_id: user.id
     )

@@ -74,6 +74,15 @@
     <dd></dd>
   <% end %>
   
+  <dt>Cohorts:</dt>
+  <% if @network_event.cohorts.present? %>
+    <%= content_tag_for(:dd, @network_event.cohorts) do |cohort| %>
+      <%= cohort.name %>
+    <% end %>
+  <% else %>
+    <dd></dd>
+  <% end %>
+  
   <dt>Scheduled at:</dt>
   <dd><%= @network_event.scheduled_at %></dd>
 
