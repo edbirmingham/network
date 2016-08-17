@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160817021519) do
+ActiveRecord::Schema.define(version: 20160817112254) do
 
   create_table "affiliations", force: :cascade do |t|
     t.integer  "member_id"
@@ -75,7 +75,6 @@ ActiveRecord::Schema.define(version: 20160817021519) do
     t.string   "zip_code"
     t.string   "shirt_size"
     t.boolean  "shirt_received"
-    t.string   "talent"
     t.string   "place_of_worship"
     t.string   "recruitment"
     t.string   "community_networks"
