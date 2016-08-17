@@ -96,6 +96,12 @@ educator_academy = Cohort.create(name: 'Academy of Urban Educators', user_id: us
 carver = School.create(name: 'Carver High School', user_id: user.id)
 tuggle = School.create(name: 'Tuggle Elementary School', user_id: user.id)
 
+Talent.create(name: 'Arts', user_id: user.id)
+Talent.create(name: 'Math', user_id: user.id)
+Talent.create(name: 'Technology', user_id: user.id)
+Talent.create(name: 'Music', user_id: user.id)
+Talent.create(name: 'Sports', user_id: user.id)
+
 network_event = nil
 Location.all.each do |location|
   Program.all.each do |program|
