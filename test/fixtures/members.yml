@@ -13,7 +13,6 @@ one:
   zip_code: MyString
   shirt_size: MyString
   shirt_received: false
-  talent: MyString
   place_of_worship: MyString
   recruitment: MyString
   community_networks: MyString
@@ -35,7 +34,6 @@ two:
   zip_code: MyString
   shirt_size: MyString
   shirt_received: false
-  talent: MyString
   place_of_worship: MyString
   recruitment: MyString
   community_networks: MyString
