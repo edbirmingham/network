@@ -113,7 +113,8 @@ class NetworkEventsController < ApplicationController
         :school_contact_ids => [],
         :volunteer_ids => [],
         :graduating_class_ids => [],
-        :school_ids => []
+        :school_ids => [],
+        :cohort_ids => []
       )
     end
 end
