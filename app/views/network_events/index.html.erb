@@ -57,12 +57,12 @@
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Program</th>
-        <th>Location</th>
-        <th>Organization(s)</th>
-        <th>Scheduled at</th>
-        <th></th>
+            <th><%= sortable "name"%></th>
+            <th><%= sortable "program"%></th>
+            <th><%= sortable "location"%></th>
+            <th>Organization(s)</th>
+            <th><%= sortable "scheduled_at", "Scheduled at"%></th>
+            <th></th>
         <th></th>
         <th></th>
       </tr>
