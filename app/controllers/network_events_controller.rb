@@ -1,13 +1,18 @@
 class NetworkEventsController < ApplicationController
   before_action :set_network_event, only: [:show, :edit, :update, :destroy]
+  helper_method :sort_column, :sort_direction
 
   # GET /network_events
   # GET /network_events.json
   def index
     if params[:start_date].present? && params[:end_date].present?
       @network_events = NetworkEvent.in_date_range( params[:start_date], params[:end_date])
+        .includes(:program, :location)
+        .order(sort_column + " " + sort_direction)
     else
       @network_events = NetworkEvent.default_date_range
+        .includes(:program, :location)
+        .order(sort_column + " " + sort_direction)
     end
   end
 
@@ -80,6 +85,19 @@ class NetworkEventsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_network_event
       @network_event = NetworkEvent.find(params[:id])
+    end
+    
+    def sort_column
+      if %w[location program organization].include? params[:sort]
+        params[:sort].pluralize + ".name"
+      else
+        NetworkEvent.column_names.include?(params[:sort]) ? params[:sort] : "scheduled_at"
+      end
+    end
+    
+    def sort_direction
+      # if no order direction is selected, default to ascending
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
