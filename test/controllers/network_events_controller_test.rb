@@ -26,10 +26,17 @@ class NetworkEventsControllerTest < ActionController::TestCase
 
     assert_redirected_to network_event_path(assigns(:network_event))
   end
-
+  
   test "should show network_event" do
     get :show, id: @network_event
     assert_response :success
+  end
+
+  test "should get csv" do
+    get :index, :format => :csv
+    assert_response :success
+    body = response.body
+    assert_equal "name,program,location,scheduled\n",body
   end
 
   test "should get edit" do
