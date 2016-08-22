@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< 226fa8a8f83a70b57e7da1f2747fc84eab103449
-ActiveRecord::Schema.define(version: 20160817171426) do
-=======
 ActiveRecord::Schema.define(version: 20160822211424) do
->>>>>>> Add neighborhood managementfd
 
   create_table "affiliations", force: :cascade do |t|
     t.integer  "member_id"
@@ -151,21 +147,20 @@ ActiveRecord::Schema.define(version: 20160822211424) do
     t.string   "abbreviation"
   end
 
-<<<<<<< 226fa8a8f83a70b57e7da1f2747fc84eab103449
-  create_table "school_assignments", force: :cascade do |t|
-    t.integer  "network_event_id"
-    t.integer  "school_id"
-    t.integer  "user_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-=======
   create_table "residences", force: :cascade do |t|
     t.integer  "member_id"
     t.integer  "neighborhood_id"
     t.integer  "user_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
->>>>>>> Add neighborhood managementfd
+  end 
+  
+  create_table "school_assignments", force: :cascade do |t|
+    t.integer  "network_event_id"
+    t.integer  "school_id"
+    t.integer  "user_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "school_contact_assignments", force: :cascade do |t|
