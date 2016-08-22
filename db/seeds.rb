@@ -28,6 +28,11 @@ gear_up = Cohort.create(name: 'Gear-Up', user_id: user.id)
 health_academy = Cohort.create(name: 'Academy of Health Sciences', user_id: user.id)
 educator_academy = Cohort.create(name: 'Academy of Urban Educators', user_id: user.id)
 
+marching_band = ExtracurricularActivity.create(name: 'Marching Band', user_id: user.id)
+football = ExtracurricularActivity.create(name: 'Football', user_id: user.id)
+chess_club = ExtracurricularActivity.create(name: 'Chess Club', user_id: user.id)
+theater = ExtracurricularActivity.create(name: 'Theater', user_id: user.id)
+
 Location.create(
   name: 'Tuggle Elementary',
   address_one: '1234 Broad St N',

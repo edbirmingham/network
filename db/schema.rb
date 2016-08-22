@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20160824180110) do
     t.datetime "updated_at",                  null: false
   end
 
+
   create_table "graduating_class_assignments", force: :cascade do |t|
     t.integer  "graduating_class_id"
     t.integer  "network_event_id"
