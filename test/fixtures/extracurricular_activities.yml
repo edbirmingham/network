@@ -1,9 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+<<<<<<< 9614baa9801d13559de7e349ec5508a051e432de
   name: MyStringOne
   user_id: 1
 
 two:
   name: MyStringTwo
+=======
+  name: MyString
+  user_id: 1
+
+two:
+  name: MyString
+>>>>>>> Add Extracurricular CRUD
   user_id: 1

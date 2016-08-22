@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :extracurricular_activities
   resources :neighborhoods
+  resources :extracurricular_activities
   resources :talents
   resources :schools
   resources :cohorts
