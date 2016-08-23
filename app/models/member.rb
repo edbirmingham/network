@@ -10,6 +10,8 @@ class Member < ActiveRecord::Base
   has_many :talents, through: :talent_assignments
   has_many :residences
   has_many :neighborhoods, through: :residences
+  has_many :participations
+  has_many :events, through: :participations, source: :network_event
 
   def self.search(query)
     if query.present?
