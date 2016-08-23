@@ -154,3 +154,15 @@ Talent.create(
   name: 'Technology',
   user: user
 )
+
+Participation.create(
+  level: 'attendee',
+  member: sean,
+  network_event: network_event
+)
+
+Participation.create(
+  level: 'volunteer',
+  member: victoria,
+  network_event: network_event
+)
