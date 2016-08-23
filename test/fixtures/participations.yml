@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+attendee:
+  level: attendee
+  member_id: 1
+  network_event_id: 1
+  user_id: 1
+
+volunteer:
+  level: volunteer
+  member_id: 1
+  network_event_id: 1
+  user_id: 1
