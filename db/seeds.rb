@@ -15,6 +15,11 @@ GraduatingClass.create(year: 2018, user_id: user.id)
 GraduatingClass.create(year: 2019, user_id: user.id)
 GraduatingClass.create(year: 2020, user_id: user.id)
 
+roebuck = Neighborhood.create(name: 'Roebuck', user_id: user.id)
+smithfield = Neighborhood.create(name: 'Smithfield', user_id: user.id)
+woodlawn = Neighborhood.create(name: 'Woodlawn', user_id: user.id)
+ensley = Neighborhood.create(name: 'Ensley', user_id: user.id)
+
 Location.create(
   name: 'Tuggle Elementary',
   address_one: '1234 Broad St N',
@@ -53,6 +58,7 @@ victoria = Member.create(
   last_name: 'Hollis',
   email: 'victoria@example.com',
   phone: '205 999-9999',
+  neighborhoods: [roebuck],
   user_id: user.id
 )
 chris = Member.create(
@@ -60,6 +66,7 @@ chris = Member.create(
   last_name: 'Collins',
   email: 'chris@example.com',
   phone: '205 999-9999',
+  neighborhoods: [smithfield,ensley],
   user_id: user.id
 )
 andrew = Member.create(
@@ -67,6 +74,7 @@ andrew = Member.create(
   last_name: 'Sellers',
   email: 'andrew@example.com',
   phone: '205 999-9999',
+  neighborhoods: [woodlawn],
   user_id: user.id
 )
 sean = Member.create(
@@ -74,6 +82,7 @@ sean = Member.create(
   last_name: 'Abdoli',
   email: 'sean@example.com',
   phone: '205 999-9999',
+  neighborhoods: [ensley],
   user_id: user.id
 )
 
@@ -96,6 +105,12 @@ educator_academy = Cohort.create(name: 'Academy of Urban Educators', user_id: us
 carver = School.create(name: 'Carver High School', user_id: user.id)
 tuggle = School.create(name: 'Tuggle Elementary School', user_id: user.id)
 
+Talent.create(name: 'Arts', user_id: user.id)
+Talent.create(name: 'Math', user_id: user.id)
+Talent.create(name: 'Technology', user_id: user.id)
+Talent.create(name: 'Music', user_id: user.id)
+Talent.create(name: 'Sports', user_id: user.id)
+
 network_event = nil
 Location.all.each do |location|
   Program.all.each do |program|
@@ -107,7 +122,9 @@ Location.all.each do |location|
       site_contacts: [sean, victoria],
       school_contacts: [chris],
       volunteers: [andrew],
+      schools: [carver, tuggle],
       graduating_classes: [class_of_2016, class_of_2017],
+      cohorts: [gear_up],
       scheduled_at: rand(14).days.from_now,
       user_id: user.id
     )

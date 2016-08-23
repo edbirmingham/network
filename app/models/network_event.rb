@@ -23,6 +23,12 @@ class NetworkEvent < ActiveRecord::Base
   has_many :organization_assignments
   has_many :organizations, through: :organization_assignments
   
+  has_many :school_assignments
+  has_many :schools, through: :school_assignments
+  
+  has_many :cohort_assignments
+  has_many :cohorts, through: :cohort_assignments
+  
   def self.in_date_range(start_date, end_date)
     start_date = Date.strptime(start_date, '%A %B %d %Y')
     end_date = Date.strptime(end_date, '%A %B %d %Y')
