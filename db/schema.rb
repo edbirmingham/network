@@ -11,19 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< 060179885eed5390272a316deb20813b1eb5c5ce
 ActiveRecord::Schema.define(version: 20160824180110) do
-=======
-<<<<<<< 81fff869caf321d785048dfde705f5d32f8fab44
-ActiveRecord::Schema.define(version: 20160824173532) do
-=======
-<<<<<<< 3af1c7d475facb718eafa1c0d0775cd52d473220
-ActiveRecord::Schema.define(version: 20160823032921) do
-=======
-ActiveRecord::Schema.define(version: 20160822221834) do
->>>>>>> Add Extracurricular CRUD
->>>>>>> Add Extracurricular CRUD
->>>>>>> Add Extracurricular CRUD
 
   create_table "affiliations", force: :cascade do |t|
     t.integer  "member_id"
