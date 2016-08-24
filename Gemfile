@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
-gem 'rails_12factor'
+gem 'rails_12factor', group: :production
 gem 'puma'
 # Use Postgresql in production
 # gem 'pg'

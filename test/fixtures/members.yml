@@ -6,7 +6,6 @@ one:
   phone: MyString
   email: MyString
   identity: MyString
-  affiliation: MyString
   address: MyString
   city: MyString
   state: MyString
@@ -27,7 +26,6 @@ two:
   phone: MyString
   email: MyString
   identity: MyString
-  affiliation: MyString
   address: MyString
   city: MyString
   state: MyString
