@@ -1,7 +1,7 @@
 <% require 'csv' %>
-<%= CSV.generate(headers: true) do |csv|
+<%= CSV.generate(headers: true, :quote_char=>'"', :force_quotes => true,) do |csv|
   csv << %w{name program location scheduled}
   @network_events.each do |row|
     csv << [row.name,row.program.name,row.location.name,row.scheduled_at]
   end
-end %>
+end .html_safe %>

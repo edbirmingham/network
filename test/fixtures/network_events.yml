@@ -4,12 +4,12 @@ one:
   name: MyString
   program: one
   location: one
-  scheduled_at: 2016-06-20 01:59:56
+  scheduled_at: <%= 2.days.from_now %>
   user: one
 
 two:
   name: MyString
   program: two
   location: two
-  scheduled_at: 2016-06-20 01:59:56
+  scheduled_at: <%= 2.days.from_now %>
   user: two
