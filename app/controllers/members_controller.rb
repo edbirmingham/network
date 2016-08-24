@@ -4,7 +4,7 @@ class MembersController < ApplicationController
   # GET /members
   # GET /members.json
   def index
-    @members = Member.order(:first_name, :last_name)
+    @members = Member.order(:first_name, :last_name).page params[:page]
     if params[:q].present?
       if request.xhr?
         @members = @members.limit(25).search(params[:q][:term])
