@@ -9,6 +9,7 @@
         <th>Email</th>
         <th></th>
         <th></th>
+        <th></th>
       </tr>
     </thead>
 
@@ -16,6 +17,7 @@
       <%= content_tag_for(:tr, @users) do |user| %>
         <td><%= mail_to user.email %></td>
         <td><%= link_to 'Show', user, method: :get %></td>
+        <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <% end %>
     </tbody>

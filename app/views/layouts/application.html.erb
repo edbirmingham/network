@@ -26,30 +26,34 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <% if user_signed_in? %>
-            <ul class="nav navbar-nav">
-              <li><%= link_to('Members', members_path) %></li>
-              <li><%= link_to('Events', network_events_path) %></li>
-              <li><%= link_to('Actions', network_actions_path) %></li>
-            </ul>
+            <% if current_user.admin? %>
+              <ul class="nav navbar-nav">
+                <li><%= link_to('Members', members_path) %></li>
+                <li><%= link_to('Events', network_events_path) %></li>
+                <li><%= link_to('Actions', network_actions_path) %></li>
+              </ul>
+            <% end %>
             <ul class="nav navbar-nav navbar-right">
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                   <%= current_user.email %> <span class="caret"></span>
                 </a>
-                <ul class="dropdown-menu">
-                  <li><%= link_to('Cohorts', cohorts_path) %></li>
-                  <li><%= link_to('Graduating classes', graduating_classes_path) %></li>
-                  <li><%= link_to('Locations', locations_path) %></li>
-                  <li><%= link_to('Organizations', organizations_path) %></li>
-                  <li><%= link_to('Programs', programs_path) %></li>
-                  <li><%= link_to('Schools', schools_path) %></li>
-                  <li><%= link_to('Neighborhoods', neighborhoods_path) %></li>
-                  <li><%= link_to('Talents', talents_path) %></li>
-                  <li><%= link_to('Users', users_path) %></li>
-                  <li role="separator" class="divider"></li>
-                  <li><%= link_to('Edit profile', edit_user_registration_path) %></li>
-                  <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
-                </ul>
+                  <ul class="dropdown-menu">
+                    <% if current_user.admin? %>
+                      <li><%= link_to('Cohorts', cohorts_path) %></li>
+                      <li><%= link_to('Graduating classes', graduating_classes_path) %></li>
+                      <li><%= link_to('Locations', locations_path) %></li>
+                      <li><%= link_to('Organizations', organizations_path) %></li>
+                      <li><%= link_to('Programs', programs_path) %></li>
+                      <li><%= link_to('Schools', schools_path) %></li>
+                      <li><%= link_to('Neighborhoods', neighborhoods_path) %></li>
+                      <li><%= link_to('Talents', talents_path) %></li>
+                      <li><%= link_to('Users', users_path) %></li>
+                      <li role="separator" class="divider"></li>
+                    <% end %>
+                    <li><%= link_to('Edit profile', edit_user_registration_path) %></li>
+                    <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
+                  </ul>
               </li>
             </ul>
           <% end %>
