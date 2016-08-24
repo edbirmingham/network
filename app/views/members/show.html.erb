@@ -29,6 +29,11 @@
   <dt>Affiliation:</dt>
   <dd><%= @member.affiliation %></dd>
 
+  <dt>Cohorts:</dt>
+  <% @member.cohorts.each do |cohort|%>
+  <dd><%= cohort.name %></dd>
+  <% end %>
+  
   <dt>Organizations:</dt>
   <% @member.organizations.each do |organization|%>
   <dd><%= organization.name %></dd>
