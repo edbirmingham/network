@@ -12,7 +12,7 @@ module NetworkEventsHelper
     if params[:end_date].present?
       params[:end_date]
     else
-      Date.today + 180.days
+      3.months.from_now
     end
   end
 
