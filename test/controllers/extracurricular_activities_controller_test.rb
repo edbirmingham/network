@@ -21,7 +21,7 @@ class ExtracurricularActivitiesControllerTest < ActionController::TestCase
 
   test "should create extracurricular_activity" do
     assert_difference('ExtracurricularActivity.count') do
-      post :create, extracurricular_activity: { name: @extracurricular_activity.name}
+      post :create, extracurricular_activity: { name: 'MyStringThree'}
     end
 
     assert_redirected_to extracurricular_activity_path(assigns(:extracurricular_activity))

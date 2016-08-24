@@ -159,7 +159,7 @@
     </div>
   </div>
   <div class='form-group'>
-    <%= f.label :extracurricular_activities, class: "col-sm-2 control-label" %>
+    <%= f.label :extracurricular_activity_ids, 'Extracurricular Activities', class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
       <%= f.collection_select :extracurricular_activity_ids,
             ExtracurricularActivity.order(:name).all,
