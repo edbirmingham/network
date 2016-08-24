@@ -4,7 +4,7 @@ class GraduatingClassesController < ApplicationController
   # GET /graduating_classes
   # GET /graduating_classes.json
   def index
-    @graduating_classes = GraduatingClass.all
+    @graduating_classes = GraduatingClass.order(:year)
   end
 
   # GET /graduating_classes/1
