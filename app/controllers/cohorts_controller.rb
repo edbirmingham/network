@@ -4,7 +4,7 @@ class CohortsController < ApplicationController
   # GET /cohorts
   # GET /cohorts.json
   def index
-    @cohorts = Cohort.all
+    @cohorts = Cohort.order(:name)
   end
 
   # GET /cohorts/1

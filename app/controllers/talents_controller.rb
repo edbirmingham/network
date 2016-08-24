@@ -4,7 +4,7 @@ class TalentsController < ApplicationController
   # GET /talents
   # GET /talents.json
   def index
-    @talents = Talent.all
+    @talents = Talent.order(:name)
   end
 
   # GET /talents/1

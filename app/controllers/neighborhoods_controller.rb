@@ -4,7 +4,7 @@ class NeighborhoodsController < ApplicationController
   # GET /neighborhoods
   # GET /neighborhoods.json
   def index
-    @neighborhoods = Neighborhood.all
+    @neighborhoods = Neighborhood.order(:name)
   end
 
   # GET /neighborhoods/1
