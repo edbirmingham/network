@@ -24,6 +24,10 @@ smithfield = Neighborhood.create(name: 'Smithfield', user_id: user.id)
 woodlawn = Neighborhood.create(name: 'Woodlawn', user_id: user.id)
 ensley = Neighborhood.create(name: 'Ensley', user_id: user.id)
 
+gear_up = Cohort.create(name: 'Gear-Up', user_id: user.id)
+health_academy = Cohort.create(name: 'Academy of Health Sciences', user_id: user.id)
+educator_academy = Cohort.create(name: 'Academy of Urban Educators', user_id: user.id)
+
 Location.create(
   name: 'Tuggle Elementary',
   address_one: '1234 Broad St N',
@@ -63,6 +67,7 @@ victoria = Member.create(
   email: 'victoria@example.com',
   phone: '205 999-9999',
   neighborhoods: [roebuck],
+  cohorts: [gear_up],
   user_id: user.id
 )
 chris = Member.create(
@@ -71,6 +76,7 @@ chris = Member.create(
   email: 'chris@example.com',
   phone: '205 999-9999',
   neighborhoods: [smithfield,ensley],
+  cohorts: [health_academy],
   user_id: user.id
 )
 andrew = Member.create(
@@ -79,6 +85,7 @@ andrew = Member.create(
   email: 'andrew@example.com',
   phone: '205 999-9999',
   neighborhoods: [woodlawn],
+  cohorts: [health_academy, gear_up],
   user_id: user.id
 )
 sean = Member.create(
@@ -87,6 +94,7 @@ sean = Member.create(
   email: 'sean@example.com',
   phone: '205 999-9999',
   neighborhoods: [ensley],
+  cohorts: [educator_academy],
   user_id: user.id
 )
 
@@ -102,9 +110,6 @@ Organization.create(name: 'Publix', created_by_id: user.id)
 Organization.create(name: 'Code for Birmingham', created_by_id: user.id)
 Organization.create(name: 'Birmingham Chamber of Commerce', created_by_id: user.id)
 
-gear_up = Cohort.create(name: 'Gear-Up', user_id: user.id)
-health_academy = Cohort.create(name: 'Academy of Health Sciences', user_id: user.id)
-educator_academy = Cohort.create(name: 'Academy of Urban Educators', user_id: user.id)
 
 carver = School.create(name: 'Carver High School', user_id: user.id)
 tuggle = School.create(name: 'Tuggle Elementary School', user_id: user.id)
