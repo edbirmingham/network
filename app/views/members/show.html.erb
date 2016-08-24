@@ -100,13 +100,13 @@
       </thead>
 
       <tbody>
-        <%= content_tag_for(:tr, @member.events.order(:scheduled_at)) do |event| %>
-          <td><%= link_to event.name, event %></td>
-          <td><%= event.program.try(:name) %></td>
-          <td><%= event.location.try(:name) %></td>
-          <td><%= event.scheduled_at %></td>
-          <td><%= event.created_at %></td>
-          <td></td>
+        <%= content_tag_for(:tr, @member.participations) do |participation| %>
+          <td><%= link_to participation.network_event.name, participation.network_event %></td>
+          <td><%= participation.network_event.program.try(:name) %></td>
+          <td><%= participation.network_event.location.try(:name) %></td>
+          <td><%= participation.network_event.scheduled_at %></td>
+          <td><%= participation.network_event.created_at %></td>
+          <td><%= link_to 'Destroy', participation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tbody>
     </table>
