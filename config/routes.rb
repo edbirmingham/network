@@ -23,4 +23,5 @@ Rails.application.routes.draw do
   resources :members
   resources :locations
   resources :organizations
+  resources :participations, only: :destroy
 end
