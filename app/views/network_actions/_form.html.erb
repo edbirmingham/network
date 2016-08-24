@@ -15,32 +15,32 @@
   <div class="form-group">
     <%= f.label :network_event_id, 'Event', class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.collection_select :network_event_id, 
-            NetworkEvent.order(:name).all, 
-            :id, 
-            :name_with_date, 
-            {}, 
+      <%= f.collection_select :network_event_id,
+            NetworkEvent.order(:name).all,
+            :id,
+            :name_with_date,
+            {:include_blank => 'none'},
             class: "select2 form-control" %>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :actor_id, class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.collection_select :actor_id, 
-            [@network_action.actor].compact, 
-            :id, 
-            :text, 
-            {}, 
-            class: "select2 ajax form-control", 
+      <%= f.collection_select :actor_id,
+            [@network_action.actor].compact,
+            :id,
+            :text,
+            {},
+            class: "select2 ajax form-control",
             data: { ajax: { url: members_path }, placeholder: 'Find Actor' }  %>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :action_type, 'Type', class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.select :action_type, 
-            NetworkAction.types, 
-            {}, 
+      <%= f.select :action_type,
+            NetworkAction.types,
+            {},
             class: "select2 form-control" %>
     </div>
   </div>
@@ -53,13 +53,13 @@
   <div class="form-group">
     <%= f.label :member_ids, 'Matches', class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.collection_select :member_ids, 
-            @network_action.members, 
-            :id, 
-            :text, 
-            {}, 
-            class: "select2 ajax form-control", 
-            multiple: true, 
+      <%= f.collection_select :member_ids,
+            @network_action.members,
+            :id,
+            :text,
+            {},
+            class: "select2 ajax form-control",
+            multiple: true,
             data: { ajax: { url: members_path }, placeholder: 'Find Matches' }  %>
     </div>
   </div>
