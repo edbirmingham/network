@@ -58,7 +58,6 @@ ActiveRecord::Schema.define(version: 20160824180110) do
     t.datetime "updated_at",                  null: false
   end
 
-
   create_table "graduating_class_assignments", force: :cascade do |t|
     t.integer  "graduating_class_id"
     t.integer  "network_event_id"
@@ -162,6 +161,15 @@ ActiveRecord::Schema.define(version: 20160824180110) do
     t.integer  "created_by_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+  end
+
+  create_table "participations", force: :cascade do |t|
+    t.string   "level"
+    t.integer  "member_id"
+    t.integer  "network_event_id"
+    t.integer  "user_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "participations", force: :cascade do |t|

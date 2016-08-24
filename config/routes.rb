@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
-<<<<<<< 3af1c7d475facb718eafa1c0d0775cd52d473220
-  resources :neighborhoods
-=======
   resources :extracurricular_activities
->>>>>>> Add Extracurricular CRUD
+  resources :neighborhoods
   resources :talents
   resources :schools
   resources :cohorts

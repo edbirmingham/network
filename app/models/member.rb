@@ -9,6 +9,8 @@ class Member < ActiveRecord::Base
   has_many :organizations, through: :affiliations
   has_many :talent_assignments
   has_many :talents, through: :talent_assignments
+  has_many :extracurricular_activity_assignments
+  has_many :extracurricular_activities, through: :extracurricular_activity_assignments
   has_many :residences
   has_many :neighborhoods, through: :residences
   has_many :participations
@@ -59,5 +61,9 @@ class Member < ActiveRecord::Base
 
   def talent_list
     talents.map(&:name).compact.sort.join(', ')
+  end
+  
+  def extracurricular_activities_list
+    extracurricular_activities.map(&:name).compact.sort.join(', ')
   end
 end

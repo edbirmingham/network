@@ -21,7 +21,7 @@ class ExtracurricularActivitiesControllerTest < ActionController::TestCase
 
   test "should create extracurricular_activity" do
     assert_difference('ExtracurricularActivity.count') do
-      post :create, extracurricular_activity: { name: @extracurricular_activity.name, user_id: @extracurricular_activity.user_id }
+      post :create, extracurricular_activity: { name: @extracurricular_activity.name}
     end
 
     assert_redirected_to extracurricular_activity_path(assigns(:extracurricular_activity))
@@ -38,7 +38,7 @@ class ExtracurricularActivitiesControllerTest < ActionController::TestCase
   end
 
   test "should update extracurricular_activity" do
-    patch :update, id: @extracurricular_activity, extracurricular_activity: { name: @extracurricular_activity.name, user_id: @extracurricular_activity.user_id }
+    patch :update, id: @extracurricular_activity, extracurricular_activity: { name: @extracurricular_activity.name}
     assert_redirected_to extracurricular_activity_path(assigns(:extracurricular_activity))
   end
 

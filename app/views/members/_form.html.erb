@@ -158,6 +158,17 @@
             { multiple: true, class: 'select2 form-control' } %>
     </div>
   </div>
+  <div class='form-group'>
+    <%= f.label :extracurricular_activities, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.collection_select :extracurricular_activity_ids,
+            ExtracurricularActivity.order(:name).all,
+            :id,
+            :name,
+            {include_blank: 'None'},
+            { multiple: true, class: 'select2 form-control'} %>
+    </div>
+  </div>
   <div class="form-group">
     <%= f.label :place_of_worship, class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
