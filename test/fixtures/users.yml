@@ -2,6 +2,8 @@
 
 one:
  email: one@test.com
+ admin: true
 
 two: 
   email: two@test.com
+  admin: false
