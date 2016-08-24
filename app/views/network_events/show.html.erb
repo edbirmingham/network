@@ -37,7 +37,7 @@
   <% else %>
     <dd></dd>
   <% end %>
-  
+
   <dt>School Contacts:</dt>
   <% if @network_event.school_contacts.present? %>
     <%= content_tag_for(:dd, @network_event.school_contacts) do |contact| %>
@@ -46,7 +46,7 @@
   <% else %>
     <dd></dd>
   <% end %>
-  
+
   <dt>Volunteers:</dt>
   <% if @network_event.volunteers.present? %>
     <%= content_tag_for(:dd, @network_event.volunteers) do |volunteer| %>
@@ -55,7 +55,7 @@
   <% else %>
     <dd></dd>
   <% end %>
-  
+
   <dt>Schools:</dt>
   <% if @network_event.schools.present? %>
     <%= content_tag_for(:dd, @network_event.schools) do |school| %>
@@ -64,7 +64,7 @@
   <% else %>
     <dd></dd>
   <% end %>
-  
+
   <dt>Graduating Classes:</dt>
   <% if @network_event.graduating_classes.present? %>
     <%= content_tag_for(:dd, @network_event.graduating_classes) do |graduating_class| %>
@@ -73,7 +73,7 @@
   <% else %>
     <dd></dd>
   <% end %>
-  
+
   <dt>Cohorts:</dt>
   <% if @network_event.cohorts.present? %>
     <%= content_tag_for(:dd, @network_event.cohorts) do |cohort| %>
@@ -82,7 +82,7 @@
   <% else %>
     <dd></dd>
   <% end %>
-  
+
   <dt>Scheduled at:</dt>
   <dd><%= @network_event.scheduled_at %></dd>
 
@@ -93,3 +93,30 @@
   <dd><%= @network_event.user.try(:email) %></dd>
 
 </dl>
+
+<h2>Participants</h2>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Identity</th>
+        <th>Affiliation</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @network_event.participants.order(:last_name, :first_name)) do |participant| %>
+        <td><%= link_to participant.name, participant %></td>
+        <td><%= participant.email %></td>
+        <td><%= participant.phone %></td>
+        <td><%= participant.identity %></td>
+        <td><%= participant.affiliation %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
