@@ -38,7 +38,7 @@ class ExtracurricularActivitiesControllerTest < ActionController::TestCase
   end
 
   test "should update extracurricular_activity" do
-    patch :update, id: @extracurricular_activity, extracurricular_activity: { name: @extracurricular_activity.name}
+    patch :update, id: @extracurricular_activity, extracurricular_activity: { name: 'MyStringFour'}
     assert_redirected_to extracurricular_activity_path(assigns(:extracurricular_activity))
   end
 
