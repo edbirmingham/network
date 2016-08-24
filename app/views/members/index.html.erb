@@ -3,16 +3,20 @@
     <span class="glyphicon glyphicon-plus"></span>
     New Member
   <% end %>
+  <%= link_to members_path(format: :csv), class: 'btn btn-primary' do %>
+   <span class="glyphicon glyphicon-save"></span>
+   Download
+ <% end %>
   <h1>Listing members</h1>
-  
+
   <%= form_tag members_path, :method => :get do %>
     <div class="input-group">
       <span class="input-group-btn">
         <button class="btn btn-default" type="submit" name="commit">Go!</button>
       </span>
-      <%= text_field_tag 'q', 
-            params[:q], 
-            class: 'form-control', 
+      <%= text_field_tag 'q',
+            params[:q],
+            class: 'form-control',
             placeholder: 'Search for...',
             autofocus: true %>
     </div>

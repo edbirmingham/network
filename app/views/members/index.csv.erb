@@ -1,0 +1,7 @@
+<% require 'csv' %>
+<%= CSV.generate(headers: true, :quote_char=>'"', :force_quotes => true,) do |csv|
+  csv << %w{first_name	last_name	phone	email}
+  @members.each do |row|
+    csv << [row.first_name,row.last_name,row.phone,row.email]
+  end
+end .html_safe %>
