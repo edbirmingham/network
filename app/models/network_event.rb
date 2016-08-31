@@ -47,4 +47,22 @@ class NetworkEvent < ActiveRecord::Base
   def name_with_date
     name + ' (' + scheduled_at.to_formatted_s(:long) + ')'
   end
+
+  def invitees
+    member_scope = Member.uniq
+
+    if cohorts.any?
+      member_scope = member_scope.joins(:cohorts).where(cohorts: { id: cohort_ids })
+    end
+
+    if schools.any?
+      member_scope = member_scope.where(school_id: school_ids)
+    end
+
+    if graduating_classes.any?
+      member_scope = member_scope.where(graduating_class_id: graduating_class_ids)
+    end
+
+    member_scope
+  end
 end
