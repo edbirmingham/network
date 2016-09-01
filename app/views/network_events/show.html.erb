@@ -94,6 +94,31 @@
 
 </dl>
 
+<h2>Invitees</h2>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Identity</th>
+        <th>Affiliation</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @network_event.invitees.order(:last_name, :first_name)) do |invitee| %>
+        <td><%= link_to invitee.name, invitee %></td>
+        <td><%= invitee.email %></td>
+        <td><%= invitee.phone %></td>
+        <td><%= invitee.identity %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
 <h2>Participants</h2>
 
 <div class="table-responsive">
