@@ -17,6 +17,7 @@ class Member < ActiveRecord::Base
   has_many :events, through: :participations, source: :network_event
   has_many :cohortians
   has_many :cohorts, through: :cohortians
+  
 
   def self.search(query)
     if query.present?

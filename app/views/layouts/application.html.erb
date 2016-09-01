@@ -51,6 +51,8 @@
                       <li><%= link_to('Talents', talents_path) %></li>
                       <li><%= link_to('Users', users_path) %></li>
                       <li role="separator" class="divider"></li>
+                      <li><%= link_to('Event Sign Up', sign_ups_path) %></li>
+                      <li role="separator" class="divider"></li>
                     <% end %>
                     <li><%= link_to('Edit profile', edit_user_registration_path) %></li>
                     <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
