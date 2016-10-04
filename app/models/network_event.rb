@@ -3,6 +3,7 @@ class NetworkEvent < ActiveRecord::Base
   validates :program_id, presence: true
   validates :scheduled_at, presence: true
   validates :location_id, presence: true
+  
 
   belongs_to :location
   belongs_to :user
@@ -31,6 +32,7 @@ class NetworkEvent < ActiveRecord::Base
 
   has_many :participations
   has_many :participants, through: :participations, source: :member
+
 
   def self.in_date_range(start_date, end_date)
     start_date = Date.strptime(start_date, '%A %B %d %Y')
