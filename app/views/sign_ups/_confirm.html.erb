@@ -1,0 +1,24 @@
+<%= form_for(@participation, url: network_event_sign_ups_path(@network_event) ,html: { class: "form-horizontal", role: "form" }) do |f| %>
+<div id="confirm"> 
+<span class="btn btn-primary glyphicon glyphicon-remove pull-right" id="unconfirm"></span>
+<dl class="dl-horizontal text-left">
+    <dt>First name:</dt>
+    <dd id="first_name"></dd>
+  
+    <dt>Last name:</dt>
+    <dd id="last_name"></dd>
+    
+    <dt>Phone:</dt>
+    <dd id="phone"></dd>
+  
+    <dt>Email:</dt>
+    <dd id="email"></dd>
+  </dl>
+ 
+    <%= f.hidden_field :member_id %>
+    <%= f.hidden_field :level %>
+</div>
+<div>
+  <%= f.submit 'Confirm attendance', class: "btn btn-primary" %>
+</div>
+<% end %>
