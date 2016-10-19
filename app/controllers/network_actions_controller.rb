@@ -3,6 +3,7 @@ class NetworkActionsController < ApplicationController
 
   # GET /network_actions
   # GET /network_actions.json
+  # GET /network_actions.csv
   def index
     @network_actions = NetworkAction.all
   end

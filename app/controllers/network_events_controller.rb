@@ -4,15 +4,22 @@ class NetworkEventsController < ApplicationController
 
   # GET /network_events
   # GET /network_events.json
+  # GET /network_events.csv
   def index
     if params[:start_date].present? && params[:end_date].present?
       @network_events = NetworkEvent.in_date_range( params[:start_date], params[:end_date])
         .includes(:program, :location)
         .order(sort_column + " " + sort_direction)
     else
-      @network_events = NetworkEvent.default_date_range
+      if params[:format] == 'csv'
+      @network_events = NetworkEvent.all
         .includes(:program, :location)
         .order(sort_column + " " + sort_direction)
+      else
+        @network_events = NetworkEvent.default_date_range
+          .includes(:program, :location)
+          .order(sort_column + " " + sort_direction)
+      end
     end
   end
 

@@ -26,10 +26,17 @@ class NetworkEventsControllerTest < ActionController::TestCase
 
     assert_redirected_to network_event_path(assigns(:network_event))
   end
-
+  
   test "should show network_event" do
     get :show, id: @network_event
     assert_response :success
+  end
+
+  test "should get csv" do
+    get :index, params: { start_date: "Thursday September 1 2016", end_date: "Saturday September 3 2016", commit: "Filter by date" }, :format => :csv
+    assert_response :success
+    body = response.body
+    assert_equal "\"name\",\"program\",\"location\",\"scheduled\"\n\"MyString\",\"MyString\",\"Two Place\",\"2016-08-01 01:00:00 UTC\"\n\"MyString\",\"MyString\",\"One Elementary\",\"2016-08-01 02:00:00 UTC\"\n",body
   end
 
   test "should get edit" do
