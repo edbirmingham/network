@@ -7,4 +7,9 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  
+  def file_data(name)
+    File.read(Rails.root.to_s + "/test/support/files/#{name}")
+  end 
+  
 end

@@ -1,15 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  program: one
-  location: one
-  scheduled_at: 2016-08-01 02:00:00
+tuggle_network:
+  name: Tuggle Network Night
+  program: network_night
+  location: tuggle
+  scheduled_at: 2016-08-01 01:00:00
   user: one
 
-two:
-  name: MyString
-  program: two
-  location: two
-  scheduled_at: 2016-08-01 01:00:00
+carver_tour:
+  name: Carver UAB Tour
+  program: college_101
+  location: uab
+  scheduled_at: 2016-08-01 02:00:00
   user: two

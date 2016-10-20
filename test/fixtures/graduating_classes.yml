@@ -1,7 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+class_of_2016:
   year: 2016
 
-two:
+class_of_2017:
   year: 2017
+
+class_of_2020:
+  year: 2020
+  

@@ -1,11 +1,21 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  member_id: 1
-  network_event_id: 1
-  user_id: 1
+  member: martin
+  network_event: tuggle_network
+  user: one
 
 two:
-  member_id: 1
-  network_event_id: 1
-  user_id: 1
+  member: george
+  network_event: tuggle_network
+  user: one
+
+three:
+  member: jane
+  network_event: carver_tour
+  user: one
+
+four:
+  member: john
+  network_event: carver_tour
+  user: one

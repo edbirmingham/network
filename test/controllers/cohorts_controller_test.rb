@@ -4,7 +4,7 @@ class CohortsControllerTest < ActionController::TestCase
   include Devise::TestHelpers 
   
   setup do
-    @cohort = cohorts(:one)
+    @cohort = cohorts(:purple)
     sign_in users(:one)
   end
 
