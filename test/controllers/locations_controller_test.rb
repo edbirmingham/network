@@ -4,7 +4,7 @@ class LocationsControllerTest < ActionController::TestCase
   include Devise::TestHelpers 
   
   setup do
-    @location = locations(:one)
+    @location = locations(:tuggle)
     sign_in users(:one)
   end
 

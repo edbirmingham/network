@@ -1,11 +1,11 @@
 <div class="page-header">
-  <%= link_to "network_events.csv", class: 'btn btn-primary' do %>
-    <span class="glyphicon"></span>
-    Download
-  <% end %>
   <%= link_to new_network_event_path, class: 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-plus"></span>
     New Event
+  <% end %>
+  <%= link_to "network_events.csv", class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-save"></span>
+    Download
   <% end %>
   <h1>Listing events</h1>
   

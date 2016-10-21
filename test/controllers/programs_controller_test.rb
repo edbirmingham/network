@@ -4,7 +4,7 @@ class ProgramsControllerTest < ActionController::TestCase
   include Devise::TestHelpers 
   
   setup do
-    @program = programs(:one)
+    @program = programs(:network_night)
     sign_in users(:one)
   end
 

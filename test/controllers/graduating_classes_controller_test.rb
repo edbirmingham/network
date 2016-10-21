@@ -4,7 +4,7 @@ class GraduatingClassesControllerTest < ActionController::TestCase
   include Devise::TestHelpers 
   
   setup do
-    @graduating_class = graduating_classes(:one)
+    @graduating_class = graduating_classes(:class_of_2017)
     sign_in users(:one)
   end
 

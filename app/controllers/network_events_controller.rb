@@ -12,9 +12,9 @@ class NetworkEventsController < ApplicationController
         .order(sort_column + " " + sort_direction)
     else
       if params[:format] == 'csv'
-      @network_events = NetworkEvent.all
-        .includes(:program, :location)
-        .order(sort_column + " " + sort_direction)
+        @network_events = NetworkEvent.all
+          .includes(:program, :location)
+          .order(sort_column + " " + sort_direction)
       else
         @network_events = NetworkEvent.default_date_range
           .includes(:program, :location)

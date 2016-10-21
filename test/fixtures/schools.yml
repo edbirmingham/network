@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
+tuggle:
+  name: Tuggle Elementary School
   user: one
 
-two:
-  name: MyString
+carver:
+  name: Carver High School
   user: two

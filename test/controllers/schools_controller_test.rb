@@ -4,7 +4,7 @@ class SchoolsControllerTest < ActionController::TestCase
   include Devise::TestHelpers 
   
   setup do
-    @school = schools(:one)
+    @school = schools(:tuggle)
     sign_in users(:one)
   end
 

@@ -46,10 +46,10 @@ class NetworkEvent < ActiveRecord::Base
     where(scheduled_at: start_date.beginning_of_day..end_date.end_of_day)
   end
 
-  def name_with_date
-    name + ' (' + scheduled_at.to_formatted_s(:long) + ')'
+  def date
+    scheduled_at.to_date
   end
-
+  
   def invitees
     member_scope = Member.uniq
 
@@ -67,4 +67,25 @@ class NetworkEvent < ActiveRecord::Base
 
     member_scope
   end
+  
+  def location_name
+    location.try(:name)
+  end
+  
+  def name_with_date
+    name + ' (' + scheduled_at.to_formatted_s(:long) + ')'
+  end
+
+  def program_name
+    program.try(:name)
+  end
+  
+  def start_time
+    scheduled_at.to_time
+  end
+  
+  def stop_time
+    (scheduled_at + duration.minutes).to_time
+  end
+  
 end

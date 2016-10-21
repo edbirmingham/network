@@ -39,3 +39,36 @@ two:
   other_networks: MyString
   user: two
   graduating_class: one
+
+jane:
+  first_name: Jane
+  last_name: Doe
+  
+john:
+  first_name: John
+  last_name: Smith
+  
+martin:
+  first_name: Martin
+  last_name: King
+  
+george:
+  first_name: George
+  last_name: Carver
+  
+rosa:
+  first_name: Rosa
+  last_name: Parks
+  
+carrie:
+  first_name: Carrie
+  last_name: Tuggle
+  
+ossie:
+  first_name: Ossie
+  last_name: Mitchell
+  
+malachi:
+  first_name: Malachi
+  last_name: Wilkerson
+  

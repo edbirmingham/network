@@ -4,7 +4,7 @@ class NetworkEventsControllerTest < ActionController::TestCase
   include Devise::TestHelpers 
   
   setup do
-    @network_event = network_events(:one)
+    @network_event = network_events(:tuggle_network)
     sign_in users(:one)
   end
 
@@ -35,8 +35,8 @@ class NetworkEventsControllerTest < ActionController::TestCase
   test "should get csv" do
     get :index, params: { start_date: "Thursday September 1 2016", end_date: "Saturday September 3 2016", commit: "Filter by date" }, :format => :csv
     assert_response :success
-    body = response.body
-    assert_equal "\"name\",\"program\",\"location\",\"scheduled\"\n\"MyString\",\"MyString\",\"Two Place\",\"2016-08-01 01:00:00 UTC\"\n\"MyString\",\"MyString\",\"One Elementary\",\"2016-08-01 02:00:00 UTC\"\n",body
+    
+    assert_equal file_data('network_events.csv'), response.body
   end
 
   test "should get edit" do

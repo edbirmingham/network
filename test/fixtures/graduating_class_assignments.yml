@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  graduating_class_id: 1
-  network_event_id: 1
-  user_id: 1
+carver:
+  graduating_class: class_of_2020
+  network_event: carver_tour
+  user: one
 
-two:
-  graduating_class_id: 1
-  network_event_id: 1
-  user_id: 1
+tuggle:
+  graduating_class: class_of_2017
+  network_event: tuggle_network
+  user: one
