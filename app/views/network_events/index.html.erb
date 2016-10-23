@@ -80,7 +80,7 @@
         <td><%= network_event.location.try(:name) %></td>
         <td><%= network_event.organizations.map(&:name).join(', ') %></td>
         <td><%= network_event.volunteers.map(&:name).join(', ') %></td>
-        <td><%= network_event.scheduled_at %></td>
+        <td><%= network_event.scheduled_at.to_formatted_s(:long) %></td>
         <td><%= link_to 'Show', network_event %></td>
         <td><%= link_to 'Edit', edit_network_event_path(network_event) %></td>
         <td><%= link_to 'Destroy', network_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
