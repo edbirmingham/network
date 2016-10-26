@@ -107,6 +107,12 @@ class NetworkEventsController < ApplicationController
           where(graduating_class_assignments: {graduating_class_id: params[:graduating_class_ids]})
       end
       
+      # Filter events by program
+      if params[:program_ids].present?
+        events = events.
+          where(:program_id => params[:program_ids])
+      end
+      
       events
     end
     
