@@ -23,4 +23,31 @@ module NetworkEventsHelper
       'Update Event'
     end
   end
+  
+  def clip_from(event_list)
+    names = ""
+    if event_list.present?
+      for item in event_list
+        names += item.name + ", "
+      end
+    end
+    names.chomp(', ')
+  end 
+  
+  def clip_event_info(event)
+    event_info = "Name: " + event.name + "\n" + 
+                "Program: " + event.program.name + "\n" +
+                "Location: " + event.location.name + "\n" +
+                "Organizations: " + clip_from(event.organizations) + "\n" +
+                "Site Contacts: " + clip_from(event.site_contacts) + "\n" +
+                "School Contacts: " + clip_from(event.school_contacts) + "\n" + 
+                "Volunteers: " + clip_from(event.volunteers) + "\n" +
+                "Schools: " + clip_from(event.schools) + "\n" + 
+                "Graduating Classes: " + clip_from(event.graduating_classes) + "\n" + 
+                "Cohorts: " + clip_from(event.cohorts) + "\n" +
+                "Scheduled at: " + event.scheduled_at.to_formatted_s(:long) + "\n" + 
+                "Ends at: " + (event.scheduled_at + event.duration.minutes).to_formatted_s(:long) + "\n"
+    return event_info
+  end
+        
 end

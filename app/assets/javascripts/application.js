@@ -18,3 +18,4 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require select2-full
+//= require zeroclipboard
