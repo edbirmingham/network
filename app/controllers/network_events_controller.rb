@@ -93,6 +93,13 @@ class NetworkEventsController < ApplicationController
         events = events.default_date_range
       end
       
+      # Filter events by cohort.
+      if params[:cohort_ids].present?
+        events = events.
+          joins(:cohort_assignments).
+          where(cohort_assignments: {cohort_id: params[:cohort_ids]})
+      end
+          
       # Filter events by graduating class.
       if params[:graduating_class_ids].present?
         events = events.
