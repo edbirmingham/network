@@ -45,6 +45,9 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+#Gem for copying to clipboard
+gem 'zeroclipboard-rails'
+
 # Network Gems
 gem 'devise'
 
