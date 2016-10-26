@@ -9,28 +9,50 @@
   <% end %>
   <h1>Listing events</h1>
   
-<%= form_tag network_events_path, :method => :get do %>
-   <div class="container">
-      <div class='col-md-6'>
-          <div class="form-group">
-              <div class='input-group date' id='startdatepicker'>
-                  <input type='text' class="form-control" name="start_date"/>
-                  <span class="input-group-addon">
-                      <span class="glyphicon glyphicon-calendar"></span>
-                  </span>
-              </div>
-          </div>
+<%= form_tag network_events_path, :method => :get, class: "form-horizontal" do %>
+  <div class="container">
+    <div class='col-md-5'>
+        <div class="form-group">
+            <div class='input-group date' id='startdatepicker'>
+                <input type='text' class="form-control" name="start_date"/>
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+      Through
+    </div>
+    <div class='col-md-5'>
+        <div class="form-group">
+            <div class='input-group date' id='enddatepicker'>
+                <input type='text' class="form-control" name="end_date" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-12">
+        <%= select_tag :graduating_class_ids, 
+              options_from_collection_for_select(
+                GraduatingClass.order(:year).all, 
+                :id, 
+                :name,
+                params[:graduating_class_ids]
+              ),
+              class: "select2 form-control", 
+              multiple: true, 
+              data: { placeholder: 'Filter by graduating class' }  %>
       </div>
-      <div class='col-md-6'>
-          <div class="form-group">
-              <div class='input-group date' id='enddatepicker'>
-                  <input type='text' class="form-control" name="end_date" />
-                  <span class="input-group-addon">
-                      <span class="glyphicon glyphicon-calendar"></span>
-                  </span>
-              </div>
-          </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-12">
+        <%= submit_tag "Filter events", class: "btn btn-secondary"%>
       </div>
+    </div>
   </div>
   <script type="text/javascript">
       $(function () {
@@ -52,7 +74,6 @@
           });
       });
   </script> 
-  <%= submit_tag "Filter by date", class: "btn btn-secondary"%>
 <% end %>
 
 </div>

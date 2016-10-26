@@ -86,10 +86,18 @@ class NetworkEventsController < ApplicationController
         includes(:program, :location, :organizations, :volunteers).
         order(sort_column + " " + sort_direction)
         
+      # Filter events by scheduled date.
       if params[:start_date].present? && params[:end_date].present?
         events = events.in_date_range( params[:start_date], params[:end_date])
       else
         events = events.default_date_range
+      end
+      
+      # Filter events by graduating class.
+      if params[:graduating_class_ids].present?
+        events = events.
+          joins(:graduating_class_assignments).
+          where(graduating_class_assignments: {graduating_class_id: params[:graduating_class_ids]})
       end
       
       events
