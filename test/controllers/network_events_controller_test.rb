@@ -27,7 +27,7 @@ class NetworkEventsControllerTest < ActionController::TestCase
     get :index, 
       start_date: "Monday August 1 2016", 
       end_date: "Wednesday August 3 2016", 
-      commit: "Filter by date"
+      commit: "Filter events"
     assert_response :success
     assert assigns(:network_events).present?
     assert_equal 2, assigns(:network_events).length
@@ -38,12 +38,25 @@ class NetworkEventsControllerTest < ActionController::TestCase
       start_date: "Monday August 1 2016", 
       end_date: "Wednesday August 3 2016", 
       graduating_class_ids: [graduating_classes(:class_of_2017).id],
-      commit: "Filter by date"
+      commit: "Filter events"
     
     assert_response :success
     assert assigns(:network_events).present?
     assert_includes assigns(:network_events), network_events(:tuggle_network)
     refute_includes assigns(:network_events), network_events(:carver_tour)
+  end
+  
+  test "should get index with blue cohort" do
+    get :index, 
+      start_date: "Monday August 1 2016", 
+      end_date: "Wednesday August 3 2016", 
+      cohort_ids: [cohorts(:blue).id],
+      commit: "Filter events"
+    
+    assert_response :success
+    assert assigns(:network_events).present?
+    assert_includes assigns(:network_events), network_events(:carver_tour)
+    refute_includes assigns(:network_events), network_events(:tuggle_network)
   end
   
   test "should get new" do
