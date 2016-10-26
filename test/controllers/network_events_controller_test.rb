@@ -8,12 +8,44 @@ class NetworkEventsControllerTest < ActionController::TestCase
     sign_in users(:one)
   end
 
-  test "should get index" do
+  test "should get index with default filter" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:network_events)
+    assert assigns(:network_events).blank?
   end
 
+  test "should get index with empty date range" do
+    get :index, 
+      start_date: "Friday September 2 2016", 
+      end_date: "Saturday September 3 2016", 
+      commit: "Filter events"
+    assert_response :success
+    assert assigns(:network_events).blank?
+  end
+
+  test "should get index with date range including events" do
+    get :index, 
+      start_date: "Monday August 1 2016", 
+      end_date: "Wednesday August 3 2016", 
+      commit: "Filter by date"
+    assert_response :success
+    assert assigns(:network_events).present?
+    assert_equal 2, assigns(:network_events).length
+  end
+
+  test "should get index with class of 2017" do
+    get :index, 
+      start_date: "Monday August 1 2016", 
+      end_date: "Wednesday August 3 2016", 
+      graduating_class_ids: [graduating_classes(:class_of_2017).id],
+      commit: "Filter by date"
+    
+    assert_response :success
+    assert assigns(:network_events).present?
+    assert_includes assigns(:network_events), network_events(:tuggle_network)
+    refute_includes assigns(:network_events), network_events(:carver_tour)
+  end
+  
   test "should get new" do
     get :new
     assert_response :success
@@ -33,7 +65,10 @@ class NetworkEventsControllerTest < ActionController::TestCase
   end
 
   test "should get csv" do
-    get :index, params: { start_date: "Thursday September 1 2016", end_date: "Saturday September 3 2016", commit: "Filter by date" }, :format => :csv
+    time = Time.local(2016, 8, 1, 10, 5, 0)
+    Timecop.travel(time) do
+      get :index, :format => :csv
+    end
     assert_response :success
     
     assert_equal file_data('network_events.csv'), response.body

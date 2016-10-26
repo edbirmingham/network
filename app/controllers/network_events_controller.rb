@@ -6,21 +6,7 @@ class NetworkEventsController < ApplicationController
   # GET /network_events.json
   # GET /network_events.csv
   def index
-    if params[:start_date].present? && params[:end_date].present?
-      @network_events = NetworkEvent.in_date_range( params[:start_date], params[:end_date])
-        .includes(:program, :location)
-        .order(sort_column + " " + sort_direction)
-    else
-      if params[:format] == 'csv'
-        @network_events = NetworkEvent.all
-          .includes(:program, :location)
-          .order(sort_column + " " + sort_direction)
-      else
-        @network_events = NetworkEvent.default_date_range
-          .includes(:program, :location)
-          .order(sort_column + " " + sort_direction)
-      end
-    end
+    @network_events = filtered_events
   end
 
   # GET /network_events/1
@@ -89,9 +75,32 @@ class NetworkEventsController < ApplicationController
   end
   
   private
+  
     # Use callbacks to share common setup or constraints between actions.
     def set_network_event
       @network_event = NetworkEvent.find(params[:id])
+    end
+    
+    def filtered_events
+      events = NetworkEvent.
+        includes(:program, :location, :organizations, :volunteers).
+        order(sort_column + " " + sort_direction)
+        
+      # Filter events by scheduled date.
+      if params[:start_date].present? && params[:end_date].present?
+        events = events.in_date_range( params[:start_date], params[:end_date])
+      else
+        events = events.default_date_range
+      end
+      
+      # Filter events by graduating class.
+      if params[:graduating_class_ids].present?
+        events = events.
+          joins(:graduating_class_assignments).
+          where(graduating_class_assignments: {graduating_class_id: params[:graduating_class_ids]})
+      end
+      
+      events
     end
     
     def sort_column
