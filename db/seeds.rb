@@ -110,11 +110,11 @@ Program.create(name: 'Connector Table Meeting', user_id: user.id)
 Program.create(name: 'Core Team Meeting', user_id: user.id)
 
 eab = Organization.create(name: 'EAB', created_by_id: user.id)
-Organization.create(name: 'Regions Bank', created_by_id: user.id)
-Organization.create(name: 'Publix', created_by_id: user.id)
-Organization.create(name: 'Code for Birmingham', created_by_id: user.id)
-Organization.create(name: 'Birmingham Chamber of Commerce', created_by_id: user.id)
-
+regions = Organization.create(name: 'Regions Bank', created_by_id: user.id)
+publix = Organization.create(name: 'Publix', created_by_id: user.id)
+code = Organization.create(name: 'Code for Birmingham', created_by_id: user.id)
+chamber = Organization.create(name: 'Birmingham Chamber of Commerce', created_by_id: user.id)
+organizations = [eab, regions, publix, code, chamber]
 
 carver = School.create(name: 'Carver High School', user_id: user.id)
 tuggle = School.create(name: 'Tuggle Elementary School', user_id: user.id)
@@ -135,7 +135,7 @@ Location.all.each do |location|
       name: "#{location.name} #{program.name}",
       program: program,
       location: location,
-      organizations: [eab],
+      organizations: organizations.sample(1),
       site_contacts: [sean, victoria],
       school_contacts: [chris],
       volunteers: [andrew],

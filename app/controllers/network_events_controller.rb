@@ -120,6 +120,13 @@ class NetworkEventsController < ApplicationController
           where(school_assignments: {school_id: params[:school_ids]})
       end
           
+      # Filter events by organization
+      if params[:organization_ids].present?
+        events = events.
+          joins(:organization_assignments).
+          where(organization_assignments: {organization_id: params[:organization_ids]})
+      end
+      
       events
     end
     
