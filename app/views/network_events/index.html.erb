@@ -64,6 +64,20 @@
     </div>
     <div class="form-group">
       <div class="col-md-12">
+        <%= select_tag :organization_ids, 
+              options_from_collection_for_select(
+                Organization.order(:name).all, 
+                :id, 
+                :name,
+                params[:organization_ids]
+              ),
+              class: "select2 form-control", 
+              multiple: true, 
+              data: { placeholder: 'Filter by organization' }  %>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-12">
         <%= select_tag :cohort_ids, 
               options_from_collection_for_select(
                 Cohort.order(:name).all, 
