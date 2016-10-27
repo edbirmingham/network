@@ -118,6 +118,9 @@ Organization.create(name: 'Birmingham Chamber of Commerce', created_by_id: user.
 
 carver = School.create(name: 'Carver High School', user_id: user.id)
 tuggle = School.create(name: 'Tuggle Elementary School', user_id: user.id)
+hudson = School.create(name: 'Hudson K-8', user_id: user.id)
+ramsey = School.create(name: 'Ramsey High School', user_id: user.id)
+school_choice = [carver, tuggle, hudson, ramsey]
 
 Talent.create(name: 'Arts', user_id: user.id)
 Talent.create(name: 'Math', user_id: user.id)
@@ -136,7 +139,7 @@ Location.all.each do |location|
       site_contacts: [sean, victoria],
       school_contacts: [chris],
       volunteers: [andrew],
-      schools: [carver, tuggle],
+      schools: school_choice.sample(2),
       graduating_classes: [class_of_2016, class_of_2017],
       cohorts: [gear_up],
       scheduled_at: rand(14).days.from_now,
