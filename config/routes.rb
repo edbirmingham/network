@@ -29,7 +29,10 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
-  resources :members
+  resources :members do
+    resources :communications, only: [:new, :show, :create, :edit, :update, :destroy]
+  end
+  
   resources :locations
   resources :organizations
   resources :participations, only: :destroy
