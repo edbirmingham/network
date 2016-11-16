@@ -36,6 +36,9 @@
   <dd><%= organization.name %></dd>
   <% end %>
 
+  <dt>School:</dt>
+  <dd><%= @member.school.try(:name) %></dd>
+  
   <dt>Graduation Class:</dt>
   <dd><%= @member.graduation_year %></dd>
 
