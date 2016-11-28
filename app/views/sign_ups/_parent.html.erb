@@ -1,0 +1,13 @@
+  <div class='form-group'>
+    <%= f.label :school_id, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.collection_select(
+        :school_id,
+        School.order(:name).all,
+        :id,
+        :name,
+        {include_blank: 'None'},
+        {class: 'select2 form-control'})
+      %>
+    </div>
+  </div>
