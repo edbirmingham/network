@@ -151,6 +151,8 @@ class NetworkEventsController < ApplicationController
         :location_id, 
         :scheduled_at, 
         :duration, 
+        :needs_transport, 
+        :transport_ordered_on,
         :organization_ids => [], 
         :site_contact_ids => [],
         :school_contact_ids => [],

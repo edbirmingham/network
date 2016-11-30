@@ -88,7 +88,13 @@
 
   <dt>Ends At:</dt>
   <dd><%= @network_event.scheduled_at + @network_event.duration.minutes %></dd>
+  
+  <dt>Transportation needed:</dt>
+  <dd><%= @network_event.needs_transport %></dd>
 
+  <dt>Transportation ordered:</dt>
+  <dd><%= @network_event.transport_ordered_on %></dd>
+  
   <dt>Creator:</dt>
   <dd><%= @network_event.user.try(:email) %></dd>
 
