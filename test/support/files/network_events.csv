@@ -1,3 +1,3 @@
-"name","program","location","date","start_time","end_time","school","cohorts","classes","school_contacts","site_contacts"
-"Tuggle Network Night","Network Night","Tuggle Elementary School","08-01-2016","01:00","02:00","Tuggle Elementary School","green, purple","2017","George Carver, Martin King","Carrie Tuggle, Rosa Parks"
-"Carver UAB Tour","College 101","UAB","08-01-2016","02:00","03:00","Carver High School","blue, red","2020","Jane Doe, John Smith","Ossie Mitchell, Malachi Wilkerson"
+"name","program","location","organizations","date","start_time","end_time","school","cohorts","classes","school_contacts","site_contacts","notes"
+"Tuggle Network Night","Network Night","Tuggle Elementary School","EAB","08-01-2016","01:00","02:00","Tuggle Elementary School","green, purple","2017","George Carver, Martin King","Carrie Tuggle, Rosa Parks","notes_1"
+"Carver UAB Tour","College 101","UAB","EAB","08-01-2016","02:00","03:00","Carver High School","blue, red","2020","Jane Doe, John Smith","Ossie Mitchell, Malachi Wilkerson","notes_2"

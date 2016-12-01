@@ -153,6 +153,7 @@ class NetworkEventsController < ApplicationController
         :duration, 
         :needs_transport, 
         :transport_ordered_on,
+        :notes,
         :organization_ids => [], 
         :site_contact_ids => [],
         :school_contact_ids => [],

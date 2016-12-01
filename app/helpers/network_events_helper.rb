@@ -46,7 +46,8 @@ module NetworkEventsHelper
                 "Graduating Classes: " + clip_from(event.graduating_classes) + "\n" + 
                 "Cohorts: " + clip_from(event.cohorts) + "\n" +
                 "Scheduled at: " + event.scheduled_at.to_formatted_s(:long) + "\n" + 
-                "Ends at: " + (event.scheduled_at + event.duration.minutes).to_formatted_s(:long) + "\n"
+                "Ends at: " + (event.scheduled_at + event.duration.minutes).to_formatted_s(:long) + "\n" +
+                "Notes: " + event.try(:notes).to_s
     return event_info
   end
         
