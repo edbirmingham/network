@@ -9,28 +9,28 @@ class NetworkEvent < ActiveRecord::Base
   belongs_to :user
   belongs_to :program
 
-  has_many :site_contact_assignments
+  has_many :site_contact_assignments, dependent: :delete_all
   has_many :site_contacts, through: :site_contact_assignments, source: :member
 
-  has_many :school_contact_assignments
+  has_many :school_contact_assignments, dependent: :delete_all
   has_many :school_contacts, through: :school_contact_assignments, source: :member
 
-  has_many :volunteer_assignments
+  has_many :volunteer_assignments, dependent: :delete_all
   has_many :volunteers, through: :volunteer_assignments, source: :member
 
-  has_many :graduating_class_assignments
+  has_many :graduating_class_assignments, dependent: :delete_all
   has_many :graduating_classes, through: :graduating_class_assignments
 
-  has_many :organization_assignments
+  has_many :organization_assignments, dependent: :delete_all
   has_many :organizations, through: :organization_assignments
 
-  has_many :school_assignments
+  has_many :school_assignments, dependent: :delete_all
   has_many :schools, through: :school_assignments
 
-  has_many :cohort_assignments
+  has_many :cohort_assignments, dependent: :delete_all
   has_many :cohorts, through: :cohort_assignments
 
-  has_many :participations
+  has_many :participations, dependent: :delete_all
   has_many :participants, through: :participations, source: :member
 
 
