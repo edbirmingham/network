@@ -21,7 +21,11 @@ class Member < ActiveRecord::Base
 
   def self.search(query)
     if query.present?
-      condition = 'first_name LIKE :search OR last_name LIKE :search'
+      if Rails.env.production?
+        condition = 'first_name ILIKE :search OR last_name ILIKE :search'
+      else
+        condition = 'first_name LIKE :search OR last_name LIKE :search'
+      end
       query.split(' ').inject(self) do |conditions, term|
         conditions.where([condition, search: "#{term}%"])
       end
