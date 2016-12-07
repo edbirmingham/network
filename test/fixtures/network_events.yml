@@ -5,6 +5,7 @@ tuggle_network:
   program: network_night
   location: tuggle
   scheduled_at: 2016-08-01 01:00:00
+  notes: notes_1
   user: one
 
 carver_tour:
@@ -12,4 +13,5 @@ carver_tour:
   program: college_101
   location: uab
   scheduled_at: 2016-08-01 02:00:00
+  notes: notes_2
   user: two
