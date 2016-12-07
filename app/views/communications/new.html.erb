@@ -1,0 +1,10 @@
+<div class="page-header">
+  <%= link_to member_path(@member), class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <h1><%= @member.name %></h1>
+  <h1>New communication</h1>
+</div>
+
+<%= render 'form' %>

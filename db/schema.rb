@@ -43,6 +43,16 @@ ActiveRecord::Schema.define(version: 20161130192947) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "communications", force: :cascade do |t|
+    t.string   "kind"
+    t.text     "notes"
+    t.integer  "member_id"
+    t.integer  "user_id"
+    t.datetime "contacted_on"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "extracurricular_activities", force: :cascade do |t|
     t.string   "name"
     t.integer  "user_id"

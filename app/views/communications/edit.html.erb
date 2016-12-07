@@ -1,0 +1,13 @@
+<div class="page-header">
+  <%= link_to members_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to member_communication_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-info-sign"></span>
+    Show
+  <% end %>
+  <h1>Editing communication</h1>
+</div>
+
+<%= render 'form' %>

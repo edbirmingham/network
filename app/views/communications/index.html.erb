@@ -1,0 +1,35 @@
+<div class="page-header">
+  <%= link_to new_member_communication_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Communication
+  <% end %>
+  <h1>Listing communications</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+            <th>Kind</th>
+            <th>Notes</th>
+            <th>Member</th>
+            <th>User</th>
+            <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @communications) do |communication| %>
+            <td><%= communication.kind %></td>
+            <td><%= communication.notes %></td>
+            <td><%= communication.member %></td>
+            <td><%= communication.user %></td>
+            <td><%= link_to 'Show', communication %></td>
+        <td><%= link_to 'Edit', edit_communication_path(communication) %></td>
+        <td><%= link_to 'Destroy', communication, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>
