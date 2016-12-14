@@ -19,6 +19,7 @@ class SignUpsController < ApplicationController
       member_level = participation_params[:level]
       @level = ""
       @participation = Participation.new(member_id: participation_params[:member_id], network_event_id: @network_event.id, level: participation_params[:level])
+      @participation.user = current_user
       respond_to do |format|
         if @participation.save
           format.html { redirect_to action: 'new', level: member_level}
@@ -28,13 +29,30 @@ class SignUpsController < ApplicationController
           format.json { render json: @participation.errors, status: :unprocessable_entity}
         end
       end
-    elsif params[:commit] == "Create Member"
+    elsif params[:member_id].present?
+      member_level = params[:level]       
+      @member = Member.find(params[:member_id])
+      respond_to do |format|
+        if @member.update(member_params)
+          participation = Participation.new(member_id: @member.id, network_event_id: @network_event.id, level: params[:level])
+          participation.user = current_user
+          participation.save
+          flash[:sign_up_success] = 'Member was updated successfully'
+          format.html { redirect_to action: 'new', level: member_level}
+          format.json { render @member}
+        else
+          format.html { render :new}
+          format.json { render json: @member.errors, status: :unprocessable_entity}
+        end
+      end
+    else 
       member_level = params[:level]
       @member = Member.new(member_params)
       @member.user = current_user
       respond_to do |format|
         if @member.save
           participation = Participation.new(member_id: @member.id, network_event_id: @network_event.id, level: params[:level])
+          participation.user = current_user
           participation.save
           flash[:sign_up_success] = 'Member was created successfully'
           format.html { redirect_to action: 'new', level: member_level}
@@ -44,7 +62,7 @@ class SignUpsController < ApplicationController
           format.json { render json: @member.errors, status: :unprocessable_entity}
         end
       end
-     
+          
     end
   end
   
