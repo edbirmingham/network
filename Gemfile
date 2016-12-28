@@ -51,6 +51,12 @@ gem 'zeroclipboard-rails'
 # Network Gems
 gem 'devise'
 
+# Until the new API calls are generally available, we must manually specify a 
+# fork of the Heroku API gem:
+gem 'platform-api', github: 'jalada/platform-api', branch: 'master'
+
+gem 'letsencrypt-rails-heroku', group: 'production'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
