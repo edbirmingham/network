@@ -46,6 +46,17 @@ class NetworkEvent < ActiveRecord::Base
     where(scheduled_at: start_date.beginning_of_day..end_date.end_of_day)
   end
 
+  def self.statuses
+    [
+      "working",
+      "confirmed", 
+      "scheduled", 
+      "completed", 
+      "declined", 
+      "need to contact and pending further convo with supervisor"
+    ]
+  end
+        
   def date
     scheduled_at.to_date
   end
