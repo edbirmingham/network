@@ -5,19 +5,30 @@ class Member < ActiveRecord::Base
   belongs_to :user
   belongs_to :graduating_class, class_name: 'GraduatingClass', foreign_key: :graduating_class_id
   belongs_to :school
-  has_many :affiliations
+  
+  has_many :affiliations, dependent: :delete_all
   has_many :organizations, through: :affiliations
-  has_many :talent_assignments
+  
+  has_many :talent_assignments, dependent: :delete_all
   has_many :talents, through: :talent_assignments
-  has_many :extracurricular_activity_assignments
+  
+  has_many :extracurricular_activity_assignments, dependent: :delete_all
   has_many :extracurricular_activities, through: :extracurricular_activity_assignments
-  has_many :residences
+  
+  has_many :residences, dependent: :delete_all
   has_many :neighborhoods, through: :residences
-  has_many :participations
+  
+  has_many :participations, dependent: :delete_all
   has_many :events, through: :participations, source: :network_event
-  has_many :cohortians
+  
+  has_many :cohortians, dependent: :delete_all
   has_many :cohorts, through: :cohortians
-  has_many :communications  
+  
+  has_many :matches, dependent: :delete_all
+  has_many :matched_actions, through: :matches, source: :network_action
+  
+  has_many :communications, dependent: :destroy
+  has_many :network_actions, dependent: :destroy, foreign_key: :actor_id
 
   def self.search(query)
     if query.present?
