@@ -18,6 +18,19 @@
       <%= f.text_field :name, class: "form-control" %>
     </div>
   </div>
+  <% if @network_event.persisted? %>
+    <div class="form-group">
+      <%= f.label :status, class: "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+        <%= f.collection_select :status, 
+              NetworkEvent.statuses, 
+              :to_s, 
+              :titleize, 
+              {}, 
+              class: "select2 form-control" %>
+      </div>
+    </div>
+  <% end %>
   <div class="form-group">
     <%= f.label :program_id, class: "col-sm-2 control-label" %>
     <div class="col-sm-10">

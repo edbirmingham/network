@@ -50,5 +50,5 @@ module NetworkEventsHelper
                 "Notes: " + event.try(:notes).to_s
     return event_info
   end
-        
+  
 end

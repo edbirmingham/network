@@ -6,6 +6,7 @@ tuggle_network:
   location: tuggle
   scheduled_at: 2016-08-01 01:00:00
   notes: notes_1
+  status: confirmed
   user: one
 
 carver_tour:
@@ -14,4 +15,5 @@ carver_tour:
   location: uab
   scheduled_at: 2016-08-01 02:00:00
   notes: notes_2
+  status: completed
   user: two

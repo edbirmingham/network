@@ -138,13 +138,14 @@
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
-            <th><%= sortable "name"%></th>
-            <th><%= sortable "program"%></th>
-            <th><%= sortable "location"%></th>
-            <th>Organization(s)</th>
-            <th>Volunteer(s)</th>
-            <th><%= sortable "scheduled_at", "Scheduled at"%></th>
-            <th></th>
+        <th><%= sortable "name"%></th>
+        <th><%= sortable "status"%></th>
+        <th><%= sortable "program"%></th>
+        <th><%= sortable "location"%></th>
+        <th>Organization(s)</th>
+        <th>Volunteer(s)</th>
+        <th><%= sortable "scheduled_at", "Scheduled at"%></th>
+        <th></th>
         <th></th>
         <th></th>
         <th></th>
@@ -154,6 +155,7 @@
     <tbody>
       <%= content_tag_for(:tr, @network_events) do |network_event| %>
         <td><%= network_event.name %></td>
+        <td><%= network_event.status.try(:titleize) %></td>
         <td><%= network_event.program.try(:name) %></td>
         <td><%= network_event.location.try(:name) %></td>
         <td><%= network_event.organizations.map(&:name).join(', ') %></td>

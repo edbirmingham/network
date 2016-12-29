@@ -14,6 +14,9 @@
   <dt>Name:</dt>
   <dd><%= @network_event.name %></dd>
 
+  <dt>Status:</dt>
+  <dd><%= @network_event.status.try(:titleize) %></dd>
+
   <dt>Program:</dt>
   <dd><%= @network_event.program.try(:name) %></dd>
 

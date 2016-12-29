@@ -147,6 +147,7 @@ class NetworkEventsController < ApplicationController
     def network_event_params
       params.require(:network_event).permit(
         :name, 
+        :status,
         :program_id, 
         :location_id, 
         :scheduled_at, 
