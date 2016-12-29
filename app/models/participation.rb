@@ -2,7 +2,6 @@
 class Participation < ActiveRecord::Base
   belongs_to :user
   belongs_to :member
-
   belongs_to :network_event
 
   validates :level, presence: true

@@ -4,6 +4,6 @@ class ExtracurricularActivity < ActiveRecord::Base
   validates :name, presence: true
   validates_uniqueness_of :name
   
-  has_many :extracurricular_activity_assignments
+  has_many :extracurricular_activity_assignments, dependent: :delete_all
   has_many :members, through: :extracurricular_activity_assignments
 end
