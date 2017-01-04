@@ -104,6 +104,15 @@
   <dt>Creator:</dt>
   <dd><%= @network_event.user.try(:email) %></dd>
 
+  <dt>Sign Up:</dt>
+  <dd>
+    <div class="sign_up__attendee">
+      <%= link_to 'Sign Up Attendee', new_network_event_sign_up_path(:network_event_id => @network_event.id, :level => 'attendee') %>
+    </div>
+    <div class="sign_up__volunteer">
+      <%= link_to 'Sign Up Volunteer', new_network_event_sign_up_path(:network_event_id => @network_event.id, :level => 'volunteer') %>
+    </div>
+  </dd>
 </dl>
 
 <h2>Invitees</h2>
