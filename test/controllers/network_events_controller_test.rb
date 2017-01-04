@@ -75,6 +75,10 @@ class NetworkEventsControllerTest < ActionController::TestCase
   test "should show network_event" do
     get :show, id: @network_event
     assert_response :success
+    assert_select '.sign_up__attendee', 'Sign Up Attendee'
+    assert_select '.sign_up__attendee > a[href$=?]', "/#{@network_event.id}/sign_ups/new?level=attendee"
+    assert_select '.sign_up__volunteer', 'Sign Up Volunteer'
+    assert_select '.sign_up__volunteer > a[href$=?]', "/#{@network_event.id}/sign_ups/new?level=volunteer"
   end
 
   test "should get csv" do
