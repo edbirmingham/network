@@ -392,8 +392,8 @@ CSV.foreach("tmp/calendar.csv", headers: true) do |row|
             program_id: programs[row["Program"]],
             location_id: location_lookup(locations, row["Location"]),
             scheduled_at: scheduled_at,
-            duration: scheduled_duration
-            # , mongo_id: "csv.calendar.#{index}"
+            duration: scheduled_duration,
+            mongo_id: "csv.calendar.#{index}"
         )
         # row["School"].try(:split, ', ').try(:each) do |school|
         #     values.add school
