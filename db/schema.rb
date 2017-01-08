@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161229194057) do
+ActiveRecord::Schema.define(version: 20170108211004) do
 
   create_table "affiliations", force: :cascade do |t|
     t.integer  "member_id"
@@ -158,6 +158,7 @@ ActiveRecord::Schema.define(version: 20161229194057) do
     t.datetime "transport_ordered_on"
     t.text     "notes"
     t.string   "status"
+    t.string   "mongo_id"
   end
 
   add_index "network_events", ["program_id"], name: "index_network_events_on_program_id"
