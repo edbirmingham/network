@@ -1,6 +1,9 @@
 require 'csv'
 require 'set'
 
+def cohort_lookup(cohort)
+    Cohort.where(name: cohort).first || Cohort.create!(name: cohort)
+end
 
 if Rails.env.production?
     cohorts = {
@@ -89,14 +92,19 @@ file_names.each do |file_name|
     CSV.foreach("tmp/#{file_name}.csv", headers: true) do |row|
         if row["School"].present?
             index += 1
-            Member.create!(
-                first_name: row["First Name"],
-                last_name: row["Last Name"],
-                school_id: schools[row["School"]],
-                cohort_ids: [cohorts[row["Cohort"]]],
-                graduating_class_id: graduating_classes[row["Graduating Class"].split('-').last],
-                mongo_id: "csv.#{file_name}.#{index}"
-            )
+            # Member.create!(
+            #     first_name: row["First Name"],
+            #     last_name: row["Last Name"],
+            #     school_id: schools[row["School"]],
+            #     cohort_ids: [cohorts[row["Cohort"]]],
+            #     graduating_class_id: graduating_classes[row["Graduating Class"].split('-').last],
+            #     mongo_id: "csv.#{file_name}.#{index}"
+            # )
+            
+            member = Member.where(mongo_id: "csv.#{file_name}.#{index}").first
+            if member.present? && row["Class"].present?
+                member.cohorts << cohort_lookup(row["Class"])
+            end
             
             # values.add row["School"]
             # puts row["School"] if schools[row["School"]].blank?
