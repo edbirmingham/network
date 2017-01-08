@@ -1,0 +1,83 @@
+<%= form_for(@member, url: network_event_sign_ups_path(@network_event) ,html: { class: "form-horizontal", role: "form" }) do |f| %>
+  <% if @member.errors.any? %>
+    <div class="alert alert-danger alert-dismissable" role="alert">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <h4><%= pluralize(@member.errors.count, "error") %> prohibited this member from being saved:</h4>
+
+      <ul>
+      <% @member.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <% if @participation.errors.any? %>
+    <div class="alert alert-danger alert-dismissable" role="alert">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <h4><%= pluralize(@participation.errors.count, "error") %> prohibited this member from being saved:</h4>
+
+      <ul>
+      <% @participation.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <% if flash[:sign_up_success] %>
+     <div class="alert alert-success" role="alert">
+       <%= flash[:sign_up_success] %>
+     </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :first_name, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :first_name, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :last_name, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :last_name, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :phone, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.telephone_field :phone, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :email, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.email_field :email, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :identity, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.select :identity,
+            Member.identities,
+            {},
+            class: "select2 form-control" %>
+    </div>
+  </div>
+  
+    <div id="school">
+    <%= render :partial => 'school', locals: { f: f} %>
+    </div>
+    <div id="graduating">
+      <%= render :partial => 'graduating', locals: { f: f} %>
+    </div>
+    
+  <div class="form-group">
+    <%= hidden_field_tag :member_id, @member_id %>
+    <%= hidden_field_tag :level, @level %>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit class: "btn btn-primary", id: "new_edit_submit" %>
+      <%= button_tag 'Return to New Member Form', class: "btn btn-default update-button", type: 'button', id: "return-button" %>
+    </div>
+  </div>
+<% end %>

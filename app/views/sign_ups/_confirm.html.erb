@@ -1,3 +1,6 @@
+<div class ="form-group">
+  <h2>Confirm Attendance</h2>
+</div>
 <%= form_for(@participation, url: network_event_sign_ups_path(@network_event) ,html: { class: "form-horizontal", role: "form" }) do |f| %>
 <div id="confirm"> 
 <span class="btn btn-primary glyphicon glyphicon-remove pull-right" id="unconfirm"></span>
@@ -23,5 +26,6 @@
 </div>
 <div>
   <%= f.submit 'Confirm attendance', class: "btn btn-primary" %>
+  <%= button_tag 'Update Member', class: "btn btn-primary update-button", type: 'button', id: "update-signup" %>
 </div>
 <% end %>
