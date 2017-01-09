@@ -1,0 +1,36 @@
+<div class="page-header">
+  <%= link_to new_network_event_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Event
+  <% end %>
+  <h1>Listing events</h1>
+</div>
+  
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+            <th>Name</th>
+            <th>Program</th>
+            <th>Location</th>
+            <th>Organization(s)</th>
+            <th>Scheduled At</th>
+            <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @network_events) do |network_event| %>
+        <td><%= network_event.name %></td>
+        <td><%= network_event.program.try(:name) %></td>
+        <td><%= network_event.location.try(:name) %></td>
+        <td><%= network_event.organizations.map(&:name).join(', ') %></td>
+        <td><%= network_event.scheduled_at %></td>
+        <td><%= link_to 'Check In Attendees', new_network_event_check_in_path(:network_event_id => network_event.id, :level => 'attendee') %></td>
+        <td><%= link_to 'Check In Volunteers', new_network_event_check_in_path(:network_event_id => network_event.id, :level => 'volunteer') %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>
