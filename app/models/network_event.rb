@@ -62,22 +62,26 @@ class NetworkEvent < ActiveRecord::Base
   end
   
   def invitees
-    member_scope = Member.uniq
-
-    if cohorts.any?
-      member_scope = member_scope.
-        joins(:cohorts).
-        where(cohorts: { id: cohort_ids }).
-        having("COUNT(cohorts.id) = #{cohort_ids.count}").
-        group("members.id")
-    end
-
-    if schools.any?
-      member_scope = member_scope.where(school_id: school_ids)
-    end
-
-    if graduating_classes.any?
-      member_scope = member_scope.where(graduating_class_id: graduating_class_ids)
+    if cohorts.any? || schools.any? || graduating_classes.any?
+      member_scope = Member.uniq
+  
+      if cohorts.any?
+        member_scope = member_scope.
+          joins(:cohorts).
+          where(cohorts: { id: cohort_ids }).
+          having("COUNT(cohorts.id) = #{cohort_ids.count}").
+          group("members.id")
+      end
+  
+      if schools.any?
+        member_scope = member_scope.where(school_id: school_ids)
+      end
+  
+      if graduating_classes.any?
+        member_scope = member_scope.where(graduating_class_id: graduating_class_ids)
+      end
+    else
+      member_scope = Member.none
     end
 
     member_scope
