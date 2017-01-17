@@ -82,4 +82,8 @@ class Member < ActiveRecord::Base
   def extracurricular_activities_list
     extracurricular_activities.map(&:name).compact.sort.join(', ')
   end
+  
+  def affiliation_list
+    organizations.map(&:name).compact.sort.join(', ')
+  end
 end

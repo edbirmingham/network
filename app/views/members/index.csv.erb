@@ -1,7 +1,7 @@
 <% require 'csv' %>
 <%= CSV.generate(headers: true, :quote_char=>'"', :force_quotes => true,) do |csv|
-  csv << %w{first_name	last_name	phone	email identity affiliation graduation_class address city state zip_code talent_list community_networks extra_groups other_networks}
+  csv << %w{first_name	last_name	phone	email identity affiliation_list graduation_class address city state zip_code talent_list community_networks extra_groups other_networks}
   @members.each do |row|
-    csv << [row.first_name,row.last_name,row.phone,row.email,row.identity,row.affiliation,row.graduation_year,row.address,row.city,row.state,row.zip_code,row.talent_list,row.community_networks,row.extra_groups,row.other_networks]
+    csv << [row.first_name,row.last_name,row.phone,row.email,row.identity,row.affiliation_list,row.graduation_year,row.address,row.city,row.state,row.zip_code,row.talent_list,row.community_networks,row.extra_groups,row.other_networks]
   end
 end .html_safe %>
