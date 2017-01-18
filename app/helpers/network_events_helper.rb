@@ -51,4 +51,14 @@ module NetworkEventsHelper
     return event_info
   end
   
+  def download_query_params
+    request.query_parameters.slice(
+      :start_date,
+      :end_date,
+      :program_ids,
+      :school_ids,
+      :organization_ids,
+      :cohort_ids,
+      :graduating_class_ids)
+  end
 end
