@@ -25,15 +25,23 @@
 
   <dt>Identity:</dt>
   <dd><%= @member.identity %></dd>
-
+  
   <dt>Cohorts:</dt>
-  <% @member.cohorts.each do |cohort|%>
-  <dd><%= cohort.name %></dd>
+  <% if @member.cohorts.present? %>
+    <%= content_tag_for(:dd, @member.cohorts) do |cohort| %>
+      <%= link_to cohort.name, cohort %>
+    <% end %>
+  <% else %>
+    <dd></dd>
   <% end %>
   
   <dt>Organizations:</dt>
-  <% @member.organizations.each do |organization|%>
-  <dd><%= organization.name %></dd>
+  <% if @member.organizations.present? %>
+    <%= content_tag_for(:dd, @member.organizations) do |organization| %>
+      <%= link_to organization.name, organization %>
+    <% end %>
+  <% else %>
+    <dd></dd>
   <% end %>
 
   <dt>School:</dt>
@@ -41,10 +49,14 @@
   
   <dt>Graduation Class:</dt>
   <dd><%= @member.graduation_year %></dd>
-
+  
   <dt>Neighborhoods:</dt>
-  <% @member.neighborhoods.each do |neighborhood|%>
-  <dd><%= neighborhood.name %></dd>
+  <% if @member.neighborhoods.present? %>
+    <%= content_tag_for(:dd, @member.neighborhoods) do |neighborhood| %>
+      <%= link_to neighborhood.name, neighborhood %>
+    <% end %>
+  <% else %>
+    <dd></dd>
   <% end %>
 
   <dt>Address:</dt>
@@ -64,12 +76,24 @@
 
   <dt>Shirt received:</dt>
   <dd><%= @member.shirt_received %></dd>
-
+  
   <dt>Talents:</dt>
-  <dd><%= @member.talent_list %></dd>
-
+  <% if @member.talents.present? %>
+    <%= content_tag_for(:dd, @member.talents) do |talent| %>
+      <%= link_to talent.name, talent %>
+    <% end %>
+  <% else %>
+    <dd></dd>
+  <% end %>
+  
   <dt>Extracurricular Activities:</dt>
-  <dd><%= @member.extracurricular_activities_list %></dd>
+  <% if @member.extracurricular_activities.present? %>
+    <%= content_tag_for(:dd, @member.extracurricular_activities) do |extracurricular_activity| %>
+      <%= link_to extracurricular_activity.name, extracurricular_activity %>
+    <% end %>
+  <% else %>
+    <dd></dd>
+  <% end %>
   
   <dt>Place of worship:</dt>
   <dd><%= @member.place_of_worship %></dd>
