@@ -1,6 +1,10 @@
 module ApplicationHelper
   def phone_to(number)
-    link_to number, "tel:#{number}"
+    if number.nil?
+      return "" 
+    else
+      link_to number, "tel:#{number}"
+    end
   end
   
   def sortable(column, title=nil)
