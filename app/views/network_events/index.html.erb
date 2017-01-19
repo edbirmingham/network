@@ -3,10 +3,6 @@
     <span class="glyphicon glyphicon-plus"></span>
     New Event
   <% end %>
-  <%= link_to "network_events.csv", class: 'btn btn-primary' do %>
-    <span class="glyphicon glyphicon-save"></span>
-    Download
-  <% end %>
   <h1>Listing events</h1>
   
 <%= form_tag network_events_path, :method => :get, class: "form-horizontal" do %>
@@ -169,4 +165,9 @@
     </tbody>
   </table>
   <%= paginate @network_events %>
+  
+  <%= link_to network_events_path({format: :csv}.merge(download_query_params)), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-save"></span>
+    Download
+  <% end %>
 </div>
