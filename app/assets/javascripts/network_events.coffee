@@ -9,3 +9,9 @@ $(document).on 'ready page:load', ->
   $('#network_event_needs_transport').change ->
     $('#order_div').slideToggle()
       
+  $('#event-datetimepicker').datetimepicker({
+      showClear: true,
+      format: 'YYYY-MM-DD hh:mm a',
+      useCurrent: false
+    })
+  

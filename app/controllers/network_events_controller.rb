@@ -7,6 +7,7 @@ class NetworkEventsController < ApplicationController
   # GET /network_events.csv
   def index
     @network_events = filtered_events.page params[:page]
+    @unscheduled_only = params[:unscheduled_events_only]
   end
 
   # GET /network_events/1
@@ -84,10 +85,12 @@ class NetworkEventsController < ApplicationController
     def filtered_events
       events = NetworkEvent.
         includes(:program, :location, :organizations, :volunteers).
-        order(sort_column + " " + sort_direction)
+        order(sort_column + " IS NULL, " + sort_column + " " + sort_direction)
         
       # Filter events by scheduled date.
-      if params[:start_date].present? && params[:end_date].present?
+      if params[:unscheduled_events_only].present?
+        events = events.where(scheduled_at: nil)
+      elsif params[:start_date].present? && params[:end_date].present?
         events = events.in_date_range( params[:start_date], params[:end_date])
       else
         events = events.default_date_range

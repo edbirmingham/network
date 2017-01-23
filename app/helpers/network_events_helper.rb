@@ -35,6 +35,14 @@ module NetworkEventsHelper
   end 
   
   def clip_event_info(event)
+    if event.scheduled_at.present?
+      event_schedule_time = event.try(:scheduled_at).to_formatted_s(:long)
+      ends_at = (event.scheduled_at + event.duration.minutes).to_formatted_s(:long)
+    else
+      event_schedule_time = "Unscheduled"
+      ends_at = "Unscheduled"
+    end
+    
     event_info = "Name: " + event.name + "\n" + 
                 "Program: " + event.program.name + "\n" +
                 "Location: " + event.location.name + "\n" +
@@ -45,8 +53,8 @@ module NetworkEventsHelper
                 "Schools: " + clip_from(event.schools) + "\n" + 
                 "Graduating Classes: " + clip_from(event.graduating_classes) + "\n" + 
                 "Cohorts: " + clip_from(event.cohorts) + "\n" +
-                "Scheduled at: " + event.scheduled_at.to_formatted_s(:long) + "\n" + 
-                "Ends at: " + (event.scheduled_at + event.duration.minutes).to_formatted_s(:long) + "\n" +
+                "Scheduled at: " + event_schedule_time + "\n" + 
+                "Ends at: " + ends_at + "\n" +
                 "Notes: " + event.try(:notes).to_s
     return event_info
   end

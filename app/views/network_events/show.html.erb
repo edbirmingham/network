@@ -90,8 +90,11 @@
   <dd><%= @network_event.scheduled_at %></dd>
 
   <dt>Ends At:</dt>
-  <dd><%= @network_event.scheduled_at + @network_event.duration.minutes %></dd>
-  
+  <dd><% if @network_event.scheduled_at.present? %>
+        <%= @network_event.scheduled_at + @network_event.duration.minutes %>
+      <% end %>
+  </dd>
+      
   <dt>Transportation needed:</dt>
   <dd><%= @network_event.needs_transport %></dd>
 
