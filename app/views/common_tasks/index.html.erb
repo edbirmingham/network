@@ -1,0 +1,31 @@
+<div class="page-header">
+  <%= link_to new_common_task_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Common task
+  <% end %>
+  <h1>Listing common tasks</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+            <th>Name</th>
+            <th>User</th>
+            <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @common_tasks) do |common_task| %>
+            <td><%= common_task.name %></td>
+            <td><%= common_task.user.try(:email) %></td>
+            <td><%= link_to 'Show', common_task %></td>
+        <td><%= link_to 'Edit', edit_common_task_path(common_task) %></td>
+        <td><%= link_to 'Destroy', common_task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>
