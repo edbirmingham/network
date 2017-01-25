@@ -1,9 +1,7 @@
 module ApplicationHelper
   def phone_to(number)
-    if number.nil?
-      return "" 
-    else
-      link_to number, "tel:#{number}"
+    if number.present?
+      link_to number_to_phone(number), "tel:#{number}"
     end
   end
   
