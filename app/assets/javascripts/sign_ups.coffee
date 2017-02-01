@@ -2,9 +2,11 @@ $(document).on 'ready page:load', ->
   $('#return-button').hide()
   $('#confirm').hide()
   $('#update').hide()
-  
+  $('#children_in_birmingham_form').hide()
+
   $('#member_ids').on 'select2:select', (e) ->
     $('#participation_member_id').val(e.params.data.id)
+    console.log(e)
     $('#create').hide()
     $('#update').hide()
     $('#member_ids').html()
@@ -14,6 +16,7 @@ $(document).on 'ready page:load', ->
     $('#phone').text(e.params.data.phone)
     $('#identity').text(e.params.data.identity)
     $('#email').text(e.params.data.email)
+    $('#children_in_birmingham_school').text(e.params.data.children_in_birmingham_school)
     
     # Revert/clear create form
   $('#unconfirm, #return-button').on 'click', ->
@@ -34,14 +37,18 @@ $(document).on 'ready page:load', ->
     selected = e.params.data.text
     if selected is 'Student'
       $('#school').show() 
-      $('#graduating').show() 
+      $('#graduating').show()
+      $('#children_in_birmingham_form').hide()
     else if selected is 'Parent' or selected is 'Educator'
       $('#school').show() 
-      $('#graduating').hide() 
+      $('#graduating').hide()
+      $('#children_in_birmingham_form').show()
     else
       $('#school').hide() 
-      $('#graduating').hide() 
-      
+      $('#graduating').hide()
+      $('#children_in_birmingham_form').hide()
+
+
   # Alter create form for edit, fill with member values
   $('#update-signup').on 'click', ->
     $('#confirm').hide() 

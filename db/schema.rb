@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170108211004) do
+ActiveRecord::Schema.define(version: 20170201183152) do
 
   create_table "affiliations", force: :cascade do |t|
     t.integer  "member_id"
@@ -121,11 +121,12 @@ ActiveRecord::Schema.define(version: 20170108211004) do
     t.string   "extra_groups"
     t.string   "other_networks"
     t.integer  "user_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.integer  "graduating_class_id"
     t.integer  "school_id"
     t.string   "mongo_id"
+    t.boolean  "children_in_birmingham_school"
   end
 
   create_table "neighborhoods", force: :cascade do |t|

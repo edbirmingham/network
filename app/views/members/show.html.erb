@@ -86,7 +86,8 @@
     <dd></dd>
   <% end %>
   
-  <dt>Extracurricular Activities:</dt>
+  <dt>Extracurricular</dt>
+  <dt>Activities:</dt>
   <% if @member.extracurricular_activities.present? %>
     <%= content_tag_for(:dd, @member.extracurricular_activities) do |extracurricular_activity| %>
       <%= link_to extracurricular_activity.name, extracurricular_activity %>
@@ -100,6 +101,11 @@
 
   <dt>Recruitment:</dt>
   <dd><%= @member.recruitment %></dd>
+
+  <dt>Children in</dt>
+  <dd></dd>
+  <dt>Birmingham School:</dt>
+  <dd><%= @member.children_in_birmingham_school %></dd>
 
   <dt>Community networks:</dt>
   <dd><%= @member.community_networks %></dd>
