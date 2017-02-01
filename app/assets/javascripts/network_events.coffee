@@ -16,4 +16,10 @@ $(document).on 'ready page:load', ->
     
   $('#network_event_needs_transport').change ->
     $('#order_div').slideToggle()
-    $('#network_event_transport_ordered_on').val("")
+  $('#event-datetimepicker').datetimepicker({
+      showClear: true,
+      format: 'YYYY-MM-DD hh:mm a',
+      useCurrent: false
+  })
+  
+  $('#network_event_transport_ordered_on').val("")

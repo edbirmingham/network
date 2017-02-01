@@ -11,16 +11,29 @@ class NetworkEventsControllerTest < ActionController::TestCase
   test "should get index with default filter" do
     get :index
     assert_response :success
-    assert assigns(:network_events).blank?
+    # assert assigns(:network_events).blank?
+    assert_equal 1, assigns(:network_events).length
+    assert_includes assigns(:network_events), network_events(:dateless_event)
   end
-
+  
+  test "should get index with unscheduled events" do
+    get :index, 
+      unscheduled_events_only: true, 
+      commit: "Filter events"
+    assert_response :success
+    assert assigns(:network_events).present?
+    assert_equal 1, assigns(:network_events).length
+    assert_includes assigns(:network_events), network_events(:dateless_event)
+  end
+  
   test "should get index with empty date range" do
     get :index, 
       start_date: "Friday September 2 2016", 
       end_date: "Saturday September 3 2016", 
       commit: "Filter events"
     assert_response :success
-    assert assigns(:network_events).blank?
+    assert assigns(:network_events).present?
+    assert_includes assigns(:network_events), network_events(:dateless_event)
   end
 
   test "should get index with date range including events" do
@@ -30,7 +43,7 @@ class NetworkEventsControllerTest < ActionController::TestCase
       commit: "Filter events"
     assert_response :success
     assert assigns(:network_events).present?
-    assert_equal 2, assigns(:network_events).length
+    assert_equal 3, assigns(:network_events).length
   end
 
   test "should get index with class of 2017" do

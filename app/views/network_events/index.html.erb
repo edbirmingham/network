@@ -7,6 +7,12 @@
   
 <%= form_tag network_events_path, :method => :get, class: "form-horizontal" do %>
   <div class="container">
+    <div class="form-group">
+      <div class="col-md-12">
+        <%= check_box_tag "unscheduled_events_only",nil,@unscheduled_only %>
+        <%= label_tag "Unscheduled Events Only" %>
+      </div>
+    </div>
     <div class='col-md-5'>
         <div class="form-group">
             <div class='input-group date' id='startdatepicker'>
@@ -156,7 +162,7 @@
         <td><%= network_event.location.try(:name) %></td>
         <td><%= network_event.organizations.map(&:name).join(', ') %></td>
         <td><%= network_event.volunteers.map(&:name).join(', ') %></td>
-        <td><%= network_event.scheduled_at.to_formatted_s(:long) %></td>
+        <td><%= network_event.scheduled_at.try(:to_formatted_s, :long)%></td>
         <td><%= link_to 'Show', network_event %></td>
         <td><%= link_to 'Edit', edit_network_event_path(network_event) %></td>
         <td><%= link_to 'Destroy', network_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
