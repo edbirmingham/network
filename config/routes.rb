@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :identities
   resources :common_tasks
   resources :neighborhoods
   resources :extracurricular_activities
