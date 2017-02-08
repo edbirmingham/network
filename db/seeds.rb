@@ -33,6 +33,9 @@ football = ExtracurricularActivity.create(name: 'Football', user_id: user.id)
 chess_club = ExtracurricularActivity.create(name: 'Chess Club', user_id: user.id)
 theater = ExtracurricularActivity.create(name: 'Theater', user_id: user.id)
 
+chaperone_task = CommonTask.create(name: 'Find X chaperones', user_id: user.id)
+schedule_transportation = CommonTask.create(name: 'Schedule Transportation', user_id: user.id)
+
 Location.create(
   name: 'Tuggle Elementary',
   address_one: '1234 Broad St N',

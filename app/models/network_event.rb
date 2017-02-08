@@ -31,6 +31,10 @@ class NetworkEvent < ActiveRecord::Base
 
   has_many :participations, dependent: :delete_all
   has_many :participants, through: :participations, source: :member
+  
+  has_many :network_event_tasks
+  
+  accepts_nested_attributes_for :network_event_tasks
 
 
   def self.in_date_range(start_date, end_date)

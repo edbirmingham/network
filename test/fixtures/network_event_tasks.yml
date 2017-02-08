@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  network_event: tuggle_network 
+  common_task: one
+  user: one
+
+two:
+  name: MyString
+  network_event: carver_tour 
+  common_task: two
+  user: one
+  
+three:
+  name: MyString
+  network_event: dateless_event 
+  common_task: two
+  user: one
