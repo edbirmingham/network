@@ -72,7 +72,7 @@ class SignUpsController < ApplicationController
   private
   
   def member_params
-    params.permit(member: [:id, :first_name, :last_name, :phone, :email, :identity, :school_id, :graduating_class_id])[:member]
+    params.permit(member: [:id, :first_name, :last_name, :phone, :email, :identity_id, :school_id, :graduating_class_id])[:member]
   end
   
   def participation_params

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170206135401) do
+ActiveRecord::Schema.define(version: 20170218041732) do
 
   create_table "affiliations", force: :cascade do |t|
     t.integer  "member_id"
@@ -139,7 +139,10 @@ ActiveRecord::Schema.define(version: 20170206135401) do
     t.integer  "graduating_class_id"
     t.integer  "school_id"
     t.string   "mongo_id"
+    t.integer  "identity_id"
   end
+
+  add_index "members", ["identity_id"], name: "index_members_on_identity_id"
 
   create_table "neighborhoods", force: :cascade do |t|
     t.string   "name"

@@ -184,3 +184,12 @@ Participation.create(
   member: victoria,
   network_event: network_event
 )
+
+Identity.create([
+  {name: "Student"},
+  {name: "Parent"},
+  {name: "Educator"},
+  {name: "Resident"},
+  {name: "Community Partner"}
+])
+

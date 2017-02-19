@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class IdentitiesControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+  
   setup do
     @identity = identities(:one)
+    sign_in users(:one)
   end
 
   test "should get index" do
@@ -18,7 +21,7 @@ class IdentitiesControllerTest < ActionController::TestCase
 
   test "should create identity" do
     assert_difference('Identity.count') do
-      post :create, identity: { name: @identity.name }
+      post :create, identity: { name: @identity.name + 'test' }
     end
 
     assert_redirected_to identity_path(assigns(:identity))
@@ -35,7 +38,7 @@ class IdentitiesControllerTest < ActionController::TestCase
   end
 
   test "should update identity" do
-    patch :update, id: @identity, identity: { name: @identity.name }
+    patch :update, id: @identity, identity: { name: @identity.name + 'test' }
     assert_redirected_to identity_path(assigns(:identity))
   end
 
