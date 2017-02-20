@@ -4,7 +4,7 @@ class MembersController < ApplicationController
   # GET /members
   # GET /members.json
   def index
-    @members = Member.order(:first_name, :last_name).page params[:page]
+    @members = filtered_members.page params[:page]
     if params[:q].present?
       if request.xhr?
         @members = @members.limit(25).search(params[:q][:term])
@@ -73,6 +73,21 @@ class MembersController < ApplicationController
     def set_member
       @member = Member.find(params[:id])
     end
+    
+    #Filters
+     
+     
+    def filtered_members
+      members = Member.includes(:identity)
+      if params[:identity_ids].present?
+        members = Member.
+        joins(:identity).
+        where(identities: {id: params[:identity_ids]})
+      end
+      members
+    end
+ 
+    
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def member_params
