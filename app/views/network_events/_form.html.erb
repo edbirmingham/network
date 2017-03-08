@@ -178,6 +178,24 @@
       </div>
       </div>
     </div>
+  <% if @network_event.new_record?%>
+    <div class="form-group">
+      <%= f.label :network_event_tasks, "Task List", class: "col-sm-2 control-label" %>
+      <div class="col-md-10">
+        <%= f.fields_for :network_event_tasks do |event_task| %>
+          <div class="form-group row">
+            <div class="col-md-11">
+            <%= event_task.text_field :name, :disabled => true, class: "form-control task-field" %>
+            <%= event_task.hidden_field :common_task_id , :disabled => true, class: "task-field" %>
+          </div>
+          <div class="col-md-1">
+            <%= check_box_tag "task_present", "0", false, class: "form-control task-chk" %>
+          </div>
+          </div>
+        <% end %>
+        </div>
+    </div>
+  <% end %>
   <div class="form-group">
     <%= f.label :notes, class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
