@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   resources :common_tasks
   resources :neighborhoods
   resources :extracurricular_activities
@@ -35,6 +36,9 @@ Rails.application.routes.draw do
   resources :members do
     resources :communications, only: [:new, :show, :create, :edit, :update, :destroy]
   end
+  
+  match "/404", :to => "errors#not_found", :via => :all
+  match "/500", :to => "errors#internal_server_error", :via => :all
   
   resources :locations
   resources :organizations
