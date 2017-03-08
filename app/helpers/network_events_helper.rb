@@ -59,7 +59,7 @@ module NetworkEventsHelper
     return event_info
   end
   
-  def download_query_params
+  def network_events_download_query_params
     request.query_parameters.slice(
       :start_date,
       :end_date,

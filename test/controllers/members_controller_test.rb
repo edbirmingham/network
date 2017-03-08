@@ -49,4 +49,23 @@ class MembersControllerTest < ActionController::TestCase
 
     assert_redirected_to members_path
   end
+  
+  test "should get members for carver school" do
+     get :index,
+      school_ids: [@member.school.id],
+      commit: "Filter members"
+    assert_response :success
+    assert assigns(:members).present?
+    assert_equal 2, assigns(:members).length
+  end  
+  
+  test "should get members for carver and tuggle school" do
+     tuggle = schools(:tuggle)
+     get :index,
+      school_ids: [@member.school.id, tuggle.id],
+      commit: "Filter members"
+    assert_response :success
+    assert assigns(:members).present?
+    assert_equal 3, assigns(:members).length
+  end
 end

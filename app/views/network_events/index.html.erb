@@ -172,7 +172,7 @@
   </table>
   <%= paginate @network_events %>
   
-  <%= link_to network_events_path({format: :csv}.merge(download_query_params)), class: 'btn btn-primary' do %>
+  <%= link_to network_events_path({format: :csv}.merge(network_events_download_query_params)), class: 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-save"></span>
     Download
   <% end %>

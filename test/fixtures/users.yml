@@ -7,3 +7,7 @@ one:
 two: 
   email: two@test.com
   admin: false
+
+three:
+  email: three@test.com
+  admin: false

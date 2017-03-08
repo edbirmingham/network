@@ -18,6 +18,7 @@ one:
   extra_groups: MyString
   other_networks: MyString
   user: one
+  school: carver
   graduating_class: class_of_2016
 
 two:
@@ -38,6 +39,28 @@ two:
   extra_groups: MyString
   other_networks: MyString
   user: two
+  school: carver
+  graduating_class: class_of_2017
+
+three:
+  first_name: MyString
+  last_name: MyString
+  phone: MyString
+  email: MyString
+  identity: MyString
+  address: MyString
+  city: MyString
+  state: MyString
+  zip_code: MyString
+  shirt_size: MyString
+  shirt_received: false
+  place_of_worship: MyString
+  recruitment: MyString
+  community_networks: MyString
+  extra_groups: MyString
+  other_networks: MyString
+  user: three
+  school: tuggle
   graduating_class: class_of_2017
 
 jane:
