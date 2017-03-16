@@ -30,4 +30,11 @@ $(document).on 'ready page:load', ->
     else
       $(this).parent().parent().find(':input').filter('.task-field').prop("disabled", true)
       
+  $('.task_button').on "ajax:success", (e, data, status, xhr) ->
+    $(this).removeClass("btn-primary").addClass("btn-success")
+    console.log("SUCCESS")
+    console.log(data.inspect)
+    
+    
+    
         

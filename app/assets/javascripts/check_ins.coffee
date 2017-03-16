@@ -4,7 +4,7 @@
 $(document).on 'ready page:load', ->
   event_id = $('#network_event_id').val()
   member_level = $('#level').val()
-  $('table :button').click ->
+  $('.check_in').click ->
     table_row = $(this).closest("tr")
     row_member_id = $(this).siblings(".row_member_id").val()
     $.ajax({

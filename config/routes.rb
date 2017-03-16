@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'network_event_tasks/update'
+
   resources :common_tasks
   resources :neighborhoods
   resources :extracurricular_activities
@@ -8,6 +10,7 @@ Rails.application.routes.draw do
   resources :graduating_classes
   resources :network_actions
   resources :programs
+  resources :network_event_tasks, only: [:update]
   
   resources :network_events do
     resources :sign_ups, only: [:new, :show, :create, :edit, :update]
