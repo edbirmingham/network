@@ -13,6 +13,12 @@ class NetworkEventsController < ApplicationController
   # GET /network_events/1
   # GET /network_events/1.json
   def show
+    @completed_tasks_count = 0 
+    @network_event.network_event_tasks.each do |task|
+      if task.completed_at != nil
+        @completed_tasks_count += 1
+      end
+    end
   end
 
   # GET /network_events/new
