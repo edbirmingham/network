@@ -13,6 +13,7 @@ class NetworkEventsController < ApplicationController
   # GET /network_events/1
   # GET /network_events/1.json
   def show
+    @completed_tasks_count = @network_event.network_event_tasks.where.not(completed_at: nil).count
   end
 
   # GET /network_events/new

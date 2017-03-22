@@ -4,16 +4,19 @@ one:
   name: MyString
   network_event: tuggle_network 
   common_task: one
+  completed_at: 2016-08-01 01:00:00
   user: one
 
 two:
   name: MyString
   network_event: carver_tour 
   common_task: two
+  completed_at: 2016-08-01 01:00:00
   user: one
   
 three:
   name: MyString
   network_event: dateless_event 
   common_task: two
+  completed_at: 2016-08-01 01:00:00
   user: one

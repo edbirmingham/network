@@ -30,4 +30,3 @@ $(document).on 'ready page:load', ->
     else
       $(this).parent().parent().find(':input').filter('.task-field').prop("disabled", true)
       
-        
