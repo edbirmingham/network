@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'network_event_tasks/update'
 
+  resources :identities
   resources :common_tasks
   resources :neighborhoods
   resources :extracurricular_activities

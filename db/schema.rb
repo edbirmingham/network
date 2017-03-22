@@ -90,6 +90,12 @@ ActiveRecord::Schema.define(version: 20170322163313) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "identities", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "locations", force: :cascade do |t|
     t.string   "name"
     t.integer  "user_id"
@@ -133,7 +139,10 @@ ActiveRecord::Schema.define(version: 20170322163313) do
     t.integer  "graduating_class_id"
     t.integer  "school_id"
     t.string   "mongo_id"
+    t.integer  "identity_id"
   end
+
+  add_index "members", ["identity_id"], name: "index_members_on_identity_id"
 
   create_table "neighborhoods", force: :cascade do |t|
     t.string   "name"
