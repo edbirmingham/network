@@ -101,6 +101,15 @@
   <dt>Transportation ordered:</dt>
   <dd><%= @network_event.transport_ordered_on %></dd>
   
+  <dt>Task list:</dt>
+  <% if @network_event.network_event_tasks.present? %>
+    <%= content_tag_for(:dd, @network_event.network_event_tasks) do |task| %>
+      <%= task.name %>
+    <% end %>
+  <% else %>
+    <dd></dd>
+  <% end %>
+  
   <dt>Notes:</dt>
   <dd><%= @network_event.notes %></dd>
   
