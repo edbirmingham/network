@@ -8,7 +8,7 @@
       row.last_name,
       row.phone,
       row.email,
-      row.identity.name,
+      row.identity.try(:name),
       row.affiliation_list,
       row.graduation_year,
       row.address,
