@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170322163313) do
+ActiveRecord::Schema.define(version: 20170322223833) do
 
   create_table "affiliations", force: :cascade do |t|
     t.integer  "member_id"
@@ -48,7 +48,10 @@ ActiveRecord::Schema.define(version: 20170322163313) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "owner_id"
   end
+
+  add_index "common_tasks", ["owner_id"], name: "index_common_tasks_on_owner_id"
 
   create_table "communications", force: :cascade do |t|
     t.string   "kind"
@@ -169,10 +172,12 @@ ActiveRecord::Schema.define(version: 20170322163313) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "owner_id"
   end
 
   add_index "network_event_tasks", ["common_task_id"], name: "index_network_event_tasks_on_common_task_id"
   add_index "network_event_tasks", ["network_event_id"], name: "index_network_event_tasks_on_network_event_id"
+  add_index "network_event_tasks", ["owner_id"], name: "index_network_event_tasks_on_owner_id"
 
   create_table "network_events", force: :cascade do |t|
     t.string   "name"
