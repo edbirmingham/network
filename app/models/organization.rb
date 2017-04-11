@@ -1,4 +1,4 @@
-class Organization < ActiveRecord::Base
+class Organization < ApplicationRecord
   validates :name, presence: true
   validates_uniqueness_of :name
 

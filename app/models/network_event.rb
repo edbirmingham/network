@@ -1,4 +1,4 @@
-class NetworkEvent < ActiveRecord::Base
+class NetworkEvent < ApplicationRecord
   validates :name, presence: true
   validates :program_id, presence: true
   validates :location_id, presence: true

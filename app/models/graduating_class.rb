@@ -1,4 +1,4 @@
-class GraduatingClass < ActiveRecord::Base
+class GraduatingClass < ApplicationRecord
   belongs_to :user
   has_many :students, class_name: 'Member'
   

@@ -1,4 +1,4 @@
-class SiteContactAssignment < ActiveRecord::Base
+class SiteContactAssignment < ApplicationRecord
   belongs_to :network_event
   belongs_to :member
   belongs_to :user

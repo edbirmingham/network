@@ -1,4 +1,4 @@
-class Communication < ActiveRecord::Base
+class Communication < ApplicationRecord
   belongs_to :member
   belongs_to :user
   

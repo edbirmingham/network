@@ -1,4 +1,4 @@
-class NetworkAction < ActiveRecord::Base
+class NetworkAction < ApplicationRecord
   belongs_to :network_event
   belongs_to :actor, class_name: 'Member'
   belongs_to :user
