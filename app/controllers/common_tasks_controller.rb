@@ -69,6 +69,6 @@ class CommonTasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def common_task_params
-      params.require(:common_task).permit(:name, :owner_id, :user_id)
+      params.require(:common_task).permit(:name, :owner_id, :user_id, :date_modifier)
     end
 end

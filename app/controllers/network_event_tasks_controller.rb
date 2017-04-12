@@ -14,7 +14,7 @@ class NetworkEventTasksController < ApplicationController
   private
   
   def network_event_task_params
-    params.require(:network_event_task).permit(:id, :name, :network_event_id, :common_task_id, :completed_at, :owner_id) 
+    params.require(:network_event_task).permit(:id, :name, :network_event_id, :common_task_id, :completed_at, :owner_id, :due_date, :date_modifier) 
   end
   
 end
