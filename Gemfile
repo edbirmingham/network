@@ -4,6 +4,8 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 gem 'rails_12factor', group: :production
+# Used to get content_tag_for back in Rails 5
+gem 'record_tag_helper'
 gem 'puma'
 # Use Postgresql in production
 # gem 'pg'

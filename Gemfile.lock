@@ -160,6 +160,8 @@ GEM
     rake (12.0.0)
     rdoc (4.2.2)
       json (~> 1.4)
+    record_tag_helper (1.0.0)
+      actionview (~> 5.x)
     responders (2.2.0)
       railties (>= 4.2.0, < 5.1)
     sass (3.4.23)
@@ -223,6 +225,7 @@ DEPENDENCIES
   rails (= 4.2.5)
   rails-controller-testing
   rails_12factor
+  record_tag_helper
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   select2-rails
