@@ -70,8 +70,8 @@ class NetworkEvent < ApplicationRecord
   
   def invitees
     if cohorts.any? || schools.any? || graduating_classes.any?
-      member_scope = Member.uniq
-  
+      member_scope = Member.distinct
+
       if cohorts.any?
         member_scope = member_scope.
           joins(:cohorts).
