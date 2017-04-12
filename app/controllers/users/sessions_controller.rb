@@ -1,5 +1,5 @@
 class Users::SessionsController < Devise::SessionsController
-  skip_filter :require_admin_user!
+  skip_before_action :require_admin_user!
   
 # before_action :configure_sign_in_params, only: [:create]
 

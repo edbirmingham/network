@@ -1,5 +1,5 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-  skip_filter :require_admin_user!
+  skip_before_action :require_admin_user!
   
 # before_action :configure_sign_up_params, only: [:create]
 # before_action :configure_account_update_params, only: [:update]
