@@ -11,7 +11,7 @@
     <thead>
       <tr>
             <th>Name</th>
-            <th>User</th>
+            <th>Owner</th>
             <th></th>
         <th></th>
         <th></th>
@@ -21,7 +21,7 @@
     <tbody>
       <%= content_tag_for(:tr, @common_tasks) do |common_task| %>
             <td><%= common_task.name %></td>
-            <td><%= common_task.user.try(:email) %></td>
+            <td><%= common_task.owner.try(:email) %></td>
             <td><%= link_to 'Show', common_task %></td>
         <td><%= link_to 'Edit', edit_common_task_path(common_task) %></td>
         <td><%= link_to 'Destroy', common_task, method: :delete, data: { confirm: 'Are you sure?' } %></td>

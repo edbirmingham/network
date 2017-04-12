@@ -126,6 +126,7 @@
         <tr>
           <th>Name</th>
           <th>Completed at</th>
+          <th>Owner</th>
           <th></th>
         </tr>
       </thead>
@@ -134,12 +135,14 @@
         <%= content_tag_for(:tr, @network_event.network_event_tasks) do |task| %>
           <td class="task_name"><%= task.name %></td>
           <td class="task_completed_at"><%= if task.completed_at.present? then task.completed_at.in_time_zone("Central Time (US & Canada)").to_formatted_s(:long) end %></td>
+          <td class="task_owner"><%= task.owner.try(:email) %></td>
           <td class="task_mark">
             <% if not task.completed_at.present? %>
               <%= button_to("Mark Completed", network_event_task_path(task) , remote: true, method: :patch, name: "task_button", class:"btn btn-primary task_button",
                             params: { :"network_event_task[name]" => task.name,
                                       :"network_event_task[network_event_id]" => task.network_event_id,
                                       :"network_event_task[common_task_id]" => task.common_task_id,
+                                      :"network_event_task[owner_id]" => task.owner_id,
                                       :"network_event_task[completed_at]" => Time.now }) %>
             <% else %>
               Completed 

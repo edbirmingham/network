@@ -5,4 +5,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :created_organizations, class_name: "Organization", foreign_key: :created_by_id
+  has_many :common_tasks
+  has_many :network_event_tasks
 end

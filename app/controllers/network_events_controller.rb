@@ -21,7 +21,7 @@ class NetworkEventsController < ApplicationController
     @network_event = NetworkEvent.new
     @common_tasks = CommonTask.all
     @common_tasks.each do |common_task|
-      @network_event.network_event_tasks.build(common_task_id: common_task.id, name: common_task.name)
+      @network_event.network_event_tasks.build(common_task_id: common_task.id, name: common_task.name, owner_id: common_task.owner_id)
     end
   end
 
@@ -174,7 +174,7 @@ class NetworkEventsController < ApplicationController
         :graduating_class_ids => [],
         :school_ids => [],
         :cohort_ids => [],
-        :network_event_tasks_attributes => [:id, :name, :scheduled_at, :common_task_id, :network_event_id]
+        :network_event_tasks_attributes => [:id, :name, :scheduled_at, :common_task_id, :network_event_id, :owner_id ]
       )
     end
 end
