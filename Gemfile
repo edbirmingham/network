@@ -51,7 +51,7 @@ gem 'zeroclipboard-rails'
 # Network Gems
 gem 'devise'
 
-# Until the new API calls are generally available, we must manually specify a 
+# Until the new API calls are generally available, we must manually specify a
 # fork of the Heroku API gem:
 gem 'platform-api', github: 'jalada/platform-api', branch: 'master'
 
