@@ -21,30 +21,30 @@ class OrganizationsControllerTest < ActionController::TestCase
 
   test "should create organization" do
     assert_difference('Organization.where(created_by_id: users(:one).id).count') do
-      post :create, organization: { name: @organization.name + 'test' }
+      post :create, params: { organization: { name: @organization.name + 'test' } }
     end
 
     assert_redirected_to organization_path(assigns(:organization))
   end
 
   test "should show organization" do
-    get :show, id: @organization
+    get :show, params: { id: @organization }
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @organization
+    get :edit, params: { id: @organization }
     assert_response :success
   end
 
   test "should update organization" do
-    patch :update, id: @organization, organization: { name: @organization.name + 'test' }
+    patch :update, params: { id: @organization, organization: { name: @organization.name + 'test' } }
     assert_redirected_to organization_path(assigns(:organization))
   end
 
   test "should destroy organization" do
     assert_difference('Organization.count', -1) do
-      delete :destroy, id: @organization
+      delete :destroy, params: { id: @organization }
     end
 
     assert_redirected_to organizations_path
