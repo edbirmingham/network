@@ -11,6 +11,6 @@ module ApplicationHelper
     css_class = column == sort_column ? "current #{sort_direction}" : nil
     # join columns dont change sort directions because, 
     direction = (column == sort_column or join_column == sort_column) && sort_direction == "asc" ? "desc" : "asc"
-    link_to title, params.merge({:sort => column, :direction => direction}), {:class => css_class}
+    link_to title, params.permit!.merge({:sort => column, :direction => direction}), {:class => css_class}
   end
 end
