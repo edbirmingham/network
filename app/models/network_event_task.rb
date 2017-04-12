@@ -5,5 +5,4 @@ class NetworkEventTask < ApplicationRecord
   belongs_to :common_task
   
   validates_presence_of :name
-  validates_presence_of :common_task_id
 end

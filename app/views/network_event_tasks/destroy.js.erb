@@ -1,0 +1,13 @@
+// hide table row
+$("tr#network_event_task_<%= @network_event_task.id %>").hide();
+
+//decrease total
+$("#total-count").text( parseInt( $("#total-count").text() ) - 1);
+
+//decrease completed count if task completed
+if (<%= @network_event_task.completed_at.present? %>) {
+  $("#completed-count").text( parseInt( $("#completed-count").text() ) - 1);
+}
+  
+
+

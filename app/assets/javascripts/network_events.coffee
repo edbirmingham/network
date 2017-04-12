@@ -8,6 +8,11 @@ $(document).on 'ready page:load', ->
       useCurrent: false
     })
     
+  $('#event-task-datetimepicker').datetimepicker({
+      showClear: true,
+      format: 'YYYY-MM-DD hh:mm a'
+     }) 
+  
   checked = $('#network_event_needs_transport').is(':checked')
   if checked
     $('#order_div').show()
@@ -30,3 +35,11 @@ $(document).on 'ready page:load', ->
     else
       $(this).parent().parent().find(':input').filter('.task-field').prop("disabled", true)
       
+  $("#new-task-form").hide()
+  $("#create-task-button").on "click", ->
+    $("#new-task-form").show()
+    $("#create-task-button").html("Hide Form")
+    $("#create-task-button").on "click", ->
+      $("#new-task-form").hide()
+      
+    

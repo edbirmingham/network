@@ -1,18 +1,9 @@
-
-var task_id = "<%= @network_event_task.id%>";
-var row_id_selecter = "#network_event_task_" + task_id;
-
-// Pass new completed_at attribute
+var $row = $("tr#network_event_task_<%= @network_event_task.id %>");
 var task_completed_at = "<%= @network_event_task.completed_at.in_time_zone("Central Time (US & Canada)").to_formatted_s(:long) %>";
 
 // Update table row
-var row = $("tr" + row_id_selecter);
-row.find("td.task_completed_at").text(task_completed_at);
-row.find("td.task_mark").find(".task_button").replaceWith("Completed");
+$row.find("td.task_completed_at").text(task_completed_at);
+$row.find("td.task_mark").find(".task_button").replaceWith("Completed");
 
-// Update ratio heading
-var ratio = $("#ratio").text();
-var num = ratio.slice(0, ratio.indexOf("/")).trim();
-var rest = ratio.slice(ratio.indexOf("/")).trim();
-var amount = parseInt(num) + 1;
-$("#ratio").text(amount + " " + rest);
+// Update task list heading
+$("#completed-count").text( parseInt( $("#completed-count").text() ) + 1);

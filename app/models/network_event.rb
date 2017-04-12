@@ -2,7 +2,7 @@ class NetworkEvent < ApplicationRecord
   validates :name, presence: true
   validates :program_id, presence: true
   validates :location_id, presence: true
-  before_save :apply_date_modifiers_to_tasks
+  before_save :apply_date_modifiers_to_tasks, if: :scheduled_at_is_changed?
   
 
   belongs_to :location
@@ -127,41 +127,40 @@ class NetworkEvent < ApplicationRecord
     end
   end
   
-  protected
+  def scheduled_at_is_changed?
+    return self.changes.include? 'scheduled_at'
+  end
   
   def apply_date_modifiers_to_tasks
-    attribute = 'scheduled_at'
-    # If scheduled_at changed, re/apply datemodifier to get correct task due dates
-    if self.changes.include? attribute
-      self.network_event_tasks.each do |task|
-        if task.date_modifier
-          scheduled_at = self.scheduled_at.in_time_zone("Central Time (US & Canada)")
-          puts case task.date_modifier
-          when 'Monday before event'
-            task.due_date = scheduled_at.end_of_week(:tuesday) - 1.week
-          when '2 Mondays before event'
-            task.due_date = scheduled_at.end_of_week(:tuesday) - 2.weeks
-          when 'Friday before event'
-            task.due_date = scheduled_at.end_of_week(:saturday) - 1.week
-          when '2 Fridays before event'
-            task.due_date = scheduled_at.end_of_week(:saturday) - 2.weeks
-          when '1 week before event'
-            task.due_date = scheduled_at.end_of_day - 1.week
-          when '2 weeks before event'
-            task.due_date = scheduled_at.end_of_day - 2.weeks
-          when '3 weeks before event'
-            task.due_date = scheduled_at.end_of_day - 3.weeks
-          when '1 month before event'
-            task.due_date = scheduled_at.end_of_day - 1.months
-          when '2 months before event'
-            task.due_date = scheduled_at.end_of_day - 2.months
-          when '3 months before event'
-            task.due_date = scheduled_at.end_of_day - 3.months
-          when '4 months before event'
-            task.due_date = scheduled_at.end_of_day - 4.months
-          end
-        end
+    self.network_event_tasks.each do |task|
+      scheduled_at = self.scheduled_at.in_time_zone("Central Time (US & Canada)")
+      case task.date_modifier
+      when 'Monday before event'
+        task.due_date = scheduled_at.end_of_week(:tuesday) - 1.week
+      when '2 Mondays before event'
+        task.due_date = scheduled_at.end_of_week(:tuesday) - 2.weeks
+      when 'Friday before event'
+        task.due_date = scheduled_at.end_of_week(:saturday) - 1.week
+      when '2 Fridays before event'
+        task.due_date = scheduled_at.end_of_week(:saturday) - 2.weeks
+      when '1 week before event'
+        task.due_date = scheduled_at.end_of_day - 1.week
+      when '2 weeks before event'
+        task.due_date = scheduled_at.end_of_day - 2.weeks
+      when '3 weeks before event'
+        task.due_date = scheduled_at.end_of_day - 3.weeks
+      when '1 month before event'
+        task.due_date = scheduled_at.end_of_day - 1.months
+      when '2 months before event'
+        task.due_date = scheduled_at.end_of_day - 2.months
+      when '3 months before event'
+        task.due_date = scheduled_at.end_of_day - 3.months
+      when '4 months before event'
+        task.due_date = scheduled_at.end_of_day - 4.months
+      else 
+        task.due_date = nil
       end
-    end
+      task.save
+      end
   end
 end
