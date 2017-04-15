@@ -2,7 +2,7 @@ class NetworkEvent < ApplicationRecord
   validates :name, presence: true
   validates :program_id, presence: true
   validates :location_id, presence: true
-  
+
 
   belongs_to :location
   belongs_to :user
@@ -31,9 +31,9 @@ class NetworkEvent < ApplicationRecord
 
   has_many :participations, dependent: :delete_all
   has_many :participants, through: :participations, source: :member
-  
+
   has_many :network_event_tasks
-  
+
   accepts_nested_attributes_for :network_event_tasks
 
 
@@ -52,14 +52,14 @@ class NetworkEvent < ApplicationRecord
   def self.statuses
     [
       "working",
-      "confirmed", 
-      "scheduled", 
-      "completed", 
-      "declined", 
+      "confirmed",
+      "scheduled",
+      "completed",
+      "declined",
       "need to contact and pending further convo with supervisor"
     ]
   end
-        
+
   def date
     if scheduled_at.present?
       scheduled_at.to_date
@@ -67,7 +67,7 @@ class NetworkEvent < ApplicationRecord
       nil
     end
   end
-  
+
   def invitees
     if cohorts.any? || schools.any? || graduating_classes.any?
       member_scope = Member.distinct
@@ -79,11 +79,11 @@ class NetworkEvent < ApplicationRecord
           having("COUNT(cohorts.id) = #{cohort_ids.count}").
           group("members.id")
       end
-  
+
       if schools.any?
         member_scope = member_scope.where(school_id: school_ids)
       end
-  
+
       if graduating_classes.any?
         member_scope = member_scope.where(graduating_class_id: graduating_class_ids)
       end
@@ -93,11 +93,11 @@ class NetworkEvent < ApplicationRecord
 
     member_scope
   end
-  
+
   def location_name
     location.try(:name)
   end
-  
+
   def name_with_date
     if scheduled_at.present?
       name + ' (' + scheduled_at.to_formatted_s(:long) + ')'
@@ -109,7 +109,7 @@ class NetworkEvent < ApplicationRecord
   def program_name
     program.try(:name)
   end
-  
+
   def start_time
     if scheduled_at.present?
       scheduled_at.to_time
@@ -117,7 +117,7 @@ class NetworkEvent < ApplicationRecord
       nil
     end
   end
-  
+
   def stop_time
     if scheduled_at.present?
       (scheduled_at + duration.minutes).to_time
@@ -125,5 +125,5 @@ class NetworkEvent < ApplicationRecord
       nil
     end
   end
-  
+
 end
