@@ -23,7 +23,7 @@ class CheckInsController < ApplicationController
     respond_to do |format|
         if @participation.save
             format.json { head :no_content}
-            format.html { render :nothing => true, :notice => 'Check In Successful!' }
+            format.html { render :body => nil, :notice => 'Check In Successful!' }
         else
             format.json { render :json => current_user.errors, :status => :unprocessable_entity }
             format.html { render :action => "edit" }
