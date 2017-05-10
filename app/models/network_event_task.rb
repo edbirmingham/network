@@ -1,4 +1,4 @@
-class NetworkEventTask < ActiveRecord::Base
+class NetworkEventTask < ApplicationRecord
   belongs_to :user
   belongs_to :network_event
   belongs_to :common_task

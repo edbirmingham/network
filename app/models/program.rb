@@ -1,4 +1,4 @@
-class Program < ActiveRecord::Base
+class Program < ApplicationRecord
   	validates :name, presence: true
     validates_uniqueness_of :name
     

@@ -2,8 +2,9 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5'
-gem 'rails_12factor', group: :production
+gem 'rails', '~> 5.0.0'
+# Used to get content_tag_for back in Rails 5
+gem 'record_tag_helper'
 gem 'puma'
 # Use Postgresql in production
 # gem 'pg'
@@ -51,7 +52,7 @@ gem 'zeroclipboard-rails'
 # Network Gems
 gem 'devise'
 
-# Until the new API calls are generally available, we must manually specify a 
+# Until the new API calls are generally available, we must manually specify a
 # fork of the Heroku API gem:
 gem 'platform-api', github: 'jalada/platform-api', branch: 'master'
 
@@ -61,6 +62,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'timecop'
+  gem 'rails-controller-testing'
 end
 
 group :development do
