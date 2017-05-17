@@ -116,19 +116,6 @@ sean = Member.create(
   user_id: user.id
 )
 
-(1..99).each do |i|
-  Member.create(
-    first_name: "User#{i}",
-    last_name: 'Crowd',
-    email: "user#{i}_clone@example.com",
-    phone: '205 555-5555',
-    neighborhoods: [ensley],
-    cohorts: [educator_academy],
-    school: ramsey,
-    user_id: user.id
-  )
-end
-
 Program.create(name: 'College 101', user_id: user.id)
 Program.create(name: 'Raise Up Initiatives', user_id: user.id)
 Program.create(name: 'Educator Round Table', user_id: user.id)
@@ -213,3 +200,18 @@ Identity.create([
   {name: "Community Partner"}
 ])
 
+identity_enumerator = Identity.all.cycle
+
+(1..99).each do |i|
+  Member.create(
+    first_name: "User#{i}",
+    last_name: 'Crowd',
+    email: "user#{i}_clone@example.com",
+    phone: '205 555-5555',
+    neighborhoods: [ensley],
+    cohorts: [educator_academy],
+    school: ramsey,
+    user_id: user.id,
+    identity: identity_enumerator.next
+  )
+end
