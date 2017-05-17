@@ -13,11 +13,16 @@ class NetworkEventsController < ApplicationController
   # GET /network_events/1
   # GET /network_events/1.json
   def show
+    @completed_tasks_count = @network_event.network_event_tasks.where.not(completed_at: nil).count
   end
 
   # GET /network_events/new
   def new
     @network_event = NetworkEvent.new
+    @common_tasks = CommonTask.all
+    @common_tasks.each do |common_task|
+      @network_event.network_event_tasks.build(common_task_id: common_task.id, name: common_task.name, owner_id: common_task.owner_id, date_modifier: common_task.date_modifier)
+    end
   end
 
   # GET /network_events/1/edit
@@ -31,6 +36,10 @@ class NetworkEventsController < ApplicationController
     @network_event.user = current_user
     respond_to do |format|
       if @network_event.save
+        @network_event.network_event_tasks.each do |task|
+          task.user_id = current_user.id
+          task.save
+        end
         if create_another
           format.html { redirect_to new_network_event_path, alert: 'Network event was successfully created.' }
           format.json { render :new, status: :created, location: new_network_event_path }
@@ -164,7 +173,8 @@ class NetworkEventsController < ApplicationController
         :volunteer_ids => [],
         :graduating_class_ids => [],
         :school_ids => [],
-        :cohort_ids => []
+        :cohort_ids => [],
+        :network_event_tasks_attributes => [:id, :name, :scheduled_at, :common_task_id, :network_event_id, :owner_id, :due_date, :date_modifier]
       )
     end
 end

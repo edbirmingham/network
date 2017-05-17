@@ -24,7 +24,7 @@
   <dd><%= mail_to @member.email %></dd>
 
   <dt>Identity:</dt>
-  <dd><%= @member.identity %></dd>
+  <dd><%= @member.identity.try(:name) %></dd>
   
   <dt>Cohorts:</dt>
   <% if @member.cohorts.present? %>

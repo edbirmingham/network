@@ -1,5 +1,5 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  skip_filter :require_admin_user!
+  skip_before_action :require_admin_user!
   
   # You should configure your model like this:
   # devise :omniauthable, omniauth_providers: [:twitter]

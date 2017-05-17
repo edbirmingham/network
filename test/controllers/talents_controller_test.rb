@@ -21,30 +21,30 @@ class TalentsControllerTest < ActionController::TestCase
 
   test "should create talent" do
     assert_difference('Talent.count') do
-      post :create, talent: { name: @talent.name + 'test' }
+      post :create, params: { talent: { name: @talent.name + 'test' } }
     end
 
     assert_redirected_to talent_path(assigns(:talent))
   end
 
   test "should show talent" do
-    get :show, id: @talent
+    get :show, params: { id: @talent }
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @talent
+    get :edit, params: { id: @talent }
     assert_response :success
   end
 
   test "should update talent" do
-    patch :update, id: @talent, talent: { name: @talent.name + 'test' }
+    patch :update, params: { id: @talent, talent: { name: @talent.name + 'test' } }
     assert_redirected_to talent_path(assigns(:talent))
   end
 
   test "should destroy talent" do
     assert_difference('Talent.count', -1) do
-      delete :destroy, id: @talent
+      delete :destroy, params: { id: @talent }
     end
 
     assert_redirected_to talents_path

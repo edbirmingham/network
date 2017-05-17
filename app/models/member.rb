@@ -1,10 +1,11 @@
-class Member < ActiveRecord::Base
+class Member < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
 
   belongs_to :user
   belongs_to :graduating_class, class_name: 'GraduatingClass', foreign_key: :graduating_class_id
   belongs_to :school
+  belongs_to :identity
   
   has_many :affiliations, dependent: :delete_all
   has_many :organizations, through: :affiliations

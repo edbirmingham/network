@@ -23,3 +23,10 @@ $(document).on 'ready page:load', ->
   })
   
   $('#network_event_transport_ordered_on').val("")
+  
+  $('.task-chk').change ->
+    if $(this).is(':checked')
+      $(this).parent().parent().find(':input').filter('.task-field').prop("disabled", false)
+    else
+      $(this).parent().parent().find(':input').filter('.task-field').prop("disabled", true)
+      

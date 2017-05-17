@@ -1,4 +1,4 @@
-class School < ActiveRecord::Base
+class School < ApplicationRecord
   validates :name, presence: true
   validates_uniqueness_of :name
   

@@ -1,4 +1,4 @@
-class Talent < ActiveRecord::Base
+class Talent < ApplicationRecord
   belongs_to :user
 
   has_many :talent_assignments, dependent: :delete_all

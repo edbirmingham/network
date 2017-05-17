@@ -1,5 +1,5 @@
 # Particiption links members and events to track participation levels
-class Participation < ActiveRecord::Base
+class Participation < ApplicationRecord
   belongs_to :user
   belongs_to :member
   belongs_to :network_event
