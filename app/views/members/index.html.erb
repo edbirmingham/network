@@ -90,7 +90,7 @@
   <%= paginate @members %>
   
   <div>
-    <%= link_to members_path({format: :csv}.merge(members_download_query_params)), class: 'btn btn-primary' do %>
+    <%= link_to members_path({format: :csv}.merge(members_download_query_params)), class: 'btn btn-primary btn__download' do %>
       <span class="glyphicon glyphicon-save"></span>
       Download
     <% end %>

@@ -20,6 +20,7 @@ one:
   user: one
   school: carver
   graduating_class: class_of_2016
+  identity: one
 
 two:
   first_name: MyString
@@ -41,6 +42,7 @@ two:
   user: two
   school: carver
   graduating_class: class_of_2017
+  identity: two
 
 three:
   first_name: MyString
