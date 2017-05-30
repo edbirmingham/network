@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :graduating_classes
   resources :network_actions
   resources :programs
-  resources :network_event_tasks, only: [:create, :update, :destroy]
+  resources :network_event_tasks, only: [:create, :index, :update, :destroy]
   
   resources :network_events do
     resources :sign_ups, only: [:new, :show, :create, :edit, :update]
