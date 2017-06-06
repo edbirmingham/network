@@ -8,7 +8,7 @@ class NetworkEventTasksControllerTest < ActionController::TestCase
     sign_in users(:one)
   end
 
-  test "should update with ajax" do
+  test "should update network event task" do
     patch :update, xhr: true, params: {
       id: @network_event_task,
         network_event_task: {name: @network_event_task.name,
@@ -18,5 +18,24 @@ class NetworkEventTasksControllerTest < ActionController::TestCase
       }
     assert_response :success
   end
-
+  
+  test "should create network event task" do
+    assert_difference('NetworkEventTask.count') do
+      post :create, xhr: true, params: { 
+        network_event_task: {
+          name: @network_event_task.name,
+          network_event_id: @network_event_task.network_event_id,
+          common_task_id: @network_event_task.common_task_id
+        }
+      }
+    end
+    assert_response :success
+  end
+  
+  test "should destroy network event task" do
+    assert_difference('NetworkEventTask.count', -1) do
+      delete :destroy, xhr: true,  params: { id: @network_event_task }
+    end
+    assert_response :success
+  end
 end

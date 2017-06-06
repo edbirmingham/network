@@ -119,15 +119,16 @@
 </dl>
 
 <h2>Event Task List</h2>
-  <h3 id="ratio"><%= @completed_tasks_count %> / <%= @network_event.network_event_tasks.length %> Completed</h3>
+  <h3><span id="completed-count"><%= @completed_tasks_count %></span> / <span id="total-count"><%= @network_event.network_event_tasks.length %></span> Completed</h4>
   <div class="table-responsive">
-    <table class="table table-striped table-bordered table-hover">
+    <table class="table table-striped table-bordered table-hover" id="task-list">
       <thead>
         <tr>
           <th>Name</th>
           <th>Due Date</th>
           <th>Completed at</th>
           <th>Owner</th>
+          <th></th>
           <th></th>
         </tr>
       </thead>
@@ -150,10 +151,38 @@
               Completed 
             <% end %>
           </td>
+          <td><%= link_to 'Destroy', task, method: :delete, remote: true, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tbody>
     </table>
-  </div>
+</div>
+<div class="form-group">
+  <%= button_tag "Create New Task", class: "btn btn-primary", id: "create-task-button" %>
+</div>
+
+<%= form_for @network_event_task, url: network_event_tasks_path, html: { id: "new-task-form", class: "form-inline" }, :remote => true do |f| %>
+      <div class="form-group">
+        <%= f.label :name %>
+          <%= f.text_field :name, class:"form-control", id: 'task-name' %>
+          <%= f.hidden_field :network_event_id, value: @network_event.id %> 
+      </div>
+      <div class="form-group">
+        <%= f.label :owner %>
+          <%= f.collection_select :owner_id, User.all, :id, :email, {}, class: "select2 form-control"%>
+      </div>
+      <div class="form-group">
+        <%= f.label :date_modifier, "Due date" %>
+        <%= f.collection_select :date_modifier,
+              CommonTask.date_modifiers,
+              :to_s,
+              :titleize,
+              {},
+              class: "select2 form-control task-field",
+              multiple: false,
+              data: {placeholder: 'Select Date Modifier'} %>
+      </div>
+          <%= f.submit "Save Task", class:"btn btn-primary" %>
+<% end %>
 
 <h2>Invitees</h2>
 
