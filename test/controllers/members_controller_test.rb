@@ -49,4 +49,51 @@ class MembersControllerTest < ActionController::TestCase
 
     assert_redirected_to members_path
   end
+  
+  test "should get members for carver school" do
+     get :index,
+      school_ids: [@member.school.id],
+      commit: "Filter members"
+    assert_response :success
+    assert assigns(:members).present?
+    assert_equal 2, assigns(:members).length
+  end  
+  
+  test "should get members for carver and tuggle school" do
+     tuggle = schools(:tuggle)
+     school_ids = [@member.school.id, tuggle.id]
+     get :index,
+      school_ids: school_ids,
+      commit: "Filter members"
+    assert_response :success
+    assert assigns(:members).present?
+    assert_equal 3, assigns(:members).length
+    assert_select 'a.btn__download' do |elements|
+      assert_equal 1, elements.count, "expected to find only 1 element btn__download"
+      elements.each do |element|
+        download_params = Rack::Utils.parse_query URI(element[:href]).query
+        expected = {"school_ids[]"=> school_ids.map(&:to_s) }
+        assert_equal expected, download_params
+      end
+    end
+  end
+  
+  test "should get members with identity one or two" do
+     identity_ids = [identities(:one).id, identities(:two).id]
+     get :index,
+      identity_ids: identity_ids,
+      commit: "Filter members"
+    assert_response :success
+    assert assigns(:members).present?
+    assert_equal 2, assigns(:members).length
+    assert_select 'a.btn__download' do |elements|
+      assert_equal 1, elements.count, "expected to find only 1 element btn__download"
+      elements.each do |element|
+        download_params = Rack::Utils.parse_query URI(element[:href]).query
+        expected = {"identity_ids[]"=> identity_ids.map(&:to_s) }
+        assert_equal expected, download_params
+      end
+    end
+  end
+
 end

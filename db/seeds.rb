@@ -69,6 +69,12 @@ Location.create(
   user_id: user.id
 )
 
+carver = School.create(name: 'Carver High School', user_id: user.id)
+tuggle = School.create(name: 'Tuggle Elementary School', user_id: user.id)
+hudson = School.create(name: 'Hudson K-8', user_id: user.id)
+ramsey = School.create(name: 'Ramsey High School', user_id: user.id)
+school_choice = [carver, tuggle, hudson, ramsey]
+
 victoria = Member.create(
   first_name: 'Victoria',
   last_name: 'Hollis',
@@ -76,6 +82,7 @@ victoria = Member.create(
   phone: '205 999-9999',
   neighborhoods: [roebuck],
   cohorts: [gear_up],
+  school: carver,
   user_id: user.id
 )
 chris = Member.create(
@@ -85,6 +92,7 @@ chris = Member.create(
   phone: '205 999-9999',
   neighborhoods: [smithfield,ensley],
   cohorts: [health_academy],
+  school: carver,
   user_id: user.id
 )
 andrew = Member.create(
@@ -94,6 +102,7 @@ andrew = Member.create(
   phone: '205 999-9999',
   neighborhoods: [woodlawn],
   cohorts: [health_academy, gear_up],
+  school: hudson,
   user_id: user.id
 )
 sean = Member.create(
@@ -103,6 +112,7 @@ sean = Member.create(
   phone: '205 999-9999',
   neighborhoods: [ensley],
   cohorts: [educator_academy],
+  school: ramsey,
   user_id: user.id
 )
 
@@ -118,12 +128,6 @@ publix = Organization.create(name: 'Publix', created_by_id: user.id)
 code = Organization.create(name: 'Code for Birmingham', created_by_id: user.id)
 chamber = Organization.create(name: 'Birmingham Chamber of Commerce', created_by_id: user.id)
 organizations = [eab, regions, publix, code, chamber]
-
-carver = School.create(name: 'Carver High School', user_id: user.id)
-tuggle = School.create(name: 'Tuggle Elementary School', user_id: user.id)
-hudson = School.create(name: 'Hudson K-8', user_id: user.id)
-ramsey = School.create(name: 'Ramsey High School', user_id: user.id)
-school_choice = [carver, tuggle, hudson, ramsey]
 
 Talent.create(name: 'Arts', user_id: user.id)
 Talent.create(name: 'Math', user_id: user.id)
@@ -208,3 +212,18 @@ Identity.create([
   {name: "Community Partner"}
 ])
 
+identity_enumerator = Identity.all.cycle
+
+(1..99).each do |i|
+  Member.create(
+    first_name: "User#{i}",
+    last_name: 'Crowd',
+    email: "user#{i}_clone@example.com",
+    phone: '205 555-5555',
+    neighborhoods: [ensley],
+    cohorts: [educator_academy],
+    school: ramsey,
+    user_id: user.id,
+    identity: identity_enumerator.next
+  )
+end
