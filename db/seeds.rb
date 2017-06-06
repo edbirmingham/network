@@ -131,6 +131,18 @@ Talent.create(name: 'Technology', user_id: user.id)
 Talent.create(name: 'Music', user_id: user.id)
 Talent.create(name: 'Sports', user_id: user.id)
 
+student_nell = Member.create(
+  first_name: 'Nell',
+  last_name: 'Student',
+  email: 'nell@example.com',
+  phone: '205 999-9999',
+  neighborhoods: [ensley],
+  school: carver,
+  graduating_class: class_of_2017,
+  cohorts: [gear_up],
+  user_id: user.id
+)
+
 network_event = nil
 Location.all.each do |location|
   Program.all.each do |program|

@@ -116,6 +116,16 @@
       <%= link_to 'Sign Up Volunteer', new_network_event_sign_up_path(:network_event_id => @network_event.id, :level => 'volunteer') %>
     </div>
   </dd>
+
+  <dt>Check In:</dt>
+  <dd>
+    <div class="check_in_attendee">
+      <%= link_to 'Check In Attendee', new_network_event_check_in_path(:network_event_id => @network_event.id, :level => 'attendee') %>
+    </div>
+    <div class="check_in_volunteer">
+      <%= link_to 'Check In Volunteer', new_network_event_check_in_path(:network_event_id => @network_event.id, :level => 'volunteer') %>
+    </div>
+  </dd>
 </dl>
 
 <h2>Event Task List</h2>
