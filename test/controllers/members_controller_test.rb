@@ -96,4 +96,14 @@ class MembersControllerTest < ActionController::TestCase
     end
   end
 
+  test "filtering by organization_ids returns the matching members" do
+    organization = organizations(:one)
+
+    @member.organizations << organization
+
+    get :index, params: { organization_ids: [organization.id.to_s] }
+
+    assert_response :success
+    assert assigns(:members) == [@member]
+  end
 end

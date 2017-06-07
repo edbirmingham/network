@@ -92,6 +92,12 @@ class MembersController < ApplicationController
         members = members.where(school_id: params[:school_ids])
       end
 
+      # Filter members by organization.
+      if params[:organization_ids].present?
+        members = members.joins(:organizations).
+          where(organizations: { id: params[:organization_ids] })
+      end
+
       members
     end
 
