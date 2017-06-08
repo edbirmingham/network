@@ -52,8 +52,8 @@ class MembersControllerTest < ActionController::TestCase
   
   test "should get members for carver school" do
      get :index,
-      school_ids: [@member.school.id],
-      commit: "Filter members"
+      params: { school_ids: [@member.school.id],
+      commit: "Filter members" }
     assert_response :success
     assert assigns(:members).present?
     assert_equal 2, assigns(:members).length
@@ -63,8 +63,8 @@ class MembersControllerTest < ActionController::TestCase
      tuggle = schools(:tuggle)
      school_ids = [@member.school.id, tuggle.id]
      get :index,
-      school_ids: school_ids,
-      commit: "Filter members"
+      params: { school_ids: school_ids,
+      commit: "Filter members" }
     assert_response :success
     assert assigns(:members).present?
     assert_equal 3, assigns(:members).length
@@ -81,8 +81,8 @@ class MembersControllerTest < ActionController::TestCase
   test "should get members with identity one or two" do
      identity_ids = [identities(:one).id, identities(:two).id]
      get :index,
-      identity_ids: identity_ids,
-      commit: "Filter members"
+      params: { identity_ids: identity_ids,
+      commit: "Filter members" }
     assert_response :success
     assert assigns(:members).present?
     assert_equal 2, assigns(:members).length
