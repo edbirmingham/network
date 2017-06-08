@@ -49,7 +49,7 @@ class MembersControllerTest < ActionController::TestCase
 
     assert_redirected_to members_path
   end
-  
+
   test "should get members for carver school" do
      get :index,
       params: { school_ids: [@member.school.id],
@@ -57,8 +57,8 @@ class MembersControllerTest < ActionController::TestCase
     assert_response :success
     assert assigns(:members).present?
     assert_equal 2, assigns(:members).length
-  end  
-  
+  end
+
   test "should get members for carver and tuggle school" do
      tuggle = schools(:tuggle)
      school_ids = [@member.school.id, tuggle.id]
@@ -77,7 +77,7 @@ class MembersControllerTest < ActionController::TestCase
       end
     end
   end
-  
+
   test "should get members with identity one or two" do
      identity_ids = [identities(:one).id, identities(:two).id]
      get :index,
@@ -102,6 +102,13 @@ class MembersControllerTest < ActionController::TestCase
     @member.organizations << organization
 
     get :index, params: { organization_ids: [organization.id.to_s] }
+
+    assert_response :success
+    assert assigns(:members) == [@member]
+  end
+
+  test "should get memnder by graduating class of 2017" do
+    get :index, params: { graduating_class_ids: [graduating_classes(:class_of_2016).id] }
 
     assert_response :success
     assert assigns(:members) == [@member]
