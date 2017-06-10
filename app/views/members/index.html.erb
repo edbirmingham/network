@@ -68,6 +68,21 @@
 
       <div class="form-group">
         <div class="col-md-12">
+          <%= select_tag :graduating_class_ids,
+                options_from_collection_for_select(
+                  GraduatingClass.order(:year).all,
+                  :id,
+                  :name,
+                  params[:graduating_class_ids]
+                ),
+                class: "select2 form-control",
+                multiple: true,
+                data: { placeholder: 'Filter by graduating class' } %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-12">
           <%= submit_tag 'Filter members', name: 'commit', class: 'btn btn-secondary'%>
         </div>
       </div>

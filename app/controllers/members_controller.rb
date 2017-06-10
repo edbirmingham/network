@@ -50,7 +50,7 @@ class MembersController < ApplicationController
       end
     end
   end
-  
+
   # DELETE /members/1
   # DELETE /members/1.json
   def destroy
@@ -66,7 +66,7 @@ class MembersController < ApplicationController
     def set_member
       @member = Member.find(params[:id])
     end
-    
+
     #Filters
     def filtered_members
       members = Member.includes(:identity).order(:first_name, :last_name)
@@ -96,6 +96,12 @@ class MembersController < ApplicationController
       if params[:organization_ids].present?
         members = members.joins(:organizations).
           where(organizations: { id: params[:organization_ids] })
+      end
+
+      # Filter members by graduating class.
+      if params[:graduating_class_ids].present?
+        members = members.
+          where(graduating_class: params[:graduating_class_ids])
       end
 
       members
