@@ -104,6 +104,13 @@ class MembersController < ApplicationController
           where(graduating_class: params[:graduating_class_ids])
       end
 
+      # Filter members by cohort.
+      if params[:cohort_ids].present?
+        members = members.
+          joins(:cohortians).
+          where(cohortians: {cohort_id: params[:cohort_ids]})
+      end
+
       members
     end
 

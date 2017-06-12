@@ -107,8 +107,19 @@ class MembersControllerTest < ActionController::TestCase
     assert assigns(:members) == [@member]
   end
 
-  test "should get memnder by graduating class of 2017" do
+  test "should get members by graduating class of 2017" do
     get :index, params: { graduating_class_ids: [graduating_classes(:class_of_2016).id] }
+
+    assert_response :success
+    assert assigns(:members) == [@member]
+  end
+
+  test "should get members with blue cohort" do
+    blue_cohort = cohorts(:blue)
+    @member.cohorts << blue_cohort
+    get :index, params: {
+      cohort_ids: [cohorts(:blue).id]
+    }
 
     assert_response :success
     assert assigns(:members) == [@member]

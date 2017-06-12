@@ -68,6 +68,21 @@
 
       <div class="form-group">
         <div class="col-md-12">
+          <%= select_tag :cohort_ids, 
+                options_from_collection_for_select(
+                  Cohort.order(:name).all, 
+                  :id, 
+                  :name,
+                  params[:cohort_ids]
+                ),
+                class: "select2 form-control", 
+                multiple: true, 
+                data: { placeholder: 'Filter by cohort' }  %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-12">
           <%= select_tag :graduating_class_ids,
                 options_from_collection_for_select(
                   GraduatingClass.order(:year).all,
