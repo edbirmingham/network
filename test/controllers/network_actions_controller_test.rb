@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class NetworkActionsControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     @network_action = network_actions(:one)

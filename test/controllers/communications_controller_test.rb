@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class CommunicationsControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     sign_in users(:one)

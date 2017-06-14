@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class SchoolsControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     @school = schools(:tuggle)

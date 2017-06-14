@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class CommonTasksControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     @common_task = common_tasks(:one)

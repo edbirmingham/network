@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class GraduatingClassesControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     @graduating_class = graduating_classes(:class_of_2017)

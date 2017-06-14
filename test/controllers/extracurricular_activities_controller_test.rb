@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class ExtracurricularActivitiesControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     @extracurricular_activity = extracurricular_activities(:one)

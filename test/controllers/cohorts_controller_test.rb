@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class CohortsControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     @cohort = cohorts(:purple)

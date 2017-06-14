@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class TalentsControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     @talent = talents(:one)

@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class MembersControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     @member = members(:one)
