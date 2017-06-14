@@ -3,7 +3,11 @@
     <span class="glyphicon glyphicon-list-alt"></span>
     Back
   <% end %>
-  <h1>New event</h1>
+  <% if copy_network_events? %>
+    <h1>Copy event(s)</h1>
+  <% else %>
+    <h1>New event</h1>
+  <% end %>
 </div>
 <% if flash[:alert] %>
   <div class="success alert-success" role="alert">
