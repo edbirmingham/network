@@ -107,6 +107,17 @@ class MembersControllerTest < ActionController::TestCase
     assert assigns(:members) == [@member]
   end
 
+  test "filtering by neighborhood returns matching members" do
+    neighborhood = neighborhoods(:one)
+
+    @member.neighborhoods << neighborhood
+
+    get :index, params: { neighborhood_ids: [neighborhood.id.to_s] }
+
+    assert_response :success
+    assert assigns(:members) == [@member]
+  end
+
   test "should get members by graduating class of 2017" do
     get :index, params: { graduating_class_ids: [graduating_classes(:class_of_2016).id] }
 
