@@ -19,3 +19,7 @@
 //= require bootstrap-datetimepicker
 //= require select2-full
 //= require zeroclipboard
+
+$(document).on('turbolinks:render', function() {
+  $('.select2').select2();
+});
