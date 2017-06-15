@@ -102,6 +102,12 @@ class MembersController < ApplicationController
           where(organizations: { id: params[:organization_ids] })
       end
 
+      # Filter members by neighborhood.
+      if params[:neighborhood_ids].present?
+        members = members.joins(:neighborhoods).
+          where(neighborhoods: { id: params[:neighborhood_ids] })
+      end
+
       # Filter members by graduating class.
       if params[:graduating_class_ids].present?
         members = members.
