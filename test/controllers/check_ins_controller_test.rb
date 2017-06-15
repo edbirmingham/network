@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class CheckInsControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     @network_event = network_events(:tuggle_network)

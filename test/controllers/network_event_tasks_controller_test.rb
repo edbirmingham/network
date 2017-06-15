@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class NetworkEventTasksControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     @network_event_task = network_event_tasks(:one)

@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class NeighborhoodsControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     @neighborhood = neighborhoods(:one)

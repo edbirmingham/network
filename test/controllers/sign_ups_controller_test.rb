@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class SignUpsControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     @participation = participations(:attendee)

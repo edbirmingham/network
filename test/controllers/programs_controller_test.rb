@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class ProgramsControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     @program = programs(:network_night)

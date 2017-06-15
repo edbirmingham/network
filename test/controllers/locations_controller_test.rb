@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class LocationsControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     @location = locations(:tuggle)

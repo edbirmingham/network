@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class OrganizationsControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     @organization = organizations(:one)
