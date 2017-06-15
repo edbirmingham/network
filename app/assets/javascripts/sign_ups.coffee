@@ -6,7 +6,6 @@ $(document).on 'ready page:load', ->
 
   $('#member_ids').on 'select2:select', (e) ->
     $('#participation_member_id').val(e.params.data.id)
-    console.log(e)
     $('#create').hide()
     $('#update').hide()
     $('#member_ids').html()
@@ -16,7 +15,7 @@ $(document).on 'ready page:load', ->
     $('#phone').text(e.params.data.phone)
     $('#identity').text(e.params.data.identity)
     $('#email').text(e.params.data.email)
-    $('#children_in_birmingham_school').text(e.params.data.children_in_birmingham_school)
+    $('#children_in_birmingham_school').prop("checked", e.params.data.children_in_birmingham_school)
     
     # Revert/clear create form
   $('#unconfirm, #return-button').on 'click', ->
