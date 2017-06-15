@@ -76,7 +76,7 @@ class MembersController < ApplicationController
         joins(:identity).
         where(identities: {id: params[:identity_ids]})
       end
-
+      
       # limit the size of xml_http_request? responses
       if request.xhr?
         members = members.limit(25)
@@ -84,7 +84,11 @@ class MembersController < ApplicationController
 
       # Filter members by search term
       if params[:q].present?
-        members = members.search(params[:q])
+        query = params[:q]
+        if request.xhr?
+          query = query[:term]
+        end
+        members = members.search(query)
       end
 
       # Filter members by school.
