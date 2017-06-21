@@ -43,3 +43,8 @@ $(document).on 'ready page:load', ->
       $("#new-task-form").hide()
       
     
+  # Task completion on event show page
+  $('tr.network_event_task').on 'ajax:success', (event, data) ->
+    $(this).children('td.task_completed_at').html(data.formatted_date)
+    $(this).children("td.task_mark").find(".task_button").replaceWith("Completed");
+    $("#completed-count").text( parseInt( $("#completed-count").text() ) + 1);

@@ -152,11 +152,7 @@
           <td class="task_mark">
             <% if not task.completed_at.present? %>
               <%= button_to("Mark Completed", network_event_task_path(task) , remote: true, method: :patch, name: "task_button", class:"btn btn-primary task_button",
-                            params: { :"network_event_task[name]" => task.name,
-                                      :"network_event_task[network_event_id]" => task.network_event_id,
-                                      :"network_event_task[common_task_id]" => task.common_task_id,
-                                      :"network_event_task[owner_id]" => task.owner_id,
-                                      :"network_event_task[completed_at]" => Time.now }) %>
+                            params: { :"network_event_task[completed_at]" => Time.now }) %>
             <% else %>
               Completed 
             <% end %>
