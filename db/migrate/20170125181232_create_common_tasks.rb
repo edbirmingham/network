@@ -1,4 +1,4 @@
-class CreateCommonTasks < ActiveRecord::Migration
+class CreateCommonTasks < ActiveRecord::Migration[5.1]
   def change
     create_table :common_tasks do |t|
       t.string :name

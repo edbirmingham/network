@@ -1,4 +1,4 @@
-class CreateCohorts < ActiveRecord::Migration
+class CreateCohorts < ActiveRecord::Migration[5.1]
   def change
     create_table :cohorts do |t|
       t.string :name

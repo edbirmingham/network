@@ -1,4 +1,4 @@
-class CreateGraduatingClasses < ActiveRecord::Migration
+class CreateGraduatingClasses < ActiveRecord::Migration[5.1]
   def change
     create_table :graduating_classes do |t|
       t.integer :year

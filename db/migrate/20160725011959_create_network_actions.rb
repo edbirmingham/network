@@ -1,4 +1,4 @@
-class CreateNetworkActions < ActiveRecord::Migration
+class CreateNetworkActions < ActiveRecord::Migration[5.1]
   def change
     create_table :network_actions do |t|
       t.integer :actor_id
