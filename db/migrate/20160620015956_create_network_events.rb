@@ -1,4 +1,4 @@
-class CreateNetworkEvents < ActiveRecord::Migration
+class CreateNetworkEvents < ActiveRecord::Migration[5.1]
   def change
     create_table :network_events do |t|
       t.string :name

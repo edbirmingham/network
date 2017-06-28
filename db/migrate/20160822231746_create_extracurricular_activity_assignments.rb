@@ -1,4 +1,4 @@
-class CreateExtracurricularActivityAssignments < ActiveRecord::Migration
+class CreateExtracurricularActivityAssignments < ActiveRecord::Migration[5.1]
   def change
     create_table :extracurricular_activity_assignments do |t|
       t.integer :member_id

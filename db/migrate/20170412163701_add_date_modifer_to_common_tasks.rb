@@ -1,4 +1,4 @@
-class AddDateModiferToCommonTasks < ActiveRecord::Migration
+class AddDateModiferToCommonTasks < ActiveRecord::Migration[5.1]
   def change
     add_column :common_tasks, :date_modifier, :string
   end

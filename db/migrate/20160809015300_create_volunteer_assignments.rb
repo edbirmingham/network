@@ -1,4 +1,4 @@
-class CreateVolunteerAssignments < ActiveRecord::Migration
+class CreateVolunteerAssignments < ActiveRecord::Migration[5.1]
   def change
     create_table :volunteer_assignments do |t|
       t.integer :member_id
