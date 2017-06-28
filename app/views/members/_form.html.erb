@@ -135,7 +135,7 @@
     <div class="col-sm-10">
       <%= f.select :shirt_size,
             Member.shirt_sizes,
-            {},
+            {include_blank: true},
             class: "select2 form-control" %>
     </div>
   </div>
