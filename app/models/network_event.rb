@@ -120,7 +120,7 @@ class NetworkEvent < ApplicationRecord
   end
 
   def stop_time
-    if scheduled_at.present?
+    if scheduled_at.present? && duration.present?
       (scheduled_at + duration.minutes).to_time
     else
       nil
