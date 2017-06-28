@@ -37,9 +37,13 @@ module NetworkEventsHelper
   def clip_event_info(event)
     if event.scheduled_at.present?
       event_schedule_time = event.try(:scheduled_at).to_formatted_s(:long)
-      ends_at = (event.scheduled_at + event.duration.minutes).to_formatted_s(:long)
     else
       event_schedule_time = "Unscheduled"
+    end
+    
+    if event.stop_time.present?
+      ends_at = event.stop_time.to_formatted_s(:long)
+    else
       ends_at = "Unscheduled"
     end
     
