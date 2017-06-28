@@ -42,13 +42,13 @@ class NetworkEventsController < ApplicationController
           task.save
         end
         if create_another
-          format.html { redirect_to new_network_event_path, alert: 'Network event was successfully created.' }
+          format.html { redirect_to new_network_event_path, alert: 'Event was successfully created.' }
           format.json { render :new, status: :created, location: new_network_event_path }
         else
-          format.html { redirect_to @network_event, notice: 'Network event was successfully created.' }
+          format.html { redirect_to @network_event, notice: 'Event was successfully created.' }
           format.json { render :show, status: :created, location: @network_event }
         end
-        #format.html { redirect_to @network_event, notice: 'Network event was successfully created.' }
+        #format.html { redirect_to @network_event, notice: 'Event was successfully created.' }
         #format.json { render :show, status: :created, location: @network_event }
       else
         format.html { render :new }
@@ -62,7 +62,7 @@ class NetworkEventsController < ApplicationController
   def update
     respond_to do |format|
       if @network_event.update(network_event_params)
-        format.html { redirect_to @network_event, notice: 'Network event was successfully updated.' }
+        format.html { redirect_to @network_event, notice: 'Event was successfully updated.' }
         format.json { render :show, status: :ok, location: @network_event }
       else
         format.html { render :edit }
@@ -76,27 +76,27 @@ class NetworkEventsController < ApplicationController
   def destroy
     @network_event.destroy
     respond_to do |format|
-      format.html { redirect_to network_events_url, notice: 'Network event was successfully destroyed.' }
+      format.html { redirect_to network_events_url, notice: 'Event was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
-  
+
   def create_another
     params[:commit] == "Save & Create Another"
   end
-  
+
   private
-  
+
     # Use callbacks to share common setup or constraints between actions.
     def set_network_event
       @network_event = NetworkEvent.find(params[:id])
     end
-    
+
     def filtered_events
       events = NetworkEvent.
         includes(:program, :location, :organizations, :volunteers).
         order(sort_column + " IS NULL, " + sort_column + " " + sort_direction)
-        
+
       # Filter events by scheduled date.
       if params[:unscheduled_events_only].present?
         events = events.where(scheduled_at: nil)
@@ -105,44 +105,44 @@ class NetworkEventsController < ApplicationController
       else
         events = events.default_date_range
       end
-      
+
       # Filter events by cohort.
       if params[:cohort_ids].present?
         events = events.
           joins(:cohort_assignments).
           where(cohort_assignments: {cohort_id: params[:cohort_ids]})
       end
-          
+
       # Filter events by graduating class.
       if params[:graduating_class_ids].present?
         events = events.
           joins(:graduating_class_assignments).
           where(graduating_class_assignments: {graduating_class_id: params[:graduating_class_ids]})
       end
-      
+
       # Filter events by program
       if params[:program_ids].present?
         events = events.
           where(:program_id => params[:program_ids])
       end
-      
+
       # Filter events by school.
       if params[:school_ids].present?
         events = events.
           joins(:school_assignments).
           where(school_assignments: {school_id: params[:school_ids]})
       end
-          
+
       # Filter events by organization
       if params[:organization_ids].present?
         events = events.
           joins(:organization_assignments).
           where(organization_assignments: {organization_id: params[:organization_ids]})
       end
-      
+
       events
     end
-    
+
     def sort_column
       if %w[location program organization].include? params[:sort]
         params[:sort].pluralize + ".name"
@@ -150,7 +150,7 @@ class NetworkEventsController < ApplicationController
         NetworkEvent.column_names.include?(params[:sort]) ? params[:sort] : "scheduled_at"
       end
     end
-    
+
     def sort_direction
       # if no order direction is selected, default to ascending
       %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
@@ -159,16 +159,16 @@ class NetworkEventsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def network_event_params
       params.require(:network_event).permit(
-        :name, 
+        :name,
         :status,
-        :program_id, 
-        :location_id, 
-        :scheduled_at, 
-        :duration, 
-        :needs_transport, 
+        :program_id,
+        :location_id,
+        :scheduled_at,
+        :duration,
+        :needs_transport,
         :transport_ordered_on,
         :notes,
-        :organization_ids => [], 
+        :organization_ids => [],
         :site_contact_ids => [],
         :school_contact_ids => [],
         :volunteer_ids => [],
