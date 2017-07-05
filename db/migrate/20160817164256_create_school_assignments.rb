@@ -1,6 +1,6 @@
 class CreateSchoolAssignments < ActiveRecord::Migration[5.1]
   def change
-    create_table :school_contact_assignments do |t|
+    create_table :school_assignments do |t|
       t.integer :network_event_id
       t.integer :school_id
       t.integer :user_id
