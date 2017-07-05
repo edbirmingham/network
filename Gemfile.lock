@@ -164,6 +164,8 @@ GEM
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
+    rollbar (2.15.0)
+      multi_json
     sass (3.4.23)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -229,6 +231,7 @@ DEPENDENCIES
   rails (~> 5.1)
   rails-controller-testing
   record_tag_helper
+  rollbar
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   select2-rails
