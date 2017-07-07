@@ -208,7 +208,7 @@
         <td><%= link_to invitee.name, invitee %></td>
         <td><%= invitee.email %></td>
         <td><%= invitee.phone %></td>
-        <td><%= invitee.identity.name %></td>
+        <td><%= invitee.identity.try(:name) %></td>
       <% end %>
     </tbody>
   </table>
@@ -233,7 +233,7 @@
         <td><%= link_to participant.name, participant %></td>
         <td><%= participant.email %></td>
         <td><%= participant.phone %></td>
-        <td><%= participant.identity.name %></td>
+        <td><%= participant.identity.try(:name) %></td>
       <% end %>
     </tbody>
   </table>
