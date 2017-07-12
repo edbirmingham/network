@@ -104,19 +104,20 @@
 
     <tbody> 
       <%= content_tag_for(:tr, @network_event_tasks) do |task| %>
-        <td><%= task.name %></td>
+        <td><%= best_in_place task, :name, :as => :input %></td>
         <td><%= link_to(task.network_event.name, network_event_path(task.network_event)) if task.network_event %></td>
-        <td><%= task.owner.try(:email) %></td>
-        <td><%= task.due_date.in_time_zone("Central Time (US & Canada)").strftime(' %a, %B %e %Y') if task.due_date %></td>
+        <td><%= best_in_place task, :owner_id, :as => :select, 
+                :collection => User.all.map { |u| [u.id, u.email] } %></td>
+        <td><%= task.formatted_due_date if task.due_date %></td>
         <td><%= task.common_task.try(:name) %></td>
-        <td class="completed_at"><%= task.completed_at.in_time_zone("Central Time (US & Canada)").strftime(' %a, %B %e %Y') if task.completed_at %></td>
-        <td>
-          <% if task.completed_at.present? %>
+        <td class="completed_at"><%= task.formatted_completed_at %></td>
+        <td class="task_completed">
+          <% if task.completed? %>
             Completed
           <% else %>
             <%= button_to("Mark completed",
                   network_event_task_path(task), remote: true, method: :patch, 
-                  name: "task_button", class: "btn btn-primary",
+                  name: "task_button", class: "btn btn-primary completed_button",
                   params: { :"network_event_task[completed_at]" => Time.now }) %>
           <% end %>
         </td>

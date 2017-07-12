@@ -1,6 +1,9 @@
-$(document).on 'ready page:load', ->
+$(document).on 'turbolinks:load', ->
   client = new ZeroClipboard($('.copy_button'))
   $('.copy_button').tooltip()
+  
+  # initialize gem for inplace editing
+  $('.best_in_place').best_in_place()
   
   $('#transport-datetimepicker').datetimepicker({
       showClear: true,
@@ -45,6 +48,7 @@ $(document).on 'ready page:load', ->
     
   # Task completion on event show page
   $('tr.network_event_task').on 'ajax:success', (event, data) ->
-    $(this).children('td.task_completed_at').html(data.formatted_date)
-    $(this).children("td.task_mark").find(".task_button").replaceWith("Completed");
-    $("#completed-count").text( parseInt( $("#completed-count").text() ) + 1);
+    if data.completed_at
+      $(this).children('td.task_completed_at').html(data.completed_at)
+      $(this).children("td.task_mark").find(".task_button").replaceWith("Completed");
+      $("#completed-count").text( parseInt( $("#completed-count").text() ) + 1);
