@@ -3,6 +3,18 @@
   
 <%= form_tag network_event_tasks_path, :method => :get, class: "form-horizontal" do %>
   <div class="container">
+    <div class="input-group">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="submit" name="commit">Go!</button>
+      </span>
+      <%= text_field_tag 'q',
+        params[:q],
+        class: 'form-control',
+        placeholder: 'Search for...',
+        autofocus: true %>
+    </div>
+    <br><br>
+     
     <div class="form-group">
       <div class="col-md-12">
         <%= label_tag :status_filter_show_all, "Show all" %>

@@ -1,4 +1,9 @@
 class NetworkEventTask < ApplicationRecord
+  include PgSearch
+  
+  pg_search_scope :search_by_task_name,
+                  :against => [:name],
+                  :using => { :tsearch => {:prefix => true} }
   belongs_to :user
   belongs_to :owner, :class_name => "User"
   belongs_to :network_event
