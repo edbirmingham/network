@@ -12,4 +12,29 @@ class NetworkEventTask < ApplicationRecord
     where(due_date: [start_date.beginning_of_day..end_date.end_of_day, nil])
   end
   
+  def formatted_due_date
+    if due_date.present?
+      due_date.in_time_zone("Central Time (US & Canada)").strftime(' %a, %B %e %Y') 
+    else
+      nil
+    end
+  end
+  
+  def formatted_completed_at
+    if completed_at.present?
+      completed_at.in_time_zone("Central Time (US & Canada)").strftime(' %a, %B %e %Y') 
+    else
+      nil
+    end
+  end
+  
+  def completed?
+    return completed_at.present?
+  end
+  
+  def as_json(options)
+    result = super
+    result["completed_at"] = completed_at.in_time_zone("Central Time (US & Canada)").strftime(' %a, %B %e %Y')
+    result
+  end
 end

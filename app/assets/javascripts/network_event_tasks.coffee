@@ -16,7 +16,12 @@ $(document).on 'ready page:load', ->
       return
     return
     
+  # initialize bip for inplace editing
+  $('.best_in_place').best_in_place()
+
+  # Task completion
   $('tr.network_event_task').on 'ajax:success', (event, data) ->
-    $(this).children('td.completed_at').html(data.formatted_date)
-    
+    $(this).children('td.completed_at').html(data.completed_at)
+    $(this).children("td.task_completed").find(".completed_button").replaceWith("Completed")
+
     
