@@ -1,5 +1,9 @@
 module NetworkEventsHelper
 
+  def copy_network_events?
+    params[:network_event_ids].present?
+  end 
+  
   def default_start_date
     if params[:start_date].present?
       params[:start_date]

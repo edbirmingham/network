@@ -1,6 +1,6 @@
-$(document).on 'ready page:load', ->
-  client = new ZeroClipboard($('.copy_button'))
-  $('.copy_button').tooltip()
+$(document).on 'ready page:load turbolinks:render', ->
+  client = new ZeroClipboard($('.clip_button'))
+  $('.clip_button').tooltip()
   
   $('#transport-datetimepicker').datetimepicker({
       showClear: true,
@@ -13,14 +13,19 @@ $(document).on 'ready page:load', ->
       format: 'YYYY-MM-DD hh:mm a'
      }) 
   
-  checked = $('#network_event_needs_transport').is(':checked')
-  if checked
+  needs_transport = $('#network_event_needs_transport').val()
+  if needs_transport == 'true'
     $('#order_div').show()
   else
     $('#order_div').hide()
     
   $('#network_event_needs_transport').change ->
-    $('#order_div').slideToggle()
+    needs_transport = $('#network_event_needs_transport').val()
+    if needs_transport == 'true'
+      $('#order_div').show()
+    else
+      $('#order_div').hide()
+      
   $('#event-datetimepicker').datetimepicker({
       showClear: true,
       format: 'YYYY-MM-DD hh:mm a',

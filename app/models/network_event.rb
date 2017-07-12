@@ -99,6 +99,26 @@ class NetworkEvent < ApplicationRecord
     location.try(:name)
   end
 
+  def copy(overrides={})
+    options = { 
+      except: [:notes, :transport_ordered_on, :status, :scheduled_at],
+      include: [
+        :site_contact_assignments, 
+        :school_contact_assignments,
+        :volunteer_assignments,
+        :graduating_class_assignments,
+        :organization_assignments,
+        :school_assignments,
+        :cohort_assignments,
+        :network_event_tasks
+      ] 
+    }
+    clone = self.deep_clone options
+    clone.save
+    clone.update_attributes(overrides)
+    clone
+  end
+  
   def name_with_date
     if scheduled_at.present?
       name + ' (' + scheduled_at.to_formatted_s(:long) + ')'

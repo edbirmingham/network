@@ -12,10 +12,15 @@
     </div>
   <% end %>
 
+  <% if copy_network_events? %>
+    <% params[:network_event_ids].each do |network_event_id| %>
+      <%= hidden_field_tag "network_event_ids[]", network_event_id %>
+    <% end %>
+  <% end %>
   <div class="form-group">
     <%= f.label :name, class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.text_field :name, class: "form-control" %>
+      <%= f.text_field :name, class: "form-control", disabled: copy_network_events? %>
     </div>
   </div>
   <% if @network_event.persisted? %>
@@ -26,7 +31,7 @@
               NetworkEvent.statuses, 
               :to_s, 
               :titleize, 
-              {}, 
+              { include_blank: true }, 
               class: "select2 form-control" %>
       </div>
     </div>
@@ -38,8 +43,9 @@
             Program.order(:name).all, 
             :id, 
             :name, 
-            {}, 
-            class: "select2 form-control" %>
+            { include_blank: true }, 
+            class: "select2 form-control",
+            data: { placeholder: 'Find Program' } %>
     </div>
   </div>
   <div class="form-group">
@@ -49,8 +55,9 @@
             Location.order(:name).all, 
             :id, 
             :name, 
-            {}, 
-            class: "select2 form-control" %>
+            { include_blank: true }, 
+            class: "select2 form-control",
+            data: { placeholder: 'Find Location' } %>
     </div>
   </div>
   <div class="form-group">
@@ -162,9 +169,13 @@
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :needs_transport, 'Transportation Needed',  class: "col-sm-2 control-label" %>
+    <%= f.label :needs_transport, 'Transportation Needed', class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.check_box :needs_transport, class: "form-control"%>
+      <%= f.select :needs_transport, 
+            [["Yes", true], ["No", false]], 
+            { include_blank: " " }, 
+            class: "select2 form-control", 
+            data: { placeholder: 'Transportation Needed?' }  %>
     </div>
   </div>
   <div class="form-group" id='order_div'>
@@ -181,10 +192,10 @@
   <div class="form-group">
     <%= f.label :notes, class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.text_area :notes, class: "form-control" %>
+      <%= f.text_area :notes, class: "form-control", disabled: copy_network_events? %>
     </div>
   </div>
-  <% if @network_event.new_record?%>
+  <% if @network_event.new_record? && !copy_network_events? %>
     <div class="form-group">
       <%= f.label :network_event_tasks, "Task List", class: "col-sm-2 control-label" %>
       <div class="col-sm-10">
@@ -229,10 +240,15 @@
   <% end %>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <%= f.submit event_button_name(f.object), class: "btn btn-primary" %>
-      <% if controller.action_name == 'new' %>
-        <%= f.submit "Save & Create Another", class: "btn btn-primary" %>
-      <%end%>
+      <% if copy_network_events? %>
+        <%= f.submit "Copy Event(s)", class: "btn btn-primary" %>
+        <%= f.submit "Save & Copy More", class: "btn btn-primary" %>
+      <% else %>
+        <%= f.submit event_button_name(f.object), class: "btn btn-primary" %>
+        <% if controller.action_name == 'new' %>
+          <%= f.submit "Save & Create Another", class: "btn btn-primary" %>
+        <%end%>
+      <% end %>
     </div>
   </div>
 <% end %>
