@@ -40,6 +40,20 @@ This setup uses Cloud9 for your development environment.  Cloud9 provides an onl
   git remote add upstream https://github.com/edbirmingham/network.git
   git pull upstream master
   ```
+  * Setup auto start for postgres service
+    * Click on the Gear icon in File browser (on the left). Check "Show Home in Favorites" and "Show Hidden Files"
+    * In the top directory ~-. you will see the .profile (hidden file) open it for editing and put this in at bottom of the file....
+    ```
+    function ensureservice {
+    service=$1
+    if [[ ! $(ps -ef | grep -v grep | grep "$service" | wc -l) > 0 ]]
+    then
+    sudo service $service start
+    fi
+    }
+    ensureservice postgresql
+    ```
+    * Click on the Gear icon in File browser (on the left). Uncheck "Show Home in Favorites" and "Show Hidden Files"
   * In the bash tab, install the Ruby gems used by the project and setup the data in the database by entering the following commands:
   ```
   bundle install
