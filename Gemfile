@@ -21,6 +21,9 @@ gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+# Cloning ActiveRecord models.
+gem 'deep_cloneable', '~> 2.2.2'
+
 # Pagination
 gem 'kaminari'
 # Use jquery as the JavaScript library
