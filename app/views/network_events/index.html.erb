@@ -168,7 +168,7 @@
           <td><%= link_to 'Show', network_event %></td>
           <td><%= link_to 'Edit', edit_network_event_path(network_event) %></td>
           <td><%= link_to 'Destroy', network_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          <td><%= button_tag "Clip", data: {"clipboard-text" => clip_event_info(network_event), "toggle" => "tooltip", "placement" => "right"}, :title => clip_event_info(network_event), :class =>'clip_button btn btn-primary'%></td>
+          <td><%= button_tag "Clip", type: 'button', data: {"clipboard-text" => clip_event_info(network_event), "toggle" => "tooltip", "placement" => "right"}, :title => clip_event_info(network_event), :class =>'clip_button btn btn-primary'%></td>
         <% end %>
       </tbody>
     </table>
