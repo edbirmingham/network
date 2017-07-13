@@ -20,6 +20,8 @@ class NetworkEventsController < ApplicationController
   # GET /network_events/new
   def new
     @network_event = NetworkEvent.new
+    @network_event.duration = nil
+    
     @common_tasks = CommonTask.all
     @common_tasks.each do |common_task|
       @network_event.network_event_tasks.build(common_task_id: common_task.id, name: common_task.name, owner_id: common_task.owner_id, date_modifier: common_task.date_modifier)
@@ -33,27 +35,10 @@ class NetworkEventsController < ApplicationController
   # POST /network_events
   # POST /network_events.json
   def create
-    @network_event = NetworkEvent.new(network_event_params)
-    @network_event.user = current_user
-    respond_to do |format|
-      if @network_event.save
-        @network_event.network_event_tasks.each do |task|
-          task.user_id = current_user.id
-          task.save
-        end
-        if create_another
-          format.html { redirect_to new_network_event_path, alert: 'Event was successfully created.' }
-          format.json { render :new, status: :created, location: new_network_event_path }
-        else
-          format.html { redirect_to @network_event, notice: 'Event was successfully created.' }
-          format.json { render :show, status: :created, location: @network_event }
-        end
-        #format.html { redirect_to @network_event, notice: 'Event was successfully created.' }
-        #format.json { render :show, status: :created, location: @network_event }
-      else
-        format.html { render :new }
-        format.json { render json: @network_event.errors, status: :unprocessable_entity }
-      end
+    if copying_events?
+      copy_events
+    else
+      create_event
     end
   end
 
@@ -82,11 +67,65 @@ class NetworkEventsController < ApplicationController
   end
 
   def create_another
-    params[:commit] == "Save & Create Another"
+    ["Save & Create Another", "Save & Copy More"].include? params[:commit]
   end
 
   private
-
+  
+    def copy_events
+      NetworkEvent.
+        where(id: params[:network_event_ids]).
+        each do |original|
+          original.copy(override_params)
+        end
+        respond_to do |format|
+          if create_another
+            format.html { redirect_to new_network_event_path(network_event_ids: params[:network_event_ids]), alert: 'Event(s) were successfully copied.' }
+          else
+            format.html { redirect_to network_events_path, notice: 'Event(s) were successfully copied.' }
+          end
+        end
+    end 
+  
+    def copying_events?
+      params[:network_event_ids].present?
+    end
+    
+    def create_event
+      @network_event = NetworkEvent.new(network_event_params)
+      @network_event.user = current_user
+      respond_to do |format|
+        if @network_event.save
+          @network_event.network_event_tasks.each do |task|
+            task.user_id = current_user.id
+            task.save
+          end
+          if create_another
+            format.html { redirect_to new_network_event_path, alert: 'Event was successfully created.' }
+            format.json { render :new, status: :created, location: new_network_event_path }
+          else
+            format.html { redirect_to @network_event, notice: 'Event was successfully created.' }
+            format.json { render :show, status: :created, location: @network_event }
+          end
+          #format.html { redirect_to @network_event, notice: 'Event was successfully created.' }
+          #format.json { render :show, status: :created, location: @network_event }
+        else
+          format.html { render :new }
+          format.json { render json: @network_event.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+    
+    def override_params
+      @override_params = network_event_params.select do |key, value|
+        if value.is_a? Array
+          value.present? && value.any?(&:present?)
+        else
+          value.present?
+        end
+      end
+    end
+    
     # Use callbacks to share common setup or constraints between actions.
     def set_network_event
       @network_event = NetworkEvent.find(params[:id])

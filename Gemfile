@@ -21,6 +21,9 @@ gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+# Cloning ActiveRecord models.
+gem 'deep_cloneable', '~> 2.2.2'
+
 # Pagination
 gem 'kaminari'
 # Use jquery as the JavaScript library
@@ -36,6 +39,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use datetime picker from Bootstrap
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
+
+# gem for in-place editing
+gem 'best_in_place', '~> 3.0.1'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

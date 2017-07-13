@@ -19,3 +19,5 @@
 //= require bootstrap-datetimepicker
 //= require select2-full
 //= require zeroclipboard
+//= require best_in_place
+

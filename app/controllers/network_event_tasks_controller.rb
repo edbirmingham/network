@@ -25,8 +25,7 @@ class NetworkEventTasksController < ApplicationController
     @network_event_task = NetworkEventTask.find(params[:id])
     respond_to do |format|
       if @network_event_task.update(network_event_task_params)
-        format.json { render json:  { network_event_task: @network_event_task, formatted_date: 
-          @network_event_task.completed_at.in_time_zone("Central Time (US & Canada)").strftime(' %a, %B %e %Y') }}
+        format.json { render json: @network_event_task }
       else
         format.json { render json: @network_event_task.errors, status: :unprocessable_entity }
       end

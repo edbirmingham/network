@@ -1,5 +1,11 @@
+require 'csv'
+
 module NetworkEventsHelper
 
+  def copy_network_events?
+    params[:network_event_ids].present?
+  end 
+  
   def default_start_date
     if params[:start_date].present?
       params[:start_date]
@@ -72,5 +78,29 @@ module NetworkEventsHelper
       :organization_ids,
       :cohort_ids,
       :graduating_class_ids)
+  end
+
+  def csv(events)
+    CSV.generate(headers: true, :quote_char=>'"', :force_quotes => true,) do |csv|
+      csv << %w{name status program location organizations date start_time end_time school cohorts classes school_contacts site_contacts notes}
+      @network_events.each do |event|
+        csv << [
+          event.name,
+          event.status,
+          event.program_name,
+          event.location_name,
+          event.organizations.map(&:name).join(', '),
+          if event.date != nil then event.date.strftime('%m-%d-%Y') else "" end,
+          if event.start_time != nil then event.start_time.strftime("%I:%M") else "" end,
+          if event.stop_time != nil then event.stop_time.strftime("%I:%M") else "" end,
+          event.schools.map(&:name).join(', '),
+          event.cohorts.map(&:name).join(', '),
+          event.graduating_classes.map(&:year).join(', '),
+          event.school_contacts.map(&:name).join(', '),
+          event.site_contacts.map(&:name).join(', '),
+          event.notes
+        ]
+      end
+    end
   end
 end
