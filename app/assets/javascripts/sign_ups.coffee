@@ -1,4 +1,4 @@
-$(document).on 'ready page:load', ->
+$(document).on 'ready page:load turbolinks:load', ->
   $('#return-button').hide()
   $('#confirm').hide()
   $('#update').hide()
