@@ -167,7 +167,7 @@
   <%= button_tag "Create New Task", class: "btn btn-primary", id: "create-task-button" %>
 </div>
 
-<%= form_for @network_event_task, url: network_event_tasks_path, html: { id: "new-task-form", class: "form-inline" }, :remote => true do |f| %>
+<%= form_for @network_event_task, url: network_event_tasks_path, html: { id: "new-task-form" }, :remote => true do |f| %>
       <div class="form-group">
         <%= f.label :name %>
           <%= f.text_field :name, class:"form-control", id: 'task-name' %>
@@ -176,6 +176,10 @@
       <div class="form-group">
         <%= f.label :owner %>
           <%= f.collection_select :owner_id, User.all, :id, :email, {}, class: "select2 form-control"%>
+      </div>
+      <div class="form-group">
+        <%= f.label :common_task %>
+          <%= f.collection_select :common_task_id, CommonTask.all, :id, :name, {:include_blank => "No common task selected" }, class: "select2 form-control"%>
       </div>
       <div class="form-group">
         <%= f.label :date_modifier, "Due date" %>
