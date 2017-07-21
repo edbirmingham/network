@@ -5,6 +5,7 @@ class CommonTask < ApplicationRecord
   def self.date_modifiers 
     [
       "Day before event",
+      "Day of event",
       "1 week after event",
       "Monday before event",
       "2 Mondays before event",
