@@ -121,9 +121,9 @@ class NetworkEvent < ApplicationRecord
   
   def name_with_date
     if scheduled_at.present?
-      name + ' (' + scheduled_at.to_formatted_s(:long) + ')'
+      name + ' (' + scheduled_at.to_formatted_s(:long) + ', ' + location.name + ')'
     else
-      name
+      name + ' (at ' + location.name + ')'
     end
   end
 
