@@ -34,7 +34,9 @@ class NetworkEventTask < ApplicationRecord
   
   def as_json(options)
     result = super
-    result["completed_at"] = completed_at.in_time_zone("Central Time (US & Canada)").strftime(' %a, %B %e %Y')
+    if completed_at?
+      result["completed_at"] = completed_at.in_time_zone("Central Time (US & Canada)").strftime(' %a, %B %e %Y')
+    end
     result
   end
 end

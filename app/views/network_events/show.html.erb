@@ -149,7 +149,7 @@
           <td class="task_due_date"><%= task.formatted_due_date %> </td>
           <td class="task_completed_at"><%= task.formatted_completed_at %> </td>
           <td class="task_owner"><%= best_in_place task, :owner_id, :as => :select, 
-                                    :collection => User.all.map { |u| [u.id, u.email]} %></td>
+                                    :collection => User.best_in_place_options %></td>
           <td class="task_mark">
             <% if not task.completed_at.present? %>
               <%= button_to("Mark Completed", network_event_task_path(task) , remote: true, method: :patch, name: "task_button", class:"btn btn-primary task_button",
@@ -175,7 +175,7 @@
       </div>
       <div class="form-group">
         <%= f.label :owner %>
-          <%= f.collection_select :owner_id, User.all, :id, :email, {}, class: "select2 form-control"%>
+          <%= f.collection_select :owner_id, User.all, :id, :email, {:include_blank => "No owner selected"}, class: "select2 form-control"%>
       </div>
       <div class="form-group">
         <%= f.label :common_task %>

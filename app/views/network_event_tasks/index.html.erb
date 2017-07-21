@@ -107,7 +107,7 @@
         <td><%= best_in_place task, :name, :as => :input %></td>
         <td><%= link_to(task.network_event.name, network_event_path(task.network_event)) if task.network_event %></td>
         <td><%= best_in_place task, :owner_id, :as => :select, 
-                :collection => User.all.map { |u| [u.id, u.email] } %></td>
+                :collection => User.best_in_place_options %></td>
         <td><%= task.formatted_due_date if task.due_date %></td>
         <td><%= task.common_task.try(:name) %></td>
         <td class="completed_at"><%= task.formatted_completed_at %></td>

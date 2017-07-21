@@ -13,7 +13,6 @@
             <th>Name</th>
             <th>Owner</th>
             <th>Default due date</th>
-            <th>User</th>
             <th></th>
         <th></th>
         <th></th>
@@ -25,7 +24,6 @@
             <td><%= common_task.name %></td>
             <td><%= common_task.owner.try(:email) %></td>
             <td><%= common_task.try(:date_modifier) %></td>
-            <td><%= common_task.user.try(:email) %></td>
             <td><%= link_to 'Show', common_task %></td>
         <td><%= link_to 'Edit', edit_common_task_path(common_task) %></td>
         <td><%= link_to 'Destroy', common_task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
