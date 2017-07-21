@@ -1,4 +1,5 @@
 ENV['RAILS_ENV'] ||= 'test'
+ENV['TZ'] = 'UTC'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 
