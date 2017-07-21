@@ -46,9 +46,7 @@ $(document).on 'ready page:load turbolinks:load', ->
   $("#new-task-form").hide()
   $("#create-task-button").on "click", ->
     $("#new-task-form").show()
-    $("#create-task-button").html("Hide Form")
-    $("#create-task-button").on "click", ->
-      $("#new-task-form").hide()
+    $("#create-task-button").hide()
       
     
   # Task completion on event show page
