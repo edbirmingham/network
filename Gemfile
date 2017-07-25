@@ -7,9 +7,9 @@ gem 'rails', '~> 5.1'
 gem 'record_tag_helper'
 gem 'puma'
 # Use Postgresql in production
-# gem 'pg'
+gem 'pg'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# gem 'sqlite3'
 # Use SCSS for stylesheets
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'sass-rails', '~> 5.0'
@@ -81,3 +81,5 @@ end
 
 gem 'rollbar'
 
+# PgSearch builds named scopes that take advantage of PostgreSQL's full text search.
+gem 'pg_search'

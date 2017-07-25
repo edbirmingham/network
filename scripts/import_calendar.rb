@@ -4,7 +4,7 @@ require 'pp'
 
 def member_lookup(members, member)
     members[member] || 
-        Member.search(member).first.try(:id) || 
+        Member.search_by_full_name(member).first.try(:id) || 
         Member.create!(
             first_name: member.split(' ')[0..-2].join(' '),
             last_name: member.split(' ').last,
