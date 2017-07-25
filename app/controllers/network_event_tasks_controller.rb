@@ -47,6 +47,15 @@ class NetworkEventTasksController < ApplicationController
       includes(:owner, :network_event, :common_task).
       order("due_date IS NULL, due_date ASC")
       
+    # Filter members by search term
+    if params[:q].present?
+      query = params[:q]
+      if request.xhr?
+        query = query[:term]
+      end
+      tasks = tasks.search_by_task_name(query)
+    end
+    
     # Filter tasks by completion
     if params[:status_filter] == 'uncompleted_only'
       tasks = tasks.where(completed_at: nil);
