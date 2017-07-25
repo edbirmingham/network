@@ -157,6 +157,8 @@ class NetworkEvent < ApplicationRecord
       case task.date_modifier
       when 'Day before event'
         task.due_date = scheduled_at.end_of_day - 1.day
+      when 'Day of event'
+        task.due_date = scheduled_at.end_of_day
       when '1 week after event'
         task.due_date = scheduled_at.end_of_day + 1.week
       when 'Monday before event'
