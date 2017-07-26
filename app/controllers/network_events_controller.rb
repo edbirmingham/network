@@ -144,7 +144,15 @@ class NetworkEventsController < ApplicationController
       else
         events = events.default_date_range
       end
-
+      
+      # Filter events by uncompleted tasks
+      if params[:common_task_ids].present?
+        events = events.
+          joins(:network_event_tasks).
+          where(network_event_tasks: {common_task_id: params[:common_task_ids],
+                                      completed_at: nil})
+      end
+      
       # Filter events by cohort.
       if params[:cohort_ids].present?
         events = events.

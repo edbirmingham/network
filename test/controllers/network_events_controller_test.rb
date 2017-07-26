@@ -48,6 +48,16 @@ class NetworkEventsControllerTest < ActionController::TestCase
     assert assigns(:network_events).present?
     assert_equal 3, assigns(:network_events).length
   end
+  
+  test "should get index with uncompleted transportation task" do
+    get :index, params: {
+      common_task_ids: [common_tasks(:two).id],
+      commit: "Filter events"
+    }
+    assert_response :success
+    assert assigns(:network_events).present?
+    assert_equal 1, assigns(:network_events).length
+  end
 
   test "should get index with class of 2017" do
     get :index, params: {
