@@ -1,10 +1,10 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
-$(document).on 'ready page:load', ->
+$(document).on 'ready page:load turbolinks:load', ->
   event_id = $('#network_event_id').val()
   member_level = $('#level').val()
-  $('table :button').click ->
+  $('table.check-in-table :button').click ->
     table_row = $(this).closest("tr")
     row_member_id = $(this).siblings(".row_member_id").val()
     $.ajax({

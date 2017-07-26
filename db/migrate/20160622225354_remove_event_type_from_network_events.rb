@@ -1,4 +1,4 @@
-class RemoveEventTypeFromNetworkEvents < ActiveRecord::Migration
+class RemoveEventTypeFromNetworkEvents < ActiveRecord::Migration[5.1]
   def up
     remove_column :network_events, :event_type, :string
   end

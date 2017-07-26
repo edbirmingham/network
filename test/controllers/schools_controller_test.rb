@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class SchoolsControllerTest < ActionController::TestCase
-  include Devise::TestHelpers 
-  
+  include Devise::Test::ControllerHelpers
+
   setup do
     @school = schools(:tuggle)
     sign_in users(:one)
@@ -21,30 +21,30 @@ class SchoolsControllerTest < ActionController::TestCase
 
   test "should create school" do
     assert_difference('School.count') do
-      post :create, school: { name: @school.name + 'test' }
+      post :create, params: { school: { name: @school.name + 'test' } }
     end
 
     assert_redirected_to school_path(assigns(:school))
   end
 
   test "should show school" do
-    get :show, id: @school
+    get :show, params: { id: @school }
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @school
+    get :edit, params: { id: @school }
     assert_response :success
   end
 
   test "should update school" do
-    patch :update, id: @school, school: { name: @school.name + 'test' }
+    patch :update, params: { id: @school, school: { name: @school.name + 'test' } }
     assert_redirected_to school_path(assigns(:school))
   end
 
   test "should destroy school" do
     assert_difference('School.count', -1) do
-      delete :destroy, id: @school
+      delete :destroy, params: { id: @school }
     end
 
     assert_redirected_to schools_path

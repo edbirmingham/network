@@ -1,4 +1,4 @@
-class CreateMatches < ActiveRecord::Migration
+class CreateMatches < ActiveRecord::Migration[5.1]
   def change
     create_table :matches do |t|
       t.integer :network_action_id

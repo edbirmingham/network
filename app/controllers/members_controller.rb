@@ -4,14 +4,7 @@ class MembersController < ApplicationController
   # GET /members
   # GET /members.json
   def index
-    @members = Member.order(:first_name, :last_name).page params[:page]
-    if params[:q].present?
-      if request.xhr?
-        @members = @members.limit(25).search(params[:q][:term])
-      else
-        @members = @members.search(params[:q])
-      end
-    end
+    @members = filtered_members.page params[:page]
   end
 
   # GET /members/1
@@ -57,7 +50,7 @@ class MembersController < ApplicationController
       end
     end
   end
-  
+
   # DELETE /members/1
   # DELETE /members/1.json
   def destroy
@@ -74,8 +67,65 @@ class MembersController < ApplicationController
       @member = Member.find(params[:id])
     end
 
+    #Filters
+    def filtered_members
+      members = Member.includes(:identity).order(:first_name, :last_name)
+
+      if params[:identity_ids].present?
+        members = Member.
+        joins(:identity).
+        where(identities: {id: params[:identity_ids]})
+      end
+
+      # limit the size of xml_http_request? responses
+      if request.xhr?
+        members = members.limit(25)
+      end
+
+      # Filter members by search term
+      if params[:q].present?
+        query = params[:q]
+        if request.xhr?
+          query = query[:term]
+        end
+        members = members.search_by_full_name(query)
+      end
+
+      # Filter members by school.
+      if params[:school_ids].present?
+        members = members.where(school_id: params[:school_ids])
+      end
+
+      # Filter members by organization.
+      if params[:organization_ids].present?
+        members = members.joins(:organizations).
+          where(organizations: { id: params[:organization_ids] })
+      end
+
+      # Filter members by neighborhood.
+      if params[:neighborhood_ids].present?
+        members = members.joins(:neighborhoods).
+          where(neighborhoods: { id: params[:neighborhood_ids] })
+      end
+
+      # Filter members by graduating class.
+      if params[:graduating_class_ids].present?
+        members = members.
+          where(graduating_class: params[:graduating_class_ids])
+      end
+
+      # Filter members by cohort.
+      if params[:cohort_ids].present?
+        members = members.
+          joins(:cohortians).
+          where(cohortians: {cohort_id: params[:cohort_ids]})
+      end
+
+      members
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def member_params
-      params.require(:member).permit(:first_name, :last_name, :phone, :email, :identity, :affiliation, :address, :city, :state, :zip_code, :shirt_size, :shirt_received, :children_in_birmingham_school, :place_of_worship, :recruitment, :community_networks, :extra_groups, :other_networks, :graduating_class_id, :school_id, :organization_ids => [], :neighborhood_ids => [], :extracurricular_activity_ids => [], talent_ids: [], :cohort_ids => [])
+      params.require(:member).permit(:first_name, :last_name, :phone, :email, :identity, :affiliation, :address, :city, :state, :zip_code, :shirt_size, :shirt_received, :children_in_birmingham_school, :place_of_worship, :recruitment, :community_networks, :extra_groups, :other_networks, :graduating_class_id, :school_id, :identity_id, :organization_ids => [], :neighborhood_ids => [], :extracurricular_activity_ids => [], talent_ids: [], :cohort_ids => [])
     end
 end

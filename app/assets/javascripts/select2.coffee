@@ -1,4 +1,4 @@
-$(document).on 'ready page:load', ->
+$(document).on 'ready page:load turbolinks:render', ->
   $('.select2').each (i, e) =>
     select = $(e)
     options =

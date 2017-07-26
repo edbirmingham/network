@@ -1,0 +1,140 @@
+<div class="page-header">
+  <h1>Listing event tasks</h1>
+  
+<%= form_tag network_event_tasks_path, :method => :get, class: "form-horizontal" do %>
+  <div class="container">
+    <div class="input-group">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="submit" name="commit">Go!</button>
+      </span>
+      <%= text_field_tag 'q',
+        params[:q],
+        class: 'form-control',
+        placeholder: 'Search for...',
+        autofocus: true %>
+    </div>
+    <br><br>
+     
+    <div class="form-group">
+      <div class="col-md-12">
+        <%= label_tag :status_filter_show_all, "Show all" %>
+        <%= radio_button_tag :status_filter, :show_all, !@status_filter.present? || @status_filter.eql?('show_all') %>
+        <%= label_tag :status_filter_uncompleted_only, "Uncompleted only" %>
+        <%= radio_button_tag :status_filter, :uncompleted_only, @status_filter.eql?('uncompleted_only') %>
+        <%= label_tag :status_filter_completed_only, "Completed only" %>
+        <%= radio_button_tag :status_filter, :completed_only, @status_filter.eql?('completed_only') %>
+      </div>
+    </div>
+    <div class='col-md-5'>
+        <div class="form-group">
+            <div class='input-group date' id='startdatepicker'>
+                <%= text_field_tag :start_date, @start_date, class: "form-control" %>
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+      Through
+    </div>
+    <div class='col-md-5'>
+        <div class="form-group">
+            <div class='input-group date' id='enddatepicker'>
+                <%= text_field_tag :end_date, @end_date, class: "form-control" %>
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-12">
+        <%= select_tag :network_event_ids, 
+              options_from_collection_for_select(
+                NetworkEvent.order(:name).all, 
+                :id, 
+                :name_with_date,
+                params[:network_event_ids]
+              ),
+              class: "select2 form-control", 
+              multiple: true, 
+              data: { placeholder: 'Filter by event' }  %>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-12">
+        <%= select_tag :owner_ids, 
+              options_from_collection_for_select(
+                User.order(:email).all, 
+                :id, 
+                :email,
+                params[:owner_ids]
+              ),
+              class: "select2 form-control", 
+              multiple: true, 
+              data: { placeholder: 'Filter by task owner' }  %>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-12">
+        <%= select_tag :common_task_ids, 
+              options_from_collection_for_select(
+                CommonTask.order(:name).all, 
+                :id, 
+                :name,
+                params[:common_task_ids]
+              ),
+              class: "select2 form-control", 
+              multiple: true, 
+              data: { placeholder: 'Filter by common task' }  %>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-12">
+        <%= submit_tag "Filter tasks", class: "btn btn-secondary"%>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Network event</th>
+        <th>Owner</th>
+        <th>Due date</th>
+        <th>Common task</th>
+        <th>Completed on</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody> 
+      <%= content_tag_for(:tr, @network_event_tasks) do |task| %>
+        <td><%= best_in_place task, :name, :as => :input %></td>
+        <td><%= link_to(task.network_event.name, network_event_path(task.network_event)) if task.network_event %></td>
+        <td><%= best_in_place task, :owner_id, :as => :select, 
+                :collection => User.best_in_place_options %></td>
+        <td><%= task.formatted_due_date if task.due_date %></td>
+        <td><%= task.common_task.try(:name) %></td>
+        <td class="completed_at"><%= task.formatted_completed_at %></td>
+        <td class="task_completed">
+          <% if task.completed? %>
+            Completed
+          <% else %>
+            <%= button_to("Mark completed",
+                  network_event_task_path(task), remote: true, method: :patch, 
+                  name: "task_button", class: "btn btn-primary completed_button",
+                  params: { :"network_event_task[completed_at]" => Time.now }) %>
+          <% end %>
+        </td>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate @network_event_tasks %>
+</div>

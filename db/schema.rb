@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170201183152) do
+ActiveRecord::Schema.define(version: 20170412164443) do
 
   create_table "affiliations", force: :cascade do |t|
     t.integer  "member_id"
@@ -41,6 +40,16 @@ ActiveRecord::Schema.define(version: 20170201183152) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "common_tasks", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "date_modifier"
+    t.integer  "owner_id"
+    t.index ["owner_id"], name: "index_common_tasks_on_owner_id"
   end
 
   create_table "communications", force: :cascade do |t|
@@ -79,6 +88,12 @@ ActiveRecord::Schema.define(version: 20170201183152) do
   create_table "graduating_classes", force: :cascade do |t|
     t.integer  "year"
     t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "identities", force: :cascade do |t|
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -127,6 +142,8 @@ ActiveRecord::Schema.define(version: 20170201183152) do
     t.integer  "school_id"
     t.string   "mongo_id"
     t.boolean  "children_in_birmingham_school"
+    t.integer  "identity_id"
+    t.index ["identity_id"], name: "index_members_on_identity_id"
   end
 
   create_table "neighborhoods", force: :cascade do |t|
@@ -146,6 +163,22 @@ ActiveRecord::Schema.define(version: 20170201183152) do
     t.datetime "updated_at",       null: false
   end
 
+  create_table "network_event_tasks", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "completed_at"
+    t.integer  "common_task_id"
+    t.integer  "network_event_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "due_date"
+    t.string   "date_modifier"
+    t.integer  "owner_id"
+    t.index ["common_task_id"], name: "index_network_event_tasks_on_common_task_id"
+    t.index ["network_event_id"], name: "index_network_event_tasks_on_network_event_id"
+    t.index ["owner_id"], name: "index_network_event_tasks_on_owner_id"
+  end
+
   create_table "network_events", force: :cascade do |t|
     t.string   "name"
     t.integer  "location_id"
@@ -160,9 +193,8 @@ ActiveRecord::Schema.define(version: 20170201183152) do
     t.text     "notes"
     t.string   "status"
     t.string   "mongo_id"
+    t.index ["program_id"], name: "index_network_events_on_program_id"
   end
-
-  add_index "network_events", ["program_id"], name: "index_network_events_on_program_id"
 
   create_table "organization_assignments", force: :cascade do |t|
     t.integer  "network_event_id"
@@ -264,10 +296,9 @@ ActiveRecord::Schema.define(version: 20170201183152) do
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
     t.boolean  "admin",                  default: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "volunteer_assignments", force: :cascade do |t|
     t.integer  "member_id"

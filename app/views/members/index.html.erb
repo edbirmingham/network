@@ -3,22 +3,119 @@
     <span class="glyphicon glyphicon-plus"></span>
     New Member
   <% end %>
-  <%= link_to members_path(format: :csv), class: 'btn btn-primary' do %>
-   <span class="glyphicon glyphicon-save"></span>
-   Download
- <% end %>
+
   <h1>Listing members</h1>
 
-  <%= form_tag members_path, :method => :get do %>
-    <div class="input-group">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="submit" name="commit">Go!</button>
-      </span>
-      <%= text_field_tag 'q',
-            params[:q],
-            class: 'form-control',
-            placeholder: 'Search for...',
-            autofocus: true %>
+  <%= form_tag members_path, :method => :get, class: "form-horizontal"  do %>
+    <div class="container">  
+      <div class="input-group">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="submit" name="commit">Go!</button>
+        </span>
+        <%= text_field_tag 'q',
+          params[:q],
+          class: 'form-control',
+          placeholder: 'Search for...',
+          autofocus: true %>
+      </div>
+      <br><br>
+       
+      <div class="form-group">
+        <div class="col-md-12">
+          <%= select_tag :identity_ids, 
+            options_from_collection_for_select(
+              Identity.order(:name).all, 
+              :id, 
+              :name,
+              params[:identity_ids]
+            ),
+            class: "select2 form-control", 
+            multiple: true, 
+            data: { placeholder: 'Filter by Identities' }  
+          %>
+        </div>
+       </div>
+ 
+      <div class="form-group">
+        <div class="col-md-12">
+          <%= select_tag :school_ids,
+                options_from_collection_for_select(
+                  School.order(:name).all,
+                  :id,
+                  :name,
+                  params[:school_ids]
+                ),
+                class: "select2 form-control",
+                multiple: true,
+                data: { placeholder: 'Filter by school' }  %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-12">
+          <%= select_tag :organization_ids,
+                options_from_collection_for_select(
+                  Organization.order(:name).all,
+                  :id,
+                  :name,
+                  params[:organization_ids]
+                ),
+                class: "select2 form-control",
+                multiple: true,
+                data: { placeholder: 'Filter by organization' }  %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-12">
+          <%= select_tag :neighborhood_ids,
+                options_from_collection_for_select(
+                  Neighborhood.order(:name).all,
+                  :id,
+                  :name,
+                  params[:neighborhood_ids]
+                ),
+                class: "select2 form-control",
+                multiple: true,
+                data: { placeholder: 'Filter by neighborhood' }  %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-12">
+          <%= select_tag :cohort_ids, 
+                options_from_collection_for_select(
+                  Cohort.order(:name).all, 
+                  :id, 
+                  :name,
+                  params[:cohort_ids]
+                ),
+                class: "select2 form-control", 
+                multiple: true, 
+                data: { placeholder: 'Filter by cohort' }  %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-12">
+          <%= select_tag :graduating_class_ids,
+                options_from_collection_for_select(
+                  GraduatingClass.order(:year).all,
+                  :id,
+                  :name,
+                  params[:graduating_class_ids]
+                ),
+                class: "select2 form-control",
+                multiple: true,
+                data: { placeholder: 'Filter by graduating class' } %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-12">
+          <%= submit_tag 'Filter members', name: 'commit', class: 'btn btn-secondary'%>
+        </div>
+      </div>
     </div>
   <% end %>
 
@@ -51,4 +148,11 @@
     </tbody>
   </table>
   <%= paginate @members %>
+  
+  <div>
+    <%= link_to members_path({format: :csv}.merge(members_download_query_params)), class: 'btn btn-primary btn__download' do %>
+      <span class="glyphicon glyphicon-save"></span>
+      Download
+    <% end %>
+  </div>
 </div>

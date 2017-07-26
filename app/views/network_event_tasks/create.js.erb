@@ -1,0 +1,8 @@
+// render new task list table row
+$("#task-list").append("<%= j render @network_event_task %>");
+
+// update task-list heading
+$("#total-count").text( parseInt( $("#total-count").text() ) + 1);
+
+// reset creation form
+document.getElementById("new-task-form").reset();

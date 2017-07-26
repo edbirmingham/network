@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class CheckInsControllerTest < ActionController::TestCase
-  include Devise::TestHelpers 
-  
+  include Devise::Test::ControllerHelpers
+
   setup do
     @network_event = network_events(:tuggle_network)
     @participation = participations(:attendee)
@@ -16,13 +16,13 @@ class CheckInsControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    get :new, network_event_id: @network_event
+    get :new, params: { network_event_id: @network_event }
     assert_response :success
   end
 
   test "should create participation during check in" do
     assert_difference('Participation.count') do
-       post :create, participation: { member_id: @participation.member_id, network_event_id: @participation.network_event_id, level: @participation.level }, network_event_id: @participation.network_event_id, xhr: true
+       post :create, params: { participation: { member_id: @participation.member_id, network_event_id: @participation.network_event_id, level: @participation.level }, network_event_id: @participation.network_event_id }, xhr: true
     end
     assert_response :success
   end

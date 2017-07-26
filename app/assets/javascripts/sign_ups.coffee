@@ -1,4 +1,4 @@
-$(document).on 'ready page:load', ->
+$(document).on 'ready page:load turbolinks:load', ->
   $('#return-button').hide()
   $('#confirm').hide()
   $('#update').hide()
@@ -13,7 +13,7 @@ $(document).on 'ready page:load', ->
     $('#first_name').text(e.params.data.first_name)
     $('#last_name').text(e.params.data.last_name)
     $('#phone').text(e.params.data.phone)
-    $('#identity').text(e.params.data.identity)
+    $('#identity_id').text(e.params.data.identity_id)
     $('#email').text(e.params.data.email)
     $('#children_in_birmingham_school').prop("checked", e.params.data.children_in_birmingham_school)
     
@@ -25,14 +25,14 @@ $(document).on 'ready page:load', ->
     $('#create :input').val('')
     $('#member_heading').text('Create Member')
     $('#new_edit_submit').val('Create Member')
-    $('#member_identity').val('Student').trigger('change')
+    $('#member_identity_id').val('Student').trigger('change')
     $('#graduating').show()
     $('#school').show()
     $('#member_school_id').val('').trigger('change')
     $('#member_graduating_class_id').val('').trigger('change')
     $('#create').show()
     
-  $('#member_identity').on 'select2:select', (e) ->
+  $('#member_identity_id').on 'select2:select', (e) ->
     selected = e.params.data.text
     if selected is 'Student'
       $('#school').show() 
@@ -62,13 +62,13 @@ $(document).on 'ready page:load', ->
     $('#member_last_name').val(member.last_name)
     $('#member_phone').val(member.phone)
     $('#member_email').val(member.email)
-    $('#member_identity').val(member.identity).trigger('change')
-    if member.identity is 'Student'
+    $('#member_identity_id').val(member.identity_id).trigger('change')
+    if member.identity_id is 1
       $('#graduating').show() 
       $('#school').show() 
       $('#member_school_id').val(member.school_id).trigger('change')
       $('#member_graduating_class_id').val(member.graduating_class_id).trigger('change')
-    else if member.identity is 'Parent' or member.identity is 'Educator'
+    else if member.identity is 2 or member.identity is 3
       $('#school').show() 
       $('#graduating').hide() 
       $('#member_school_id').val(member.school_id).trigger('change')

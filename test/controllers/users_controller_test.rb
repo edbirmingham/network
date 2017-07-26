@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     @user = users(:one)
@@ -15,13 +15,13 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should show user" do
-    get :show, id: @user
+    get :show, params: { id: @user }
     assert_response :success
   end
 
   test "should destroy user" do
     assert_difference('User.count', -1) do
-      delete :destroy, id: @user
+      delete :destroy, params: { id: @user }
     end
 
     assert_redirected_to users_path

@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class ProgramsControllerTest < ActionController::TestCase
-  include Devise::TestHelpers 
-  
+  include Devise::Test::ControllerHelpers
+
   setup do
     @program = programs(:network_night)
     sign_in users(:one)
@@ -21,30 +21,30 @@ class ProgramsControllerTest < ActionController::TestCase
 
   test "should create program" do
     assert_difference('Program.count') do
-      post :create, program: { name: @program.name + 'test', user_id: @program.user_id }
+      post :create, params: { program: { name: @program.name + 'test', user_id: @program.user_id } }
     end
 
     assert_redirected_to program_path(assigns(:program))
   end
 
   test "should show program" do
-    get :show, id: @program
+    get :show, params: { id: @program }
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @program
+    get :edit, params: { id: @program }
     assert_response :success
   end
 
   test "should update program" do
-    patch :update, id: @program, program: { name: @program.name + 'test', user_id: @program.user_id }
+    patch :update, params: { id: @program, program: { name: @program.name + 'test', user_id: @program.user_id } }
     assert_redirected_to program_path(assigns(:program))
   end
 
   test "should destroy program" do
     assert_difference('Program.count', -1) do
-      delete :destroy, id: @program
+      delete :destroy, params: { id: @program }
     end
 
     assert_redirected_to programs_path

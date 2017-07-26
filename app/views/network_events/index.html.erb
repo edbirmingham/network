@@ -7,6 +7,12 @@
   
 <%= form_tag network_events_path, :method => :get, class: "form-horizontal" do %>
   <div class="container">
+    <div class="form-group">
+      <div class="col-md-12">
+        <%= check_box_tag "unscheduled_events_only",nil,@unscheduled_only %>
+        <%= label_tag "Unscheduled Events Only" %>
+      </div>
+    </div>
     <div class='col-md-5'>
         <div class="form-group">
             <div class='input-group date' id='startdatepicker'>
@@ -129,45 +135,51 @@
 <% end %>
 
 </div>
-
-<div class="table-responsive">
-  <table class="table table-striped table-bordered table-hover">
-    <thead>
-      <tr>
-        <th><%= sortable "name"%></th>
-        <th><%= sortable "status"%></th>
-        <th><%= sortable "program"%></th>
-        <th><%= sortable "location"%></th>
-        <th>Organization(s)</th>
-        <th>Volunteer(s)</th>
-        <th><%= sortable "scheduled_at", "Scheduled at"%></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <%= content_tag_for(:tr, @network_events) do |network_event| %>
-        <td><%= network_event.name %></td>
-        <td><%= network_event.status.try(:titleize) %></td>
-        <td><%= network_event.program.try(:name) %></td>
-        <td><%= network_event.location.try(:name) %></td>
-        <td><%= network_event.organizations.map(&:name).join(', ') %></td>
-        <td><%= network_event.volunteers.map(&:name).join(', ') %></td>
-        <td><%= network_event.scheduled_at.to_formatted_s(:long) %></td>
-        <td><%= link_to 'Show', network_event %></td>
-        <td><%= link_to 'Edit', edit_network_event_path(network_event) %></td>
-        <td><%= link_to 'Destroy', network_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= button_tag "Copy", data: {"clipboard-text" => clip_event_info(network_event), "toggle" => "tooltip", "placement" => "right"}, :title => clip_event_info(network_event), :class =>'copy_button btn btn-primary'%></td>
-      <% end %>
-    </tbody>
-  </table>
-  <%= paginate @network_events %>
+<%= form_tag(new_network_event_path, method: "get") do %>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Select</th>
+          <th><%= sortable "name"%></th>
+          <th><%= sortable "status"%></th>
+          <th><%= sortable "program"%></th>
+          <th><%= sortable "location"%></th>
+          <th>Organization(s)</th>
+          <th>Volunteer(s)</th>
+          <th><%= sortable "scheduled_at", "Scheduled at"%></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
   
-  <%= link_to network_events_path({format: :csv}.merge(download_query_params)), class: 'btn btn-primary' do %>
-    <span class="glyphicon glyphicon-save"></span>
-    Download
-  <% end %>
-</div>
+      <tbody>
+        <%= content_tag_for(:tr, @network_events) do |network_event| %>
+          <td><%= check_box_tag "network_event_ids[]", network_event.id %></td>
+          <td><%= network_event.name %></td>
+          <td><%= network_event.status.try(:titleize) %></td>
+          <td><%= network_event.program.try(:name) %></td>
+          <td><%= network_event.location.try(:name) %></td>
+          <td><%= network_event.organizations.map(&:name).join(', ') %></td>
+          <td><%= network_event.volunteers.map(&:name).join(', ') %></td>
+          <td><%= network_event.scheduled_at.try(:to_formatted_s, :long)%></td>
+          <td><%= link_to 'Show', network_event %></td>
+          <td><%= link_to 'Edit', edit_network_event_path(network_event) %></td>
+          <td><%= link_to 'Destroy', network_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= button_tag "Clip", type: 'button', data: {"clipboard-text" => clip_event_info(network_event), "toggle" => "tooltip", "placement" => "right"}, :title => clip_event_info(network_event), :class =>'clip_button btn btn-primary'%></td>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate @network_events %>
+    
+    <%= submit_tag "Copy Events", class: 'btn btn-primary' do %>
+      <span class="glyphicon glyphicon-plus"></span>
+    <% end %>
+    <%= link_to network_events_path({format: :csv}.merge(network_events_download_query_params)), class: 'btn btn-primary' do %>
+      <span class="glyphicon glyphicon-save"></span>
+      Download
+    <% end %>
+  </div>
+ <% end %> 

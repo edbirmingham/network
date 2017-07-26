@@ -1,0 +1,16 @@
+<tr class="network_event_task" id="network_event_task_<%= @network_event_task.id %>">
+  <td class="task_name"><%= best_in_place @network_event_task, :name, :as => :input %></td>
+  <td class="task_due_date"><%= @network_event_task.formatted_due_date %> </td>
+  <td class="task_completed_at"><%= @network_event_task.formatted_completed_at %> </td>
+  <td class="task_owner"><%= best_in_place @network_event_task, :owner_id, :as => :select, 
+                            :collection => User.all.map { |u| [u.id, u.email]} %></td>
+  <td class="task_mark">
+    <% if not @network_event_task.completed_at.present? %>
+      <%= button_to("Mark Completed", network_event_task_path(@network_event_task) , remote: true, method: :patch, name: "task_button", class:"btn btn-primary task_button",
+                    params: { :"network_event_task[completed_at]" => Time.now }) %>
+    <% else %>
+      Completed 
+    <% end %>
+  </td>
+  <td><%= link_to 'Destroy', @network_event_task, method: :delete, remote: true, data: { confirm: 'Are you sure?' } %></td>
+</tr>

@@ -1,5 +1,5 @@
 class Users::PasswordsController < Devise::PasswordsController
-  skip_filter :require_admin_user!
+  skip_before_action :require_admin_user!
   
   # GET /resource/password/new
   # def new

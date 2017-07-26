@@ -56,10 +56,14 @@
   <div class="form-group">
     <%= f.label :identity, class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.select :identity,
-            Member.identities,
-            {},
-            class: "select2 form-control" %>
+      <%= f.collection_select(
+        :identity_id, 
+        Identity.all,
+        :id,
+        :name,
+        {},
+        {class: 'select2 form-control'})
+      %>
     </div>
   </div>
   

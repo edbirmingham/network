@@ -1,4 +1,4 @@
-class CreateGraduatingClassAssignments < ActiveRecord::Migration
+class CreateGraduatingClassAssignments < ActiveRecord::Migration[5.1]
   def change
     create_table :graduating_class_assignments do |t|
       t.integer :graduating_class_id
