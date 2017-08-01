@@ -6,8 +6,12 @@ class NetworkEventsController < ApplicationController
   # GET /network_events.json
   # GET /network_events.csv
   def index
-    @network_events = filtered_events.page params[:page]
+    @network_events = filtered_events
     @unscheduled_only = params[:unscheduled_events_only]
+    respond_to do |format|
+      format.any(:html, :json) { @network_events = @network_events.page params[:page] }
+      format.csv
+    end
   end
 
   # GET /network_events/1

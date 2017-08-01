@@ -34,4 +34,31 @@ class ActiveSupport::TestCase
     assert condition, "Assert Guard: #{message}"
   end
   
+  # Assertion that ensures a collection or ActiveRecord scopish object has 
+  # pagination.  A direct way of testing could not be found so an indirect
+  # test is used that checks for a pagination specific method existing.
+  #
+  # Example:
+  # 
+  #   assert_pagination assigns(:network_events), 
+  #     "Network events should be listed with pagination."
+  #
+  def assert_pagination(collection, message='')
+    assert collection.respond_to?(:total_pages), message
+  end
+  
+  # Refutation that ensures a collection or ActiveRecord scopish object does 
+  # not have pagination.  A direct way of testing could not be found so an 
+  # indirect test is used that checks for a pagination specific method 
+  # not existing on the collection.
+  #
+  # Example:
+  # 
+  #   refute_pagination assigns(:network_events), 
+  #     "Network events should be exported without pagination."
+  #
+  def refute_pagination(collection, message='')
+    refute collection.respond_to?(:total_pages), message
+  end
+  
 end
