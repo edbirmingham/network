@@ -218,3 +218,30 @@
   </table>
 </div>
 
+<h2>Messages</h2>
+<p>
+  <%= link_to new_network_event_message_path(@network_event), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-envelope"></span>
+    New Message
+  <% end %>
+</p>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Subject</th>
+        <th>Sender</th>
+        <th>Created</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @network_event.messages.order('created_at DESC')) do |message| %>
+        <td><%= link_to message.subject, network_event_message_path(@network_event, message) %></td>
+        <td><%= link_to message.sender.try(:email), user_path(message.sender) %></td>
+        <td><%= message.created_at.to_s(:long) %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>

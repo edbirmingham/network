@@ -15,6 +15,13 @@ ActiveRecord::Schema.define(version: 2018_06_30_132425) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "adhoc_recipients", force: :cascade do |t|
+    t.string "email", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_adhoc_recipients_on_email"
+  end
+
   create_table "affiliations", force: :cascade do |t|
     t.integer "member_id"
     t.integer "organization_id"
@@ -221,6 +228,27 @@ ActiveRecord::Schema.define(version: 2018_06_30_132425) do
     t.string "race"
     t.string "ethnicity"
     t.index ["identity_id"], name: "index_members_on_identity_id"
+  end
+
+  create_table "message_recipients", force: :cascade do |t|
+    t.bigint "message_id", null: false
+    t.integer "recipient_id", null: false
+    t.string "recipient_type", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["message_id"], name: "index_message_recipients_on_message_id"
+    t.index ["recipient_id", "recipient_type"], name: "index_message_recipients_on_recipient_id_and_recipient_type"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer "network_event_id", null: false
+    t.integer "sender_id", null: false
+    t.string "subject", null: false
+    t.text "body", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["network_event_id"], name: "index_messages_on_network_event_id"
   end
 
   create_table "neighborhoods", force: :cascade do |t|

@@ -94,4 +94,15 @@ Rails.application.configure do
 
   # Letsencrypt SSL certificate generation middleware
   config.middleware.insert_before ActionDispatch::SSL, Letsencrypt::Middleware
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              ENV['SENDGRID_HOST'], #smtp.sendgrid.net
+    port:                 587,
+    domain:               'edbirmingham.org',
+    user_name:            ENV['SENDGRID_USERNAME'],
+    password:             ENV['SENDGRID_PASSWORD'],
+    authentication:       'plain',
+    enable_starttls_auto: true 
+  }
 end

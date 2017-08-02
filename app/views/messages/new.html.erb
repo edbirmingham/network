@@ -1,0 +1,56 @@
+<div class="page-header">
+  <%= link_to network_event_path(network_event), class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+</div>
+
+<h1> New Message </h1>
+
+<link href="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.css" rel="stylesheet">
+<script src="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.min.js"></script>
+<%= javascript_include_tag "messages" %>
+
+<%= form_for([network_event, @message], html: { class: "form-horizontal", role: "form" }) do |f| %>
+  <% if @message.errors.any? %>
+    <div class="alert alert-danger alert-dismissable" role="alert">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <h4><%= pluralize(@message.errors.count, "error") %> prohibited this event from being saved:</h4>
+
+      <ul>
+      <% @message.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :subject, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :subject, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :message_recipient_ids, 'Search Contacts', class: "col-sm-2 control-label" %>
+    <div class="col-sm-5">
+      <%= select :message, :recipient_ids,
+            @message.recipient_ids,
+            {},
+            class: "select2 ajax form-control", 
+            multiple: true, 
+            data: { tags: true, ajax: { url: contacts_network_event_path(network_event) }, placeholder: 'Search by name' }  %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :body, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_area :body, class: "form-control", rows: 10, cols: 4 %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit "Send", class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>

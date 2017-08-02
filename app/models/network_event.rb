@@ -38,6 +38,8 @@ class NetworkEvent < ApplicationRecord
 
   has_many :tasks, dependent: :destroy
 
+  has_many :messages, dependent: :destroy
+
   accepts_nested_attributes_for :tasks
 
   def self.in_date_range(start_date, end_date)

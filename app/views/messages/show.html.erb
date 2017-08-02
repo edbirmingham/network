@@ -1,0 +1,29 @@
+<div class="page-header">
+  <%= link_to network_event_path(network_event), class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+</div>
+
+<dl class="dl-horizontal text-left">
+  <dt>Subject:</dt>
+  <dd><%= @message.subject %></dd>
+
+  <dt>Body:</dt>
+  <dd><%= @message.body %></dd>
+
+  <dt>Status:</dt>
+  <dd><%= @message.status.try(:titleize) %></dd>
+
+  <dt>Sender:</dt>
+  <dd><%= @message.sender.try(:email) %></dd>
+
+  <dt>Recipients:</dt>
+
+  <%- @message.member_recipients.each do |member| %>
+    <dd><%= member.try(:email) %></dd>
+  <% end %>
+  <%- @message.adhoc_recipients.each do |recipient| %>
+    <dd><%= recipient.email %></dd>
+  <% end %>
+</dl>

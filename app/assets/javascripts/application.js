@@ -14,11 +14,10 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require turbolinks
-//= require_tree .
 //= require moment
+//= require select2
 //= require bootstrap-datetimepicker
 //= require bootstrap-editable
 //= require bootstrap-editable-rails
 //= require select2-full
 //= require zeroclipboard
-
