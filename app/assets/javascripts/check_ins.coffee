@@ -4,6 +4,7 @@
 $(document).on 'ready page:load turbolinks:load', ->
   event_id = $('#network_event_id').val()
   member_level = $('#level').val()
+  participation_type = $('#participation_type').val()
   $('table.check-in-table :button').click ->
     table_row = $(this).closest("tr")
     row_member_id = $(this).siblings(".row_member_id").val()
@@ -11,7 +12,7 @@ $(document).on 'ready page:load turbolinks:load', ->
       type: "POST",
       url: "/network_events/#{event_id}/check_ins/",
       dataType: "json"
-      data: { participation: { member_id: row_member_id, network_event_id: event_id, level: member_level} },
+      data: { participation: { member_id: row_member_id, network_event_id: event_id, level: member_level, participation_type: participation_type} },
       success:(data) ->
         table_row.fadeOut(2000)
       error:(data) ->
