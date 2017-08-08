@@ -230,15 +230,18 @@
         <th>Phone</th>
         <th>Identity</th>
         <th>Affiliation</th>
+        <th>Type</th>
       </tr>
     </thead>
 
     <tbody>
-      <%= content_tag_for(:tr, @network_event.participants.order(:last_name, :first_name)) do |participant| %>
-        <td><%= link_to participant.name, participant %></td>
-        <td><%= participant.email %></td>
-        <td><%= participant.phone %></td>
-        <td><%= participant.identity.try(:name) %></td>
+      <%= content_tag_for(:tr, @participations) do |participation| %>
+        <td><%= link_to participation.member.name, participation.member %></td>
+        <td><%= participation.member.email %></td>
+        <td><%= participation.member.phone %></td>
+        <td><%= participation.member.identity.try(:name) %></td>
+        <td></td>
+        <td><%= participation.participation_type.try(:titlecase) %></td>
       <% end %>
     </tbody>
   </table>
