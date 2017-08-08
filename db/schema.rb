@@ -136,11 +136,12 @@ ActiveRecord::Schema.define(version: 20170726180126) do
     t.string   "extra_groups"
     t.string   "other_networks"
     t.integer  "user_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.integer  "graduating_class_id"
     t.integer  "school_id"
     t.string   "mongo_id"
+    t.boolean  "children_in_birmingham_school"
     t.integer  "identity_id"
     t.index ["identity_id"], name: "index_members_on_identity_id"
   end
