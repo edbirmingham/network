@@ -71,6 +71,12 @@
     <div class="container">
 
       <div class="network-template">
+        <% if content_for? :page_header %>
+          <div class="page-header">
+            <%= yield :page_header %>
+            <h1><%= title %></h1>
+          </div>
+        <% end %>
         <%= yield %>
       </div>
 
