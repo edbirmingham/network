@@ -8,8 +8,9 @@ class User < ApplicationRecord
   has_many :common_tasks
   has_many :network_event_tasks
   
-  def self.best_in_place_options
-    options = User.all.map {|u| [u.id, u.email]} 
+  def self.editable_options
+    options = User.all.map {|u| { value: u.id, text: u.email } }
     options = [[nil, '']] + options
+    options.to_json
   end
 end
