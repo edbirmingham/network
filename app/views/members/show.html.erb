@@ -1,4 +1,4 @@
-<div class="page-header">
+<% content_for :page_header do %>
   <%= link_to members_path, class: 'btn btn-default' do %>
     <span class="glyphicon glyphicon-list-alt"></span>
     Back
@@ -7,8 +7,7 @@
     <span class="glyphicon glyphicon-pencil"></span>
     Edit
   <% end %>
-  <h1>Show member</h1>
-</div>
+<% end %>
 
 <dl class="dl-horizontal text-left">
   <dt>First name:</dt>

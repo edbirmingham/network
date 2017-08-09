@@ -1,10 +1,9 @@
-<div class="page-header">
+<% content_for :page_header do %>
   <%= link_to users_path, class: 'btn btn-default' do %>
     <span class="glyphicon glyphicon-list-alt"></span>
     Back
   <% end %>
-  <h1>Show user</h1>
-</div>
+<% end %>
 
 <dl class="dl-horizontal text-left">
   <dt>Email:</dt>

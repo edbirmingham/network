@@ -1,6 +1,4 @@
-<div class="page-header">
-  <h1>Member Sign Up</h1> 
-  <h1><%= @network_event.name %></h1>
+<% content_for :page_header do %>
   <div>
       <%= select_tag :member_ids, 
             options_from_collection_for_select([], :id, :text),
@@ -8,7 +6,9 @@
             multiple: false, 
             data: { ajax: { url: members_path }, placeholder: 'Find Member' }  %>
   </div>
-</div>
+  <%= content_for :title, t(".title", name: @network_event.name) %>
+<% end %>
+
 <div id="create">
   <%= render 'create' %>
 </div>

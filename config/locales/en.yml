@@ -23,3 +23,153 @@ en:
   organizations:
     index:
       title: "Listing Organization"
+    edit:
+      title: "Editing Organization"
+    new:
+      title: "New Organization"
+    show:
+      title: "Show Organization"
+  check_ins:
+    index:
+      title: "Listing Events"
+    new:
+      title: "Member Check In"
+  cohorts:
+    edit:
+      title: "Editing Cohort"
+    index:
+      title: "Listing Cohorts"
+    new:
+      title: "New Cohort"
+    show:
+      title: "Show Cohort"
+  communications:
+    edit:
+      title: "Editing Communication"
+    index:
+      title: "Listing Communications"
+    new:
+      title: "New Communication with %{name}"
+    show:
+      title: "Show Communication"
+  extracurricular_activities:
+    edit:
+      title: "Editing Extracurricular Activity"
+    index:
+      title: "Listing Extracurricular Activities"
+    new:
+      title: "New Extracurricular Activity"
+    show:
+      title: "Show Extracurricular Activity"
+  graduating_classes:
+    edit:
+      title: "Editing Graduating Class"
+    index:
+      title: "Listing Graduating Classes"
+    show:
+      title: "Show Graduating Class"
+  identities:
+    edit:
+      title: "Editing Identity"
+    index:
+      title: "Listing Identities"
+    new:
+      title: "New Identity"
+    show:
+      title: "Show Identity"
+  locations:
+    edit:
+      title: "Editing Location"
+    index:
+      title: "Listing Locations"
+    edit:
+      title: "Editing Member"
+    new:
+      title: "New Location"
+    show:
+      title: "Show location"
+  common_tasks:
+    edit:
+      title: "Editing Common Task"
+    index:
+      title: "Listing Common Tasks"
+    new:
+      title: "New Common Task"
+    show:
+      title: "Show Common Tasks"
+  members:
+    index:
+      title: "Listing Members"
+    new:
+      title: "New member"
+    show:
+      title: "Show Member"
+  neighborhoods:
+    edit:
+      title: "Editing Neighborhood"
+    index:
+      title: "Listing Neighborhoods"
+    new:
+      title: "New Neighborhood"
+    show:
+      title: "Show Neighborhood"
+  network_actions:
+    edit:
+      title: "Editing Action"
+    index:
+      title: "Listing Actions"
+    new:
+      title: "New Action"
+    show:
+      title: "Show Action"
+  network_events:
+    edit:
+      title: "Editing Event"
+    index:
+      title: "Listing Events"
+    show:
+      title: "Show Event"
+  programs:
+    edit:
+      title: "Editing Program"
+    index:
+      title: "Listing Programs"
+    new:
+      title: "New Program"
+    show:
+      title: "Show Program"
+  schools:
+    edit:
+      title: "Editing School"
+    index:
+      title: "Listing Schools"
+    new:
+      title: "New School"
+    show:
+      title: "Show School"
+  network_event_tasks:
+    index:
+      title: "Listing Event Tasks"
+    update:
+      title: "NetworkEventTasks#update"
+  users:
+    edit:
+      title: "Editing User"
+    index:
+      title: "Listing Users"
+    show:
+      title: "Show User"
+  sign_ups:
+    index:
+      title: "Listing Events"
+    new:
+      title: "%{name}: Member Sign Up"
+  talents:
+    edit:
+      title: "Editing Talent"
+    index:
+      title: "Listing Talents"
+    new:
+      title: "New Talent"
+    show:
+      title: "Show Talent"

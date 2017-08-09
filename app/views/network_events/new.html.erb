@@ -1,14 +1,14 @@
-<div class="page-header">
+<% content_for :page_header do %>
   <%= link_to network_events_path, class: 'btn btn-default' do %>
     <span class="glyphicon glyphicon-list-alt"></span>
     Back
   <% end %>
-  <% if copy_network_events? %>
-    <h1>Copy event(s)</h1>
-  <% else %>
-    <h1>New event</h1>
-  <% end %>
-</div>
+  <% if copy_network_events?
+       content_for :title, "Copy Event(s)"
+     else
+       content_for :title, "New Event"
+     end %>
+<% end %>
 <% if flash[:alert] %>
   <div class="success alert-success" role="alert">
   <%= alert %>

@@ -1,9 +1,8 @@
-<div class="page-header">
-  <h1>Member Check In</h1>
+<% content_for :page_header do %>
   <%= hidden_field_tag "network_event_id", @network_event_id %>
   <%= hidden_field_tag "level", @level %>
   <%= hidden_field_tag "participation_type", 'checked_in' %>
-</div>
+<% end %>
 
 <div class="table-responsive">
   <table class="check-in-table table table-striped table-bordered table-hover">
