@@ -1,6 +1,6 @@
 class Member < ApplicationRecord
   default_scope { order(:last_name, :first_name) }
-  
+
   include PgSearch
 
   pg_search_scope :search_by_full_name,

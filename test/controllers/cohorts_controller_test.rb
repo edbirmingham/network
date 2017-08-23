@@ -32,6 +32,28 @@ class CohortsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should show cohort's cohortians" do
+    get :show, params: { id: cohorts(:green) }
+    assert_select 'td', 'Rosa Parks'
+  end
+
+  test "should not show cohortians from other cohorts" do
+    get :show, params: { id: cohorts(:green) }
+    assert_select 'td', text: 'Martin King', count: 0
+  end
+
+  test "should have cohort id hidden field" do
+    get :show, params: { id: cohorts(:green) }
+    assert_select "form input[name=cohort_id][type=hidden]" do
+      assert_select "[value=?]", cohorts(:green).id.to_s
+    end
+  end
+
+  test "should have member multi-select" do
+    get :show, params: { id: cohorts(:green) }
+    assert_select "form select[name='member_ids[]']"
+  end
+
   test "should get edit" do
     get :edit, params: { id: @cohort }
     assert_response :success
