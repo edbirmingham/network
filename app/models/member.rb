@@ -58,7 +58,7 @@ class Member < ApplicationRecord
   end
 
   def text
-    "#{name}  (#{email})"
+    name
   end
 
   def graduation_year
