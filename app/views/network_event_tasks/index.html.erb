@@ -107,6 +107,7 @@
         <th>Name</th>
         <th>Network event</th>
         <th>Owner</th>
+        <th>School</th>
         <th>Due date</th>
         <th>Common task</th>
         <th>Completed on</th>
@@ -120,7 +121,7 @@
         <td><%= link_to(task.network_event.name, network_event_path(task.network_event)) if task.network_event %></td>
         <td><a class="task-owner" data-url="network_event_tasks/<%= task.id %>" 
                data-source="<%= User.editable_options %>"><%= task.owner.try(:email) %></a></td>
-               
+        <td><%= task.network_event.schools.map {|school| school.name}.join(", ") %></td>     
         <td class="date-cell" id="date_<%= task.id %>">
           <span class="date-view"><%= task.formatted_due_date %></span>
           <div class="date-form form-inline" data-task-id="<%= task.id %>">
