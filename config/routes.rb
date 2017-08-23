@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :talents
   resources :schools
   resources :cohorts
+  resources :cohortians, only: [:create, :destroy]
   resources :graduating_classes
   resources :network_actions
   resources :programs

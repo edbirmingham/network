@@ -77,6 +77,11 @@ class MembersController < ApplicationController
         where(identities: {id: params[:identity_ids]})
       end
 
+      # Include cohorts to prevent n+1
+      if params[:include] == 'cohorts'
+        members = members.includes(:cohorts)
+      end
+
       # limit the size of xml_http_request? responses
       if request.xhr?
         members = members.limit(25)
