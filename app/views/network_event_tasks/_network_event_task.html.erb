@@ -1,9 +1,21 @@
 <tr class="network_event_task" id="network_event_task_<%= @network_event_task.id %>">
-  <td class="task_name"><%= best_in_place @network_event_task, :name, :as => :input %></td>
-  <td class="task_due_date"><%= @network_event_task.formatted_due_date %> </td>
+  <td class="task_name"><a class="task-name" data-url="/network_event_tasks/<%= @network_event_task.id %>"><%= @network_event_task.name %></a></td>
+   <td class="task_due_date"><span class="date-view"><%= @network_event_task.formatted_due_date %></span>
+            <div class="date-form form-inline" data-task-id="<%= @network_event_task.id %>">
+              <%= date_field_tag :due_date, if @network_event_task.due_date then @network_event_task.due_date.in_time_zone("Central Time (US & Canada)").strftime('%Y-%m-%d') end, class: "date-input" %>
+              <div class="form-group">
+              <%= button_tag "", type: 'button', class: "update-due-date btn btn-primary" do %>
+                <span class="glyphicon glyphicon-ok"></span>
+              <% end %>
+              <%= button_tag "", type: 'button', class: 'btn cancel-update' do %>
+                <span class="glyphicon glyphicon-remove"></span>
+              <% end %>
+              </div>
+            </div>   
   <td class="task_completed_at"><%= @network_event_task.formatted_completed_at %> </td>
-  <td class="task_owner"><%= best_in_place @network_event_task, :owner_id, :as => :select, 
-                            :collection => User.all.map { |u| [u.id, u.email]} %></td>
+     
+  <td class="task_owner"><a class="task-owner" data-url="/network_event_tasks/<%= @network_event_task.id %>" 
+               data-source="<%= User.editable_options %>"><%= @network_event_task.owner.try(:email) %></a></td>
   <td class="task_mark">
     <% if not @network_event_task.completed_at.present? %>
       <%= button_to("Mark Completed", network_event_task_path(@network_event_task) , remote: true, method: :patch, name: "task_button", class:"btn btn-primary task_button",

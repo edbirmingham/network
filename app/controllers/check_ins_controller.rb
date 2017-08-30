@@ -22,9 +22,10 @@ class CheckInsController < ApplicationController
     member_ids = participation_details[:member_ids]
     network_event_id = participation_details[:network_event_id]
     level = participation_details[:level]
+    participation_type = participation_details[:participation_type]
     error_ids =[]
     member_ids.each do |member_id|
-      participation_params = {member_id: member_id, network_event_id: network_event_id, level: level}
+      participation_params = {member_id: member_id, network_event_id: network_event_id, level: level, participation_type: participation_type}
       @participation = Participation.new(participation_params)
       @participation.user = current_user
       error_ids << member_id unless @participation.save
@@ -46,7 +47,7 @@ class CheckInsController < ApplicationController
   private
 
   def participation_params
-    params.require(:participation).permit(:member_id, :level, :network_event_id)
+    params.require(:participation).permit(:member_id, :level, :network_event_id, :participation_type)
   end
 
 end

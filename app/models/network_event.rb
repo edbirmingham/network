@@ -121,9 +121,9 @@ class NetworkEvent < ApplicationRecord
   
   def name_with_date
     if scheduled_at.present?
-      name + ' (' + scheduled_at.to_formatted_s(:long) + ')'
+      name + ' (' + scheduled_at.to_formatted_s(:long) + ', ' + location.name + ')'
     else
-      name
+      name + ' (at ' + location.name + ')'
     end
   end
 
@@ -155,6 +155,12 @@ class NetworkEvent < ApplicationRecord
     self.network_event_tasks.each do |task|
       scheduled_at = self.scheduled_at.in_time_zone("Central Time (US & Canada)")
       case task.date_modifier
+      when 'Day before event'
+        task.due_date = scheduled_at.end_of_day - 1.day
+      when 'Day of event'
+        task.due_date = scheduled_at.end_of_day
+      when '1 week after event'
+        task.due_date = scheduled_at.end_of_day + 1.week
       when 'Monday before event'
         task.due_date = scheduled_at.end_of_week(:tuesday) - 1.week
       when '2 Mondays before event'

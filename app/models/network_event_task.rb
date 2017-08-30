@@ -1,4 +1,9 @@
 class NetworkEventTask < ApplicationRecord
+  include PgSearch
+  
+  pg_search_scope :search_by_task_name,
+                  :against => [:name],
+                  :using => { :tsearch => {:prefix => true} }
   belongs_to :user
   belongs_to :owner, :class_name => "User"
   belongs_to :network_event
@@ -34,7 +39,9 @@ class NetworkEventTask < ApplicationRecord
   
   def as_json(options)
     result = super
-    result["completed_at"] = completed_at.in_time_zone("Central Time (US & Canada)").strftime(' %a, %B %e %Y')
+    if completed_at?
+      result["completed_at"] = completed_at.in_time_zone("Central Time (US & Canada)").strftime(' %a, %B %e %Y')
+    end
     result
   end
 end

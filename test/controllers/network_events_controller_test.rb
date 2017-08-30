@@ -8,6 +8,18 @@ class NetworkEventsControllerTest < ActionController::TestCase
     sign_in users(:one)
   end
 
+  test "should get json with pagination" do
+    get :index, params: { :format => :json }
+    assert_pagination assigns(:network_events),
+      "Events json should be paginated."
+  end
+  
+  test "should get index with pagination" do
+    get :index
+    assert_pagination assigns(:network_events),
+      "Events listing should be paginated."
+  end
+  
   test "should get index with default filter" do
     get :index
     assert_response :success
@@ -47,6 +59,16 @@ class NetworkEventsControllerTest < ActionController::TestCase
     assert_response :success
     assert assigns(:network_events).present?
     assert_equal 3, assigns(:network_events).length
+  end
+  
+  test "should get index with uncompleted transportation task" do
+    get :index, params: {
+      common_task_ids: [common_tasks(:two).id],
+      commit: "Filter events"
+    }
+    assert_response :success
+    assert assigns(:network_events).present?
+    assert_equal 1, assigns(:network_events).length
   end
 
   test "should get index with class of 2017" do
@@ -107,6 +129,16 @@ class NetworkEventsControllerTest < ActionController::TestCase
     assert_response :success
 
     assert_equal file_data('network_events.csv'), response.body
+  end
+  
+  test "should get csv without pagination" do
+    time = Time.local(2016, 8, 1, 10, 5, 0)
+    Timecop.travel(time) do
+      get :index, params: { :format => :csv }
+    end
+    
+    refute_pagination assigns(:network_events),
+      "Events csv export should not be paginated."
   end
 
   test "should get edit" do

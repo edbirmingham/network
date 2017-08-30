@@ -2,9 +2,6 @@ $(document).on 'ready page:load turbolinks:load', ->
   client = new ZeroClipboard($('.clip_button'))
   $('.clip_button').tooltip()
   
-  # initialize gem for inplace editing
-  $('.best_in_place').best_in_place()
-  
   $('#transport-datetimepicker').datetimepicker({
       showClear: true,
       format: 'YYYY-MM-DD hh:mm a',
@@ -46,9 +43,7 @@ $(document).on 'ready page:load turbolinks:load', ->
   $("#new-task-form").hide()
   $("#create-task-button").on "click", ->
     $("#new-task-form").show()
-    $("#create-task-button").html("Hide Form")
-    $("#create-task-button").on "click", ->
-      $("#new-task-form").hide()
+    $("#create-task-button").hide()
       
     
   # Task completion on event show page
@@ -57,3 +52,46 @@ $(document).on 'ready page:load turbolinks:load', ->
       $(this).children('td.task_completed_at').html(data.completed_at)
       $(this).children("td.task_mark").find(".task_button").replaceWith("Completed");
       $("#completed-count").text( parseInt( $("#completed-count").text() ) + 1);
+
+  #In-place editing
+  $.fn.editable.defaults.mode = 'inline'
+  $('a.task_name').editable
+    name: 'name'
+    resource: 'network_event_task'
+    type: 'text'
+  $('a.task_owner').editable
+    name: 'owner_id'
+    resource: 'network_event_task'
+    type: 'select'
+      
+  $('.date-form').hide()
+  $('.cancel-update').on 'click', ->
+    $(this).parents('.date-form').hide()
+    $(this).parents('.date-form').siblings('.date-view').show()
+    
+  #allow date textbox to come up
+  $('.date-view').on 'click', ->
+    $(this).hide()
+    $(this).siblings().show()
+    
+  $('.update-due-date').on 'click', ->
+    task_id = $(this).parent().parent().data('task-id')
+    date_input = $(this).parent().parent().children('.date-input').val()
+    new_date = new Date(date_input + " CST")
+    new_date.setHours(23,59,59,999)
+    $.ajax({
+      type: "PATCH",
+      url: "/network_event_tasks/#{task_id}/"
+      dataType: "json"
+      data: { network_event_task: { due_date: new_date } }
+      context: this
+      success:(data) ->
+        formatted_date = moment(data.due_date).format('ddd, MMMM D YYYY')
+        $(this).parents('.date-form').hide()
+        $(this).parents('.date-form').siblings('.date-view').text(formatted_date).show()
+      error:(data) ->
+        alert 'error updating due date'
+    })
+      
+      
+  

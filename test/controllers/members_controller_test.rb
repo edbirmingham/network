@@ -135,4 +135,67 @@ class MembersControllerTest < ActionController::TestCase
     assert_response :success
     assert assigns(:members) == [@member]
   end
+
+  test "should get JSON index" do
+    get :index, format: :json
+    assert_response :success
+  end
+
+  test "should get JSON Array from index" do
+    get :index, format: :json
+    json = JSON.parse(response.body)
+    assert json.is_a? Array
+  end
+
+  test "should get JSON Array from index with an id attribute" do
+    get :index, format: :json
+    json = JSON.parse(response.body)
+    assert json.first.key? "id"
+  end
+
+  test "should get JSON Array from index with an text attribute" do
+    get :index, format: :json
+    json = JSON.parse(response.body)
+    assert json.first.key? "text"
+  end
+
+  test "should get JSON Array from index with text attribute of name" do
+    get :index, format: :json
+    json = JSON.parse(response.body)
+    member = json.first
+    assert member["text"] = Member.find(member["id"]).name
+  end
+
+  test "should get JSON Array from index with text attribute of name and cohorts" do
+    assert_guard Cohortian.
+      where(cohort: cohorts(:purple), member: members(:martin)).
+      exists?,
+      "Martin must be in the purple cohort"
+
+    get :index,
+      format: :json,
+      params: { cohort_ids: [cohorts(:purple).id], include: 'cohorts' }
+
+    json = JSON.parse(response.body)
+    member_json = json.first
+    member = Member.find(member_json["id"])
+    member_text = "#{member.name} (#{member.cohorts.map(&:name).join(',')})"
+
+    assert_equal member_text, member_json["text"]
+  end
+
+  test "should get JSON Array from index with text attribute without parenthesis" do
+    assert_guard Cohortian.where(member: members(:george)).none?,
+      "George must not be in a cohort"
+
+    get :index,
+      format: :json,
+      params: { include: 'cohorts' }
+
+    json = JSON.parse(response.body)
+    member_json = json.select{|m| m["id"] == members(:george).id }.first
+
+    assert_equal members(:george).name, member_json["text"]
+  end
+
 end

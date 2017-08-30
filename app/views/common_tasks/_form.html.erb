@@ -25,7 +25,7 @@
             User.order(:email).all,
             :id,
             :email,
-            {},
+            { :include_blank => "No owner selected" },
             class: "select2 form-control" %>
       </div>
   </div>

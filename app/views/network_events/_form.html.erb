@@ -227,7 +227,7 @@
                       data: {placeholder: 'Select Date Modifier'} %>
             </div>
             <div class="col-md-3">
-              <%= event_task.collection_select :owner_id, User.all, :id, :email, {}, class: "select2 form-control task-field", disabled: true %>
+              <%= event_task.collection_select :owner_id, User.all, :id, :email, {:include_blank => "No owner selected"}, class: "select2 form-control task-field", disabled: true %>
             </div>
               <%= event_task.hidden_field :common_task_id , disabled: true, class: "task-field" %>
             <div class="col-sm-1">

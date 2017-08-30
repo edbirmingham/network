@@ -1,9 +1,11 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
-$(document).on 'ready page:load', ->
+$(document).on 'ready page:load turbolinks:load', ->
   event_id = $('#network_event_id').val()
   member_level = $('#level').val()
+  participation_type = $('#participation_type').val()
+
   $('#check_in_button').click ->
     members_to_check_in = $('.check-in-table tbody tr td input:checked').map(->
                             $(this).val()
@@ -11,8 +13,8 @@ $(document).on 'ready page:load', ->
     $.ajax({
       type: "POST",
       url: "/network_events/#{event_id}/check_ins/",
-      dataType: "json"
-      data: { participation: { member_ids: members_to_check_in, network_event_id: event_id, level: member_level} },
+      dataType: "json",
+      data: { participation: { member_ids: members_to_check_in, network_event_id: event_id, level: member_level, participation_type: participation_type} },
       success:(data) ->
         location.href = window.location.href
       error:(data) ->

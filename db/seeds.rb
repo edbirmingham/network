@@ -33,8 +33,6 @@ football = ExtracurricularActivity.create(name: 'Football', user_id: user.id)
 chess_club = ExtracurricularActivity.create(name: 'Chess Club', user_id: user.id)
 theater = ExtracurricularActivity.create(name: 'Theater', user_id: user.id)
 
-chaperone_task = CommonTask.create(name: 'Find X chaperones', user_id: user.id)
-schedule_transportation = CommonTask.create(name: 'Schedule Transportation', user_id: user.id)
 
 Location.create(
   name: 'Tuggle Elementary',
@@ -147,6 +145,10 @@ student_nell = Member.create(
   user_id: user.id
 )
 
+chaperone_task = CommonTask.create(name: 'Find X chaperones', user_id: user.id, date_modifier: 'Monday before event')
+transportation_task = CommonTask.create(name: 'Schedule transportation', user_id: user.id, date_modifier: '1 week before event')
+catering_task = CommonTask.create(name: 'Schedule catering', user_id: user.id, date_modifier: '1 month before event')
+
 network_event = nil
 Location.all.each do |location|
   Program.all.each do |program|
@@ -165,6 +167,25 @@ Location.all.each do |location|
       status: NetworkEvent.statuses.sample,
       user_id: user.id
     )
+    network_event.network_event_tasks.create(
+      name: "Schedule 4 buses",  
+      owner_id: user.id,
+      common_task_id: transportation_task.id,
+      date_modifier: transportation_task.date_modifier
+    )
+    network_event.network_event_tasks.create(
+      name: "Recruit 7 chaperones",  
+      owner_id: user.id,
+      common_task_id: chaperone_task.id,
+      date_modifier: chaperone_task.date_modifier
+    )
+    network_event.network_event_tasks.create(
+      name: "Schedule catering",  
+      owner_id: user.id,
+      common_task_id: catering_task.id,
+      date_modifier: catering_task.date_modifier
+    )
+    network_event.apply_date_modifiers_to_tasks
   end
 end
 

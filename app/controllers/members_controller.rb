@@ -76,7 +76,12 @@ class MembersController < ApplicationController
         joins(:identity).
         where(identities: {id: params[:identity_ids]})
       end
-      
+
+      # Include cohorts to prevent n+1
+      if params[:include] == 'cohorts'
+        members = members.includes(:cohorts)
+      end
+
       # limit the size of xml_http_request? responses
       if request.xhr?
         members = members.limit(25)
@@ -88,7 +93,7 @@ class MembersController < ApplicationController
         if request.xhr?
           query = query[:term]
         end
-        members = members.search(query)
+        members = members.search_by_full_name(query)
       end
 
       # Filter members by school.

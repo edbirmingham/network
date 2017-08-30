@@ -17,7 +17,8 @@
 //= require_tree .
 //= require moment
 //= require bootstrap-datetimepicker
+//= require bootstrap-editable
+//= require bootstrap-editable-rails
 //= require select2-full
 //= require zeroclipboard
-//= require best_in_place
 

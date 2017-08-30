@@ -145,11 +145,22 @@
   
       <tbody>
         <%= content_tag_for(:tr, @network_event.network_event_tasks) do |task| %>
-          <td class="task_name"><%= best_in_place task, :name, :as => :input %></td>
-          <td class="task_due_date"><%= task.formatted_due_date %> </td>
+          <td class="task_name"><a class="task-name" data-url="/network_event_tasks/<%= task.id %>"><%= task.name %></a></td>
+          <td class="task_due_date"><span class="date-view"><%= task.formatted_due_date %></span>
+            <div class="date-form form-inline" data-task-id="<%= task.id %>">
+              <%= date_field_tag :due_date, if task.due_date then task.due_date.in_time_zone("Central Time (US & Canada)").strftime('%Y-%m-%d') end, class: "date-input" %>
+              <div class="form-group">
+              <%= button_tag "", type: 'button', class: "update-due-date btn btn-primary" do %>
+                <span class="glyphicon glyphicon-ok"></span>
+              <% end %>
+              <%= button_tag "", type: 'button', class: 'btn cancel-update' do %>
+                <span class="glyphicon glyphicon-remove"></span>
+              <% end %>
+              </div>
+            </div>
           <td class="task_completed_at"><%= task.formatted_completed_at %> </td>
-          <td class="task_owner"><%= best_in_place task, :owner_id, :as => :select, 
-                                    :collection => User.all.map { |u| [u.id, u.email]} %></td>
+          <td class="task_owner"><a class="task-owner" data-url="/network_event_tasks/<%= task.id %>" 
+               data-source="<%= User.editable_options %>"><%= task.owner.try(:email) %></a></td>
           <td class="task_mark">
             <% if not task.completed_at.present? %>
               <%= button_to("Mark Completed", network_event_task_path(task) , remote: true, method: :patch, name: "task_button", class:"btn btn-primary task_button",
@@ -167,7 +178,7 @@
   <%= button_tag "Create New Task", class: "btn btn-primary", id: "create-task-button" %>
 </div>
 
-<%= form_for @network_event_task, url: network_event_tasks_path, html: { id: "new-task-form", class: "form-inline" }, :remote => true do |f| %>
+<%= form_for @network_event_task, url: network_event_tasks_path, html: { id: "new-task-form" }, :remote => true do |f| %>
       <div class="form-group">
         <%= f.label :name %>
           <%= f.text_field :name, class:"form-control", id: 'task-name' %>
@@ -175,7 +186,11 @@
       </div>
       <div class="form-group">
         <%= f.label :owner %>
-          <%= f.collection_select :owner_id, User.all, :id, :email, {}, class: "select2 form-control"%>
+          <%= f.collection_select :owner_id, User.all, :id, :email, {:include_blank => "No owner selected"}, class: "select2 form-control"%>
+      </div>
+      <div class="form-group">
+        <%= f.label :common_task %>
+          <%= f.collection_select :common_task_id, CommonTask.all, :id, :name, {:include_blank => "No common task selected" }, class: "select2 form-control"%>
       </div>
       <div class="form-group">
         <%= f.label :date_modifier, "Due date" %>
@@ -226,15 +241,18 @@
         <th>Phone</th>
         <th>Identity</th>
         <th>Affiliation</th>
+        <th>Type</th>
       </tr>
     </thead>
 
     <tbody>
-      <%= content_tag_for(:tr, @network_event.participants.order(:last_name, :first_name)) do |participant| %>
-        <td><%= link_to participant.name, participant %></td>
-        <td><%= participant.email %></td>
-        <td><%= participant.phone %></td>
-        <td><%= participant.identity.try(:name) %></td>
+      <%= content_tag_for(:tr, @participations) do |participation| %>
+        <td><%= link_to participation.member.name, participation.member %></td>
+        <td><%= participation.member.email %></td>
+        <td><%= participation.member.phone %></td>
+        <td><%= participation.member.identity.try(:name) %></td>
+        <td></td>
+        <td><%= participation.participation_type.try(:titlecase) %></td>
       <% end %>
     </tbody>
   </table>

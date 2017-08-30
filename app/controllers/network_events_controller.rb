@@ -6,8 +6,12 @@ class NetworkEventsController < ApplicationController
   # GET /network_events.json
   # GET /network_events.csv
   def index
-    @network_events = filtered_events.page params[:page]
+    @network_events = filtered_events
     @unscheduled_only = params[:unscheduled_events_only]
+    respond_to do |format|
+      format.any(:html, :json) { @network_events = @network_events.page params[:page] }
+      format.csv
+    end
   end
 
   # GET /network_events/1
@@ -15,13 +19,14 @@ class NetworkEventsController < ApplicationController
   def show
     @completed_tasks_count = @network_event.network_event_tasks.where.not(completed_at: nil).count
     @network_event_task = NetworkEventTask.new
+    @participations = @network_event.participations.joins(:member).order('members.last_name, members.first_name')
   end
 
   # GET /network_events/new
   def new
     @network_event = NetworkEvent.new
     @network_event.duration = nil
-    
+
     @common_tasks = CommonTask.all
     @common_tasks.each do |common_task|
       @network_event.network_event_tasks.build(common_task_id: common_task.id, name: common_task.name, owner_id: common_task.owner_id, date_modifier: common_task.date_modifier)
@@ -71,7 +76,7 @@ class NetworkEventsController < ApplicationController
   end
 
   private
-  
+
     def copy_events
       NetworkEvent.
         where(id: params[:network_event_ids]).
@@ -85,12 +90,12 @@ class NetworkEventsController < ApplicationController
             format.html { redirect_to network_events_path, notice: 'Event(s) were successfully copied.' }
           end
         end
-    end 
-  
+    end
+
     def copying_events?
       params[:network_event_ids].present?
     end
-    
+
     def create_event
       @network_event = NetworkEvent.new(network_event_params)
       @network_event.user = current_user
@@ -115,7 +120,7 @@ class NetworkEventsController < ApplicationController
         end
       end
     end
-    
+
     def override_params
       @override_params = network_event_params.select do |key, value|
         if value.is_a? Array
@@ -125,7 +130,7 @@ class NetworkEventsController < ApplicationController
         end
       end
     end
-    
+
     # Use callbacks to share common setup or constraints between actions.
     def set_network_event
       @network_event = NetworkEvent.find(params[:id])
@@ -144,7 +149,15 @@ class NetworkEventsController < ApplicationController
       else
         events = events.default_date_range
       end
-
+      
+      # Filter events by uncompleted tasks
+      if params[:common_task_ids].present?
+        events = events.
+          joins(:network_event_tasks).
+          where(network_event_tasks: {common_task_id: params[:common_task_ids],
+                                      completed_at: nil})
+      end
+      
       # Filter events by cohort.
       if params[:cohort_ids].present?
         events = events.
