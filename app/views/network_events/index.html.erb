@@ -172,7 +172,7 @@
       <tbody>
         <%= content_tag_for(:tr, @network_events) do |network_event| %>
           <td><%= check_box_tag "network_event_ids[]", network_event.id %></td>
-          <td><%= network_event.name %></td>
+          <td><a class="event-name" data-url="network_events/<%= network_event.id %>"><%= network_event.name %></a></td>
           <td><%= network_event.status.try(:titleize) %></td>
           <td><%= network_event.program.try(:name) %></td>
           <td><%= network_event.location.try(:name) %></td>
