@@ -17,6 +17,11 @@ class MembersController < ApplicationController
     @member = Member.new
   end
 
+  def new_in_group
+    @member = Member.new
+    @another_member_button = 'Create Member and Another'
+  end
+
   # GET /members/1/edit
   def edit
   end
@@ -24,12 +29,25 @@ class MembersController < ApplicationController
   # POST /members
   # POST /members.json
   def create
+    @another_member_button = 'Create Member and Another'
     @member = Member.new(member_params)
     @member.user = current_user
     respond_to do |format|
       if @member.save
-        format.html { redirect_to @member, notice: 'Member was successfully created.' }
-        format.json { render :show, status: :created, location: @member }
+        if params[:commit] == @another_member_button
+          previous_member = @member
+          @member = @member.dup
+          @member.assign_attributes(first_name: nil, last_name: nil, email: nil,
+                                    phone: nil , address: nil, city: nil, state: nil,
+                                    zip_code: nil, shirt_size: nil)
+
+          @member.cohorts = previous_member.cohorts
+          @member.organizations = previous_member.organizations
+          format.html { render :new_in_group }
+        else
+          format.html { redirect_to @member, notice: 'Member was successfully created.' }
+          format.json { render :show, status: :created, location: @member }
+        end
       else
         format.html { render :new }
         format.json { render json: @member.errors, status: :unprocessable_entity }

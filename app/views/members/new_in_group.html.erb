@@ -1,0 +1,23 @@
+<div class="page-header">
+  <%= link_to members_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <h1>New member</h1>
+  <small>Note: While adding members in group, it copies Graduating class Cohorts, 
+  School, Identity, Organizations from previous member to the new member in the series.</small>
+</div>
+
+<%= form_for(@member, html: { class: "form-horizontal", role: "form" }) do |f| %>
+  <%= render partial: 'form', locals: {f: f} %>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-4">
+      <%= f.submit 'Create Member and Stop', class: "btn btn-primary" %>
+    </div>
+
+    <div class="col-sm-offset-2 col-sm-4">
+      <%= f.submit @another_member_button, class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
+
