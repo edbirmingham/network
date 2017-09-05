@@ -13,4 +13,15 @@ module ApplicationHelper
     direction = (column == sort_column or join_column == sort_column) && sort_direction == "asc" ? "desc" : "asc"
     link_to title, params.permit!.merge({:sort => column, :direction => direction}), {:class => css_class}
   end
+
+  def title
+    if content_for?(:title)
+      # allows the title to be set in the view by using t(".title")
+      content_for :title
+    else
+      # look up translation key based on controller path, action name and .title
+      # this works identical to the built-in lazy lookup
+      t("#{ controller_path.tr('/', '.') }.#{ action_name }.title", default: :site_name)
+    end
+  end
 end

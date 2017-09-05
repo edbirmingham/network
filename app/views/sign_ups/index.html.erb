@@ -1,10 +1,9 @@
-<div class="page-header">
+<% content_for :page_header do %>
   <%= link_to new_network_event_path, class: 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-plus"></span>
     New Event
   <% end %>
-  <h1>Listing events</h1>
-</div>
+<% end %>
   
 
 <div class="table-responsive">

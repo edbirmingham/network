@@ -1,4 +1,4 @@
-<div class="page-header">
+<% content_for :page_header do %>
   <%= link_to members_path, class: 'btn btn-default' do %>
     <span class="glyphicon glyphicon-list-alt"></span>
     Back
@@ -7,8 +7,7 @@
     <span class="glyphicon glyphicon-info-sign"></span>
     Show
   <% end %>
-  <h1>Editing member</h1>
-</div>
+<% end %>
 
 <%= render 'form' %>
 
