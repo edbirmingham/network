@@ -63,6 +63,12 @@ $(document).on 'ready page:load turbolinks:load', ->
     name: 'owner_id'
     resource: 'network_event_task'
     type: 'select'
+    
+  $('a.event-name').editable
+    name: 'name'
+    resource: 'network_event'
+    type: 'text'
+  
       
   $('.date-form').hide()
   $('.cancel-update').on 'click', ->
