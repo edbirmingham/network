@@ -40,6 +40,9 @@ Rails.application.routes.draw do
 
   resources :members do
     resources :communications, only: [:new, :show, :create, :edit, :update, :destroy]
+    collection do
+      get 'new_in_group'
+    end
   end
 
   resources :locations

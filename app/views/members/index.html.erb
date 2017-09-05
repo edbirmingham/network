@@ -4,6 +4,11 @@
     New Member
   <% end %>
 
+  <%= link_to new_in_group_members_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    Add Members in group
+  <% end %>
+
   <h1>Listing members</h1>
 
   <%= form_tag members_path, :method => :get, class: "form-horizontal"  do %>

@@ -1,205 +1,198 @@
-<%= form_for(@member, html: { class: "form-horizontal", role: "form" }) do |f| %>
-  <% if @member.errors.any? %>
-    <div class="alert alert-danger alert-dismissable" role="alert">
-      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-      <h4><%= pluralize(@member.errors.count, "error") %> prohibited this member from being saved:</h4>
+<% if @member.errors.any? %>
+  <div class="alert alert-danger alert-dismissable" role="alert">
+    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <h4><%= pluralize(@member.errors.count, "error") %> prohibited this member from being saved:</h4>
 
-      <ul>
-      <% @member.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="form-group">
-    <%= f.label :first_name, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.text_field :first_name, class: "form-control" %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :last_name, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.text_field :last_name, class: "form-control" %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :phone, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.telephone_field :phone, class: "form-control" %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :email, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.email_field :email, class: "form-control" %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :identity_id, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.collection_select(
-        :identity_id,
-        Identity.all,
-        :id,
-        :name,
-        {},
-        {class: 'select2 form-control'})
-       %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :cohort_ids, 'Cohorts', class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.collection_select :cohort_ids,
-            Cohort.order(:name).all,
-            :id,
-            :name,
-            {:include_blank => 'None'},
-            {multiple: true, class: "select2 form-control"} %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :organization_ids, 'Organizations', class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.collection_select :organization_ids,
-            Organization.order(:name).all,
-            :id,
-            :name,
-            {:include_blank => 'None'},
-            {multiple: true, class: "select2 form-control"} %>
-    </div>
-  </div>
-  <div class='form-group'>
-    <%= f.label :school_id, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.collection_select(
-        :school_id,
-        School.order(:name).all,
-        :id,
-        :name,
-        {include_blank: 'None'},
-        {class: 'select2 form-control'})
-      %>
-    </div>
-  </div>
-  <div class='form-group'>
-    <%= f.label :graduating_class_id, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.collection_select :graduating_class_id,
-            GraduatingClass.order(:year).all,
-            :id,
-            :year,
-            {include_blank: 'None'},
-            {class: 'select2 form-control'} %>
-    </div>
-  </div>
-  <div class='form-group'>
-    <%= f.label :neighborhoods, class: 'col-sm-2 control-label' %>
-    <div class='col-sm-10'>
-      <%= f.collection_select :neighborhood_ids,
-            Neighborhood.order(:name).all,
-            :id,
-            :name,
-            { include_blank: false },
-            { multiple: true, class: 'select2 form-control' } %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :address, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.text_field :address, class: "form-control" %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :city, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.text_field :city, class: "form-control" %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :state, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.text_field :state, class: "form-control" %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :zip_code, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.text_field :zip_code, class: "form-control" %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :shirt_size, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.select :shirt_size,
-            Member.shirt_sizes,
-            {include_blank: true},
-            class: "select2 form-control" %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :shirt_received, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.check_box :shirt_received, class: "form-control" %>
-    </div>
-  </div>
-  <div class='form-group'>
-    <%= f.label :talents, class: 'col-sm-2 control-label' %>
-    <div class='col-sm-10'>
-      <%= f.collection_select :talent_ids,
-            Talent.order(:name).all,
-            :id,
-            :name,
-            { include_blank: false },
-            { multiple: true, class: 'select2 form-control' } %>
-    </div>
-  </div>
-  <div class='form-group'>
-    <%= f.label :extracurricular_activity_ids, 'Extracurricular Activities', class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.collection_select :extracurricular_activity_ids,
-            ExtracurricularActivity.order(:name).all,
-            :id,
-            :name,
-            {include_blank: 'None'},
-            { multiple: true, class: 'select2 form-control'} %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :place_of_worship, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.text_field :place_of_worship, class: "form-control" %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :recruitment, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.text_field :recruitment, class: "form-control" %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :community_networks, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.text_field :community_networks, class: "form-control" %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :extra_groups, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.text_field :extra_groups, class: "form-control" %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :other_networks, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.text_field :other_networks, class: "form-control" %>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <%= f.submit class: "btn btn-primary" %>
-    </div>
+    <ul>
+    <% @member.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
   </div>
 <% end %>
+
+<div class="form-group">
+  <%= f.label :first_name, class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <%= f.text_field :first_name, class: "form-control" %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :last_name, class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <%= f.text_field :last_name, class: "form-control" %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :phone, class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <%= f.telephone_field :phone, class: "form-control" %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :email, class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <%= f.email_field :email, class: "form-control" %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :identity_id, class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <%= f.collection_select(
+      :identity_id,
+      Identity.all,
+      :id,
+      :name,
+      {},
+      {class: 'select2 form-control'})
+     %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :cohort_ids, 'Cohorts', class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <%= f.collection_select :cohort_ids,
+          Cohort.order(:name).all,
+          :id,
+          :name,
+          {:include_blank => 'None'},
+          {multiple: true, class: "select2 form-control"} %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :organization_ids, 'Organizations', class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <%= f.collection_select :organization_ids,
+          Organization.order(:name).all,
+          :id,
+          :name,
+          {:include_blank => 'None'},
+          {multiple: true, class: "select2 form-control"} %>
+  </div>
+</div>
+<div class='form-group'>
+  <%= f.label :school_id, class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <%= f.collection_select(
+      :school_id,
+      School.order(:name).all,
+      :id,
+      :name,
+      {include_blank: 'None'},
+      {class: 'select2 form-control'})
+    %>
+  </div>
+</div>
+<div class='form-group'>
+  <%= f.label :graduating_class_id, class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <%= f.collection_select :graduating_class_id,
+          GraduatingClass.order(:year).all,
+          :id,
+          :year,
+          {include_blank: 'None'},
+          {class: 'select2 form-control'} %>
+  </div>
+</div>
+<div class='form-group'>
+  <%= f.label :neighborhoods, class: 'col-sm-2 control-label' %>
+  <div class='col-sm-10'>
+    <%= f.collection_select :neighborhood_ids,
+          Neighborhood.order(:name).all,
+          :id,
+          :name,
+          { include_blank: false },
+          { multiple: true, class: 'select2 form-control' } %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :address, class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <%= f.text_field :address, class: "form-control" %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :city, class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <%= f.text_field :city, class: "form-control" %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :state, class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <%= f.text_field :state, class: "form-control" %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :zip_code, class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <%= f.text_field :zip_code, class: "form-control" %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :shirt_size, class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <%= f.select :shirt_size,
+          Member.shirt_sizes,
+          {include_blank: true},
+          class: "select2 form-control" %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :shirt_received, class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <%= f.check_box :shirt_received, class: "form-control" %>
+  </div>
+</div>
+<div class='form-group'>
+  <%= f.label :talents, class: 'col-sm-2 control-label' %>
+  <div class='col-sm-10'>
+    <%= f.collection_select :talent_ids,
+          Talent.order(:name).all,
+          :id,
+          :name,
+          { include_blank: false },
+          { multiple: true, class: 'select2 form-control' } %>
+  </div>
+</div>
+<div class='form-group'>
+  <%= f.label :extracurricular_activity_ids, 'Extracurricular Activities', class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <%= f.collection_select :extracurricular_activity_ids,
+          ExtracurricularActivity.order(:name).all,
+          :id,
+          :name,
+          {include_blank: 'None'},
+          { multiple: true, class: 'select2 form-control'} %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :place_of_worship, class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <%= f.text_field :place_of_worship, class: "form-control" %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :recruitment, class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <%= f.text_field :recruitment, class: "form-control" %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :community_networks, class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <%= f.text_field :community_networks, class: "form-control" %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :extra_groups, class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <%= f.text_field :extra_groups, class: "form-control" %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :other_networks, class: "col-sm-2 control-label" %>
+  <div class="col-sm-10">
+    <%= f.text_field :other_networks, class: "form-control" %>
+  </div>
+</div>
