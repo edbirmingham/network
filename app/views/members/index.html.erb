@@ -90,7 +90,7 @@
         <div class="col-md-12">
           <%= select_tag :cohort_ids, 
                 options_from_collection_for_select(
-                  Cohort.order(:name).all, 
+                  Cohort.active_cohorts, 
                   :id, 
                   :name,
                   params[:cohort_ids]

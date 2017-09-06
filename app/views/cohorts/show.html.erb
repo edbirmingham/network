@@ -17,6 +17,13 @@
   <dt>Creator:</dt>
   <dd><%= @cohort.user.try(:email) %></dd>
 
+  <dt>Status:</dt>
+  <dd>
+    <span id="cohort_status_label"><%= @cohort.active ? 'Active' : 'Deactive' %></span>
+    <%= button_tag @cohort.active ? 'Deactivate' : 'Activate' , class: 'btn btn-default', id: 'toggle_cohort_status' %>
+    <%= hidden_field_tag :cohort_status, @cohort.active %>
+  </dd>
+
 </dl>
 
 <h2>Members</h2>
