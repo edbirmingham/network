@@ -1,5 +1,6 @@
 class ExtracurricularActivitiesController < ApplicationController
   before_action :set_extracurricular_activity, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /extracurricular_activities
   # GET /extracurricular_activities.json

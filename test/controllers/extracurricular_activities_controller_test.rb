@@ -49,4 +49,10 @@ class ExtracurricularActivitiesControllerTest < ActionController::TestCase
 
     assert_redirected_to extracurricular_activities_path
   end
+  
+  test "staff user shouldn't be able to delete extracurricular_activities" do
+    user = User.create!(email: 'test@example.com', staff: true, password: 'abcdef') 
+    ability = Ability.new(user)
+    assert ability.cannot? :delete, @extracurricular_activity
+  end
 end

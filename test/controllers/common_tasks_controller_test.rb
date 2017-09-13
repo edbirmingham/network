@@ -49,4 +49,10 @@ class CommonTasksControllerTest < ActionController::TestCase
 
     assert_redirected_to common_tasks_path
   end
+  
+  test "staff user shouldn't be able to delete common_task" do
+    user = User.create!(email: 'test@example.com', staff: true, password: 'abcdef') 
+    ability = Ability.new(user)
+    assert ability.cannot? :delete, @common_task
+  end
 end

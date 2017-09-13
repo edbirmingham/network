@@ -15,7 +15,9 @@
             <th>Default due date</th>
             <th></th>
         <th></th>
-        <th></th>
+        <% if can? :delete, CommonTask %>
+          <th></th>
+        <% end %>
       </tr>
     </thead>
 
@@ -26,7 +28,9 @@
             <td><%= common_task.try(:date_modifier) %></td>
             <td><%= link_to 'Show', common_task %></td>
         <td><%= link_to 'Edit', edit_common_task_path(common_task) %></td>
-        <td><%= link_to 'Destroy', common_task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if can? :delete, CommonTask %>
+          <td><%= link_to 'Destroy', common_task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       <% end %>
     </tbody>
   </table>

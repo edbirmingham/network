@@ -1,5 +1,6 @@
 class NetworkActionsController < ApplicationController
   before_action :set_network_action, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /network_actions
   # GET /network_actions.json

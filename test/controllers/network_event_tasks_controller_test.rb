@@ -88,4 +88,10 @@ class NetworkEventTasksControllerTest < ActionController::TestCase
     end
     assert_response :success
   end
+  
+  test "staff user shouldn't be able to delete network_event_task" do
+    user = User.create!(email: 'test@example.com', staff: true, password: 'abcdef') 
+    ability = Ability.new(user)
+    assert ability.cannot? :delete, @network_event_task
+  end
 end

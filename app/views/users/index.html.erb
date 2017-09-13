@@ -9,7 +9,9 @@
         <th>Email</th>
         <th></th>
         <th></th>
-        <th></th>
+        <% if can? :delete, User %>
+          <th></th>
+        <% end %>
       </tr>
     </thead>
 
@@ -18,7 +20,9 @@
         <td><%= mail_to user.email %></td>
         <td><%= link_to 'Show', user, method: :get %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if can? :delete, User %>
+          <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       <% end %>
     </tbody>
   </table>

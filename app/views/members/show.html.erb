@@ -132,7 +132,9 @@
           <th>Contacted on</th> 
           <th></th>
           <th></th>
-          <th></th>
+          <% if can? :delete, Communication %>
+            <th></th>
+          <% end %>
         </tr>
       </thead>
 
@@ -143,7 +145,9 @@
           <td><%= communication.contacted_on %></td>
           <td><%= link_to 'Show', member_communication_path(@member, communication) %></td>
           <td><%= link_to 'Edit', edit_member_communication_path(@member, communication) %></td>
-          <td><%= link_to 'Destroy', member_communication_path(@member, communication), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% if can? :delete, Communication %>
+            <td><%= link_to 'Destroy', member_communication_path(@member, communication), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
         <% end %>
       </tbody>
     </table>

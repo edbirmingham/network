@@ -1,4 +1,5 @@
 class NetworkEventTasksController < ApplicationController
+  load_and_authorize_resource
   
   def create
     @network_event_task = NetworkEventTask.new(network_event_task_params)

@@ -11,3 +11,4 @@ two:
 three:
   email: three@test.com
   admin: false
+  staff: true

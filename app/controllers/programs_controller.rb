@@ -1,5 +1,6 @@
 class ProgramsController < ApplicationController
   before_action :set_program, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /programs
   # GET /programs.json

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170906163338) do
+ActiveRecord::Schema.define(version: 20170906165326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -177,9 +177,11 @@ ActiveRecord::Schema.define(version: 20170906163338) do
     t.datetime "due_date"
     t.string "date_modifier"
     t.integer "owner_id"
+    t.bigint "parent_id"
     t.index ["common_task_id"], name: "index_network_event_tasks_on_common_task_id"
     t.index ["network_event_id"], name: "index_network_event_tasks_on_network_event_id"
     t.index ["owner_id"], name: "index_network_event_tasks_on_owner_id"
+    t.index ["parent_id"], name: "index_network_event_tasks_on_parent_id"
   end
 
   create_table "network_events", force: :cascade do |t|
@@ -300,6 +302,7 @@ ActiveRecord::Schema.define(version: 20170906163338) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "admin", default: false
+    t.boolean "staff"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -312,4 +315,5 @@ ActiveRecord::Schema.define(version: 20170906163338) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "network_event_tasks", "network_event_tasks", column: "parent_id"
 end

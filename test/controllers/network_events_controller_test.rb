@@ -155,7 +155,12 @@ class NetworkEventsControllerTest < ActionController::TestCase
     assert_difference('NetworkEvent.count', -1) do
       delete :destroy, params: { id: @network_event }
     end
-
     assert_redirected_to network_events_path
+  end
+  
+  test "staff user shouldn't be able to delete network_event" do
+    user = User.create!(email: 'test@example.com', staff: true, password: 'abcdef') 
+    ability = Ability.new(user)
+    assert ability.cannot? :delete, @network_event
   end
 end

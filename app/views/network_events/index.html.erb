@@ -164,7 +164,9 @@
           <th><%= sortable "scheduled_at", "Scheduled at"%></th>
           <th></th>
           <th></th>
-          <th></th>
+          <% if can? :destroy, NetworkEvent %> 
+            <th></th>
+          <% end %>
           <th></th>
         </tr>
       </thead>
@@ -181,8 +183,11 @@
           <td><%= network_event.scheduled_at.try(:to_formatted_s, :long)%></td>
           <td><%= link_to 'Show', network_event %></td>
           <td><%= link_to 'Edit', edit_network_event_path(network_event) %></td>
-          <td><%= link_to 'Destroy', network_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          <td><%= button_tag "Clip", type: 'button', data: {"clipboard-text" => clip_event_info(network_event), "toggle" => "tooltip", "placement" => "right"}, :title => clip_event_info(network_event), :class =>'clip_button btn btn-primary'%></td>
+          <% if can? :destroy, network_event %> 
+            <td>
+              <%= link_to 'Destroy', network_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <% end %>
+            <td><%= button_tag "Clip", type: 'button', data: {"clipboard-text" => clip_event_info(network_event), "toggle" => "tooltip", "placement" => "right"}, :title => clip_event_info(network_event), :class =>'clip_button btn btn-primary'%></td>
         <% end %>
       </tbody>
     </table>

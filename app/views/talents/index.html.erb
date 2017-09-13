@@ -13,7 +13,9 @@
             <th>Name</th>
             <th></th>
         <th></th>
-        <th></th>
+        <% if can? :delete, Talent %>
+          <th></th>
+        <% end %>
       </tr>
     </thead>
 
@@ -22,7 +24,9 @@
             <td><%= talent.name %></td>
             <td><%= link_to 'Show', talent %></td>
         <td><%= link_to 'Edit', edit_talent_path(talent) %></td>
-        <td><%= link_to 'Destroy', talent, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if can? :delete, Talent %>
+          <td><%= link_to 'Destroy', talent, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       <% end %>
     </tbody>
   </table>

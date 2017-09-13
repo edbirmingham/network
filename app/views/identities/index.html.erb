@@ -13,7 +13,9 @@
             <th>Name</th>
             <th></th>
         <th></th>
-        <th></th>
+        <% if can? :delete, Identity %>
+          <th></th>
+        <% end %>
       </tr>
     </thead>
 
@@ -22,7 +24,9 @@
             <td><%= identity.name %></td>
             <td><%= link_to 'Show', identity %></td>
         <td><%= link_to 'Edit', edit_identity_path(identity) %></td>
-        <td><%= link_to 'Destroy', identity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if can? :delete, Identity %>
+          <td><%= link_to 'Destroy', identity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       <% end %>
     </tbody>
   </table>

@@ -14,7 +14,9 @@
             <th>Abbreviation</th>
         <th></th>
         <th></th>
-        <th></th>
+        <% if can? :delete, Program %>
+          <th></th>
+        <% end %>
       </tr>
     </thead>
 
@@ -24,7 +26,9 @@
             <td><%= program.abbreviation %></td>
             <td><%= link_to 'Show', program %></td>
         <td><%= link_to 'Edit', edit_program_path(program) %></td>
-        <td><%= link_to 'Destroy', program, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if can? :delete, Program %>
+          <td><%= link_to 'Destroy', program, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       <% end %>
     </tbody>
   </table>
