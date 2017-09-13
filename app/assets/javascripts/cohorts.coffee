@@ -9,7 +9,7 @@ $(document).on 'ready page:load turbolinks:load', ->
       type: "PUT",
       url: "/cohorts/#{cohort_id}",
       dataType: "json"
-      data: { cohort: { id: cohort_id, active: !cohort_status} },
+      data: { cohort: { active: !cohort_status } },
       success:(data) ->
       	$('#cohort_status').val data.active
       	if data.active
