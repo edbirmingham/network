@@ -24,6 +24,24 @@ body {
   padding-top: 50px;
 }
 
+//for member checkin page
+#btn_div{
+  text-align: right;
+  margin-bottom: -15px;
+}
+.info_div {
+  color: #9d9d9d;
+  padding: 2px;
+}
+#select-all{
+  margin-left: 3px;
+}
+thead tr th:first-child,
+tbody tr td:first-child {
+  width: 8.5em;
+}
+//end
+
 .network-template {
   padding: 40px 15px;
   text-align: center;

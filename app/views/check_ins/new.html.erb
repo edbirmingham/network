@@ -1,3 +1,9 @@
+<% if flash[:check_in_message] %>
+ <div class="alert alert-success" role="alert">
+    <%= flash[:check_in_message] %>
+ </div>
+<% end %>
+
 <div class="page-header">
   <h1>Member Check In</h1>
   <%= hidden_field_tag "network_event_id", @network_event_id %>
@@ -5,28 +11,30 @@
   <%= hidden_field_tag "participation_type", 'checked_in' %>
 </div>
 
+<div id="btn_div">
+  <span class='info_div'></span>
+  <button type="button" id="check_in_button" class="btn btn-primary">Check In All Selected</button>
+</div>
+<br/>
 <div class="table-responsive">
   <table class="check-in-table table table-striped table-bordered table-hover">
     <thead>
       <tr>
+        <th>Select<%= check_box_tag 'select-all' %></th>
         <th>First name</th>
         <th>Last name</th>
         <th>Phone</th>
         <th>Email</th>
-        <th></th>
       </tr>
     </thead>
 
     <tbody>
       <%= content_tag_for(:tr, @members) do |member| %>
+        <td><%= check_box_tag "checkin_member_ids[]", member.id %></td>
         <td><%= member.first_name %></td>
         <td><%= member.last_name %></td>
         <td><%= phone_to member.phone %></td>
         <td><%= mail_to member.email %></td>
-        <td>
-         <%= button_tag "Check In", class: "btn btn-primary", id: "check_in_button"%> 
-         <%= hidden_field_tag "row_member_id", member.id, class: "row_member_id" %>
-        </td>
       <% end %>
     </tbody>
   </table>
