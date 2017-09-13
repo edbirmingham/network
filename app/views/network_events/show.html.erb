@@ -146,7 +146,7 @@
       <tbody>
         <%= content_tag_for(:tr, @network_event.network_event_tasks) do |task| %>
           <td class="task_name"><a class="task-name" data-url="/network_event_tasks/<%= task.id %>"><%= task.name %></a></td>
-          <td class="task_due_date"><span class="date-view"><%= task.formatted_due_date %></span>
+          <td class="task_due_date"><span class="date-view"><%= task.formatted_due_date.present? ? task.formatted_due_date : 'Add due date' %></span>
             <div class="date-form form-inline" data-task-id="<%= task.id %>">
               <%= date_field_tag :due_date, if task.due_date then task.due_date.in_time_zone("Central Time (US & Canada)").strftime('%Y-%m-%d') end, class: "date-input" %>
               <div class="form-group">
