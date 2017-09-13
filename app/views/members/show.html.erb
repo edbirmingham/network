@@ -17,6 +17,13 @@
   <dt>Last name:</dt>
   <dd><%= @member.last_name %></dd>
 
+  <dt>Date of Birth:</dt>
+  <% if @member.date_of_birth.present? %>
+    <dd><%= @member.try(:date_of_birth).strftime('%m/%d/%Y') %></dd>
+  <% else %>
+    <dd></dd>
+  <% end %>
+
   <dt>Phone:</dt>
   <dd><%= phone_to @member.phone %></dd>
 
