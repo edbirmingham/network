@@ -52,7 +52,7 @@
   <%= f.label :cohort_ids, 'Cohorts', class: "col-sm-2 control-label" %>
   <div class="col-sm-10">
     <%= f.collection_select :cohort_ids,
-          Cohort.order(:name).all,
+          Cohort.active_cohorts,
           :id,
           :name,
           {:include_blank => 'None'},

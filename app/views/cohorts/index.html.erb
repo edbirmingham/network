@@ -10,8 +10,9 @@
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
-            <th>Name</th>
-            <th></th>
+        <th>Name</th>
+        <th>Status</th>
+        <th></th>
         <th></th>
         <th></th>
       </tr>
@@ -19,8 +20,9 @@
 
     <tbody>
       <%= content_tag_for(:tr, @cohorts) do |cohort| %>
-            <td><%= cohort.name %></td>
-            <td><%= link_to 'Show', cohort %></td>
+        <td><%= cohort.name %></td>
+        <td><%= cohort.active ? 'Active' : 'Deactive' %></td>
+        <td><%= link_to 'Show', cohort %></td>
         <td><%= link_to 'Edit', edit_cohort_path(cohort) %></td>
         <td><%= link_to 'Destroy', cohort, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <% end %>
