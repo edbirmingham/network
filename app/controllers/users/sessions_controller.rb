@@ -1,6 +1,6 @@
 class Users::SessionsController < Devise::SessionsController
-  skip_before_action :require_admin_user!
-  
+  skip_before_action :require_admin_or_staff_user!
+
 # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in

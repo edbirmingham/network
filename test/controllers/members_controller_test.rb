@@ -197,5 +197,11 @@ class MembersControllerTest < ActionController::TestCase
 
     assert_equal members(:george).name, member_json["text"]
   end
+  
+  test "staff user shouldn't be able to delete members" do
+    user = User.create!(email: 'test@example.com', staff: true, password: 'abcdef') 
+    ability = Ability.new(user)
+    assert ability.cannot? :delete, @member
+  end
 
 end

@@ -49,4 +49,10 @@ class NetworkActionsControllerTest < ActionController::TestCase
 
     assert_redirected_to network_actions_path
   end
+  
+  test "staff user shouldn't be able to delete network_action" do
+    user = User.create!(email: 'test@example.com', staff: true, password: 'abcdef') 
+    ability = Ability.new(user)
+    assert ability.cannot? :delete, @network_action
+  end
 end

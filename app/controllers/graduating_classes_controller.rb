@@ -1,5 +1,6 @@
 class GraduatingClassesController < ApplicationController
   before_action :set_graduating_class, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /graduating_classes
   # GET /graduating_classes.json

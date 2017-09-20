@@ -1,6 +1,7 @@
 class CommunicationsController < ApplicationController
   before_action :set_member, only: [:new, :show, :edit, :update, :destroy]
   before_action :set_communication, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET members/1/communications/1
   # GET members/1/communications/1.json

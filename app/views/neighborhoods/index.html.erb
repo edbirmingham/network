@@ -13,7 +13,9 @@
             <th>Name</th>
             <th></th>
         <th></th>
-        <th></th>
+        <% if can? :delete, Neighborhood %>
+          <th></th>
+        <% end %>
       </tr>
     </thead>
 
@@ -22,7 +24,9 @@
         <td><%= neighborhood.name %></td>
         <td><%= link_to 'Show', neighborhood %></td>
         <td><%= link_to 'Edit', edit_neighborhood_path(neighborhood) %></td>
-        <td><%= link_to 'Destroy', neighborhood, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if can? :delete, Neighborhood %>
+          <td><%= link_to 'Destroy', neighborhood, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       <% end %>
     </tbody>
   </table>

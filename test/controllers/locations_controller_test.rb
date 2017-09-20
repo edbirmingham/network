@@ -49,4 +49,10 @@ class LocationsControllerTest < ActionController::TestCase
 
     assert_redirected_to locations_path
   end
+  
+  test "staff user shouldn't be able to delete location" do
+    user = User.create!(email: 'test@example.com', staff: true, password: 'abcdef') 
+    ability = Ability.new(user)
+    assert ability.cannot? :delete, @location
+  end
 end

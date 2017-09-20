@@ -43,6 +43,8 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
 # gem for in-place editing
 gem 'bootstrap-editable-rails'
 
+gem 'cancancan', '~> 2.0'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

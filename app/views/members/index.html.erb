@@ -136,7 +136,9 @@
         <th>Email</th>
         <th></th>
         <th></th>
-        <th></th>
+        <% if can? :delete, Member %>
+          <th></th>
+        <% end %>
       </tr>
     </thead>
 
@@ -148,7 +150,9 @@
         <td><%= mail_to member.email %></td>
         <td><%= link_to 'Show', member %></td>
         <td><%= link_to 'Edit', edit_member_path(member) %></td>
+        <% if can? :delete, Member %>
         <td><%= link_to 'Destroy', member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       <% end %>
     </tbody>
   </table>

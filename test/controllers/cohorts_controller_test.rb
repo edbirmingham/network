@@ -71,4 +71,10 @@ class CohortsControllerTest < ActionController::TestCase
 
     assert_redirected_to cohorts_path
   end
+  
+  test "staff user shouldn't be able to delete cohort" do
+    user = User.create!(email: 'test@example.com', staff: true, password: 'abcdef') 
+    ability = Ability.new(user)
+    assert ability.cannot? :delete, @cohort
+  end 
 end
