@@ -19,7 +19,7 @@ class CheckInsController < ApplicationController
 
   def create
     participation_details = params[:participation]
-    member_ids = participation_details[:member_ids]
+    member_ids = participation_details[:member_ids] || Array(participation_details[:member_id])
     network_event_id = participation_details[:network_event_id]
     level = participation_details[:level]
     participation_type = participation_details[:participation_type]
