@@ -54,6 +54,7 @@ This setup uses Cloud9 for your development environment.  Cloud9 provides an onl
     ensureservice postgresql
     ```
     * Click on the Gear icon in File browser (on the left). Uncheck "Show Home in Favorites" and "Show Hidden Files"
+  * Copy `config/database.yml.example` to `config/database.yml` in your local directory. Edit the file if desired.
   * In the bash tab, install the Ruby gems used by the project and setup the data in the database by entering the following commands:
   ```
   bundle install
