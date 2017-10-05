@@ -5,7 +5,11 @@ class MembersController < ApplicationController
   # GET /members
   # GET /members.json
   def index
-    @members = filtered_members.page params[:page]
+    @members = filtered_members
+    respond_to do |format|
+      format.any(:html, :json) { @members = @members.page params[:page] }
+      format.csv
+    end
   end
 
   # GET /members/1
