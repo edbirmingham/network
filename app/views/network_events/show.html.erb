@@ -77,7 +77,16 @@
     <dd></dd>
   <% end %>
 
-  <dt>Cohorts:</dt>
+  <dt>Attendance Cohorts:</dt>
+  <% if @network_event.attendance_cohorts.present? %>
+    <%= content_tag_for(:dd, @network_event.attendance_cohorts) do |cohort| %>
+      <%= cohort.name %>
+    <% end %>
+  <% else %>
+    <dd></dd>
+  <% end %>
+
+  <dt>Cohorts Served:</dt>
   <% if @network_event.cohorts.present? %>
     <%= content_tag_for(:dd, @network_event.cohorts) do |cohort| %>
       <%= cohort.name %>
@@ -94,16 +103,16 @@
         <%= @network_event.stop_time %>
       <% end %>
   </dd>
-      
+
   <dt>Transportation needed:</dt>
   <dd><%= @network_event.needs_transport %></dd>
 
   <dt>Transportation ordered:</dt>
   <dd><%= @network_event.transport_ordered_on %></dd>
-  
+
   <dt>Notes:</dt>
   <dd><%= @network_event.notes %></dd>
-  
+
   <dt>Creator:</dt>
   <dd><%= @network_event.user.try(:email) %></dd>
 
@@ -142,7 +151,7 @@
           <th></th>
         </tr>
       </thead>
-  
+
       <tbody>
         <%= content_tag_for(:tr, @network_event.network_event_tasks) do |task| %>
           <td class="task_name"><a class="task-name" data-url="/network_event_tasks/<%= task.id %>"><%= task.name %></a></td>
@@ -159,14 +168,14 @@
               </div>
             </div>
           <td class="task_completed_at"><%= task.formatted_completed_at %> </td>
-          <td class="task_owner"><a class="task-owner" data-url="/network_event_tasks/<%= task.id %>" 
+          <td class="task_owner"><a class="task-owner" data-url="/network_event_tasks/<%= task.id %>"
                data-source="<%= User.editable_options %>"><%= task.owner.try(:email) %></a></td>
           <td class="task_mark">
             <% if not task.completed_at.present? %>
               <%= button_to("Mark Completed", network_event_task_path(task) , remote: true, method: :patch, name: "task_button", class:"btn btn-primary task_button",
                             params: { :"network_event_task[completed_at]" => Time.now }) %>
             <% else %>
-              Completed 
+              Completed
             <% end %>
           </td>
           <td><%= link_to 'Destroy', task, method: :delete, remote: true, data: { confirm: 'Are you sure?' } %></td>
@@ -182,7 +191,7 @@
       <div class="form-group">
         <%= f.label :name %>
           <%= f.text_field :name, class:"form-control", id: 'task-name' %>
-          <%= f.hidden_field :network_event_id, value: @network_event.id %> 
+          <%= f.hidden_field :network_event_id, value: @network_event.id %>
       </div>
       <div class="form-group">
         <%= f.label :owner %>

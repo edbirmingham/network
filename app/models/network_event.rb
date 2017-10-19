@@ -3,7 +3,7 @@ class NetworkEvent < ApplicationRecord
   validates :program_id, presence: true
   validates :location_id, presence: true
   before_save :apply_date_modifiers_to_tasks, if: :scheduled_at_is_changed?
-  
+
 
   belongs_to :location
   belongs_to :user
@@ -29,6 +29,9 @@ class NetworkEvent < ApplicationRecord
 
   has_many :cohort_assignments, dependent: :delete_all
   has_many :cohorts, through: :cohort_assignments
+
+  has_many :attendance_cohort_assignments, dependent: :delete_all
+  has_many :attendance_cohorts, through: :attendance_cohort_assignments, source: :cohort
 
   has_many :participations, dependent: :delete_all
   has_many :participants, through: :participations, source: :member
@@ -70,15 +73,13 @@ class NetworkEvent < ApplicationRecord
   end
 
   def invitees
-    if cohorts.any? || schools.any? || graduating_classes.any?
+    if attendance_cohorts.any? || schools.any? || graduating_classes.any?
       member_scope = Member.distinct
 
-      if cohorts.any?
+      if attendance_cohorts.any?
         member_scope = member_scope.
           joins(:cohorts).
-          where(cohorts: { id: cohort_ids }).
-          having("COUNT(cohorts.id) = #{cohort_ids.count}").
-          group("members.id")
+          where(cohorts: { id: attendance_cohort_ids })
       end
 
       if schools.any?
@@ -100,25 +101,26 @@ class NetworkEvent < ApplicationRecord
   end
 
   def copy(overrides={})
-    options = { 
+    options = {
       except: [:notes, :transport_ordered_on, :status, :scheduled_at],
       include: [
-        :site_contact_assignments, 
+        :site_contact_assignments,
         :school_contact_assignments,
         :volunteer_assignments,
         :graduating_class_assignments,
         :organization_assignments,
         :school_assignments,
         :cohort_assignments,
+        :attendance_cohort_assignments,
         :network_event_tasks
-      ] 
+      ]
     }
     clone = self.deep_clone options
     clone.save
     clone.update_attributes(overrides)
     clone
   end
-  
+
   def name_with_date
     if scheduled_at.present?
       name + ' (' + scheduled_at.to_formatted_s(:long) + ', ' + location.name + ')'
@@ -146,11 +148,11 @@ class NetworkEvent < ApplicationRecord
       nil
     end
   end
-  
+
   def scheduled_at_is_changed?
     return self.changes.include? 'scheduled_at'
   end
-  
+
   def apply_date_modifiers_to_tasks
     self.network_event_tasks.each do |task|
       scheduled_at = self.scheduled_at.in_time_zone("Central Time (US & Canada)")
@@ -183,7 +185,7 @@ class NetworkEvent < ApplicationRecord
         task.due_date = scheduled_at.end_of_day - 3.months
       when '4 months before event'
         task.due_date = scheduled_at.end_of_day - 4.months
-      else 
+      else
         task.due_date = nil
       end
       task.save
