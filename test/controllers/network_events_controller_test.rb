@@ -13,13 +13,13 @@ class NetworkEventsControllerTest < ActionController::TestCase
     assert_pagination assigns(:network_events),
       "Events json should be paginated."
   end
-  
+
   test "should get index with pagination" do
     get :index
     assert_pagination assigns(:network_events),
       "Events listing should be paginated."
   end
-  
+
   test "should get index with default filter" do
     get :index
     assert_response :success
@@ -60,7 +60,7 @@ class NetworkEventsControllerTest < ActionController::TestCase
     assert assigns(:network_events).present?
     assert_equal 3, assigns(:network_events).length
   end
-  
+
   test "should get index with uncompleted transportation task" do
     get :index, params: {
       common_task_ids: [common_tasks(:two).id],
@@ -106,7 +106,14 @@ class NetworkEventsControllerTest < ActionController::TestCase
 
   test "should create network_event" do
     assert_difference('NetworkEvent.count') do
-      post :create, params: { network_event: { location_id: @network_event.location_id, name: @network_event.name, scheduled_at: @network_event.scheduled_at, program_id: @network_event.program_id } }
+      post :create, params: { network_event: {
+        location_id: @network_event.location_id,
+        name: @network_event.name,
+        scheduled_at_date: @network_event.scheduled_at.to_date,
+        scheduled_at_time: @network_event.scheduled_at.to_time,
+        program_id: @network_event.program_id
+        }
+      }
     end
 
     assert_redirected_to network_event_path(assigns(:network_event))
@@ -130,13 +137,13 @@ class NetworkEventsControllerTest < ActionController::TestCase
 
     assert_equal file_data('network_events.csv'), response.body
   end
-  
+
   test "should get csv without pagination" do
     time = Time.local(2016, 8, 1, 10, 5, 0)
     Timecop.travel(time) do
       get :index, params: { :format => :csv }
     end
-    
+
     refute_pagination assigns(:network_events),
       "Events csv export should not be paginated."
   end
@@ -147,7 +154,14 @@ class NetworkEventsControllerTest < ActionController::TestCase
   end
 
   test "should update network_event" do
-    patch :update, params: { id: @network_event, network_event: { location_id: @network_event.location_id, name: @network_event.name, scheduled_at: @network_event.scheduled_at, program_id: @network_event.program_id } }
+    patch :update, params: { id: @network_event,
+      network_event: { location_id: @network_event.location_id,
+      name: @network_event.name,
+      scheduled_at_date: @network_event.scheduled_at.to_date,
+      scheduled_at_time: @network_event.scheduled_at.to_time,
+      program_id: @network_event.program_id
+      }
+    }
     assert_redirected_to network_event_path(assigns(:network_event))
   end
 
@@ -157,9 +171,9 @@ class NetworkEventsControllerTest < ActionController::TestCase
     end
     assert_redirected_to network_events_path
   end
-  
+
   test "staff user shouldn't be able to delete network_event" do
-    user = User.create!(email: 'test@example.com', staff: true, password: 'abcdef') 
+    user = User.create!(email: 'test@example.com', staff: true, password: 'abcdef')
     ability = Ability.new(user)
     assert ability.cannot? :delete, @network_event
   end

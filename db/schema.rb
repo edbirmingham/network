@@ -177,11 +177,9 @@ ActiveRecord::Schema.define(version: 20170906165326) do
     t.datetime "due_date"
     t.string "date_modifier"
     t.integer "owner_id"
-    t.bigint "parent_id"
     t.index ["common_task_id"], name: "index_network_event_tasks_on_common_task_id"
     t.index ["network_event_id"], name: "index_network_event_tasks_on_network_event_id"
     t.index ["owner_id"], name: "index_network_event_tasks_on_owner_id"
-    t.index ["parent_id"], name: "index_network_event_tasks_on_parent_id"
   end
 
   create_table "network_events", force: :cascade do |t|
@@ -315,5 +313,4 @@ ActiveRecord::Schema.define(version: 20170906165326) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "network_event_tasks", "network_event_tasks", column: "parent_id"
 end
