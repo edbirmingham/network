@@ -15,4 +15,9 @@ class MemberTest < ActiveSupport::TestCase
     member = Member.new(first_name: 'First', last_name: 'Last')
     assert member.save
   end
+
+  test 'should save member with date of birth' do
+    member = Member.new(first_name: 'First', last_name: 'Last', date_of_birth: 20.days.ago)
+    assert member.save 
+  end
 end

@@ -154,6 +154,7 @@ ActiveRecord::Schema.define(version: 20171019132839) do
     t.integer "school_id"
     t.string "mongo_id"
     t.integer "identity_id"
+    t.datetime "date_of_birth"
     t.index ["identity_id"], name: "index_members_on_identity_id"
   end
 
