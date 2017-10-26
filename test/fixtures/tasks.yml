@@ -22,3 +22,17 @@ uncompleted_task:
   common_task: two
   completed_at: null
   user: one
+  
+dashboard_project_task:
+  name: MyString
+  project: dashboard_project 
+  common_task: two
+  completed_at: null
+  owner: dashboard_user
+
+dashboard_event_task:
+  name: MyString
+  network_event: dashboard_event 
+  common_task: two
+  completed_at: null
+  owner: dashboard_user

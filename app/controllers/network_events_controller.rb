@@ -18,8 +18,8 @@ class NetworkEventsController < ApplicationController
   # GET /network_events/1
   # GET /network_events/1.json
   def show
-    @completed_tasks_count = @network_event.network_event_tasks.where.not(completed_at: nil).count
-    @network_event_task = NetworkEventTask.new
+    @completed_tasks_count = @network_event.tasks.where.not(completed_at: nil).count
+    @task = Task.new
     @participations = @network_event.participations.joins(:member).order('members.last_name, members.first_name')
   end
 
@@ -30,7 +30,7 @@ class NetworkEventsController < ApplicationController
 
     @common_tasks = CommonTask.all
     @common_tasks.each do |common_task|
-      @network_event.network_event_tasks.build(common_task_id: common_task.id, name: common_task.name, owner_id: common_task.owner_id, date_modifier: common_task.date_modifier)
+      @network_event.tasks.build(common_task_id: common_task.id, name: common_task.name, owner_id: common_task.owner_id, date_modifier: common_task.date_modifier)
     end
   end
 
@@ -102,7 +102,7 @@ class NetworkEventsController < ApplicationController
       @network_event.user = current_user
       respond_to do |format|
         if @network_event.save
-          @network_event.network_event_tasks.each do |task|
+          @network_event.tasks.each do |task|
             task.user_id = current_user.id
             task.save
           end
@@ -154,8 +154,8 @@ class NetworkEventsController < ApplicationController
       # Filter events by uncompleted tasks
       if params[:common_task_ids].present?
         events = events.
-          joins(:network_event_tasks).
-          where(network_event_tasks: {common_task_id: params[:common_task_ids],
+          joins(:tasks).
+          where(tasks: {common_task_id: params[:common_task_ids],
                                       completed_at: nil})
       end
 
@@ -229,7 +229,7 @@ class NetworkEventsController < ApplicationController
         :school_ids => [],
         :attendance_cohort_ids => [],
         :cohort_ids => [],
-        :network_event_tasks_attributes => [:id, :name, :scheduled_at, :common_task_id, :network_event_id, :owner_id, :due_date, :date_modifier]
+        :tasks_attributes => [:id, :name, :scheduled_at, :common_task_id, :network_event_id, :owner_id, :due_date, :date_modifier]
       )
     end
 end

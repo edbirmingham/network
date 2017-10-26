@@ -45,25 +45,7 @@ $(document).on 'ready page:load turbolinks:load', ->
     $("#new-task-form").show()
     $("#create-task-button").hide()
       
-    
-  # Task completion on event show page
-  $('tr.network_event_task').on 'ajax:success', (event, data) ->
-    if data.completed_at
-      $(this).children('td.task_completed_at').html(data.completed_at)
-      $(this).children("td.task_mark").find(".task_button").replaceWith("Completed");
-      $("#completed-count").text( parseInt( $("#completed-count").text() ) + 1);
-
   #In-place editing
-  $.fn.editable.defaults.mode = 'inline'
-  $('a.task_name').editable
-    name: 'name'
-    resource: 'network_event_task'
-    type: 'text'
-  $('a.task_owner').editable
-    name: 'owner_id'
-    resource: 'network_event_task'
-    type: 'select'
-    
   $('a.event-name').editable
     name: 'name'
     resource: 'network_event'
@@ -87,9 +69,9 @@ $(document).on 'ready page:load turbolinks:load', ->
     new_date.setHours(23,59,59,999)
     $.ajax({
       type: "PATCH",
-      url: "/network_event_tasks/#{task_id}/"
+      url: "/tasks/#{task_id}/"
       dataType: "json"
-      data: { network_event_task: { due_date: new_date } }
+      data: { task: { due_date: new_date } }
       context: this
       success:(data) ->
         formatted_date = moment(data.due_date).format('ddd, MMMM D YYYY')
