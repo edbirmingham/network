@@ -36,7 +36,7 @@ class NetworkEvent < ApplicationRecord
   has_many :participations, dependent: :delete_all
   has_many :participants, through: :participations, source: :member
 
-  has_many :network_event_tasks
+  has_many :network_event_tasks, dependent: :destroy
 
   accepts_nested_attributes_for :network_event_tasks
 
