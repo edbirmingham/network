@@ -167,11 +167,21 @@
   <div class="form-group">
     <%= f.label :scheduled_at, class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <div class="input-group date" id="event-datetimepicker">
-         <input type='text' class="form-control" name="network_event[scheduled_at]" id="network_event_scheduled_at" value="<%= @network_event.scheduled_at %>" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
+      <div class="col-sm-6" style="padding-left:0;">
+        <div class="input-group date" id="event-datepicker">
+          <input type='text' class="form-control" name="network_event[scheduled_at_date]" id="network_event_scheduled_at" value="<%= @network_event.scheduled_at %>" />
+          <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-6" style="padding-right: 0;">
+        <div class="input-group date" id="event-timepicker">
+          <input type='text' class="form-control" name="network_event[scheduled_at_time]" id="network_event_scheduled_at" value="<%= @network_event.scheduled_at %>" />
+          <span class="input-group-addon">
+              <span class="glyphicon glyphicon-time"></span>
+          </span>
+        </div>
       </div>
     </div>
   </div>

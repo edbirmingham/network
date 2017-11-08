@@ -51,6 +51,7 @@ class NetworkEventsController < ApplicationController
   # PATCH/PUT /network_events/1
   # PATCH/PUT /network_events/1.json
   def update
+    @network_event.scheduled_at = "#{(params[:network_event][:scheduled_at_date] + ' ' + params[:network_event][:scheduled_at_time]).to_datetime}"
     respond_to do |format|
       if @network_event.update(network_event_params)
         format.html { redirect_to @network_event, notice: 'Event was successfully updated.' }
@@ -100,6 +101,7 @@ class NetworkEventsController < ApplicationController
     def create_event
       @network_event = NetworkEvent.new(network_event_params)
       @network_event.user = current_user
+      @network_event.scheduled_at = "#{(params[:network_event][:scheduled_at_date] + ' ' + params[:network_event][:scheduled_at_time]).to_datetime}"
       respond_to do |format|
         if @network_event.save
           @network_event.network_event_tasks.each do |task|
@@ -123,6 +125,7 @@ class NetworkEventsController < ApplicationController
     end
 
     def override_params
+
       @override_params = network_event_params.select do |key, value|
         if value.is_a? Array
           value.present? && value.any?(&:present?)
@@ -130,6 +133,10 @@ class NetworkEventsController < ApplicationController
           value.present?
         end
       end
+      if params[:network_event][:scheduled_at_date].present? && params[:network_event][:scheduled_at_time].present?
+        @override_params[:scheduled_at] = "#{(params[:network_event][:scheduled_at_date] + ' ' + params[:network_event][:scheduled_at_time]).to_datetime}"
+      end
+      @override_params
     end
 
     # Use callbacks to share common setup or constraints between actions.

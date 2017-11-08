@@ -26,9 +26,15 @@ $(document).on 'ready page:load turbolinks:load', ->
     else
       $('#order_div').hide()
       
-  $('#event-datetimepicker').datetimepicker({
+  $('#event-datepicker').datetimepicker({
       showClear: true,
-      format: 'YYYY-MM-DD hh:mm a',
+      format: 'YYYY-MM-DD',
+      useCurrent: false
+  })
+
+  $('#event-timepicker').datetimepicker({
+      showClear: true,
+      format: 'hh:mm a',
       useCurrent: false
   })
   
