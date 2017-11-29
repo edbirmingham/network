@@ -1,6 +1,7 @@
 class NetworkAction < ApplicationRecord
   belongs_to :network_event
   belongs_to :actor, class_name: 'Member'
+  belongs_to :owner, class_name: 'User'
   belongs_to :user
   
   has_many :matches, dependent: :delete_all
