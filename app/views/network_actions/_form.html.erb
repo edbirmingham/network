@@ -36,6 +36,17 @@
     </div>
   </div>
   <div class="form-group">
+    <%= f.label :owner_id, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.collection_select :owner_id,
+            User.order(:email).all,
+            :id,
+            :email,
+            {},
+            class: "select2 form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
     <%= f.label :action_type, 'Type', class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
       <%= f.select :action_type,
