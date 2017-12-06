@@ -10,7 +10,6 @@ class NetworkAction < ApplicationRecord
   enum status: [:created, :matched, :unmatched, :in_progress, :complete]
   enum priority: [:needs_priority, :high_feasibility, :high_impact, :high_feasibility_and_high_impact]
   
-  
   def self.types
     %w{ Offering Request Declaration BOTN }
   end
