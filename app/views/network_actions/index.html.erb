@@ -11,6 +11,7 @@
     <thead>
       <tr>
         <th>Actor</th>
+        <th>Owner</th>
         <th>Event</th>
         <th>Type</th>
         <th>Description</th>
@@ -23,6 +24,13 @@
     <tbody>
       <%= content_tag_for(:tr, @network_actions) do |network_action| %>
         <td><%= link_to network_action.actor.try(:name), network_action.actor %></td>
+        <td>
+          <% if network_action.owner.try(:email) %>
+            <%= link_to network_action.owner.email, network_action.owner %>
+          <% else %>
+            No Owner Yet
+          <% end %>
+        </td>
         <td><%= link_to network_action.network_event.try(:name), network_action.network_event %></td>
         <td><%= network_action.action_type %></td>
         <td><%= network_action.description %></td>

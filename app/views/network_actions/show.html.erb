@@ -17,6 +17,9 @@
   <dt>Actor:</dt>
   <dd><%= link_to @network_action.actor.try(:name), @network_action.actor %></dd>
 
+  <dt>Owner:</dt>
+  <dd><%= link_to @network_action.owner.try(:email), @network_action.owner %></dd>
+
   <dt>Type:</dt>
   <dd><%= @network_action.action_type %></dd>
 

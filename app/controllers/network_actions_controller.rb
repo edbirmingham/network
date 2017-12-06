@@ -72,6 +72,6 @@ class NetworkActionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def network_action_params
-      params.require(:network_action).permit(:actor_id, :network_event_id, :action_type, :description, :member_ids => [])
+      params.require(:network_action).permit(:actor_id, :owner_id, :network_event_id, :action_type, :description, :member_ids => [])
     end
 end
