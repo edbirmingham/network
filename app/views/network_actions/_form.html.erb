@@ -75,6 +75,30 @@
     </div>
   </div>
   <div class="form-group">
+    <%= f.label :status, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.collection_select :status,
+            NetworkAction.statuses,
+            :first,
+            lambda { |status| status.first.titleize },
+            {},
+            class: "select2 form-control" %>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :priority, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.collection_select :priority,
+            NetworkAction.priorities,
+            :first,
+            lambda { |priority| priority.first.titleize },
+            {},
+            class: "select2 form-control" %>
+    </div>
+  </div>
+  
+  <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <%= f.submit action_button_name(f.object), class: "btn btn-primary" %>
     </div>

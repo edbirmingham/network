@@ -37,5 +37,11 @@
 
   <dt>User:</dt>
   <dd><%= @network_action.user.try(:email) %></dd>
+  
+  <dt>Status:</dt>
+  <dd><%= @network_action.try(:status).titleize %></dd>
+
+  <dt>Priority:</dt>
+  <dd><%= @network_action.try(:priority).titleize %></dd>
 
 </dl>
