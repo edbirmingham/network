@@ -1,0 +1,2 @@
+class RoleDimension < ApplicationRecord
+end

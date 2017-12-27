@@ -20,6 +20,15 @@ carver_tour:
   status: completed
   user: two
 
+jo_tour:
+  name: Jackson Olin UAB Tour
+  program: college_101
+  location: uab
+  scheduled_at: 2016-06-01 02:00:00
+  notes: notes_2
+  status: completed
+  user: two
+
 dateless_event:
   name: Future Unscheduled Event
   program: college_101
@@ -27,7 +36,7 @@ dateless_event:
   notes: notes_1
   status: confirmed
   user: one
-  
+
 dashboard_event:
   name: MyString
   program: college_101

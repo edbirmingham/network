@@ -6,6 +6,8 @@ class Participation < ApplicationRecord
 
   validates :level, presence: true
 
+  scope :attendee, -> { where level: 'attendee' }
+
   def attendee?
     level == 'attendee'
   end

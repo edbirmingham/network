@@ -2,17 +2,18 @@ ENV['RAILS_ENV'] ||= 'test'
 ENV['TZ'] = 'UTC'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
+require 'minitest/autorun'
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
-  
+
   def file_data(name)
     File.read(Rails.root.to_s + "/test/support/files/#{name}")
-  end 
-  
+  end
+
   # Implementation of the Guard Assertion unit testing pattern.  This should
   # be used to assert that preconditions of external dependancies are valid
   # before executing the test.  Dependencies external to the test are things

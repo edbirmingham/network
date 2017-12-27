@@ -79,7 +79,7 @@ class MembersControllerTest < ActionController::TestCase
   end
 
   test "should get members with identity one or two" do
-     identity_ids = [identities(:one).id, identities(:two).id]
+     identity_ids = [identities(:student).id, identities(:two).id]
      get :index,
       params: { identity_ids: identity_ids,
       commit: "Filter members" }

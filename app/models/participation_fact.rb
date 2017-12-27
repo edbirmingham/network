@@ -1,0 +1,2 @@
+class ParticipationFact < ApplicationRecord
+end

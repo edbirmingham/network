@@ -1,0 +1,2 @@
+class DateDimension < ApplicationRecord
+end
