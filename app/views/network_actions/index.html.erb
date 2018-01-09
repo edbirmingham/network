@@ -33,7 +33,15 @@
             No Owner Yet
           <% end %>
         </td>
-        <td><%= link_to network_action.network_event.try(:name), network_action.network_event %></td>
+        <td>
+          <% if network_action.network_event.try(:name) %>
+            <%= link_to network_action.network_event.try(:name), 
+                    network_action.network_event 
+            %>
+          <% else %>
+            No Event Yet
+          <% end %>
+        </td>
         <td><%= network_action.action_type if network_action.action_type.present? %></td>
         <td><%= network_action&.status.titleize %></td>
         <td><%= network_action&.priority.titleize %></td>

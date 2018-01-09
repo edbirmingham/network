@@ -18,7 +18,16 @@
   <dd><%= link_to @network_action.actor.try(:name), @network_action.actor %></dd>
 
   <dt>Owner:</dt>
-  <dd><%= link_to @network_action.owner.try(:email), @network_action.owner %></dd>
+  <dd>
+    <% if @network_action.owner.try(:email) %>
+      <%= link_to @network_action.owner.try(:email), @network_action.owner %>
+    <% else %>
+      No Owner Yet
+    <% end %>
+  </dd>
+
+
+
 
   <dt>Type:</dt>
   <dd><%= @network_action.action_type %></dd>
