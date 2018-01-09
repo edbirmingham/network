@@ -28,3 +28,9 @@ dateless_event:
   status: confirmed
   user: one
   
+dashboard_event:
+  name: MyString
+  program: college_101
+  location: tuggle
+  status: confirmed
+  user: dashboard_user

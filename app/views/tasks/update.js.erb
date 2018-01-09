@@ -1,0 +1,8 @@
+var $task_row = $("#task-row-<%= @task.id %>")
+$("#task-row-<%= @task.id %>").find(".task-completed").replaceWith("<div class='col-md-2'>Completed</div>");
+var task_list_items = $task_row.parent().find(".task-list-item")
+
+// Mark subtasks completed
+$.each(task_list_items, function(index, value) {  
+  $(this).find(".task-completed").replaceWith("<div class='col-md-2'>Completed</div>"); 
+});

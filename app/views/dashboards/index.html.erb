@@ -1,0 +1,109 @@
+<div class="page-header">
+  <%= form_tag dashboards_index_path, :method => :get, class: "form-horizontal" do %>
+  <div class="container">
+    <div class="form-group">
+        <div class="col-md-12">
+          <%= label_tag :dashboard_filter, "Event tasks" %>
+          <%= radio_button_tag "dashboard_filter", :event_tasks, !@dashboard_filter.present? || @dashboard_filter.eql?('event_tasks') %>
+          <%= label_tag :dashboard_filter, "Project tasks" %>
+          <%= radio_button_tag "dashboard_filter", :project_tasks, @dashboard_filter.eql?('project_tasks') %>
+        </div>
+    </div>
+  <div class="form-group">
+    <div class="col-md-12">
+      <%= submit_tag "Filter tasks", class: "btn btn-secondary"%>
+    </div>
+  </div>
+  <% end %>
+</div>
+
+<% if @projects.present? %>
+  <h2 class="text-left">Project Tasks</h2>
+  <% @projects.each do |project| %>
+  <div>
+    <div class="panel panel-default" id="js-project-panel-<%= project.id %>">
+      <div class="panel-heading">
+        <h4 class="text-left"><%= project.name %></h4> 
+        <p class="text-left">Due: <%= project.formatted_due_date %></p> 
+        <p class="text-left"><%= project.description %></p> 
+        <p>
+          <%= button_to 'Mark completed', project_path(project), remote: true, method: :patch, 
+             class: 'btn btn-default js-complete-project-btn',
+             params: {:"project[completed_at]" => Time.now} %>
+        </p>
+        <p>
+          <%= button_tag 'Add task', class: 'btn btn-default js-show-task-btn', id: "task-project-#{project.id}" %>
+        </p>
+        <div id= "<%= "js-fields-#{project.id}" %>" class="js-task-fields" hidden>
+          <%= render partial: 'task_fields', locals: {project_id: project.id, parent_id: nil, network_event_id: nil } %>
+          <br></br>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div id="project-div-<%= project.id %>">
+          <%= arranged_tree_as_list(project.tasks.arrange, {:list_style => :bootstrap_list_group, :li_class => ["task-list-item"]}) do |task| %>
+            <div class="row" id="task-row-<%= task.id %>">
+              <span class="col-md-2 task-name-pop"><%= task.name %></span>
+              <span class="col-md-3"><%= task.formatted_due_date %></span>
+              <% if task.completed_at.present? %>
+                           <span class="col-md-2 task-done">Completed</span>
+              <% else %>
+                            <%= button_to 'Mark completed', task_path(task), remote: true, 
+                              method: :patch, name: "task_button", class: "task-completed col-md-2 btn btn-link",
+                                params: { :"task[completed_at]" => Time.now } %>
+              <% end %>
+              <%= link_to 'Destroy', task, remote: true, method: :delete, data: { confirm: 'Are you sure? All subtasks will be destroyed as well' }, class: "col-md-2" %>
+              <%= button_tag 'Add subtask', class: 'btn btn-link col-md-2 js-show-subtask-btn' %>
+              <div class="js-subtask-fields" hidden>
+                <%= render partial: 'task_fields', locals: {project_id: project.id, parent_id: task.id, network_event_id: nil }%>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+  <%= paginate @projects %>
+<% elsif @events.present? %>
+  <h2 class="text-left">Event Tasks</h2>
+  <% @events.each do |event| %>
+  <div>
+    <div class="panel panel-default" id="js-event-panel-<%= event.id %>">
+      <div class="panel-heading">
+        <h4 class="text-left"><%= event.name %></h4> 
+        <p class="text-left">Scheduled: <%= event.scheduled_at.try(:to_formatted_s, :long) %></p> 
+        <p>
+          <%= button_tag 'Add task', class: 'btn btn-default js-show-task-btn' %>
+        </p>
+        <div class="row js-task-fields" hidden>
+          <%= render partial: 'task_fields', locals: {network_event_id: event.id, parent_id: nil, project_id: nil } %>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div id="event-div-<%= event.id %>">
+          <%= arranged_tree_as_list(event.tasks.arrange, {:list_style => :bootstrap_list_group, :li_class => ["task-list-item"]}) do |task| %>
+            <div class="row" id="task-row-<%= task.id %>">
+              <span class="col-md-2 task-name-pop"><%= task.name %></span>
+              <span class="col-md-3"><%= task.formatted_due_date %></span>
+              <% if task.completed_at.present? %>
+                           <span class="col-md-2 task-done">Completed</span>
+              <% else %>
+                            <%= button_to 'Mark completed', task_path(task), remote: true, 
+                              method: :patch, name: "task_button", class: "task-completed col-md-2 btn btn-link",
+                                params: { :"task[completed_at]" => Time.now } %>
+              <% end %>
+              <%= link_to 'Destroy', task, remote: true, method: :delete, data: { confirm: 'Are you sure? All subtask will be destroyed as well.' }, class: "col-md-2" %>
+              <%= button_tag 'Add subtask', class: 'js-show-subtask-btn btn btn-link col-md-2' %>
+              <div class="js-subtask-fields" hidden>
+                <%= render partial: 'task_fields', locals: {network_event_id: event.id, parent_id: task.id, project_id: nil }%>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+  <%= paginate @events %>
+<% end %>

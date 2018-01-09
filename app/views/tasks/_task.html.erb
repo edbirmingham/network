@@ -1,0 +1,18 @@
+<li class="list-group-item task-list-item text-left">
+  <div class="row" id="task-row-<%= task.id %>">
+    <span class="col-md-2 task-name-pop editable editable-click"><%= @task.name %></span>
+    <span class="col-md-3"><%= @task.formatted_due_date %></span>
+    <%= button_to 'Mark completed', task_path(@task), remote: true, 
+      method: :patch, name: "task_button", class: "task-completed col-md-2 btn btn-link",
+        params: { :"task[completed_at]" => Time.now } %>
+    <%= link_to 'Destroy', @task, remote: true, method: :delete, data: { confirm: 'Are you sure? All subtasks will be destroyed as well' }, class: "col-md-2" %>
+    <%= button_tag 'Add subtask', class: 'btn btn-link col-md-2 js-show-subtask-btn' %>
+    <div class="js-subtask-fields" hidden>
+      <% if @task.project.present? %>
+        <%= render partial: 'task_fields', locals: {network_event_id: nil, project_id: @task.project.id, parent_id: @task.id }%>
+      <% elsif @task.network_event.present? %>
+        <%= render partial: 'task_fields', locals: {network_event_id: @task.network_event.id, project_id: nil, parent_id: @task.id }%>
+      <% end %>
+    </div>
+  </div>
+</li>

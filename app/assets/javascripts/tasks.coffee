@@ -1,4 +1,5 @@
-$(document).on 'ready page:load turbolinks:load', ->
+
+$(document).on 'turbolinks:load', ->
   # initialize and link datepickers
   $ ->
     $('#startdatepicker').datetimepicker
@@ -6,6 +7,8 @@ $(document).on 'ready page:load turbolinks:load', ->
       format: 'ddd MMMM DD YYYY'
     $('#enddatepicker').datetimepicker
       useCurrent: false
+      format: 'ddd MMMM DD YYYY'
+    $('#task-datetimepicker').datetimepicker 
       format: 'ddd MMMM DD YYYY'
     $('#startdatepicker').on 'dp.change', (e) ->
       $('#enddatepicker').data('DateTimePicker').minDate e.date
@@ -15,21 +18,25 @@ $(document).on 'ready page:load turbolinks:load', ->
       return
     return
     
-  # Task completion
-  $('tr.network_event_task').on 'ajax:success', (event, data) ->
-    $(this).children('td.completed_at').html(data.completed_at)
-    $(this).children("td.task_completed").find(".completed_button").replaceWith("Completed")
-    
   #In-place editing
   $.fn.editable.defaults.mode = 'inline'
+  
   $('.task-name').editable
     name: 'name'
-    resource: 'network_event_task'
+    resource: 'task'
     type: 'text'
+    
   $('.task-owner').editable
     name: 'owner_id'
-    resource: 'network_event_task'
+    resource: 'task'
     type: 'select'
+    
+  # In-place editing that requires popups instead of inline
+  $('.task-name-pop').editable
+    mode: 'popup'
+    name: 'name'
+    resource: 'task'
+    type: 'text'
   
   $('.date-form').hide()
   $('.cancel-update').on 'click', ->
@@ -48,9 +55,9 @@ $(document).on 'ready page:load turbolinks:load', ->
     new_date.setHours(23,59,59,999)
     $.ajax({
       type: "PATCH",
-      url: "/network_event_tasks/#{task_id}/"
+      url: "/tasks/#{task_id}/"
       dataType: "json"
-      data: { network_event_task: { due_date: new_date } }
+      data: { task: { due_date: new_date } }
       context: this
       success:(data) ->
         formatted_date = moment(data.due_date).format('ddd, MMMM D YYYY')
@@ -59,7 +66,19 @@ $(document).on 'ready page:load turbolinks:load', ->
       error:(data) ->
         alert 'error updating due date'
     })
+  
+  $.fn.attachTaskButtonListener = ->
+    this.on 'click', (e) ->
+      $(this).parent().siblings('.js-task-fields').toggle()
+      $(this).html (i, html) ->
+        if html == 'Add task' then 'Hide form' else 'Add task'
+        
+  $.fn.attachSubtaskButtonListener = ->
+    this.on 'click', (e) ->
+      $(this).parent().find('.js-subtask-fields').toggle()
+      $(this).html (i, html) ->
+        if html == 'Add subtask' then 'Hide form' else 'Add subtask'
     
-    
-    
+  $('.js-show-task-btn').attachTaskButtonListener()
+  $('.js-show-subtask-btn').attachSubtaskButtonListener()
     
