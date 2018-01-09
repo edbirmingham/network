@@ -12,7 +12,15 @@
 
 <dl class="dl-horizontal text-left">
   <dt>Event:</dt>
-  <dd><%= link_to @network_action.network_event.try(:name), @network_action.network_event %></dd>
+  <dd>
+    <% if @network_action.network_event.try(:name) %>
+      <%= link_to @network_action.network_event.try(:name), 
+          @network_action.network_event 
+      %>
+    <% else %>
+      No Event Yet
+    <% end %>  
+  </dd>
 
   <dt>Actor:</dt>
   <dd><%= link_to @network_action.actor.try(:name), @network_action.actor %></dd>
