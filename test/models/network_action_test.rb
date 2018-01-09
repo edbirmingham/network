@@ -10,7 +10,9 @@ class NetworkActionTest < ActiveSupport::TestCase
       network_event: network_events(:dateless_event),
       actor: members(:one),
       owner: users(:one),
-      description: 'Really cool offer'
+      description: 'Really cool offer',
+      priority: "needs_priority",
+      status: "created"
     }.merge(additional_attributes)
   end
   
