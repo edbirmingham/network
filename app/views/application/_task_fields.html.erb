@@ -1,0 +1,29 @@
+<%= form_for Task.new, url: tasks_path, html: { class: "form-inline"}, :remote => true do |f| %>
+      <div class="form-group">
+        <%= f.label :name, class: 'sr-only' %>
+        <%= f.text_field :name, class:"form-control", id: 'task-name', placeholder: 'Name' %>
+        <%= f.hidden_field :project_id, value: project_id %> 
+        <%= f.hidden_field :network_event_id, value: network_event_id %> 
+      </div>
+      <div class="form-group">
+        <%= f.label :owner, class: 'sr-only' %>
+        <%= f.collection_select :owner_id, User.all, :id, :email, {:include_blank => "No owner selected"}, class: "select2"%>
+      </div>
+      <div class="form-group">
+        <%= f.label :common_task, class: 'sr-only' %>
+        <%= f.collection_select :common_task_id, CommonTask.all, :id, :name, {:include_blank => "No common task selected" }, class: "select2"%>
+      </div>
+      <div class="form-group">
+        <%= f.label :date_modifier, "Due date", class: 'sr-only' %>
+        <%= f.collection_select :date_modifier,
+              CommonTask.date_modifiers,
+              :to_s,
+              :titleize,
+              {},
+              class: "select2 task-field",
+              multiple: false,
+              data: {placeholder: 'Select Date Modifier'} %>
+      </div>
+        <%= f.hidden_field :parent_id, value: parent_id %>
+        <%= f.submit "Save Task", class:"btn btn-primary js-task-submit" %>
+<% end %>

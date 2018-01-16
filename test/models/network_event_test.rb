@@ -267,11 +267,11 @@ class NetworkEventTest < ActiveSupport::TestCase
 
   test "When a network event is copied the tasks should be the same" do
     original = network_events(:tuggle_network)
-    assert_guard original.network_event_tasks.present?,
+    assert_guard original.tasks.present?, 
       "Network event fixture expected to have tasks"
 
     copy = original.copy
-    assert_equal original.network_event_tasks.count, copy.network_event_tasks.count
+    assert_equal original.tasks.count, copy.tasks.count
   end
 
   test "When a network event is copied the cohorts can be overridden" do

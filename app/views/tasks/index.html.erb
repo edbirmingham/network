@@ -1,7 +1,7 @@
 <div class="page-header">
-  <h1>Listing event tasks</h1>
+  <h1>Listing tasks</h1>
   
-<%= form_tag network_event_tasks_path, :method => :get, class: "form-horizontal" do %>
+<%= form_tag tasks_path, :method => :get, class: "form-horizontal" do %>
   <div class="container">
     <div class="input-group">
       <span class="input-group-btn">
@@ -15,6 +15,16 @@
     </div>
     <br><br>
      
+    <div class="form-group">
+      <div class="col-md-12">
+        <%= label_tag :project_filter_show_all, "Show all" %>
+        <%= radio_button_tag :project_filter, :show_all, !@project_filter.present? || @status_filter.eql?('show_all') %>
+        <%= label_tag :project_filter_uncompleted_only, "Event only" %>
+        <%= radio_button_tag :project_filter, :event_only, @project_filter.eql?('event_only') %>
+        <%= label_tag :project_filter_completed_only, "Project only" %>
+        <%= radio_button_tag :project_filter, :project_only, @project_filter.eql?('project_only') %>
+      </div>
+    </div>
     <div class="form-group">
       <div class="col-md-12">
         <%= label_tag :status_filter_show_all, "Show all" %>
@@ -64,6 +74,20 @@
     </div>
     <div class="form-group">
       <div class="col-md-12">
+        <%= select_tag :project_ids, 
+              options_from_collection_for_select(
+                Project.order(:name).all, 
+                :id, 
+                :name,
+                params[:project_ids]
+              ),
+              class: "select2 form-control", 
+              multiple: true, 
+              data: { placeholder: 'Filter by project' }  %>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-12">
         <%= select_tag :owner_ids, 
               options_from_collection_for_select(
                 User.order(:email).all, 
@@ -106,22 +130,23 @@
       <tr>
         <th>Name</th>
         <th>Network event</th>
+        <th>Project</th>
         <th>Owner</th>
         <th>School</th>
         <th>Due date</th>
         <th>Common task</th>
         <th>Completed on</th>
-        <th></th>
       </tr>
     </thead>
 
     <tbody> 
-      <%= content_tag_for(:tr, @network_event_tasks) do |task| %>
-        <td><a class="task-name"  data-url="network_event_tasks/<%= task.id %>"><%= task.name %></a></td>
-        <td><%= link_to(task.network_event.name, network_event_path(task.network_event)) if task.network_event %></td>
-        <td><a class="task-owner" data-url="network_event_tasks/<%= task.id %>" 
+      <%= content_tag_for(:tr, @tasks) do |task| %>
+        <td><a class="task-name"  data-url="tasks/<%= task.id %>"><%= task.name %></a></td>
+        <td><%= link_to(task.network_event.name, network_event_path(task.network_event)) if task.network_event.present? %> </td>
+        <td><%= link_to(task.project.name, project_path(task.project)) if task.project.present? %></td>
+        <td><a class="task-owner" data-url="tasks/<%= task.id %>" 
                data-source="<%= User.editable_options %>"><%= task.owner.try(:email) %></a></td>
-        <td><%= task.network_event.schools.map {|school| school.name}.join(", ") %></td>     
+        <td><%= task.network_event.schools.map {|school| school.name}.join(", ") if task.network_event %></td>     
         <td class="date-cell" id="date_<%= task.id %>">
           <span class="date-view"><%= task.formatted_due_date %></span>
           <div class="date-form form-inline" data-task-id="<%= task.id %>">
@@ -139,18 +164,8 @@
         
         <td><%= task.common_task.try(:name) %></td>
         <td class="completed_at"><%= task.formatted_completed_at %></td>
-        <td class="task_completed">
-          <% if task.completed? %>
-            Completed
-          <% else %>
-            <%= button_to("Mark completed",
-                  network_event_task_path(task), remote: true, method: :patch, 
-                  name: "task_button", class: "btn btn-primary completed_button",
-                  params: { :"network_event_task[completed_at]" => Time.now }) %>
-          <% end %>
-        </td>
       <% end %>
     </tbody>
   </table>
-  <%= paginate @network_event_tasks %>
+  <%= paginate @tasks %>
 </div>

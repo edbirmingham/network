@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  owner: task_user
+  description: MyString
+  
+two:
+  name: MyString
+  owner: task_user
+  description: MyString
+
+dashboard_project:
+  name: MyString
+  owner: dashboard_user
+  description: MyString
+  completed_at: null

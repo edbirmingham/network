@@ -1,0 +1,8 @@
+if (<%= @task.is_childless? %>) {
+  $("#task-row-<%= @task.id %>").parent("li").remove();
+}
+else {
+  $("#task-row-<%= @task.id %>").parent("li").children("ul").remove();
+  $("#task-row-<%= @task.id %>").parent("li").remove();
+}
+
