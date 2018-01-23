@@ -43,8 +43,8 @@
           <% end %>
         </td>
         <td><%= network_action.action_type if network_action.action_type.present? %></td>
-        <td><%= network_action&.status.titleize %></td>
-        <td><%= network_action&.priority.titleize %></td>
+        <td><%= network_action.try(:status).titleize %></td>
+        <td><%= network_action&.try(:priority).titleize %></td>
         <td><%= network_action.description %></td>
         <td><%= link_to 'Show', network_action %></td>
         <td><%= link_to 'Edit', edit_network_action_path(network_action) %></td>
