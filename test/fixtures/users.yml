@@ -12,3 +12,11 @@ three:
   email: three@test.com
   admin: false
   staff: true
+  
+task_user:
+  email: task_user@test.com
+  admin: false
+  
+dashboard_user:
+  email: dashboard_user@test.com
+  admin: true

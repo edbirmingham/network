@@ -1,15 +1,18 @@
-class NetworkEventTask < ApplicationRecord
+class Task < ApplicationRecord
   include PgSearch
+  validates_presence_of :name
+  before_update :mark_descendants_completed, if: :completed_at_is_changed?
 
   pg_search_scope :search_by_task_name,
                   :against => [:name],
                   :using => { :tsearch => {:prefix => true} }
+  has_ancestry
   belongs_to :user
   belongs_to :owner, :class_name => "User"
   belongs_to :network_event
+  belongs_to :project
   belongs_to :common_task
 
-  validates_presence_of :name
 
   def self.in_date_range(start_date, end_date)
     start_date = Date.strptime(start_date, '%A %B %d %Y')
@@ -32,9 +35,22 @@ class NetworkEventTask < ApplicationRecord
       nil
     end
   end
-
+  
+  def mark_descendants_completed
+    self.descendants.each do |task|
+      if task.completed_at.nil?
+        task.completed_at = Time.now 
+        task.save
+      end
+    end
+  end
+  
   def completed?
     return completed_at.present?
+  end
+  
+  def completed_at_is_changed?
+    return self.changes.include? 'completed_at'
   end
 
   def as_json(options)

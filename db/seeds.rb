@@ -145,9 +145,9 @@ student_nell = Member.create(
   user_id: user.id
 )
 
-chaperone_task = CommonTask.create(name: 'Find X chaperones', user_id: user.id, date_modifier: 'Monday before event')
-transportation_task = CommonTask.create(name: 'Schedule transportation', user_id: user.id, date_modifier: '1 week before event')
-catering_task = CommonTask.create(name: 'Schedule catering', user_id: user.id, date_modifier: '1 month before event')
+chaperone_task = CommonTask.create(name: 'Find X chaperones', user_id: user.id, date_modifier: 'Monday before')
+transportation_task = CommonTask.create(name: 'Schedule transportation', user_id: user.id, date_modifier: '1 week before')
+catering_task = CommonTask.create(name: 'Schedule catering', user_id: user.id, date_modifier: '1 month before')
 
 network_event = nil
 Location.all.each do |location|
@@ -167,19 +167,19 @@ Location.all.each do |location|
       status: NetworkEvent.statuses.sample,
       user_id: user.id
     )
-    network_event.network_event_tasks.create(
+    network_event.tasks.create(
       name: "Schedule 4 buses",  
       owner_id: user.id,
       common_task_id: transportation_task.id,
       date_modifier: transportation_task.date_modifier
     )
-    network_event.network_event_tasks.create(
+    network_event.tasks.create(
       name: "Recruit 7 chaperones",  
       owner_id: user.id,
       common_task_id: chaperone_task.id,
       date_modifier: chaperone_task.date_modifier
     )
-    network_event.network_event_tasks.create(
+    network_event.tasks.create(
       name: "Schedule catering",  
       owner_id: user.id,
       common_task_id: catering_task.id,

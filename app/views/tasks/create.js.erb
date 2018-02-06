@@ -1,0 +1,43 @@
+<% if @task.project.present? %>
+  <% if @task.has_parent? %>
+    $parent_li = $("#task-row-<%= @task.parent_id %>").parent();
+    // if task already has subtask
+    if ($parent_li.children("ul").length){
+      $parent_li.children("ul").last().append("<%= j render @task %>");
+    } else {
+      $parent_li.append("<ul class='list-group'></ul>");
+      $parent_li.find("ul").append("<%= j render @task %>");
+    }
+  <% else %>
+    if ($("ul.list-group").length){
+      $("#project-div-<%= @task.project_id %>").children('ul').append("<%= j render @task %>");
+    } else {
+      $("#project-div-<%= @task.project_id %>").append("<ul class='list-group'></ul>");
+      $("#project-div-<%= @task.project_id %>").find("ul").append("<%= j render @task %>");
+    }
+  <% end %>
+<% elsif @task.network_event.present? %>
+  <% if @task.has_parent? %>
+    $parent_li = $("#task-row-<%= @task.parent_id %>").parent();
+    // if task already has subtask
+    if ($parent_li.children("ul").length){
+      $parent_li.children("ul").append("<%= j render @task %>");
+    } else {
+      $parent_li.append("<ul class='list-group'></ul>");
+      $parent_li.find("ul").append("<%= j render @task %>");
+    }
+  <% else %>
+    if ($("ul.list-group").length){
+      $("#event-div-<%= @task.network_event_id %>").children('ul').append("<%= j render @task %>");
+    } else {
+      $("#event-div-<%= @task.network_event_id %>").append("<ul class='list-group'></ul>");
+      $("#event-div-<%= @task.network_event_id %>").find("ul").append("<%= j render @task %>");
+    }
+  <% end %>
+<% end %>
+
+$task_li = $("#task-row-<%= @task.id %>").parent();
+$task_li.find(".js-show-subtask-btn").attachSubtaskButtonListener();
+$.each($task_li.find(".select2"), function(i,val) {
+  $(this).select2();
+});

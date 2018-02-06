@@ -36,9 +36,9 @@ class NetworkEvent < ApplicationRecord
   has_many :participations, dependent: :delete_all
   has_many :participants, through: :participations, source: :member
 
-  has_many :network_event_tasks
+  has_many :tasks, dependent: :destroy
 
-  accepts_nested_attributes_for :network_event_tasks
+  accepts_nested_attributes_for :tasks
 
 
   def self.in_date_range(start_date, end_date)
@@ -112,7 +112,7 @@ class NetworkEvent < ApplicationRecord
         :school_assignments,
         :cohort_assignments,
         :attendance_cohort_assignments,
-        :network_event_tasks
+        :tasks
       ]
     }
     clone = self.deep_clone options
@@ -154,36 +154,36 @@ class NetworkEvent < ApplicationRecord
   end
 
   def apply_date_modifiers_to_tasks
-    self.network_event_tasks.each do |task|
+    self.tasks.each do |task|
       scheduled_at = self.scheduled_at.in_time_zone("Central Time (US & Canada)")
       case task.date_modifier
-      when 'Day before event'
+      when 'Day before'
         task.due_date = scheduled_at.end_of_day - 1.day
-      when 'Day of event'
+      when 'Day of'
         task.due_date = scheduled_at.end_of_day
-      when '1 week after event'
+      when '1 week after'
         task.due_date = scheduled_at.end_of_day + 1.week
-      when 'Monday before event'
+      when 'Monday before'
         task.due_date = scheduled_at.end_of_week(:tuesday) - 1.week
-      when '2 Mondays before event'
+      when '2 Mondays before'
         task.due_date = scheduled_at.end_of_week(:tuesday) - 2.weeks
-      when 'Friday before event'
+      when 'Friday before'
         task.due_date = scheduled_at.end_of_week(:saturday) - 1.week
-      when '2 Fridays before event'
+      when '2 Fridays before'
         task.due_date = scheduled_at.end_of_week(:saturday) - 2.weeks
-      when '1 week before event'
+      when '1 week before'
         task.due_date = scheduled_at.end_of_day - 1.week
-      when '2 weeks before event'
+      when '2 weeks before'
         task.due_date = scheduled_at.end_of_day - 2.weeks
-      when '3 weeks before event'
+      when '3 weeks before'
         task.due_date = scheduled_at.end_of_day - 3.weeks
-      when '1 month before event'
+      when '1 month before'
         task.due_date = scheduled_at.end_of_day - 1.months
-      when '2 months before event'
+      when '2 months before'
         task.due_date = scheduled_at.end_of_day - 2.months
-      when '3 months before event'
+      when '3 months before'
         task.due_date = scheduled_at.end_of_day - 3.months
-      when '4 months before event'
+      when '4 months before'
         task.due_date = scheduled_at.end_of_day - 4.months
       else
         task.due_date = nil
