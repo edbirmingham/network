@@ -15,14 +15,28 @@
             <button 
               class="btn btn-default" 
               type="submit" 
-              name="Filter By Actor"
+              name="Filter"
             >
               Go!
             </button>
           </span>
-          <%= select_tag :actor_ids, 
+          <%= select_tag :owner_ids, 
               options_from_collection_for_select(
                 User.order(:email).all, 
+                :id, 
+                :email,
+                params[:owner_ids]
+              ),
+              class: "select2 form-control", 
+              style: "float: left; display:inline-block; width: 30rem;",
+              multiple: true, 
+              data: {
+                placeholder: 'Find Owner', 
+              } 
+          %>
+          <%= select_tag :actor_ids, 
+              options_from_collection_for_select(
+                Member.order(:email).all, 
                 :id, 
                 :email,
                 params[:actor_ids]
@@ -31,9 +45,9 @@
               style: "float: left; display:inline-block; width: 30rem;",
               multiple: true, 
               data: {
-                placeholder: 'Owner', 
+                placeholder: 'Find Actor', 
               } 
-        %>
+          %>
       </div>
     </div>
   </div>
@@ -47,6 +61,7 @@
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
+        <th>Actor</th>
         <th>Owner</th>
         <th>Event</th>
         <th>Type</th>

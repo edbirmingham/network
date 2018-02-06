@@ -17,7 +17,7 @@ class NetworkActionsControllerTest < ActionController::TestCase
   test "should filter actions to actor" do
     get :index, params: {
       owner_ids: "jane.doe@example.com",
-      commit: "Filter By Actor"
+      commit: "Filter"
     }
     assert_response :success
     assert assigns(:network_actions).present?

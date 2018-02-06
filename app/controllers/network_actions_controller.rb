@@ -68,9 +68,14 @@ class NetworkActionsController < ApplicationController
   
   def filtered_network_actions
     network_actions = NetworkAction.
-      includes(:actor)
-      
+      includes(:owner, :actor)
+    
     # Filter tasks by owner
+    if params[:owner_ids].present?
+      network_actions = network_actions.
+        where(:owner_id => params[:owner_ids])
+    end
+    
     if params[:actor_ids].present?
       network_actions = network_actions.
         where(:actor_id => params[:actor_ids])
