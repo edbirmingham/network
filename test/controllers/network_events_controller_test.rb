@@ -23,8 +23,7 @@ class NetworkEventsControllerTest < ActionController::TestCase
   test "should get index with default filter" do
     get :index
     assert_response :success
-    # assert assigns(:network_events).blank?
-    assert_equal 1, assigns(:network_events).length
+    assert_equal 2, assigns(:network_events).length
     assert_includes assigns(:network_events), network_events(:dateless_event)
   end
 
@@ -35,7 +34,7 @@ class NetworkEventsControllerTest < ActionController::TestCase
     }
     assert_response :success
     assert assigns(:network_events).present?
-    assert_equal 1, assigns(:network_events).length
+    assert_equal 2, assigns(:network_events).length
     assert_includes assigns(:network_events), network_events(:dateless_event)
   end
 
@@ -58,7 +57,7 @@ class NetworkEventsControllerTest < ActionController::TestCase
     }
     assert_response :success
     assert assigns(:network_events).present?
-    assert_equal 3, assigns(:network_events).length
+    assert_equal 4, assigns(:network_events).length
   end
   
   test "should get index with uncompleted transportation task" do
@@ -68,7 +67,7 @@ class NetworkEventsControllerTest < ActionController::TestCase
     }
     assert_response :success
     assert assigns(:network_events).present?
-    assert_equal 1, assigns(:network_events).length
+    assert_equal 2, assigns(:network_events).length
   end
 
   test "should get index with class of 2017" do

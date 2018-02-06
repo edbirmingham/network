@@ -1,0 +1,62 @@
+<div class="page-header">
+  <%= link_to projects_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to edit_project_path(@project), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Edit
+  <% end %>
+  <h1>Show project</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Name:</dt>
+  <dd><%= @project.name %></dd>
+  
+  <dt>Description:</dt>
+  <dd><%= @project.description %></dd>
+  
+  <dt>Owner:</dt>
+  <dd><%= @project.owner.try(:email) %></dd>
+
+  <dt>Due date:</dt>
+  <dd><%= @project.formatted_due_date %></dd>
+  
+  <dt>Completed:</dt>
+  <dd><%= @project.completed_at ? @project.completed_at : "Uncompleted" %></dd>
+  
+</dl>
+<p>
+  <%= button_to 'Mark project completed', project_path(@project), remote: true, method: :patch, 
+             class: 'btn btn-success js-complete-project-btn',
+             params: {:"project[completed_at]" => Time.now} %>
+             
+</p>
+<p>
+  <%= button_tag 'Add task', class: 'btn btn-default js-show-task-btn', id: "task-project-#{@project.id}" %>
+</p>
+<div id= "<%= "js-fields-#{@project.id}" %>" class="js-task-fields" hidden>
+    <%= render partial: 'task_fields', locals: {project_id: @project.id, parent_id: nil, network_event_id: nil } %>
+  <br></br>
+</div>
+<div id="project-div-<%= @project.id %>">
+  <%= arranged_tree_as_list(@project.tasks.arrange, {:list_style => :bootstrap_list_group, :li_class => ["task-list-item"]}) do |task| %>
+      <div class="row" id="task-row-<%= task.id %>">
+          <span class="col-md-2 task-name-pop"><%= task.name %></span>
+          <span class="col-md-3"><%= task.formatted_due_date %></span>
+          <% if task.completed_at.present? %>
+             <span class="col-md-2 task-done">Completed</span>
+          <% else %>
+              <%= button_to 'Mark completed', task_path(task), remote: true, 
+                method: :patch, name: "task_button", class: "task-completed col-md-2 btn btn-link",
+                  params: { :"task[completed_at]" => Time.now } %>
+          <% end %>
+         <%= link_to 'Destroy', task, remote: true, method: :delete, data: { confirm: 'Are you sure? All subtasks will also be destroyed' }, class: "col-md-2" %>
+         <%= button_tag 'Add subtask', class: 'btn btn-link col-md-2 js-show-subtask-btn' %>
+          <div class="js-subtask-fields" hidden>
+              <%= render partial: 'task_fields', locals: {project_id: @project.id, parent_id: task.id, network_event_id: nil }%>
+         </div>
+      </div>
+  <% end %>
+</div>

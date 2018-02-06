@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'network_event_tasks/update'
+
 
   resources :identities
   resources :common_tasks
@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   resources :graduating_classes
   resources :network_actions
   resources :programs
-  resources :network_event_tasks, only: [:create, :index, :update, :destroy]
+  resources :tasks, only: [:new, :create, :index, :update, :destroy]
+  resources :projects
 
   resources :network_events do
     resources :sign_ups, only: [:new, :show, :create, :edit, :update]
@@ -35,8 +36,9 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :edit, :update, :destroy]
 
   get 'welcome/index'
+  get 'dashboards/index'
 
-  root 'welcome#index'
+  root 'dashboards#index' 
 
   resources :members do
     resources :communications, only: [:new, :show, :create, :edit, :update, :destroy]

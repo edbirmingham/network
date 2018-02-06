@@ -50,6 +50,8 @@
         <th>Owner</th>
         <th>Event</th>
         <th>Type</th>
+        <th>Status</th>
+        <th>Priority</th>
         <th>Description</th>
         <th></th>
         <th></th>
@@ -60,8 +62,25 @@
     <tbody>
       <%= content_tag_for(:tr, @network_actions) do |network_action| %>
         <td><%= link_to network_action.actor.try(:name), network_action.actor %></td>
-        <td><%= link_to network_action.network_event.try(:name), network_action.network_event %></td>
-        <td><%= network_action.action_type %></td>
+        <td>
+          <% if network_action.owner.try(:email) %>
+            <%= link_to network_action.owner.email, network_action.owner %>
+          <% else %>
+            No Owner Yet
+          <% end %>
+        </td>
+        <td>
+          <% if network_action.network_event.try(:name) %>
+            <%= link_to network_action.network_event.try(:name), 
+                    network_action.network_event 
+            %>
+          <% else %>
+            No Event Yet
+          <% end %>
+        </td>
+        <td><%= network_action.action_type if network_action.action_type.present? %></td>
+        <td><%= network_action.try(:status).titleize %></td>
+        <td><%= network_action.try(:priority).titleize %></td>
         <td><%= network_action.description %></td>
         <td><%= link_to 'Show', network_action %></td>
         <td><%= link_to 'Edit', edit_network_action_path(network_action) %></td>

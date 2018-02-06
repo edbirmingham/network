@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171019132839) do
+ActiveRecord::Schema.define(version: 20171206181507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -173,24 +173,9 @@ ActiveRecord::Schema.define(version: 20171019132839) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "network_event_tasks", force: :cascade do |t|
-    t.string "name"
-    t.datetime "completed_at"
-    t.integer "common_task_id"
-    t.integer "network_event_id"
-    t.integer "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "due_date"
-    t.string "date_modifier"
     t.integer "owner_id"
-    t.bigint "parent_id"
-    t.index ["common_task_id"], name: "index_network_event_tasks_on_common_task_id"
-    t.index ["network_event_id"], name: "index_network_event_tasks_on_network_event_id"
-    t.index ["owner_id"], name: "index_network_event_tasks_on_owner_id"
-    t.index ["parent_id"], name: "index_network_event_tasks_on_parent_id"
+    t.integer "status", default: 0
+    t.integer "priority", default: 0
   end
 
   create_table "network_events", force: :cascade do |t|
@@ -241,6 +226,18 @@ ActiveRecord::Schema.define(version: 20171019132839) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "abbreviation"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "user_id"
+    t.bigint "owner_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "due_date"
+    t.date "completed_at"
+    t.index ["owner_id"], name: "index_projects_on_owner_id"
   end
 
   create_table "residences", force: :cascade do |t|
@@ -297,6 +294,28 @@ ActiveRecord::Schema.define(version: 20171019132839) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "tasks", force: :cascade do |t|
+    t.string "name"
+    t.datetime "completed_at"
+    t.integer "common_task_id"
+    t.integer "network_event_id"
+    t.integer "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "due_date"
+    t.string "date_modifier"
+    t.integer "owner_id"
+    t.bigint "parent_id"
+    t.bigint "project_id"
+    t.string "ancestry"
+    t.index ["ancestry"], name: "index_tasks_on_ancestry"
+    t.index ["common_task_id"], name: "index_tasks_on_common_task_id"
+    t.index ["network_event_id"], name: "index_tasks_on_network_event_id"
+    t.index ["owner_id"], name: "index_tasks_on_owner_id"
+    t.index ["parent_id"], name: "index_tasks_on_parent_id"
+    t.index ["project_id"], name: "index_tasks_on_project_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -324,5 +343,7 @@ ActiveRecord::Schema.define(version: 20171019132839) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "network_event_tasks", "network_event_tasks", column: "parent_id"
+  add_foreign_key "projects", "users", column: "owner_id"
+  add_foreign_key "tasks", "projects"
+  add_foreign_key "tasks", "tasks", column: "parent_id"
 end

@@ -45,6 +45,9 @@ gem 'bootstrap-editable-rails'
 
 gem 'cancancan', '~> 2.0'
 
+# Use Ancestry for tasks/subtasks
+gem 'ancestry'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
