@@ -6,11 +6,37 @@
   <h1>Listing actions</h1>
 </div>
 
+<div style="padding: 0 1.5rem;">
+<%= form_tag network_actions_path, :method => :get, class: "form-horizontal" do %>
+  <div class="form-group">
+    <div class="input-group">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="submit" name="commit">Go!</button>
+        </span>
+        <%= select_tag :actor_ids, 
+            options_from_collection_for_select(
+              User.order(:email).all, 
+              :id, 
+              :email,
+              params[:actor_ids]
+            ),
+            class: "select2 form-control", 
+            multiple: true, 
+            data: { placeholder: 'Owner' } 
+      %>
+    </div>
+  </div>
+</div>
+
+<% end %>
+
 <div class="table-responsive">
+  
+  
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
-        <th>Actor</th>
+        <th>Owner</th>
         <th>Event</th>
         <th>Type</th>
         <th>Description</th>
