@@ -36,17 +36,18 @@
           %>
           <%= select_tag :actor_ids, 
               options_from_collection_for_select(
-                Member.order(:email).all, 
+                {}, 
                 :id, 
-                :email,
+                :text,
                 params[:actor_ids]
               ),
-              class: "select2 form-control", 
+              class: "select2 ajax form-control", 
               style: "float: left; display:inline-block; width: 30rem;",
               multiple: true, 
-              data: {
-                placeholder: 'Find Actor', 
-              } 
+              data: { 
+                ajax: { url: members_path },
+                placeholder: 'Find Actor'
+              }
           %>
       </div>
     </div>
