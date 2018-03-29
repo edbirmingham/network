@@ -139,6 +139,7 @@ class NetworkEventsController < ApplicationController
 
     def filtered_events
       events = NetworkEvent.
+        select("DISTINCT network_events.*, " + sort_column + " IS NULL").
         includes(:program, :location, :organizations, :volunteers).
         order(sort_column + " IS NULL, " + sort_column + " " + sort_direction)
 
