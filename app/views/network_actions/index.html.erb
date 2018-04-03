@@ -1,12 +1,64 @@
 <div class="page-header">
-  <%= link_to new_network_action_path, class: 'btn btn-primary' do %>
-    <span class="glyphicon glyphicon-plus"></span>
-    New Action
+  <div class="col-md-12" style="margin-bottom: 2rem; padding-left: 0;">
+    <h1 style="text-align: left;float:left; margin: 0 2rem 1rem 0;">Actions</h1>
+    <%= link_to new_network_action_path, class: 'btn btn-primary', style: 'float:left; margin-top: 1rem; height: 3rem;' do %>
+      <span class="glyphicon glyphicon-plus"></span>
+      New Action
+    <% end %>
+  </div>
+  
+  <div style="padding: 2rem 1.5rem;">
+  <%= form_tag network_actions_path, :method => :get, class: "form-horizontal" do %>
+    <div class="form-group">
+      <div class="input-group">
+          <span style="display: inline-block;float:left; margin-right: 1rem;">
+            <button 
+              class="btn btn-default" 
+              type="submit" 
+              name="Filter"
+            >
+              Go!
+            </button>
+          </span>
+          <%= select_tag :owner_ids, 
+              options_from_collection_for_select(
+                User.order(:email).all, 
+                :id, 
+                :email,
+                params[:owner_ids]
+              ),
+              class: "select2 form-control", 
+              style: "float: left; display:inline-block; width: 30rem;",
+              multiple: true, 
+              data: {
+                placeholder: 'Find Owner', 
+              } 
+          %>
+          <%= select_tag :actor_ids, 
+              options_from_collection_for_select(
+                {}, 
+                :id, 
+                :text,
+                params[:actor_ids]
+              ),
+              class: "select2 ajax form-control", 
+              style: "float: left; display:inline-block; width: 30rem;",
+              multiple: true, 
+              data: { 
+                ajax: { url: members_path },
+                placeholder: 'Find Actor'
+              }
+          %>
+      </div>
+    </div>
+  </div>
+  
   <% end %>
-  <h1>Listing actions</h1>
 </div>
 
 <div class="table-responsive">
+  
+  
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>

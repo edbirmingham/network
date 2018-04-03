@@ -13,6 +13,34 @@ class NetworkActionsControllerTest < ActionController::TestCase
     assert_response :success
     assert_not_nil assigns(:network_actions)
   end
+  
+  test "should filter actions to owner" do
+    get :index, params: {
+      owner_id: "jane.doe@example.com",
+      commit: "Filter"
+    }
+    assert_response :success
+    assert assigns(:network_actions).present?
+  end
+  
+  test "should filter actions to actor" do
+    get :index, params: {
+      actor_id: "sean@example.com",
+      commit: "Filter"
+    }
+    assert_response :success
+    assert assigns(:network_actions).present?
+  end
+  
+  test "should filter actions to all" do
+    get :index, params: {
+      owner_id: "jane.doe@example.com",
+      actor_id: "sean@example.com",
+      commit: "Filter"
+    }
+    assert_response :success
+    assert assigns(:network_actions).present?
+  end
 
   test "should get new" do
     get :new
