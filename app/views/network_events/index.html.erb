@@ -161,6 +161,7 @@
           <th><%= sortable "location"%></th>
           <th>Organization(s)</th>
           <th>Volunteer(s)</th>
+          <th>Participant count</th>
           <th><%= sortable "scheduled_at", "Scheduled at"%></th>
           <th></th>
           <th></th>
@@ -180,6 +181,7 @@
           <td><%= network_event.location.try(:name) %></td>
           <td><%= network_event.organizations.map(&:name).join(', ') %></td>
           <td><%= network_event.volunteers.map(&:name).join(', ') %></td>
+          <td><%= network_event.participants.count %></td>
           <td><%= network_event.scheduled_at.try(:to_formatted_s, :long)%></td>
           <td><%= link_to 'Show', network_event %></td>
           <td><%= link_to 'Edit', edit_network_event_path(network_event) %></td>
