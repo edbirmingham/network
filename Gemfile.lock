@@ -77,6 +77,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
+    crass (1.0.4)
     debug_inspector (0.0.2)
     deep_cloneable (2.2.2)
       activerecord (>= 3.1.0, < 5.2.0)
@@ -115,7 +116,8 @@ GEM
     letsencrypt-rails-heroku (0.3.0)
       acme-client (~> 0.4.0)
       platform-api
-    loofah (2.0.3)
+    loofah (2.2.2)
+      crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.6.5)
       mime-types (>= 1.16, < 4)
@@ -132,7 +134,7 @@ GEM
     multipart-post (2.0.0)
     netrc (0.11.0)
     nio4r (2.1.0)
-    nokogiri (1.8.1)
+    nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
     pg (0.21.0)
