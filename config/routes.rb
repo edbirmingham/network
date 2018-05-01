@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  resources :reports, only: [:index]
+
+  namespace :reports do
+    resources :students_by_program, only: [:index]
+  end
 
   resources :identities
   resources :common_tasks
@@ -38,7 +43,7 @@ Rails.application.routes.draw do
   get 'welcome/index'
   get 'dashboards/index'
 
-  root 'dashboards#index' 
+  root 'dashboards#index'
 
   resources :members do
     resources :communications, only: [:new, :show, :create, :edit, :update, :destroy]
