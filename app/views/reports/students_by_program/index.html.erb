@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1>Students By Program</h1>
+  <h1>Attendees By Program</h1>
 </div>
 
 <div class="table-responsive">
@@ -8,8 +8,8 @@
       <tr>
         <th>School Year</th>
         <th>Program</th>
-        <th>Total Students</th>
-        <th>Unique Students</th>
+        <th>Total Attendees</th>
+        <th>Unique Attendees</th>
         <th>Average Attendance</th>
       </tr>
     </thead>
@@ -18,8 +18,8 @@
       <%= content_tag_for(:tr, @rows) do |row| %>
         <td><%= row.school_year %></td>
         <td><%= row.name_of_program %></td>
-        <td><%= row.total_students %></td>
-        <td><%= row.unique_students %></td>
+        <td><%= row.total_attendees %></td>
+        <td><%= row.unique_attendees %></td>
         <td><%= row.average_attendance %></td>
       <% end %>
     </tbody>
