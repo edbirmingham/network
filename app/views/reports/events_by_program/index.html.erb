@@ -18,7 +18,7 @@
         <td><%= row.school_year %></td>
         <td><%= row.name_of_program %></td>
         <td><%= row.event_count %></td>
-        <td><%= row.programming_hours %></td>
+        <td><%= row.programming_hours.to_s(:rounded, precision: 1) %></td>
       <% end %>
     </tbody>
   </table>
