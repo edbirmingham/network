@@ -21,5 +21,14 @@
         <td><%= row.programming_hours.to_s(:rounded, precision: 1) %></td>
       <% end %>
     </tbody>
+
+    <tfoot>
+      <tr>
+        <th>Total</th>
+        <th></th>
+        <th><%= @rows.map(&:event_count).sum %></th>
+        <th><%= @rows.map(&:programming_hours).sum.to_s(:rounded, precision: 1) %></th>
+      </tr>
+    </tfoot>
   </table>
 </div>
