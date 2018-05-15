@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :reports, only: [:index]
 
   namespace :reports do
+    resources :events_by_program, only: [:index]
     resources :students_by_program, only: [:index]
   end
 
