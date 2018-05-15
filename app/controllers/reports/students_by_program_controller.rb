@@ -1,7 +1,7 @@
 class Reports::StudentsByProgramController < ApplicationController
   def index
     select_clause = <<-SELECT
-    '2017-2018' AS school_year,
+    '2017-2018'::text AS school_year,
     programs.name AS name_of_program,
     COUNT(participations.id) AS total_attendees,
     COUNT(DISTINCT participations.member_id) AS unique_attendees,
