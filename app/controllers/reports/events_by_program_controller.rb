@@ -12,7 +12,7 @@ class Reports::EventsByProgramController < ApplicationController
             MAX(programs.name) AS name_of_program,
             network_events.id,
             network_events.duration,
-            COUNT(cohort_assignments.id) AS cohort_count
+            GREATEST(1, COUNT(cohort_assignments.id)) AS cohort_count
         FROM network_events
             INNER JOIN programs ON programs.id = network_events.program_id
             LEFT JOIN cohort_assignments ON cohort_assignments.network_event_id = network_events.id
@@ -21,6 +21,7 @@ class Reports::EventsByProgramController < ApplicationController
         GROUP BY network_events.id
     ) AS events
     GROUP BY events.school_year, events.name_of_program
+    ORDER BY events.school_year, events.name_of_program
     SQL
 
     @rows = NetworkEvent.find_by_sql(sql)
