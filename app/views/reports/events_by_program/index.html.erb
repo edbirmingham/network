@@ -6,6 +6,7 @@
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
+        <th></th>
         <th>School Year</th>
         <th>Program</th>
         <th>Event Count</th>
@@ -15,6 +16,7 @@
 
     <tbody>
       <%= content_tag_for(:tr, @rows) do |row| %>
+        <td></td>
         <td><%= row.school_year %></td>
         <td><%= row.name_of_program %></td>
         <td><%= row.event_count %></td>
@@ -25,6 +27,7 @@
     <tfoot>
       <tr>
         <th>Total</th>
+        <th></th>
         <th></th>
         <th><%= @rows.map(&:event_count).sum %></th>
         <th><%= @rows.map(&:programming_hours).sum.to_s(:rounded, precision: 1) %></th>

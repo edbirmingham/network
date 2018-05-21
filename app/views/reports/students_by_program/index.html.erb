@@ -6,6 +6,7 @@
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
+        <th></th>
         <th>School Year</th>
         <th>Program</th>
         <th>Total Attendees</th>
@@ -16,6 +17,7 @@
 
     <tbody>
       <%= content_tag_for(:tr, @rows) do |row| %>
+        <td></td>
         <td><%= row.school_year %></td>
         <td><%= row.name_of_program %></td>
         <td><%= row.total_attendees %></td>
@@ -23,5 +25,16 @@
         <td><%= row.average_attendance %></td>
       <% end %>
     </tbody>
+
+    <tfoot>
+      <tr>
+        <th>Total</th>
+        <th></th>
+        <th></th>
+        <th><%= @rows.map(&:total_attendees).sum %></th>
+        <th><%= @rows.map(&:unique_attendees).sum %></th>
+        <th><%= @rows.map(&:average_attendance).sum.to_s(:rounded, precision: 1) %></th>
+      </tr>
+    </tfoot>
   </table>
 </div>
