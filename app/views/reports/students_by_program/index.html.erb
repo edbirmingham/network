@@ -31,9 +31,9 @@
         <th>Total</th>
         <th></th>
         <th></th>
-        <th><%= @rows.map(&:total_attendees).sum %></th>
-        <th><%= @rows.map(&:unique_attendees).sum %></th>
-        <th><%= @rows.map(&:average_attendance).sum.to_s(:rounded, precision: 1) %></th>
+        <th><%= @total_attendees %></th>
+        <th><%= @total_unique_attendees %></th>
+        <th><%= @average_attendance.to_s(:rounded, precision: 1) %></th>
       </tr>
     </tfoot>
   </table>

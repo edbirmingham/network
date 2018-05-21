@@ -14,5 +14,16 @@ class Reports::StudentsByProgramController < ApplicationController
       group('programs.name').
       where("participations.level = 'attendee' AND network_events.scheduled_at > '2017/07/01'")
 
+    @total_attendees = @rows.map(&:total_attendees).sum
+    @total_unique_attendees = Participation.
+      joins(:network_event).
+      where("participations.level = 'attendee' AND network_events.scheduled_at > '2017/07/01'").
+      distinct.
+      count(:member_id)
+    if @rows.present?
+      @average_attendance = @total_attendees / @rows.length
+    else
+      @average_attendance = 0
+    end
   end
 end
