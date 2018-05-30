@@ -20,7 +20,9 @@ Network is 100% free and open-source. We encourage and support an active, health
 * Wondering how to setup a development environment?  See the [Super Easy](#super-easy-setup) setup instructions below.
 * Want to learn about the technology being used?  See the [Rails Guides](http://guides.rubyonrails.org/).
 
-## Super Easy Setup
+## Super Easy Setup (Obsolete)
+The original Cloud9 service is no longer available.  The AWS Cloud9 service does not automatically setup the Rails environment so the AWS Cloud9 setup instructions below should be used.
+
 This setup uses Cloud9 for your development environment.  Cloud9 provides an online development environment and server for you to use.  All you need is a browser and good internet connection.  Everything else is available on Cloud9's site.
 * Create a Github account
 * Fork [Network](https://github.com/edbirmingham/network)
@@ -73,3 +75,20 @@ This setup uses Cloud9 for your development environment.  Cloud9 provides an onl
 ```
 git pull upstream master
 ```
+
+## AWS Cloud9 Setup
+
+### AWS Cloud9 Setup Problems
+* History permission error when exiting `irb` similar to the following
+  ```
+  /usr/local/rvm/rubies/ruby-2.4.1/lib/ruby/2.4.0/irb/ext/save-history.rb:75:in `initialize': Permission denied @ rb_sysopen -   /usr/local/rvm/rubies/ruby-2.4.1/.irbrc_history (Errno::EACCES)
+  ```
+  * This problem occurs when exiting `irb` or `rails console`
+  * This is caused by an rvm problem and can be resolved as follows.
+  ```
+  sudo -i
+  rvm get head
+  rvm reinstall 2.4.1
+  exit
+  ```
+  * After this update, open a new terminal and `irb` history should work correctly.
