@@ -77,6 +77,13 @@ git pull upstream master
 ```
 
 ## AWS Cloud9 Setup
+This setup uses AWS Cloud9 for your development environment.  Cloud9 provides an online development environment and server for you to use.  All you need is a browser and good internet connection.  Everything else is available on Cloud9.
+* Create a Github account
+* Fork [Network](https://github.com/edbirmingham/network)
+  * Scroll to the top of this page and click "fork" in the top right corner. 
+* Create or login to an [AWS](https://aws.amazon.com) account.  A credit card will be required when creating a new AWS account.
+* Select the Cloud9 AWS service under Developer Tools to go to the Cloud9 management console.
+* Create a Cloud9 environment for the Ed Network application.  The default settings should be a good starting point and are eligible for the free tier of service.  If you have not previously created a Network VPC, you will be directed to do so at this time.
 
 ### AWS Cloud9 Setup Problems
 * History permission error when exiting `irb` similar to the following
