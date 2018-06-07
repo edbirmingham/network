@@ -4,7 +4,7 @@ class IdentitiesControllerTest < ActionController::TestCase
   include Devise::Test::ControllerHelpers
 
   setup do
-    @identity = identities(:one)
+    @identity = identities(:student)
     sign_in users(:one)
   end
 

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# one:
+#   network_event_id: 1
+#   date_dimension_id: 1
+#   event_dimension_id: 1
+#   event_count: 1
+#   hours: 1.5
+#   invitee_count: 1
+#   attendee_count: 1
+#
+# two:
+#   network_event_id: 1
+#   date_dimension_id: 1
+#   event_dimension_id: 1
+#   event_count: 1
+#   hours: 1.5
+#   invitee_count: 1
+#   attendee_count: 1

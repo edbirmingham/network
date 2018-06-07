@@ -1,0 +1,2 @@
+class EventDimension < ApplicationRecord
+end

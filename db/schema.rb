@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171206181507) do
+ActiveRecord::Schema.define(version: 20180529161058) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,39 @@ ActiveRecord::Schema.define(version: 20171206181507) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "date_dimensions", force: :cascade do |t|
+    t.date "date"
+    t.string "full_date_description"
+    t.string "day_of_week"
+    t.integer "day_number_in_calendar_month"
+    t.integer "day_number_in_calendar_year"
+    t.integer "day_number_in_school_year"
+    t.date "calendar_week_beginning_date"
+    t.integer "calendar_week_number_in_year"
+    t.string "calendar_month_name"
+    t.integer "calendar_month_number_in_year"
+    t.string "calendar_year_month"
+    t.string "calendar_year_quarter"
+    t.integer "calendar_quarter"
+    t.integer "calendar_year_half"
+    t.integer "calendar_year"
+    t.integer "school_week_number_in_year"
+    t.integer "school_month_number_in_year"
+    t.string "school_year_month"
+    t.string "school_year_quarter"
+    t.integer "school_quarter"
+    t.integer "school_year_half"
+    t.string "school_year"
+    t.string "weekday_indicator"
+    t.integer "school_year_number"
+  end
+
+  create_table "event_dimensions", force: :cascade do |t|
+    t.string "location"
+    t.string "program"
+    t.integer "network_event_id"
+  end
+
   create_table "extracurricular_activities", force: :cascade do |t|
     t.string "name"
     t.integer "user_id"
@@ -87,6 +120,12 @@ ActiveRecord::Schema.define(version: 20171206181507) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "grade_dimensions", force: :cascade do |t|
+    t.integer "number"
+    t.string "nth"
+    t.string "name"
   end
 
   create_table "graduating_class_assignments", force: :cascade do |t|
@@ -128,6 +167,17 @@ ActiveRecord::Schema.define(version: 20171206181507) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "member_dimensions", force: :cascade do |t|
+    t.string "identity"
+    t.boolean "child_in_school_system"
+    t.integer "graduating_class"
+    t.string "school"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
+    t.integer "member_id"
   end
 
   create_table "members", force: :cascade do |t|
@@ -210,6 +260,23 @@ ActiveRecord::Schema.define(version: 20171206181507) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "participation_facts", force: :cascade do |t|
+    t.integer "participation_id"
+    t.integer "date_dimension_id", null: false
+    t.integer "member_dimension_id", null: false
+    t.integer "event_dimension_id", null: false
+    t.integer "role_dimension_id", null: false
+    t.integer "grade_dimension_id", null: false
+    t.integer "invited_count", null: false
+    t.integer "attended_count", null: false
+    t.float "hours", null: false
+    t.index ["date_dimension_id"], name: "index_participation_facts_on_date_dimension_id"
+    t.index ["event_dimension_id"], name: "index_participation_facts_on_event_dimension_id"
+    t.index ["grade_dimension_id"], name: "index_participation_facts_on_grade_dimension_id"
+    t.index ["member_dimension_id"], name: "index_participation_facts_on_member_dimension_id"
+    t.index ["role_dimension_id"], name: "index_participation_facts_on_role_dimension_id"
+  end
+
   create_table "participations", force: :cascade do |t|
     t.string "level"
     t.integer "member_id"
@@ -218,6 +285,18 @@ ActiveRecord::Schema.define(version: 20171206181507) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "participation_type"
+  end
+
+  create_table "programming_facts", force: :cascade do |t|
+    t.integer "network_event_id"
+    t.integer "date_dimension_id"
+    t.integer "event_dimension_id"
+    t.integer "event_count"
+    t.float "hours"
+    t.integer "invitee_count"
+    t.integer "attendee_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "programs", force: :cascade do |t|
@@ -248,6 +327,10 @@ ActiveRecord::Schema.define(version: 20171206181507) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "role_dimensions", force: :cascade do |t|
+    t.string "name"
+  end
+
   create_table "school_assignments", force: :cascade do |t|
     t.integer "network_event_id"
     t.integer "school_id"
@@ -266,6 +349,14 @@ ActiveRecord::Schema.define(version: 20171206181507) do
 
   create_table "schools", force: :cascade do |t|
     t.string "name"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "site_assignments", force: :cascade do |t|
+    t.integer "network_event_id"
+    t.integer "member_id"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

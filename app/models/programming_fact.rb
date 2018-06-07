@@ -1,0 +1,2 @@
+class ProgrammingFact < ApplicationRecord
+end
