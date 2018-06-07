@@ -7,7 +7,7 @@ class Etl::Facts::Programming
         event_dimension_id: event_dimension(event),
         date_dimension_id: date_dimension(event),
         event_count: 1,
-        hours: event.duration / 60.0,
+        hours: hours(event),
         invitee_count: event.invitees.count,
         attendee_count: event.participations.attendee.count
       }
@@ -34,5 +34,16 @@ class Etl::Facts::Programming
       where(network_event_id: event.id).
       first.
       id
+  end
+
+  def self.hours(event)
+    hours = event.duration / 60.0
+    cohort_count = event.cohort_assignments.count
+
+    if cohort_count > 1
+      hours = hours * cohort_count
+    end
+
+    hours
   end
 end
