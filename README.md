@@ -85,17 +85,17 @@ This setup uses AWS Cloud9 for your development environment.  Cloud9 provides an
 * Select the Cloud9 AWS service under Developer Tools to go to the Cloud9 management console.
 * Create a Cloud9 environment for the Ed Network application.  The default settings should be a good starting point and are eligible for the free tier of service.  If you have not previously created a Network VPC, you will be directed to do so at this time.
 * Setup database server with ec2-user.
-```
-sudo yum install postgresql postgresql-server postgresql-devel postgresql-contrib postgresql-docs
-sudo service postgresql initdb
-sudo service postgresql start
-sudo su - postgres
-psql -U postgres
-CREATE USER ec2-user SUPERUSER;
-CREATE DATABASE "ec2-user" WITH OWNER "ec2-user";
-\q
-exit
-```
+  ```
+  sudo yum install postgresql postgresql-server postgresql-devel postgresql-contrib postgresql-docs postgresql-libs
+  sudo service postgresql initdb
+  sudo service postgresql start
+  sudo su - postgres
+  psql -U postgres
+  CREATE USER ec2-user SUPERUSER;
+  CREATE DATABASE "ec2-user" WITH OWNER "ec2-user";
+  \q
+  exit
+  ```
 * Setup auto start for postgres service
   * Click on the Gear icon in File browser (on the left). Check "Show Home in Favorites" and "Show Hidden Files"
   * In the top directory ~-. you will see the .bash_profile (hidden file) open it for editing and put this in at bottom of the file....
@@ -110,6 +110,20 @@ exit
   ensureservice postgresql
   ```
   * Click on the Gear icon in File browser (on the left). Uncheck "Show Home in Favorites" and "Show Hidden Files"
+* Follow the Github SSH key setup instruction found [here](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/#platform-linux).
+* Clone the code repository from Github.
+  ```
+  git clone git@github.com:anthonycrumley/network.git
+  cd network
+  git remote add upstream https://github.com/edbirmingham/network.git
+  git pull upstream master
+  ```
+* Setup the Rails application.
+  ```
+  bundle install
+  cp config/database.yml.example config/database.yml
+  rake db:setup
+  ```
 
 ### AWS Cloud9 Setup Problems
 * History permission error when exiting `irb` similar to the following
