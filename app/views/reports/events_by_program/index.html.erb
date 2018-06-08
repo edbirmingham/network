@@ -11,26 +11,56 @@
         <th>Program</th>
         <th>Event Count</th>
         <th>Programming Hours</th>
+        <th>Attendance</th>
       </tr>
     </thead>
 
+    <% school_year = nil %>
+    <% school_year_rows = [] %>
     <tbody>
-      <%= content_tag_for(:tr, @rows) do |row| %>
-        <td></td>
-        <td><%= row.school_year %></td>
-        <td><%= row.name_of_program %></td>
-        <td><%= row.event_count %></td>
-        <td><%= row.programming_hours.to_s(:rounded, precision: 1) %></td>
+      <% @rows.each do |row| %>
+        <% if school_year.present? && school_year != row.school_year %>
+          <tr>
+            <th><%= school_year %> Total</th>
+            <th></th>
+            <th></th>
+            <th><%= school_year_rows.map(&:event_count).sum %></th>
+            <th><%= school_year_rows.map(&:programming_hours).sum.to_s(:rounded, precision: 1) %></th>
+            <th></th>
+          </tr>
+          <% school_year_rows = [] %>
+        <% end %>
+
+        <% school_year = row.school_year %>
+        <% school_year_rows << row %>
+
+        <tr>
+          <td></td>
+          <td><%= row.school_year %></td>
+          <td><%= row.name_of_program %></td>
+          <td><%= row.event_count %></td>
+          <td><%= row.programming_hours.to_s(:rounded, precision: 1) %></td>
+          <td><%= row.attendance.to_s(:rounded, precision: 1) %></td>
+        </tr>
       <% end %>
     </tbody>
 
     <tfoot>
+      <tr>
+        <th><%= school_year %> Total</th>
+        <th></th>
+        <th></th>
+        <th><%= school_year_rows.map(&:event_count).sum %></th>
+        <th><%= school_year_rows.map(&:programming_hours).sum.to_s(:rounded, precision: 1) %></th>
+        <th></th>
+      </tr>
       <tr>
         <th>Total</th>
         <th></th>
         <th></th>
         <th><%= @rows.map(&:event_count).sum %></th>
         <th><%= @rows.map(&:programming_hours).sum.to_s(:rounded, precision: 1) %></th>
+        <th></th>
       </tr>
     </tfoot>
   </table>
