@@ -40,7 +40,7 @@
           <td><%= row.name_of_program %></td>
           <td><%= row.event_count %></td>
           <td><%= row.programming_hours.to_s(:rounded, precision: 1) %></td>
-          <td><%= row.attendance.to_s(:rounded, precision: 1) %></td>
+          <td><%= row.attendance.present? ? row.attendance.to_s(:rounded, precision: 1) : '' %></td>
         </tr>
       <% end %>
     </tbody>

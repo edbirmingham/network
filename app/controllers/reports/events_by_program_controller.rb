@@ -7,7 +7,7 @@ class Reports::EventsByProgramController < ApplicationController
       SUM(programming_facts.event_count) AS event_count,
       SUM(programming_facts.hours) AS programming_hours,
       AVG(CASE
-        WHEN programming_facts.invitee_count > 0 THEN
+        WHEN programming_facts.invitee_count > 0 AND programming_facts.attendee_count > 0 THEN
           (programming_facts.attendee_count / programming_facts.invitee_count) * 100
         ELSE NULL
       END) AS attendance
