@@ -44,14 +44,12 @@ This setup uses AWS Cloud9 for your development environment.  Cloud9 provides an
   * Click on the Gear icon in File browser (on the left). Check "Show Home in Favorites" and "Show Hidden Files"
   * In the top directory ~-. you will see the .bash_profile (hidden file) open it for editing and put this in at bottom of the file....
   ```
-  function ensureservice {
-  service=$1
-  if [[ ! $(ps -ef | grep -v grep | grep "$service" | wc -l) > 0 ]]
-  then
-  sudo service $service start
-  fi
+  function ensurepostgres {
+    if [[ ! $(ps -ef | grep -v grep | grep "postgres" | wc -l) > 0 ]]; then
+      sudo service postgresql start
+    fi
   }
-  ensureservice postgresql
+  ensurepostgres
   ```
   * Click on the Gear icon in File browser (on the left). Uncheck "Show Home in Favorites" and "Show Hidden Files"
 * Follow the Github SSH key setup instruction found [here](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/#platform-linux).
