@@ -2,7 +2,8 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1'
+gem 'rails', '~> 5.2'
+gem 'bootsnap'
 # Used to get content_tag_for back in Rails 5
 gem 'record_tag_helper'
 gem 'puma'
@@ -22,7 +23,7 @@ gem 'coffee-rails', '~> 4.2'
 # gem 'therubyracer', platforms: :ruby
 
 # Cloning ActiveRecord models.
-gem 'deep_cloneable', '~> 2.2.2'
+gem 'deep_cloneable', '~> 2.3.2'
 
 # Pagination
 gem 'kaminari'
@@ -65,7 +66,7 @@ gem 'devise', '~> 4.1'
 
 # Until the new API calls are generally available, we must manually specify a
 # fork of the Heroku API gem:
-gem 'platform-api', github: 'jalada/platform-api', branch: 'master'
+gem 'platform-api'
 
 gem 'letsencrypt-rails-heroku', group: 'production'
 
