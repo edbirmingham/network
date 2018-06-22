@@ -83,6 +83,9 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  # Listen for file updates in development mode rather than polling.
+  gem 'listen'
 end
 
 gem 'rollbar'
