@@ -17,29 +17,91 @@ class MembersControllerTest < ActionController::TestCase
   test "should get new" do
     get :new
     assert_response :success
+    assert_select "input[name='member[high_school_gpa]']"
   end
 
   test "should create member" do
+    member_attributes = { 
+      address: @member.address, 
+      city: @member.city, 
+      community_networks: @member.community_networks, 
+      email: @member.email, 
+      extra_groups: @member.extra_groups, 
+      first_name: @member.first_name, 
+      identity_id: @member.identity_id, 
+      last_name: @member.last_name, 
+      other_networks: @member.other_networks, 
+      phone: @member.phone, 
+      place_of_worship: @member.place_of_worship, 
+      recruitment: @member.recruitment, 
+      shirt_received: @member.shirt_received, 
+      shirt_size: @member.shirt_size, 
+      state: @member.state, 
+      user_id: @member.user_id, 
+      zip_code: @member.zip_code,
+      high_school_gpa: @member.high_school_gpa
+    }
+    
     assert_difference('Member.count') do
-      post :create, params: { member: { address: @member.address, city: @member.city, community_networks: @member.community_networks, email: @member.email, extra_groups: @member.extra_groups, first_name: @member.first_name, identity_id: @member.identity_id, last_name: @member.last_name, other_networks: @member.other_networks, phone: @member.phone, place_of_worship: @member.place_of_worship, recruitment: @member.recruitment, shirt_received: @member.shirt_received, shirt_size: @member.shirt_size, state: @member.state, user_id: @member.user_id, zip_code: @member.zip_code } }
+      post :create, params: { 
+        member: member_attributes 
+      }
     end
 
     assert_redirected_to member_path(assigns(:member))
+    
+    member_attributes.each do |key, value|
+      assert_equal value, assigns(:member).attributes[key.to_s], 
+        "Attribute '#{key}' does not match."
+    end
   end
 
   test "should show member" do
     get :show, params: { id: @member }
     assert_response :success
+    assert_select 'dt', 'High School GPA:'
+    assert_select 'dd', @member.high_school_gpa.to_s
   end
 
   test "should get edit" do
     get :edit, params: { id: @member }
     assert_response :success
+    assert_select "input[name='member[high_school_gpa]']"
   end
 
   test "should update member" do
-    patch :update, params: { id: @member, member: { address: @member.address, city: @member.city, community_networks: @member.community_networks, email: @member.email, extra_groups: @member.extra_groups, first_name: @member.first_name, identity_id: @member.identity_id, last_name: @member.last_name, other_networks: @member.other_networks, phone: @member.phone, place_of_worship: @member.place_of_worship, recruitment: @member.recruitment, shirt_received: @member.shirt_received, shirt_size: @member.shirt_size, state: @member.state, user_id: @member.user_id, zip_code: @member.zip_code } }
+    member_attributes = { 
+      address: @member.address, 
+      city: @member.city, 
+      community_networks: @member.community_networks, 
+      email: @member.email, 
+      extra_groups: @member.extra_groups, 
+      first_name: @member.first_name, 
+      identity_id: @member.identity_id, 
+      last_name: @member.last_name, 
+      other_networks: @member.other_networks, 
+      phone: @member.phone, 
+      place_of_worship: @member.place_of_worship, 
+      recruitment: @member.recruitment, 
+      shirt_received: @member.shirt_received, 
+      shirt_size: @member.shirt_size, 
+      state: @member.state, 
+      user_id: @member.user_id, 
+      zip_code: @member.zip_code,
+      high_school_gpa: @member.high_school_gpa - 1.0
+    }
+    
+    patch :update, params: { 
+      id: @member, 
+      member: member_attributes 
+    }
+    
     assert_redirected_to member_path(assigns(:member))
+    
+    member_attributes.each do |key, value|
+      assert_equal value, assigns(:member).attributes[key.to_s], 
+        "Attribute '#{key}' does not match."
+    end
   end
 
   test "should destroy member" do
