@@ -53,6 +53,11 @@ This setup uses AWS Cloud9 for your development environment.  Cloud9 provides an
   ```
   * Click on the Gear icon in File browser (on the left). Uncheck "Show Home in Favorites" and "Show Hidden Files"
 * Follow the Github SSH key setup instruction found [here](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/#platform-linux).
+* Setup you git user information.
+  ```
+  git config --global user.name "<your name>"
+  git config --global user.email <your email address>
+  ```
 * Clone the code repository from Github.
   ```
   git clone git@github.com:anthonycrumley/network.git
