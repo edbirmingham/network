@@ -25,5 +25,10 @@ class MemberTest < ActiveSupport::TestCase
     member = Member.new(first_name: 'First', last_name: 'Last', high_school_gpa: 4.0)
     assert member.save 
   end
+  
+  test 'should save member with ACT score' do
+    member = Member.new(first_name: 'First', last_name: 'Last', act_score: 25)
+    assert member.save 
+  end
     
 end

@@ -21,6 +21,7 @@ one:
   graduating_class: class_of_2016
   identity: student
   high_school_gpa: 4.0
+  act_score: 25
 
 two:
   first_name: MyString
@@ -43,6 +44,7 @@ two:
   graduating_class: class_of_2017
   identity: two
   high_school_gpa: 4.0
+  act_score: 25
 
 three:
   first_name: MyString
@@ -69,39 +71,47 @@ jane:
   first_name: Jane
   last_name: Doe
   high_school_gpa: 4.0
+  act_score: 25
 
 john:
   first_name: John
   last_name: Smith
   high_school_gpa: 4.0
+  act_score: 25
 
 martin:
   first_name: Martin
   last_name: King
   graduating_class: class_of_2017
   high_school_gpa: 4.0
+  act_score: 25
 
 george:
   first_name: George
   last_name: Carver
   high_school_gpa: 4.0
+  act_score: 25
 
 rosa:
   first_name: Rosa
   last_name: Parks
   high_school_gpa: 4.0
+  act_score: 25
 
 carrie:
   first_name: Carrie
   last_name: Tuggle
   high_school_gpa: 4.0
+  act_score: 25
 
 ossie:
   first_name: Ossie
   last_name: Mitchell
   high_school_gpa: 4.0
+  act_score: 25
 
 malachi:
   first_name: Malachi
   last_name: Wilkerson
   high_school_gpa: 4.0
+  act_score: 25
