@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180529161058) do
+ActiveRecord::Schema.define(version: 2018_06_26_132026) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -178,6 +178,7 @@ ActiveRecord::Schema.define(version: 20180529161058) do
     t.string "state"
     t.string "zip"
     t.integer "member_id"
+    t.float "high_school_gpa"
   end
 
   create_table "members", force: :cascade do |t|
@@ -205,6 +206,7 @@ ActiveRecord::Schema.define(version: 20180529161058) do
     t.string "mongo_id"
     t.integer "identity_id"
     t.datetime "date_of_birth"
+    t.float "high_school_gpa"
     t.index ["identity_id"], name: "index_members_on_identity_id"
   end
 

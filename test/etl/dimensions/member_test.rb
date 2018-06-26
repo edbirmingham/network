@@ -10,7 +10,8 @@ class ETLDimensionsMemberTest < ActiveSupport::TestCase
           school: schools(:tuggle),
           city: 'Birmingham',
           state: 'AL',
-          zip_code: '35205'
+          zip_code: '35205',
+          high_school_gpa: 4.0
       )
       @member.save
 
@@ -58,5 +59,9 @@ class ETLDimensionsMemberTest < ActiveSupport::TestCase
 
   test 'Zip is extracted' do
       assert_equal '35205', @member_dimension.zip
+  end
+  
+  test 'High School GPA is extracted' do
+    assert_equal @member.high_school_gpa, @member_dimension.high_school_gpa
   end
 end

@@ -9,7 +9,8 @@ class Etl::Dimensions::Member
                 school: member.school.try(:name),
                 city: member.city,
                 state: member.state,
-                zip: member.zip_code
+                zip: member.zip_code,
+                high_school_gpa: member.high_school_gpa
             }
 
             if MemberDimension.where(member_id: attributes[:member_id]).exists?
