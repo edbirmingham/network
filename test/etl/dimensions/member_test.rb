@@ -11,7 +11,8 @@ class ETLDimensionsMemberTest < ActiveSupport::TestCase
           city: 'Birmingham',
           state: 'AL',
           zip_code: '35205',
-          high_school_gpa: 4.0
+          high_school_gpa: 4.0,
+          act_score: 24
       )
       @member.save
 
@@ -63,5 +64,9 @@ class ETLDimensionsMemberTest < ActiveSupport::TestCase
   
   test 'High School GPA is extracted' do
     assert_equal @member.high_school_gpa, @member_dimension.high_school_gpa
+  end
+  
+  test 'ACT Score is extracted' do
+    assert_equal @member.act_score, @member_dimension.act_score
   end
 end

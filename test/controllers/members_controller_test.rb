@@ -18,6 +18,7 @@ class MembersControllerTest < ActionController::TestCase
     get :new
     assert_response :success
     assert_select "input[name='member[high_school_gpa]']"
+    assert_select "input[name='member[act_score]']"
   end
 
   test "should create member" do
@@ -39,7 +40,8 @@ class MembersControllerTest < ActionController::TestCase
       state: @member.state, 
       user_id: @member.user_id, 
       zip_code: @member.zip_code,
-      high_school_gpa: @member.high_school_gpa
+      high_school_gpa: @member.high_school_gpa,
+      act_score: @member.act_score
     }
     
     assert_difference('Member.count') do
@@ -61,12 +63,15 @@ class MembersControllerTest < ActionController::TestCase
     assert_response :success
     assert_select 'dt', 'High School GPA:'
     assert_select 'dd', @member.high_school_gpa.to_s
+    assert_select 'dt', 'ACT Score:'
+    assert_select 'dd', @member.act_score.to_s
   end
 
   test "should get edit" do
     get :edit, params: { id: @member }
     assert_response :success
     assert_select "input[name='member[high_school_gpa]']"
+    assert_select "input[name='member[act_score]']"
   end
 
   test "should update member" do
@@ -88,7 +93,8 @@ class MembersControllerTest < ActionController::TestCase
       state: @member.state, 
       user_id: @member.user_id, 
       zip_code: @member.zip_code,
-      high_school_gpa: @member.high_school_gpa - 1.0
+      high_school_gpa: @member.high_school_gpa - 1.0,
+      act_score: @member.act_score
     }
     
     patch :update, params: { 

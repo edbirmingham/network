@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_26_132026) do
+ActiveRecord::Schema.define(version: 2018_06_26_145142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -179,6 +179,7 @@ ActiveRecord::Schema.define(version: 2018_06_26_132026) do
     t.string "zip"
     t.integer "member_id"
     t.float "high_school_gpa"
+    t.integer "act_score"
   end
 
   create_table "members", force: :cascade do |t|
@@ -207,6 +208,7 @@ ActiveRecord::Schema.define(version: 2018_06_26_132026) do
     t.integer "identity_id"
     t.datetime "date_of_birth"
     t.float "high_school_gpa"
+    t.integer "act_score"
     t.index ["identity_id"], name: "index_members_on_identity_id"
   end
 
