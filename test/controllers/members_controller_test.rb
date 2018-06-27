@@ -21,6 +21,7 @@ class MembersControllerTest < ActionController::TestCase
     assert_select "input[name='member[act_score]']"
     assert_select "input[name='member[relative_phone]']"
     assert_select "input[name='member[relative_email]']"
+    assert_select "input[name='member[facebook_name]']"
   end
 
   test "should create member" do
@@ -45,7 +46,8 @@ class MembersControllerTest < ActionController::TestCase
       high_school_gpa: @member.high_school_gpa,
       act_score: @member.act_score,
       relative_phone: @member.relative_phone,
-      relative_email: @member.relative_email
+      relative_email: @member.relative_email,
+      facebook_name: @member.facebook_name
     }
     
     assert_difference('Member.count') do
@@ -73,6 +75,8 @@ class MembersControllerTest < ActionController::TestCase
     assert_select 'dd', @member.relative_phone.to_s
     assert_select 'dt', 'Relative Email:'
     assert_select 'dd', @member.relative_email.to_s
+    assert_select 'dt', 'Facebook Name:'
+    assert_select 'dd', @member.facebook_name.to_s
   end
 
   test "should get edit" do
@@ -82,6 +86,7 @@ class MembersControllerTest < ActionController::TestCase
     assert_select "input[name='member[act_score]']"
     assert_select "input[name='member[relative_phone]']"
     assert_select "input[name='member[relative_email]']"
+    assert_select "input[name='member[facebook_name]']"
   end
 
   test "should update member" do
@@ -104,9 +109,10 @@ class MembersControllerTest < ActionController::TestCase
       user_id: @member.user_id, 
       zip_code: @member.zip_code,
       high_school_gpa: @member.high_school_gpa - 1.0,
-      act_score: @member.act_score,
-      relative_phone: @member.relative_phone,
-      relative_email: @member.relative_email
+      act_score: @member.act_score - 1,
+      relative_phone: 'change.' + @member.relative_phone,
+      relative_email: 'change.' + @member.relative_email,
+      facebook_name: 'change' + @member.facebook_name
     }
     
     patch :update, params: { 

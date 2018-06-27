@@ -24,6 +24,7 @@ one:
   act_score: 25
   relative_phone: 2056687777
   relative_email: relative@example.com
+  facebook_name: facebookname
 
 two:
   first_name: MyString
@@ -49,6 +50,7 @@ two:
   act_score: 25
   relative_phone: 2056687777
   relative_email: relative@example.com
+  facebook_name: facebookname
 
 three:
   first_name: MyString
@@ -78,6 +80,7 @@ jane:
   act_score: 25
   relative_phone: 2056687777
   relative_email: relative@example.com
+  facebook_name: facebookname
 
 john:
   first_name: John
@@ -86,6 +89,7 @@ john:
   act_score: 25
   relative_phone: 2056687777
   relative_email: relative@example.com
+  facebook_name: facebookname
 
 martin:
   first_name: Martin
@@ -95,6 +99,7 @@ martin:
   act_score: 25
   relative_phone: 2056687777
   relative_email: relative@example.com
+  facebook_name: facebookname
 
 george:
   first_name: George
@@ -103,6 +108,7 @@ george:
   act_score: 25
   relative_phone: 2056687777
   relative_email: relative@example.com
+  facebook_name: facebookname
 
 rosa:
   first_name: Rosa
@@ -111,6 +117,7 @@ rosa:
   act_score: 25
   relative_phone: 2056687777
   relative_email: relative@example.com
+  facebook_name: facebookname
 
 carrie:
   first_name: Carrie
@@ -119,6 +126,7 @@ carrie:
   act_score: 25
   relative_phone: 2056687777
   relative_email: relative@example.com
+  facebook_name: facebookname
 
 ossie:
   first_name: Ossie
@@ -127,6 +135,7 @@ ossie:
   act_score: 25
   relative_phone: 2056687777
   relative_email: relative@example.com
+  facebook_name: facebookname
 
 malachi:
   first_name: Malachi
@@ -135,3 +144,4 @@ malachi:
   act_score: 25
   relative_phone: 2056687777
   relative_email: relative@example.com
+  facebook_name: facebookname
