@@ -35,5 +35,10 @@ class MemberTest < ActiveSupport::TestCase
     member = Member.new(first_name: 'First', last_name: 'Last', relative_phone: '2055869999')
     assert member.save 
   end
+  
+  test 'should save member with relative email address' do
+    member = Member.new(first_name: 'First', last_name: 'Last', relative_email: 'relative@example.com')
+    assert member.save 
+  end
     
 end
