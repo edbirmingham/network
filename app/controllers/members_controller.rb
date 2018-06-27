@@ -180,6 +180,7 @@ class MembersController < ApplicationController
         :act_score,
         :relative_phone,
         :relative_email,
+        :facebook_name,
         :organization_ids => [], 
         :neighborhood_ids => [], 
         :extracurricular_activity_ids => [], 

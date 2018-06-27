@@ -40,5 +40,10 @@ class MemberTest < ActiveSupport::TestCase
     member = Member.new(first_name: 'First', last_name: 'Last', relative_email: 'relative@example.com')
     assert member.save 
   end
+  
+  test 'should save member with facebook name' do
+    member = Member.new(first_name: 'First', last_name: 'Last', facebook_name: 'facebookname')
+    assert member.save 
+  end
     
 end

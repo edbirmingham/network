@@ -84,6 +84,8 @@ victoria = Member.create(
   high_school_gpa: 4.0,
   act_score: 24,
   relative_phone: '2056683333',
+  relative_email: 'relative@example.com',
+  facebook_name: 'facebookname',
   user_id: user.id
 )
 chris = Member.create(
@@ -97,6 +99,8 @@ chris = Member.create(
   high_school_gpa: 4.0,
   act_score: 25,
   relative_phone: '2056683333',
+  relative_email: 'relative@example.com',
+  facebook_name: 'facebookname',
   user_id: user.id
 )
 andrew = Member.create(
@@ -110,6 +114,8 @@ andrew = Member.create(
   high_school_gpa: 4.0,
   act_score: 25,
   relative_phone: '2056683333',
+  relative_email: 'relative@example.com',
+  facebook_name: 'facebookname',
   user_id: user.id
 )
 sean = Member.create(
@@ -123,6 +129,8 @@ sean = Member.create(
   high_school_gpa: 4.0,
   act_score: 25,
   relative_phone: '2056683333',
+  relative_email: 'relative@example.com',
+  facebook_name: 'facebookname',
   user_id: user.id
 )
 
@@ -157,6 +165,8 @@ student_nell = Member.create(
   high_school_gpa: 4.0,
   act_score: 25,
   relative_phone: '2056683333',
+  relative_email: 'relative@example.com',
+  facebook_name: 'facebookname',
   user_id: user.id
 )
 
@@ -262,6 +272,8 @@ identity_enumerator = Identity.all.cycle
     high_school_gpa: 4.0,
     act_score: 25,
     relative_phone: '2056683333',
+    relative_email: 'relative@example.com',
+    facebook_name: 'facebookname',
     user_id: user.id,
     identity: identity_enumerator.next
   )
