@@ -178,6 +178,7 @@ class MembersController < ApplicationController
         :identity_id, 
         :high_school_gpa,
         :act_score,
+        :relative_phone,
         :organization_ids => [], 
         :neighborhood_ids => [], 
         :extracurricular_activity_ids => [], 
