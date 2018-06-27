@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_26_145142) do
+ActiveRecord::Schema.define(version: 2018_06_27_130608) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -209,6 +209,7 @@ ActiveRecord::Schema.define(version: 2018_06_26_145142) do
     t.datetime "date_of_birth"
     t.float "high_school_gpa"
     t.integer "act_score"
+    t.string "relative_phone"
     t.index ["identity_id"], name: "index_members_on_identity_id"
   end
 

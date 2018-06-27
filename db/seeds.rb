@@ -83,6 +83,7 @@ victoria = Member.create(
   school: carver,
   high_school_gpa: 4.0,
   act_score: 24,
+  relative_phone: '2056683333',
   user_id: user.id
 )
 chris = Member.create(
@@ -95,6 +96,7 @@ chris = Member.create(
   school: carver,
   high_school_gpa: 4.0,
   act_score: 25,
+  relative_phone: '2056683333',
   user_id: user.id
 )
 andrew = Member.create(
@@ -107,6 +109,7 @@ andrew = Member.create(
   school: hudson,
   high_school_gpa: 4.0,
   act_score: 25,
+  relative_phone: '2056683333',
   user_id: user.id
 )
 sean = Member.create(
@@ -119,6 +122,7 @@ sean = Member.create(
   school: ramsey,
   high_school_gpa: 4.0,
   act_score: 25,
+  relative_phone: '2056683333',
   user_id: user.id
 )
 
@@ -152,6 +156,7 @@ student_nell = Member.create(
   cohorts: [gear_up],
   high_school_gpa: 4.0,
   act_score: 25,
+  relative_phone: '2056683333',
   user_id: user.id
 )
 
@@ -256,6 +261,7 @@ identity_enumerator = Identity.all.cycle
     school: ramsey,
     high_school_gpa: 4.0,
     act_score: 25,
+    relative_phone: '2056683333',
     user_id: user.id,
     identity: identity_enumerator.next
   )
