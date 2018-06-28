@@ -45,5 +45,10 @@ class MemberTest < ActiveSupport::TestCase
     member = Member.new(first_name: 'First', last_name: 'Last', facebook_name: 'facebookname')
     assert member.save 
   end
+  
+  test 'should save member with twitter handle' do
+    member = Member.new(first_name: 'First', last_name: 'Last', twitter_handle: 'twitterhandle')
+    assert member.save 
+  end
     
 end

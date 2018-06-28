@@ -181,6 +181,7 @@ class MembersController < ApplicationController
         :relative_phone,
         :relative_email,
         :facebook_name,
+        :twitter_handle,
         :organization_ids => [], 
         :neighborhood_ids => [], 
         :extracurricular_activity_ids => [], 
