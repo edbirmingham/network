@@ -23,6 +23,7 @@ class MembersControllerTest < ActionController::TestCase
     assert_select "input[name='member[relative_email]']"
     assert_select "input[name='member[facebook_name]']"
     assert_select "input[name='member[twitter_handle]']"
+    assert_select "input[name='member[instagram_handle]']"
   end
 
   test "should create member" do
@@ -49,7 +50,8 @@ class MembersControllerTest < ActionController::TestCase
       relative_phone: @member.relative_phone,
       relative_email: @member.relative_email,
       facebook_name: @member.facebook_name,
-      twitter_handle: @member.twitter_handle
+      twitter_handle: @member.twitter_handle,
+      instagram_handle: @member.instagram_handle
     }
     
     assert_difference('Member.count') do
@@ -81,6 +83,8 @@ class MembersControllerTest < ActionController::TestCase
     assert_select 'dd', @member.facebook_name
     assert_select 'dt', 'Twitter Handle:'
     assert_select 'dd', @member.twitter_handle
+    assert_select 'dt', 'Instagram Handle:'
+    assert_select 'dd', @member.instagram_handle
   end
 
   test "should get edit" do
@@ -92,6 +96,7 @@ class MembersControllerTest < ActionController::TestCase
     assert_select "input[name='member[relative_email]']"
     assert_select "input[name='member[facebook_name]']"
     assert_select "input[name='member[twitter_handle]']"
+    assert_select "input[name='member[instagram_handle]']"
   end
 
   test "should update member" do
@@ -118,7 +123,8 @@ class MembersControllerTest < ActionController::TestCase
       relative_phone: 'change.' + @member.relative_phone,
       relative_email: 'change.' + @member.relative_email,
       facebook_name: 'change' + @member.facebook_name,
-      twitter_handle: 'change' + @member.twitter_handle
+      twitter_handle: 'change' + @member.twitter_handle,
+      instagram_handle: 'change' + @member.instagram_handle
     }
     
     patch :update, params: { 
