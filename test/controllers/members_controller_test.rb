@@ -22,6 +22,7 @@ class MembersControllerTest < ActionController::TestCase
     assert_select "input[name='member[relative_phone]']"
     assert_select "input[name='member[relative_email]']"
     assert_select "input[name='member[facebook_name]']"
+    assert_select "input[name='member[twitter_handle]']"
   end
 
   test "should create member" do
@@ -47,7 +48,8 @@ class MembersControllerTest < ActionController::TestCase
       act_score: @member.act_score,
       relative_phone: @member.relative_phone,
       relative_email: @member.relative_email,
-      facebook_name: @member.facebook_name
+      facebook_name: @member.facebook_name,
+      twitter_handle: @member.twitter_handle
     }
     
     assert_difference('Member.count') do
@@ -72,11 +74,13 @@ class MembersControllerTest < ActionController::TestCase
     assert_select 'dt', 'ACT Score:'
     assert_select 'dd', @member.act_score.to_s
     assert_select 'dt', 'Relative Phone:'
-    assert_select 'dd', @member.relative_phone.to_s
+    assert_select 'dd', @member.relative_phone
     assert_select 'dt', 'Relative Email:'
-    assert_select 'dd', @member.relative_email.to_s
+    assert_select 'dd', @member.relative_email
     assert_select 'dt', 'Facebook Name:'
-    assert_select 'dd', @member.facebook_name.to_s
+    assert_select 'dd', @member.facebook_name
+    assert_select 'dt', 'Twitter Handle:'
+    assert_select 'dd', @member.twitter_handle
   end
 
   test "should get edit" do
@@ -87,6 +91,7 @@ class MembersControllerTest < ActionController::TestCase
     assert_select "input[name='member[relative_phone]']"
     assert_select "input[name='member[relative_email]']"
     assert_select "input[name='member[facebook_name]']"
+    assert_select "input[name='member[twitter_handle]']"
   end
 
   test "should update member" do
@@ -112,7 +117,8 @@ class MembersControllerTest < ActionController::TestCase
       act_score: @member.act_score - 1,
       relative_phone: 'change.' + @member.relative_phone,
       relative_email: 'change.' + @member.relative_email,
-      facebook_name: 'change' + @member.facebook_name
+      facebook_name: 'change' + @member.facebook_name,
+      twitter_handle: 'change' + @member.twitter_handle
     }
     
     patch :update, params: { 

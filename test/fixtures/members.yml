@@ -25,6 +25,7 @@ one:
   relative_phone: 2056687777
   relative_email: relative@example.com
   facebook_name: facebookname
+  twitter_handle: twitterhandle
 
 two:
   first_name: MyString
@@ -51,6 +52,7 @@ two:
   relative_phone: 2056687777
   relative_email: relative@example.com
   facebook_name: facebookname
+  twitter_handle: twitterhandle
 
 three:
   first_name: MyString
@@ -81,6 +83,7 @@ jane:
   relative_phone: 2056687777
   relative_email: relative@example.com
   facebook_name: facebookname
+  twitter_handle: twitterhandle
 
 john:
   first_name: John
@@ -90,6 +93,7 @@ john:
   relative_phone: 2056687777
   relative_email: relative@example.com
   facebook_name: facebookname
+  twitter_handle: twitterhandle
 
 martin:
   first_name: Martin
@@ -100,6 +104,7 @@ martin:
   relative_phone: 2056687777
   relative_email: relative@example.com
   facebook_name: facebookname
+  twitter_handle: twitterhandle
 
 george:
   first_name: George
@@ -109,6 +114,7 @@ george:
   relative_phone: 2056687777
   relative_email: relative@example.com
   facebook_name: facebookname
+  twitter_handle: twitterhandle
 
 rosa:
   first_name: Rosa
@@ -118,6 +124,7 @@ rosa:
   relative_phone: 2056687777
   relative_email: relative@example.com
   facebook_name: facebookname
+  twitter_handle: twitterhandle
 
 carrie:
   first_name: Carrie
@@ -127,6 +134,7 @@ carrie:
   relative_phone: 2056687777
   relative_email: relative@example.com
   facebook_name: facebookname
+  twitter_handle: twitterhandle
 
 ossie:
   first_name: Ossie
@@ -136,6 +144,7 @@ ossie:
   relative_phone: 2056687777
   relative_email: relative@example.com
   facebook_name: facebookname
+  twitter_handle: twitterhandle
 
 malachi:
   first_name: Malachi
@@ -145,3 +154,4 @@ malachi:
   relative_phone: 2056687777
   relative_email: relative@example.com
   facebook_name: facebookname
+  twitter_handle: twitterhandle

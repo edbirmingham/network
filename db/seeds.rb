@@ -86,6 +86,7 @@ victoria = Member.create(
   relative_phone: '2056683333',
   relative_email: 'relative@example.com',
   facebook_name: 'facebookname',
+  twitter_handle: 'twitterhandle',
   user_id: user.id
 )
 chris = Member.create(
@@ -101,6 +102,7 @@ chris = Member.create(
   relative_phone: '2056683333',
   relative_email: 'relative@example.com',
   facebook_name: 'facebookname',
+  twitter_handle: 'twitterhandle',
   user_id: user.id
 )
 andrew = Member.create(
@@ -116,6 +118,7 @@ andrew = Member.create(
   relative_phone: '2056683333',
   relative_email: 'relative@example.com',
   facebook_name: 'facebookname',
+  twitter_handle: 'twitterhandle',
   user_id: user.id
 )
 sean = Member.create(
@@ -131,6 +134,7 @@ sean = Member.create(
   relative_phone: '2056683333',
   relative_email: 'relative@example.com',
   facebook_name: 'facebookname',
+  twitter_handle: 'twitterhandle',
   user_id: user.id
 )
 
@@ -167,6 +171,7 @@ student_nell = Member.create(
   relative_phone: '2056683333',
   relative_email: 'relative@example.com',
   facebook_name: 'facebookname',
+  twitter_handle: 'twitterhandle',
   user_id: user.id
 )
 
@@ -274,6 +279,7 @@ identity_enumerator = Identity.all.cycle
     relative_phone: '2056683333',
     relative_email: 'relative@example.com',
     facebook_name: 'facebookname',
+    twitter_handle: 'twitterhandle',
     user_id: user.id,
     identity: identity_enumerator.next
   )
