@@ -26,6 +26,7 @@ one:
   relative_email: relative@example.com
   facebook_name: facebookname
   twitter_handle: twitterhandle
+  instagram_handle: instagramhandle
 
 two:
   first_name: MyString
@@ -53,6 +54,7 @@ two:
   relative_email: relative@example.com
   facebook_name: facebookname
   twitter_handle: twitterhandle
+  instagram_handle: instagramhandle
 
 three:
   first_name: MyString
@@ -84,6 +86,7 @@ jane:
   relative_email: relative@example.com
   facebook_name: facebookname
   twitter_handle: twitterhandle
+  instagram_handle: instagramhandle
 
 john:
   first_name: John
@@ -94,6 +97,7 @@ john:
   relative_email: relative@example.com
   facebook_name: facebookname
   twitter_handle: twitterhandle
+  instagram_handle: instagramhandle
 
 martin:
   first_name: Martin
@@ -105,6 +109,7 @@ martin:
   relative_email: relative@example.com
   facebook_name: facebookname
   twitter_handle: twitterhandle
+  instagram_handle: instagramhandle
 
 george:
   first_name: George
@@ -115,6 +120,7 @@ george:
   relative_email: relative@example.com
   facebook_name: facebookname
   twitter_handle: twitterhandle
+  instagram_handle: instagramhandle
 
 rosa:
   first_name: Rosa
@@ -125,6 +131,7 @@ rosa:
   relative_email: relative@example.com
   facebook_name: facebookname
   twitter_handle: twitterhandle
+  instagram_handle: instagramhandle
 
 carrie:
   first_name: Carrie
@@ -135,6 +142,7 @@ carrie:
   relative_email: relative@example.com
   facebook_name: facebookname
   twitter_handle: twitterhandle
+  instagram_handle: instagramhandle
 
 ossie:
   first_name: Ossie
@@ -145,6 +153,7 @@ ossie:
   relative_email: relative@example.com
   facebook_name: facebookname
   twitter_handle: twitterhandle
+  instagram_handle: instagramhandle
 
 malachi:
   first_name: Malachi
@@ -155,3 +164,4 @@ malachi:
   relative_email: relative@example.com
   facebook_name: facebookname
   twitter_handle: twitterhandle
+  instagram_handle: instagramhandle
