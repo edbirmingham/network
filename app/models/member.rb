@@ -39,6 +39,16 @@ class Member < ApplicationRecord
   has_many :communications, dependent: :destroy
   has_many :network_actions, dependent: :destroy, foreign_key: :actor_id
 
+  def self.races
+    %w{
+      American\ Indian\ or\ Alaska\ Native
+      Asian
+      Black\ or\ African\ American
+      Native\ Hawaiian\ or\ Other\ Pacific\ Islander
+      White
+    }
+  end
+  
   def self.sexes
     %w{ Female Male }
   end

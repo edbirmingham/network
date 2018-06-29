@@ -184,6 +184,7 @@ class MembersController < ApplicationController
         :twitter_handle,
         :instagram_handle,
         :sex,
+        :race,
         :organization_ids => [], 
         :neighborhood_ids => [], 
         :extracurricular_activity_ids => [], 

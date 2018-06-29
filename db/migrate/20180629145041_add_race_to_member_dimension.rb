@@ -1,0 +1,5 @@
+class AddRaceToMemberDimension < ActiveRecord::Migration[5.2]
+  def change
+    add_column :member_dimensions, :race, :string
+  end
+end

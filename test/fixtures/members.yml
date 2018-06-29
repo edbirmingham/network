@@ -28,6 +28,7 @@ one:
   twitter_handle: twitterhandle
   instagram_handle: instagramhandle
   sex: Female
+  race: Black or African American
 
 two:
   first_name: MyString
@@ -57,6 +58,7 @@ two:
   twitter_handle: twitterhandle
   instagram_handle: instagramhandle
   sex: Female
+  race: Black or African American
 
 three:
   first_name: MyString
@@ -85,6 +87,7 @@ three:
   twitter_handle: twitterhandle
   instagram_handle: instagramhandle
   sex: Female
+  race: Black or African American
 
 jane:
   first_name: Jane
@@ -97,6 +100,7 @@ jane:
   twitter_handle: twitterhandle
   instagram_handle: instagramhandle
   sex: Female
+  race: Black or African American
 
 john:
   first_name: John
@@ -109,6 +113,7 @@ john:
   twitter_handle: twitterhandle
   instagram_handle: instagramhandle
   sex: Male
+  race: Black or African American
 
 martin:
   first_name: Martin
@@ -122,6 +127,7 @@ martin:
   twitter_handle: twitterhandle
   instagram_handle: instagramhandle
   sex: Male
+  race: Black or African American
 
 george:
   first_name: George
@@ -134,6 +140,7 @@ george:
   twitter_handle: twitterhandle
   instagram_handle: instagramhandle
   sex: Male
+  race: Black or African American
 
 rosa:
   first_name: Rosa
@@ -146,6 +153,7 @@ rosa:
   twitter_handle: twitterhandle
   instagram_handle: instagramhandle
   sex: Female
+  race: Black or African American
 
 carrie:
   first_name: Carrie
@@ -158,6 +166,7 @@ carrie:
   twitter_handle: twitterhandle
   instagram_handle: instagramhandle
   sex: Female
+  race: Black or African American
 
 ossie:
   first_name: Ossie
@@ -170,6 +179,7 @@ ossie:
   twitter_handle: twitterhandle
   instagram_handle: instagramhandle
   sex: Female
+  race: Black or African American
 
 malachi:
   first_name: Malachi
@@ -182,3 +192,4 @@ malachi:
   twitter_handle: twitterhandle
   instagram_handle: instagramhandle
   sex: Male
+  race: Black or African American

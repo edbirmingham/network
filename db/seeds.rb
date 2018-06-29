@@ -89,6 +89,7 @@ victoria = Member.create(
   twitter_handle: 'twitterhandle',
   instagram_handle: 'instagramhandle',
   sex: 'Female',
+  race: 'Black or African American',
   user_id: user.id
 )
 chris = Member.create(
@@ -107,6 +108,7 @@ chris = Member.create(
   twitter_handle: 'twitterhandle',
   instagram_handle: 'instagramhandle',
   sex: 'Male',
+  race: 'Black or African American',
   user_id: user.id
 )
 andrew = Member.create(
@@ -125,6 +127,7 @@ andrew = Member.create(
   twitter_handle: 'twitterhandle',
   instagram_handle: 'instagramhandle',
   sex: 'Male',
+  race: 'Black or African American',
   user_id: user.id
 )
 sean = Member.create(
@@ -143,6 +146,7 @@ sean = Member.create(
   twitter_handle: 'twitterhandle',
   instagram_handle: 'instagramhandle',
   sex: 'Male',
+  race: 'Black or African American',
   user_id: user.id
 )
 
@@ -182,6 +186,7 @@ student_nell = Member.create(
   twitter_handle: 'twitterhandle',
   instagram_handle: 'instagramhandle',
   sex: 'Female',
+  race: 'Black or African American',
   user_id: user.id
 )
 
@@ -292,6 +297,7 @@ identity_enumerator = Identity.all.cycle
     twitter_handle: 'twitterhandle',
     instagram_handle: 'instagramhandle',
     sex: 'Female',
+    race: 'Black or African American',
     user_id: user.id,
     identity: identity_enumerator.next
   )

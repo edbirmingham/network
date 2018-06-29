@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_29_133853) do
+ActiveRecord::Schema.define(version: 2018_06_29_145041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -181,6 +181,7 @@ ActiveRecord::Schema.define(version: 2018_06_29_133853) do
     t.float "high_school_gpa"
     t.integer "act_score"
     t.string "sex"
+    t.string "race"
   end
 
   create_table "members", force: :cascade do |t|
@@ -216,6 +217,7 @@ ActiveRecord::Schema.define(version: 2018_06_29_133853) do
     t.string "twitter_handle"
     t.string "instagram_handle"
     t.string "sex"
+    t.string "race"
     t.index ["identity_id"], name: "index_members_on_identity_id"
   end
 
