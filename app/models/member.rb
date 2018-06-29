@@ -39,6 +39,10 @@ class Member < ApplicationRecord
   has_many :communications, dependent: :destroy
   has_many :network_actions, dependent: :destroy, foreign_key: :actor_id
 
+  def self.sexes
+    %w{ Female Male }
+  end
+  
   def self.shirt_sizes
     %w{ S M L XL 2XL 3XL }
   end

@@ -183,6 +183,7 @@ class MembersController < ApplicationController
         :facebook_name,
         :twitter_handle,
         :instagram_handle,
+        :sex,
         :organization_ids => [], 
         :neighborhood_ids => [], 
         :extracurricular_activity_ids => [], 

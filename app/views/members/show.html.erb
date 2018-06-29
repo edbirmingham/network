@@ -17,6 +17,9 @@
   <dt>Last name:</dt>
   <dd><%= @member.last_name %></dd>
 
+  <dt>Sex:</dt>
+  <dd><%= @member.sex %></dd>
+  
   <dt>Date of Birth:</dt>
   <% if @member.date_of_birth.present? %>
     <dd><%= @member.try(:date_of_birth).strftime('%m/%d/%Y') %></dd>

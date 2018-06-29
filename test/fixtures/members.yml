@@ -27,6 +27,7 @@ one:
   facebook_name: facebookname
   twitter_handle: twitterhandle
   instagram_handle: instagramhandle
+  sex: Female
 
 two:
   first_name: MyString
@@ -55,6 +56,7 @@ two:
   facebook_name: facebookname
   twitter_handle: twitterhandle
   instagram_handle: instagramhandle
+  sex: Female
 
 three:
   first_name: MyString
@@ -76,6 +78,13 @@ three:
   school: tuggle
   graduating_class: class_of_2017
   high_school_gpa: 4.0
+  act_score: 25
+  relative_phone: 2056687777
+  relative_email: relative@example.com
+  facebook_name: facebookname
+  twitter_handle: twitterhandle
+  instagram_handle: instagramhandle
+  sex: Female
 
 jane:
   first_name: Jane
@@ -87,6 +96,7 @@ jane:
   facebook_name: facebookname
   twitter_handle: twitterhandle
   instagram_handle: instagramhandle
+  sex: Female
 
 john:
   first_name: John
@@ -98,6 +108,7 @@ john:
   facebook_name: facebookname
   twitter_handle: twitterhandle
   instagram_handle: instagramhandle
+  sex: Male
 
 martin:
   first_name: Martin
@@ -110,6 +121,7 @@ martin:
   facebook_name: facebookname
   twitter_handle: twitterhandle
   instagram_handle: instagramhandle
+  sex: Male
 
 george:
   first_name: George
@@ -121,6 +133,7 @@ george:
   facebook_name: facebookname
   twitter_handle: twitterhandle
   instagram_handle: instagramhandle
+  sex: Male
 
 rosa:
   first_name: Rosa
@@ -132,6 +145,7 @@ rosa:
   facebook_name: facebookname
   twitter_handle: twitterhandle
   instagram_handle: instagramhandle
+  sex: Female
 
 carrie:
   first_name: Carrie
@@ -143,6 +157,7 @@ carrie:
   facebook_name: facebookname
   twitter_handle: twitterhandle
   instagram_handle: instagramhandle
+  sex: Female
 
 ossie:
   first_name: Ossie
@@ -154,6 +169,7 @@ ossie:
   facebook_name: facebookname
   twitter_handle: twitterhandle
   instagram_handle: instagramhandle
+  sex: Female
 
 malachi:
   first_name: Malachi
@@ -165,3 +181,4 @@ malachi:
   facebook_name: facebookname
   twitter_handle: twitterhandle
   instagram_handle: instagramhandle
+  sex: Male
