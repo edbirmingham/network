@@ -55,5 +55,10 @@ class MemberTest < ActiveSupport::TestCase
     member = Member.new(first_name: 'First', last_name: 'Last', instagram_handle: 'instagramhandle')
     assert member.save 
   end
+  
+  test 'should save member with sex' do
+    member = Member.new(first_name: 'First', last_name: 'Last', sex: 'Female')
+    assert member.save 
+  end
     
 end
