@@ -60,5 +60,10 @@ class MemberTest < ActiveSupport::TestCase
     member = Member.new(first_name: 'First', last_name: 'Last', sex: 'Female')
     assert member.save 
   end
+  
+  test 'should save member with race' do
+    member = Member.new(first_name: 'First', last_name: 'Last', race: 'Black or African American')
+    assert member.save 
+  end
     
 end

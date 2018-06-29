@@ -13,7 +13,8 @@ class ETLDimensionsMemberTest < ActiveSupport::TestCase
           zip_code: '35205',
           high_school_gpa: 4.0,
           act_score: 24,
-          sex: 'Female'
+          sex: 'Female',
+          race: 'Black or African American'
       )
       @member.save
 
@@ -73,5 +74,9 @@ class ETLDimensionsMemberTest < ActiveSupport::TestCase
   
   test 'Sex is extracted' do
     assert_equal @member.sex, @member_dimension.sex
+  end
+  
+  test 'Race is extracted' do
+    assert_equal @member.race, @member_dimension.race
   end
 end
