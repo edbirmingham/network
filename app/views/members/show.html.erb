@@ -23,6 +23,9 @@
   <dt>Race:</dt>
   <dd><%= @member.race %></dd>
   
+  <dt>Ethnicity:</dt>
+  <dd><%= @member.ethnicity %></dd>
+  
   <dt>Date of Birth:</dt>
   <% if @member.date_of_birth.present? %>
     <dd><%= @member.try(:date_of_birth).strftime('%m/%d/%Y') %></dd>

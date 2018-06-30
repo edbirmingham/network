@@ -185,6 +185,7 @@ class MembersController < ApplicationController
         :instagram_handle,
         :sex,
         :race,
+        :ethnicity,
         :organization_ids => [], 
         :neighborhood_ids => [], 
         :extracurricular_activity_ids => [], 

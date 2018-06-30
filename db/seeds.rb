@@ -90,6 +90,7 @@ victoria = Member.create(
   instagram_handle: 'instagramhandle',
   sex: 'Female',
   race: 'Black or African American',
+  ethnicity: 'Not Hispanic or Latino or Spanish Origin',
   user_id: user.id
 )
 chris = Member.create(
@@ -109,6 +110,7 @@ chris = Member.create(
   instagram_handle: 'instagramhandle',
   sex: 'Male',
   race: 'Black or African American',
+  ethnicity: 'Not Hispanic or Latino or Spanish Origin',
   user_id: user.id
 )
 andrew = Member.create(
@@ -128,6 +130,7 @@ andrew = Member.create(
   instagram_handle: 'instagramhandle',
   sex: 'Male',
   race: 'Black or African American',
+  ethnicity: 'Not Hispanic or Latino or Spanish Origin',
   user_id: user.id
 )
 sean = Member.create(
@@ -147,6 +150,7 @@ sean = Member.create(
   instagram_handle: 'instagramhandle',
   sex: 'Male',
   race: 'Black or African American',
+  ethnicity: 'Not Hispanic or Latino or Spanish Origin',
   user_id: user.id
 )
 
@@ -187,6 +191,7 @@ student_nell = Member.create(
   instagram_handle: 'instagramhandle',
   sex: 'Female',
   race: 'Black or African American',
+  ethnicity: 'Not Hispanic or Latino or Spanish Origin',
   user_id: user.id
 )
 
@@ -298,6 +303,7 @@ identity_enumerator = Identity.all.cycle
     instagram_handle: 'instagramhandle',
     sex: 'Female',
     race: 'Black or African American',
+    ethnicity: 'Not Hispanic or Latino or Spanish Origin',
     user_id: user.id,
     identity: identity_enumerator.next
   )

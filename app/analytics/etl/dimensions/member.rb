@@ -13,7 +13,8 @@ class Etl::Dimensions::Member
                 high_school_gpa: member.high_school_gpa,
                 act_score: member.act_score,
                 sex: member.sex,
-                race: member.race
+                race: member.race,
+                ethnicity: member.ethnicity
             }
 
             if MemberDimension.where(member_id: attributes[:member_id]).exists?

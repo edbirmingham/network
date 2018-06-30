@@ -65,5 +65,10 @@ class MemberTest < ActiveSupport::TestCase
     member = Member.new(first_name: 'First', last_name: 'Last', race: 'Black or African American')
     assert member.save 
   end
+  
+  test 'should save member with ethnicity' do
+    member = Member.new(first_name: 'First', last_name: 'Last', ethnicity: 'Hispanic or Latino or Spanish Origin')
+    assert member.save 
+  end
     
 end
