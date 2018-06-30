@@ -39,6 +39,13 @@ class Member < ApplicationRecord
   has_many :communications, dependent: :destroy
   has_many :network_actions, dependent: :destroy, foreign_key: :actor_id
 
+  def self.ethnicities
+    %w{
+      Hispanic\ or\ Latino\ or\ Spanish\ Origin
+      Not\ Hispanic\ or\ Latino\ or\ Spanish\ Origin
+    }
+  end
+  
   def self.races
     %w{
       American\ Indian\ or\ Alaska\ Native

@@ -29,6 +29,7 @@ one:
   instagram_handle: instagramhandle
   sex: Female
   race: Black or African American
+  ethnicity: Hispanic or Latino or Spanish Origin
 
 two:
   first_name: MyString
@@ -59,6 +60,7 @@ two:
   instagram_handle: instagramhandle
   sex: Female
   race: Black or African American
+  ethnicity: Hispanic or Latino or Spanish Origin
 
 three:
   first_name: MyString
@@ -88,6 +90,7 @@ three:
   instagram_handle: instagramhandle
   sex: Female
   race: Black or African American
+  ethnicity: Hispanic or Latino or Spanish Origin
 
 jane:
   first_name: Jane
@@ -101,6 +104,7 @@ jane:
   instagram_handle: instagramhandle
   sex: Female
   race: Black or African American
+  ethnicity: Hispanic or Latino or Spanish Origin
 
 john:
   first_name: John
@@ -114,6 +118,7 @@ john:
   instagram_handle: instagramhandle
   sex: Male
   race: Black or African American
+  ethnicity: Hispanic or Latino or Spanish Origin
 
 martin:
   first_name: Martin
@@ -128,6 +133,7 @@ martin:
   instagram_handle: instagramhandle
   sex: Male
   race: Black or African American
+  ethnicity: Hispanic or Latino or Spanish Origin
 
 george:
   first_name: George
@@ -141,6 +147,7 @@ george:
   instagram_handle: instagramhandle
   sex: Male
   race: Black or African American
+  ethnicity: Hispanic or Latino or Spanish Origin
 
 rosa:
   first_name: Rosa
@@ -154,6 +161,7 @@ rosa:
   instagram_handle: instagramhandle
   sex: Female
   race: Black or African American
+  ethnicity: Hispanic or Latino or Spanish Origin
 
 carrie:
   first_name: Carrie
@@ -167,6 +175,7 @@ carrie:
   instagram_handle: instagramhandle
   sex: Female
   race: Black or African American
+  ethnicity: Hispanic or Latino or Spanish Origin
 
 ossie:
   first_name: Ossie
@@ -180,6 +189,7 @@ ossie:
   instagram_handle: instagramhandle
   sex: Female
   race: Black or African American
+  ethnicity: Hispanic or Latino or Spanish Origin
 
 malachi:
   first_name: Malachi
@@ -193,3 +203,4 @@ malachi:
   instagram_handle: instagramhandle
   sex: Male
   race: Black or African American
+  ethnicity: Hispanic or Latino or Spanish Origin

@@ -14,7 +14,8 @@ class ETLDimensionsMemberTest < ActiveSupport::TestCase
           high_school_gpa: 4.0,
           act_score: 24,
           sex: 'Female',
-          race: 'Black or African American'
+          race: 'Black or African American',
+          ethnicity: 'Not Hispanic or Latino or Spanish Origin'
       )
       @member.save
 
@@ -78,5 +79,9 @@ class ETLDimensionsMemberTest < ActiveSupport::TestCase
   
   test 'Race is extracted' do
     assert_equal @member.race, @member_dimension.race
+  end
+  
+  test 'Ethnicity is extracted' do
+    assert_equal @member.ethnicity, @member_dimension.ethnicity
   end
 end
