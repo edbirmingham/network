@@ -1,0 +1,12 @@
+<p>
+  Network Event: <%= @network_event %>
+</p>
+<p>
+  Subject: <%= @subject %>
+</p>
+<p>
+  Body: <%= sanitize(@body.html_safe,
+   tags: Rails.application.config.x.allowed_html_tags_in_email,
+   attributes: Rails.application.config.x.allowed_html_attributes_in_email) 
+  %>
+</p>

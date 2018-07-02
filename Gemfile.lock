@@ -50,8 +50,7 @@ GEM
     autoprefixer-rails (8.6.3)
       execjs
     bcrypt (3.1.12)
-    binding_of_caller (0.8.0)
-      debug_inspector (>= 0.0.1)
+    bindex (0.5.0)
     bootsnap (1.3.0)
       msgpack (~> 1.0)
     bootstrap-editable-rails (0.0.9)
@@ -76,7 +75,10 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     crass (1.0.4)
-    debug_inspector (0.0.3)
+    declarative (0.0.10)
+    declarative-builder (0.1.0)
+      declarative-option (< 0.2.0)
+    declarative-option (0.1.0)
     deep_cloneable (2.3.2)
       activerecord (>= 3.1.0, < 6)
     devise (4.4.3)
@@ -85,6 +87,12 @@ GEM
       railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
+    disposable (0.4.4)
+      declarative (>= 0.0.9, < 1.0.0)
+      declarative-builder (< 0.2.0)
+      declarative-option (< 0.2.0)
+      representable (>= 2.4.0, <= 3.1.0)
+      uber (< 0.2.0)
     erubi (1.7.1)
     erubis (2.7.0)
     excon (0.62.0)
@@ -135,11 +143,14 @@ GEM
       mini_mime (>= 0.1.1)
     marcel (0.3.2)
       mimemagic (~> 0.3.2)
+    metaclass (0.0.4)
     method_source (0.9.0)
     mimemagic (0.3.2)
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
+    mocha (1.5.0)
+      metaclass (~> 0.0.1)
     momentjs-rails (2.20.1)
       railties (>= 3.1)
     moneta (0.8.1)
@@ -197,6 +208,16 @@ GEM
     rdoc (4.3.0)
     record_tag_helper (1.0.0)
       actionview (~> 5.x)
+    reform (2.2.4)
+      disposable (>= 0.4.1)
+      representable (>= 2.4.0, < 3.1.0)
+    reform-rails (0.1.7)
+      activemodel (>= 3.2)
+      reform (>= 2.2.0)
+    representable (3.0.4)
+      declarative (< 0.1.0)
+      declarative-option (< 0.2.0)
+      uber (< 0.2.0)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
@@ -237,15 +258,16 @@ GEM
     turbolinks-source (5.1.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
+    uber (0.1.0)
     uglifier (4.1.12)
       execjs (>= 0.3.0, < 3)
     warden (1.2.7)
       rack (>= 1.0)
-    web-console (2.3.0)
-      activemodel (>= 4.0)
-      binding_of_caller (>= 0.7.2)
-      railties (>= 4.0)
-      sprockets-rails (>= 2.0, < 4.0)
+    web-console (3.6.2)
+      actionview (>= 5.0)
+      activemodel (>= 5.0)
+      bindex (>= 0.4.0)
+      railties (>= 5.0)
     websocket-driver (0.7.0)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
@@ -272,6 +294,7 @@ DEPENDENCIES
   kaminari
   letsencrypt-rails-heroku
   listen
+  mocha
   momentjs-rails (>= 2.9.0)
   pg
   pg_search
@@ -280,6 +303,8 @@ DEPENDENCIES
   rails (~> 5.2)
   rails-controller-testing
   record_tag_helper
+  reform
+  reform-rails
   rollbar
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
@@ -288,7 +313,7 @@ DEPENDENCIES
   timecop
   turbolinks (~> 5)
   uglifier (>= 1.3.0)
-  web-console (~> 2.0)
+  web-console (~> 3.5)
   zeroclipboard-rails
 
 BUNDLED WITH

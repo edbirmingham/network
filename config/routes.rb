@@ -22,8 +22,12 @@ Rails.application.routes.draw do
   resources :projects
 
   resources :network_events do
+    resources :messages, only: [:new, :show, :create]
     resources :sign_ups, only: [:new, :show, :create, :edit, :update]
     resources :check_ins, only: [:new, :show, :create]
+
+    get 'contacts', on: :member
+
     collection do
       resources :sign_ups, only:[:index]
       resources :check_ins, only:[:index]

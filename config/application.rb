@@ -17,5 +17,9 @@ module Workspace
     # the framework and any gems in your application.
     
     config.active_record.belongs_to_required_by_default = false
+    
+    # Prevent XSS attacks in emails
+    config.x.allowed_html_tags_in_email = %w(strong em b a p i br style pre u h1 h2 h3 h4 h5 h6 font img ol ul)
+    config.x.allowed_html_attributes_in_email = %w(src style href)
   end
 end

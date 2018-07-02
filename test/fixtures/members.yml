@@ -194,6 +194,7 @@ ossie:
 malachi:
   first_name: Malachi
   last_name: Wilkerson
+  email: malachi.wikerson@email.local
   high_school_gpa: 4.0
   act_score: 25
   relative_phone: 2056687777

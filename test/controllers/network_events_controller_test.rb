@@ -162,4 +162,20 @@ class NetworkEventsControllerTest < ActionController::TestCase
     ability = Ability.new(user)
     assert ability.cannot? :delete, @network_event
   end
+
+  test "should find related contacts" do
+    get :contacts, params:{ q: { term: "all" }, id: @network_event.id }
+    assert_response :success
+
+    parsed_response = JSON.parse(response.body)
+    assert_equal [
+      {"text" => "All",
+        "children" => [
+          {"id"=>-1, "type"=>"All", "text"=>"All Volunteers"},
+          {"id"=>-2, "type"=>"All", "text"=>"All Site Contacts"},
+          {"id"=>-3, "type"=>"All", "text"=>"All School Contacts"}
+        ]
+      }
+    ], parsed_response
+  end
 end

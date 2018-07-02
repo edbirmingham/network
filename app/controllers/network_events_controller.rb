@@ -76,6 +76,11 @@ class NetworkEventsController < ApplicationController
     ["Save & Create Another", "Save & Copy More"].include? params[:commit]
   end
 
+  def contacts
+    permitted = params.permit(:id, q: :term)
+    render json: NetworkEventsContactsService.call(permitted)
+  end
+  
   private
 
     def copy_events
