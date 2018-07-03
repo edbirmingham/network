@@ -13,7 +13,7 @@ class MessagesController < ApplicationController
 
     if @message.valid? && @message.save
       MessageMailer.message_email(
-        network_event.name, 
+        network_event, 
         @message.subject, 
         @message.body, 
         current_user.email,
