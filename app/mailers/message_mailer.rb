@@ -1,6 +1,6 @@
 class MessageMailer < ActionMailer::Base
-  def message_email(network_event_name, subject, body, sender, recipients)
-    @network_event_name = network_event_name
+  def message_email(network_event, subject, body, sender, recipients)
+    @network_event = network_event
     @subject = subject
     @body = body
     mail(

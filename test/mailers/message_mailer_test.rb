@@ -1,9 +1,18 @@
 require 'test_helper'
  
 class MessageMailerTest < ActionMailer::TestCase
+  setup do
+    @event = NetworkEvent.new(
+      name: "The Main Event",
+      program: programs(:network_night),
+      location: locations(:tuggle),
+      scheduled_at: DateTime.new(2018, 1, 20, 18)
+    )
+  end
+  
   test "message_email sends the email" do
     email = MessageMailer.message_email(
-      "The Main Event", 
+      @event, 
       "subject", 
       "the <b>body</b> <script> evil javascript </script>", 
       "a@a.com",
@@ -18,12 +27,12 @@ class MessageMailerTest < ActionMailer::TestCase
     assert_nil email.to
     assert_equal ["x@x.com", "y@y.com"], email.bcc
     assert_equal "subject", email.subject
-    assert_equal "<p>\n  Network Event: \n</p>\n<p>\n  Subject: subject\n</p>\n<p>\n  Body: the <b>body</b>  evil javascript \n</p>\n", email.body.to_s
+    assert_equal read_fixture('event').join, email.body.to_s
   end
   
   test "message_email uses default email if sender does not have an email" do
     email = MessageMailer.message_email(
-      "The Main Event", 
+      @event, 
       "subject", 
       "the <b>body</b> <script> evil javascript </script>", 
       "",
