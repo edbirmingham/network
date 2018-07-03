@@ -12,7 +12,13 @@ class MessagesController < ApplicationController
     @message.sender = current_user
 
     if @message.valid? && @message.save
-      MessageMailer.message_email(network_event.name, @message.subject, @message.body, mailer_recipients).deliver
+      MessageMailer.message_email(
+        network_event.name, 
+        @message.subject, 
+        @message.body, 
+        current_user.email,
+        mailer_recipients
+      ).deliver
 
       redirect_to network_event_message_path(network_event, @message)
     else
@@ -28,7 +34,7 @@ class MessagesController < ApplicationController
   private
 
   def mailer_recipients
-    @message.model.member_recipients.pluck(:email) << @message.model.adhoc_recipients.pluck(:email)
+    @message.model.member_recipients.pluck(:email) + @message.model.adhoc_recipients.pluck(:email)
   end
 
   def message_params

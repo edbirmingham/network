@@ -15,12 +15,23 @@ class MessagesControllerTest < ActionController::TestCase
   end
 
   test "'create' action creates a message" do
-    member_id = members(:one).id
+    member_id = members(:malachi).id
     tuggle = network_events(:tuggle_network)
+    
     post :create, params:{ network_event_id: tuggle.id, message: {subject: "hello!", body: "hello everyone", recipient_ids: [member_id]}}
 
     assert_redirected_to network_event_message_path(tuggle, tuggle.messages.last)
 
     assert_equal 1, tuggle.messages.count
+  end
+  
+  test "'create' action sends an email from current user" do
+    member_id = members(:malachi).id
+    tuggle = network_events(:tuggle_network)
+    
+    post :create, params:{ network_event_id: tuggle.id, message: {subject: "hello!", body: "hello everyone", recipient_ids: [member_id]}}
+
+    event_email = ActionMailer::Base.deliveries.last
+    assert_equal [users(:one).email], event_email.from
   end
 end
