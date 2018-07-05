@@ -9,13 +9,10 @@
 </p>
 <p>
   <%= @network_event.name %>
-</p>
-<p>
+  <br>
   <%= @network_event.program.try(:name) %>
-</p>
-<p>
+  <br>
   <%= @network_event.location.try(:name) %>
-</p>
-<p>
+  <br>
   <%= @network_event.scheduled_at.try(:strftime, '%B %-d, %Y at%l:%M%P') %>
 </p>
