@@ -9,7 +9,6 @@
 
 <link href="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.css" rel="stylesheet">
 <script src="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.min.js"></script>
-<%= javascript_include_tag "messages" %>
 
 <%= form_for([network_event, @message], html: { class: "form-horizontal", role: "form" }) do |f| %>
   <% if @message.errors.any? %>
