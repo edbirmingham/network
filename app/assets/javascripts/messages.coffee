@@ -1,2 +1,3 @@
-$(document).on 'ready page:load', ->
-  $('#message_body').summernote()
+$(document).on 'ready page:load turbolinks:load', ->
+  if $('#message_body').summernote
+    $('#message_body').summernote()
