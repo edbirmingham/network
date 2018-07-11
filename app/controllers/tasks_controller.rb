@@ -59,7 +59,7 @@ class TasksController < ApplicationController
   def filtered_event_tasks
     tasks = Task.
       includes(:owner, :network_event, :common_task).
-      order("due_date IS NULL, due_date ASC")
+      order(Arel.sql("due_date IS NULL, due_date ASC"))
       
     # Filter members by search term
     if params[:q].present?

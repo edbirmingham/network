@@ -146,7 +146,11 @@ class NetworkEventsController < ApplicationController
       events = NetworkEvent.
         select("DISTINCT network_events.*, " + sort_column + " IS NULL").
         includes(:program, :location, :organizations, :volunteers).
-        order(sort_column + " IS NULL, " + sort_column + " " + sort_direction)
+        order(
+          Arel.sql(
+            sort_column + " IS NULL, " + sort_column + " " + sort_direction
+          )
+        )
 
       # Filter events by scheduled date.
       if params[:unscheduled_events_only].present?
