@@ -10,7 +10,12 @@
   <dd><%= @message.subject %></dd>
 
   <dt>Body:</dt>
-  <dd><%= @message.body %></dd>
+  <dd>
+    <%= sanitize(@message.body.html_safe,
+     tags: Rails.application.config.x.allowed_html_tags_in_email,
+     attributes: Rails.application.config.x.allowed_html_attributes_in_email) 
+    %>
+  </dd>
 
   <dt>Status:</dt>
   <dd><%= @message.status.try(:titleize) %></dd>
