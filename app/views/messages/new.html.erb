@@ -7,9 +7,6 @@
 
 <h1> New Message </h1>
 
-<link href="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.css" rel="stylesheet">
-<script src="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.min.js"></script>
-
 <%= form_for([network_event, @message], html: { class: "form-horizontal", role: "form" }) do |f| %>
   <% if @message.errors.any? %>
     <div class="alert alert-danger alert-dismissable" role="alert">
