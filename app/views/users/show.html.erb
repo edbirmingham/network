@@ -16,6 +16,9 @@
   <dt>Staff?:</dt>
   <dd><%= @user.staff?.to_s.capitalize %></dd>
   
+  <dt>Two Factor Authentication?:</dt>
+  <dd><%= @user.two_factor_auth?.to_s.capitalize %></dd>
+  
   <dt>Sign in count:</dt>
   <dd><%= @user.sign_in_count %></dd>
 

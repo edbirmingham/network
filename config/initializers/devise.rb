@@ -265,4 +265,19 @@ Devise.setup do |config|
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
+  
+  # Configuration for Two Factor Authentication.
+  config.max_login_attempts = 3  # Maximum second factor attempts count.
+  config.allowed_otp_drift_seconds = 30  # Allowed TOTP time drift between client and server.
+  config.otp_length = 6  # TOTP code length
+  config.direct_otp_valid_for = 5.minutes  # Time before direct OTP becomes invalid
+  config.direct_otp_length = 6  # Direct OTP code length
+  config.remember_otp_session_for_seconds = 30.days  # Time before browser has to perform 2fA again. Default is 0.
+  if Rails.env.test?
+    config.otp_secret_encryption_key = SecureRandom.hex
+  else
+    config.otp_secret_encryption_key = ENV['OTP_SECRET_ENCRYPTION_KEY']
+  end
+  config.second_factor_resource_id = 'id' # Field or method name used to set value for 2fA remember cookie
+  config.delete_cookie_on_logout = false # Delete cookie when user signs out, to force 2fA again on login
 end
