@@ -72,6 +72,9 @@ gem 'letsencrypt-rails-heroku', group: 'production'
 gem 'reform-rails'
 gem 'reform'
 
+gem 'two_factor_authentication'
+gem 'rqrcode'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

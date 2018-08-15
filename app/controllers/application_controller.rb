@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   protected
   
   def require_admin_or_staff_user!
-    unless current_user.admin? or current_user.staff?
+    unless current_user.admin? or current_user.staff? or controller_name == 'dashboards'
       redirect_to root_path
     end
   end
