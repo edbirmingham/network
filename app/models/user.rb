@@ -4,7 +4,8 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :two_factor_authenticatable, :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, 
+         omniauth_providers: %i[surveymonkey]
   has_one_time_password(encrypted: true)
 
   has_many :created_organizations, class_name: "Organization", foreign_key: :created_by_id
@@ -22,6 +23,10 @@ class User < ApplicationRecord
   
   def need_two_factor_authentication?(request)
     two_factor_auth?
+  end
+  
+  def surveymonkey?
+    surveymonkey_token.present? && surveymonkey_uid.present?
   end
   
   private

@@ -8,6 +8,14 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # def twitter
   # end
 
+  def surveymonkey
+    current_user.surveymonkey_token = request.env["omniauth.auth"].credentials.token
+    current_user.surveymonkey_uid =  request.env["omniauth.auth"].uid
+    current_user.save
+    
+    redirect_to edit_user_registration_path
+  end
+
   # More info at:
   # https://github.com/plataformatec/devise#omniauth
 

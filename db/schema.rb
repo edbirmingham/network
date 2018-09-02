@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_27_132301) do
+ActiveRecord::Schema.define(version: 2018_08_25_124726) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -473,6 +473,8 @@ ActiveRecord::Schema.define(version: 2018_07_27_132301) do
     t.datetime "direct_otp_sent_at"
     t.datetime "totp_timestamp"
     t.boolean "two_factor_auth", default: false
+    t.string "surveymonkey_token"
+    t.string "surveymonkey_uid"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["encrypted_otp_secret_key"], name: "index_users_on_encrypted_otp_secret_key", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
