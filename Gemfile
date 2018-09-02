@@ -62,6 +62,7 @@ gem 'ancestry'
 gem 'zeroclipboard-rails'
 
 # Network Gems
+gem 'omniauth-surveymonkey'
 gem 'devise', '~> 4.1'
 
 # Until the new API calls are generally available, we must manually specify a
