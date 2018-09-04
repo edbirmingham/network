@@ -61,5 +61,6 @@ Rails.application.routes.draw do
   resources :locations
   resources :organizations
   resources :participations, only: :destroy
+  resources :surveys, only: [:index, :show]
 
 end

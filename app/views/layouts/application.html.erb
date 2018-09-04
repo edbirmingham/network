@@ -54,6 +54,9 @@
                       <li><%= link_to('Projects', projects_path) %></li>
                       <li><%= link_to('Reports', reports_path) %></li>
                       <li><%= link_to('Schools', schools_path) %></li>
+                      <% if current_user.surveymonkey? %>
+                        <li><%= link_to('Surveys', surveys_path) %></li>
+                      <% end %>
                       <li><%= link_to('Identities', identities_path) %></li>
                       <li><%= link_to('Talents', talents_path) %></li>
                       <li><%= link_to('Tasks', common_tasks_path) %></li>
