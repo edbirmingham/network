@@ -75,6 +75,7 @@ gem 'reform'
 
 gem 'two_factor_authentication'
 gem 'rqrcode'
+gem 'ruby_http_client'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
