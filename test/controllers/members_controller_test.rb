@@ -319,5 +319,21 @@ class MembersControllerTest < ActionController::TestCase
     ability = Ability.new(user)
     assert ability.cannot? :delete, @member
   end
+  
+  test "should allow survey users to add recipients" do
+    sign_in users(:survey_user)
+    get :index
+    assert_response :success
+    
+    assert_select 'a', "Add to survey"
+  end
+  
+  test "should not allow non-survey users to add recipients" do
+    sign_in users(:non_survey_user)
+    get :index
+    assert_response :success
+    
+    assert_select 'a', { text: "Add to survey", count: 0 }
+  end
 
 end

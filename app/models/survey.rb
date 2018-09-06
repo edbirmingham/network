@@ -3,6 +3,34 @@ class Survey
     @user = user
   end
   
+  def add_recipients(id, recipients)
+    collector = new_collector(id)
+    message = new_message(collector[:id])
+    
+    contacts = recipients.map do |recipient|
+      {
+        email: recipient.email,
+        first_name: recipient.first_name,
+        last_name: recipient.last_name,
+        custom_fields: {
+          "1": recipient.id.to_s
+        }
+      }
+    end
+    
+    results = api.
+      collectors.
+      _(collector[:id]).
+      messages.
+      _(message[:id]).
+      recipients.
+      bulk.
+      post(request_body: { contacts: contacts }).
+      parsed_body
+    
+    results
+  end
+  
   def find(id)
     api.surveys._(id).get.parsed_body
   end
@@ -48,7 +76,26 @@ class Survey
     @user.surveymonkey_token
   end
   
-  def collectors(id)
-    api.surveys._(id).collectors.get.parsed_body[:data]
+  def new_collector(survey_id)
+    api.
+      surveys.
+      _(survey_id).
+      collectors.
+      post(request_body: { type: 'email', name: 'Network generated' }).
+      parsed_body
   end
+  
+  def collectors(survey_id)
+    api.surveys._(survey_id).collectors.get.parsed_body[:data]
+  end
+  
+  def new_message(collector_id)
+    api.
+      collectors.
+      _(collector_id).
+      messages.
+      post(request_body: { type: 'invite' }).
+      parsed_body
+  end
+  
 end

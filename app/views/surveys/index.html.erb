@@ -9,6 +9,9 @@
         <th>Title</th>
         <th>Responses</th>
         <th></th>
+        <% if params[:recipients].present? %>
+          <th></th>
+        <% end %>
       </tr>
     </thead>
 
@@ -18,6 +21,9 @@
           <td><%= survey[:title] %></td>
           <td><%= survey[:response_count] %></td>
           <td><%= link_to 'Show', survey_path(survey[:id]) %></td>
+          <% if params[:recipients].present? %>
+            <td><%= link_to "Add #{params[:recipients]} recipients", survey_path(survey[:id], recipients_params(params[:recipients])), method: :put %></td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>
