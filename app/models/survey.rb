@@ -57,7 +57,7 @@ class Survey
         parsed_body[:data]
     end
     
-    result.flatten
+    result.flatten.compact
   end
   
   private
