@@ -126,6 +126,7 @@
 
 </div>
 
+<p class="text-right"><%= page_entries_info @members %></p>
 <div class="table-responsive">
   <table class="table table-striped table-bordered table-hover">
     <thead>
@@ -157,11 +158,19 @@
     </tbody>
   </table>
   <%= paginate @members %>
-  
+</div>
+
+<div class="page-footer">
   <div>
-    <%= link_to members_path({format: :csv}.merge(members_download_query_params)), class: 'btn btn-primary btn__download' do %>
+    <%= link_to members_path({format: :csv}.merge(members_search_query_params)), class: 'btn btn-primary btn__download' do %>
       <span class="glyphicon glyphicon-save"></span>
       Download
+    <% end %>
+    <% if current_user.surveymonkey? %>
+      <%= link_to surveys_path(recipients_params(@members.total_count)), class: 'btn btn-primary' do %>
+        <span class="glyphicon glyphicon-plus"></span>
+        Add to survey
+      <% end %>
     <% end %>
   </div>
 </div>
