@@ -35,7 +35,7 @@ This setup uses AWS Cloud9 for your development environment.  Cloud9 provides an
   sudo service postgresql start
   sudo su - postgres
   psql -U postgres
-  CREATE USER ec2-user SUPERUSER;
+  CREATE USER "ec2-user" SUPERUSER;
   CREATE DATABASE "ec2-user" WITH OWNER "ec2-user";
   \q
   exit
