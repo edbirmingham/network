@@ -47,17 +47,10 @@ class Survey
   def recipients(id)
     result = []
     collectors(id).each do |collector|
-      result << api.
-        collectors.
-        _(collector[:id]).
-        recipients.
-        get(
-          query_params: { include: "survey_response_status,survey_link"}
-        ).
-        parsed_body[:data]
+      result << collector_recipients(collector)
     end
     
-    result.flatten.compact
+    result.flatten.compact.sort_by { |r| "#{r[:last_name]} #{r[:first_name]}" }
   end
   
   private
@@ -85,8 +78,36 @@ class Survey
       parsed_body
   end
   
+  def collector_recipients(collector)
+    recipients = []
+    page_number = 1
+    
+    begin
+      page = api.
+        collectors.
+        _(collector[:id]).
+        recipients.
+        get(
+          query_params: { 
+            include: "survey_response_status,survey_link,custom_fields,extra_fields",
+            page: page_number.to_s
+          }
+        ).
+        parsed_body
+        
+      recipients += page[:data]
+      page_number += 1
+    end until last_page?(page)
+    
+    recipients
+  end
+  
   def collectors(survey_id)
     api.surveys._(survey_id).collectors.get.parsed_body[:data]
+  end
+  
+  def last_page?(page)
+    page[:page] == total_pages(page)
   end
   
   def new_message(collector_id)
@@ -98,4 +119,7 @@ class Survey
       parsed_body
   end
   
+  def total_pages(page)
+    (page[:total].to_f / page[:per_page].to_f).ceil
+  end
 end
