@@ -4,9 +4,11 @@ class Communication < ApplicationRecord
   
   def self.kinds 
     %w{
+      Call
       Email 
-      Thank\ You\ Note
       Fundraising\ Request 
+      Text
+      Thank\ You\ Note
     }
   end
 end
