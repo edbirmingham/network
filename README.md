@@ -40,10 +40,11 @@ This setup uses AWS Cloud9 for your development environment.  Cloud9 provides an
   \q
   exit
   ```
-* Setup auto start for postgres service
+* Setup auto start for postgres service and key for two factory authentication.
   * Click on the Gear icon in File browser (on the left). Check "Show Home in Favorites" and "Show Hidden Files"
   * In the top directory ~-. you will see the .bash_profile (hidden file) open it for editing and put this in at bottom of the file....
   ```
+  export OTP_SECRET_ENCRYPTION_KEY=4e8332ae3fe1af0469d75516682aa9a6e5086ccff6c7b1a1d79e3bce197b9
   function ensurepostgres {
     if [[ ! $(ps -ef | grep -v grep | grep "postgres" | wc -l) > 0 ]]; then
       sudo service postgresql start
