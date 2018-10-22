@@ -37,11 +37,14 @@ class Etl::Facts::Programming
   end
 
   def self.hours(event)
-    hours = event.duration / 60.0
-    cohort_count = event.cohort_assignments.count
-
-    if cohort_count > 1
-      hours = hours * cohort_count
+    hours = 0
+    if event.duration.present?
+      hours = event.duration / 60.0
+      cohort_count = event.cohort_assignments.count
+  
+      if cohort_count > 1
+        hours = hours * cohort_count
+      end
     end
 
     hours

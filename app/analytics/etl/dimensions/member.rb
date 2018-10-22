@@ -1,6 +1,6 @@
 class Etl::Dimensions::Member
     def self.run
-        Member.all.each do |member|
+        ::Member.all.each do |member|
             attributes = {
                 member_id: member.id,
                 identity: member.identity.try(:name),
