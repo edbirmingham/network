@@ -1,6 +1,6 @@
 class Etl::Dimensions::Date
-    def self.run
-        load_date_range
+    def self.run(zero_day: default_zero_day, future_window: default_future_window)
+        load_date_range zero_day, future_window
         load_null_date
     end
 
@@ -22,13 +22,21 @@ class Etl::Dimensions::Date
         (date - first_day_of_school(date)).to_i + 1
     end
 
+    def self.default_future_window
+      1.year.from_now.to_date
+    end
+    
+    def self.default_zero_day
+        Date.new(2015, 1, 1)
+    end
+    
     def self.first_day_of_school(date)
         (school_year_number(date).to_s + '-07-01').to_date
     end
 
-    def self.load_date_range
-        date = NetworkEvent.minimum(:scheduled_at).to_date
-        max_date = NetworkEvent.maximum(:scheduled_at).to_date
+    def self.load_date_range(zero_day, future_window)
+        date = minimum_date(zero_day)
+        max_date = maximum_date(future_window)
         while date <= max_date do
             attributes = {
                 date: date.to_date,
@@ -92,6 +100,14 @@ class Etl::Dimensions::Date
         }
         persist_date attributes
 
+    end
+    
+    def self.maximum_date(future_window)
+        [future_window, NetworkEvent.maximum(:scheduled_at).to_date].min
+    end
+    
+    def self.minimum_date(zero_day)
+        [zero_day, NetworkEvent.minimum(:scheduled_at).to_date].max
     end
 
     def self.persist_date(attributes)
