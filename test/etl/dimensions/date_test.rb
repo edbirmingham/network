@@ -23,6 +23,28 @@ class ETLDimensionsDateTest < ActiveSupport::TestCase
     assert_equal days, DateDimension.where.not(date: nil).count
   end
 
+  test 'No date is created before zero day' do
+    minimum_date = DateDimension.where.not(date: nil).order(:date).first
+    minimum_date.delete
+    
+    zero_day = minimum_date.date + 1.day
+    Etl::Dimensions::Date.run zero_day: zero_day
+    
+    new_minimum_date = DateDimension.where.not(date: nil).order(:date).first
+    assert_equal zero_day, new_minimum_date.date
+  end
+  
+  test 'No date is created beyond the future window' do
+    maximum_date = DateDimension.where.not(date: nil).order(date: :desc).first
+    maximum_date.delete
+    
+    future_window = maximum_date.date - 1.day
+    Etl::Dimensions::Date.run future_window: future_window
+    
+    new_maximum_date = DateDimension.where.not(date: nil).order(date: :desc).first
+    assert_equal future_window, new_maximum_date.date
+  end
+  
   test 'A date is created for a missing date' do
     assert_equal 1, DateDimension.where(date: nil).count
   end
