@@ -26,9 +26,11 @@ class CheckInsController < ApplicationController
     error_ids =[]
     member_ids.each do |member_id|
       participation_params = {member_id: member_id, network_event_id: network_event_id, level: level, participation_type: participation_type}
-      @participation = Participation.new(participation_params)
-      @participation.user = current_user
-      error_ids << member_id unless @participation.save
+      unless Participation.where(participation_params).exists?
+        @participation = Participation.new(participation_params)
+        @participation.user = current_user
+        error_ids << member_id unless @participation.save
+      end
     end
 
     respond_to do |format|

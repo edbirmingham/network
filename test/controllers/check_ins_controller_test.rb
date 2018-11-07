@@ -20,9 +20,30 @@ class CheckInsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should not create a duplicate participation during check in" do
+    assert_no_difference('Participation.count') do
+       post :create, params: { 
+         participation: { 
+           member_id: @participation.member_id, 
+           network_event_id: @participation.network_event_id, 
+           level: @participation.level 
+         }, 
+         network_event_id: @participation.network_event_id 
+       }, xhr: true
+    end
+    assert_response :success
+  end
+  
   test "should create participation during check in" do
     assert_difference('Participation.count') do
-       post :create, params: { participation: { member_id: @participation.member_id, network_event_id: @participation.network_event_id, level: @participation.level }, network_event_id: @participation.network_event_id }, xhr: true
+       post :create, params: { 
+         participation: { 
+           member_id: Member.where.not(id: @participation.member_id).first.id, 
+           network_event_id: @participation.network_event_id, 
+           level: @participation.level 
+         }, 
+         network_event_id: @participation.network_event_id 
+       }, xhr: true
     end
     assert_response :success
   end
