@@ -3,7 +3,7 @@ module MemberSearch
   
   #Filters
   def filtered_members
-    members = Member.includes(:identity).order(:first_name, :last_name)
+    members = Member.includes(:identity, :organizations, :talents).order(:first_name, :last_name)
 
     if params[:identity_ids].present?
       members = Member.
