@@ -1,5 +1,5 @@
 class Users::UnlocksController < Devise::UnlocksController
-  skip_filter :require_admin_user!
+  skip_before_action :require_admin_or_staff_user!
   
   # GET /resource/unlock/new
   # def new

@@ -1,5 +1,6 @@
 class IdentitiesController < ApplicationController
   before_action :set_identity, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /identities
   # GET /identities.json

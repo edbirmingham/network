@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class LocationsControllerTest < ActionController::TestCase
-  include Devise::TestHelpers 
-  
+  include Devise::Test::ControllerHelpers
+
   setup do
     @location = locations(:tuggle)
     sign_in users(:one)
@@ -21,32 +21,38 @@ class LocationsControllerTest < ActionController::TestCase
 
   test "should create location" do
     assert_difference('Location.count') do
-      post :create, location: { name: @location.name + 'test' }
+      post :create, params: { location: { name: @location.name + 'test' } }
     end
 
     assert_redirected_to location_path(assigns(:location))
   end
 
   test "should show location" do
-    get :show, id: @location
+    get :show, params: { id: @location }
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @location
+    get :edit, params: { id: @location }
     assert_response :success
   end
 
   test "should update location" do
-    patch :update, id: @location, location: { name: @location.name + 'test' }
+    patch :update, params: { id: @location, location: { name: @location.name + 'test' } }
     assert_redirected_to location_path(assigns(:location))
   end
 
   test "should destroy location" do
     assert_difference('Location.count', -1) do
-      delete :destroy, id: @location
+      delete :destroy, params: { id: @location }
     end
 
     assert_redirected_to locations_path
+  end
+  
+  test "staff user shouldn't be able to delete location" do
+    user = User.create!(email: 'test@example.com', staff: true, password: 'abcdef') 
+    ability = Ability.new(user)
+    assert ability.cannot? :delete, @location
   end
 end

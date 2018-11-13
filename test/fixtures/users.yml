@@ -1,9 +1,34 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
- email: one@test.com
- admin: true
+  email: one@test.com
+  admin: true
 
 two: 
   email: two@test.com
   admin: false
+
+three:
+  email: three@test.com
+  admin: false
+  staff: true
+  
+task_user:
+  email: task_user@test.com
+  admin: false
+  
+dashboard_user:
+  email: dashboard_user@test.com
+  admin: true
+
+survey_user:
+  email: survey_user@test.com
+  admin: true
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  surveymonkey_token: token
+  surveymonkey_uid: uid
+  
+non_survey_user:
+  email: non_survey_user@test.com
+  admin: true
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>

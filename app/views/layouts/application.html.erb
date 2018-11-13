@@ -9,6 +9,9 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.css" rel="stylesheet">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.min.js"></script>
+
     <%= csrf_meta_tags %>
   </head>
   <body>
@@ -26,11 +29,12 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <% if user_signed_in? %>
-            <% if current_user.admin? %>
+            <% if current_user.admin? or current_user.staff? %>
               <ul class="nav navbar-nav">
                 <li><%= link_to('Members', members_path) %></li>
                 <li><%= link_to('Events', network_events_path) %></li>
                 <li><%= link_to('Actions', network_actions_path) %></li>
+                <li><%= link_to('Tasks', tasks_path) %></li>
               </ul>
             <% end %>
             <ul class="nav navbar-nav navbar-right">
@@ -39,7 +43,7 @@
                   <%= current_user.email %> <span class="caret"></span>
                 </a>
                   <ul class="dropdown-menu">
-                    <% if current_user.admin? %>
+                    <% if current_user.admin? or current_user.staff? %>
                       <li><%= link_to('Cohorts', cohorts_path) %></li>
                       <li><%= link_to('Extracurricular Activities', extracurricular_activities_path) %></li>
                       <li><%= link_to('Graduating classes', graduating_classes_path) %></li>
@@ -47,7 +51,12 @@
                       <li><%= link_to('Neighborhoods', neighborhoods_path) %></li>
                       <li><%= link_to('Organizations', organizations_path) %></li>
                       <li><%= link_to('Programs', programs_path) %></li>
+                      <li><%= link_to('Projects', projects_path) %></li>
+                      <li><%= link_to('Reports', reports_path) %></li>
                       <li><%= link_to('Schools', schools_path) %></li>
+                      <% if current_user.surveymonkey? %>
+                        <li><%= link_to('Surveys', surveys_path) %></li>
+                      <% end %>
                       <li><%= link_to('Identities', identities_path) %></li>
                       <li><%= link_to('Talents', talents_path) %></li>
                       <li><%= link_to('Tasks', common_tasks_path) %></li>

@@ -1,5 +1,6 @@
 class Users::ConfirmationsController < Devise::ConfirmationsController
-  skip_filter :require_admin_user!
+  skip_before_action :require_admin_or_staff_user!
+  
   
   # GET /resource/confirmation/new
   # def new

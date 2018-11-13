@@ -13,5 +13,5 @@ pg.exec("UPDATE members SET identity_id=1 WHERE members.identity ='Student'")
 pg.exec("UPDATE members SET identity_id=2 WHERE members.identity ='Parent'")
 pg.exec("UPDATE members SET identity_id=3 WHERE members.identity ='Educator'")
 pg.exec("UPDATE members SET identity_id=4 WHERE members.identity ='Resident'")
-pg.exec("UPDATE members SET identity_id=5 WHERE members.identity ='Community\ Partner'")
+pg.exec("UPDATE members SET identity_id=5 WHERE members.identity ='Community Partner'")
 

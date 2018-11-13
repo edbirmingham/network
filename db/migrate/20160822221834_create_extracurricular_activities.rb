@@ -1,4 +1,4 @@
-class CreateExtracurricularActivities < ActiveRecord::Migration
+class CreateExtracurricularActivities < ActiveRecord::Migration[5.1]
   def change
     create_table :extracurricular_activities do |t|
       t.string :name

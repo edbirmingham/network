@@ -1,4 +1,4 @@
-class Identity < ActiveRecord::Base
+class Identity < ApplicationRecord
       validates :name, presence: true
       validates_uniqueness_of :name
       

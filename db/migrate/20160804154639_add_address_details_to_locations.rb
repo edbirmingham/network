@@ -1,4 +1,4 @@
-class AddAddressDetailsToLocations < ActiveRecord::Migration
+class AddAddressDetailsToLocations < ActiveRecord::Migration[5.1]
   def change
     add_column :locations, :address_one, :string
     add_column :locations, :address_two, :string

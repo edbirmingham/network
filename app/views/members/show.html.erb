@@ -7,7 +7,7 @@
     <span class="glyphicon glyphicon-pencil"></span>
     Edit
   <% end %>
-  <h1>Show member</h1>
+  <h1>Member profile</h1>
 </div>
 
 <dl class="dl-horizontal text-left">
@@ -17,48 +17,40 @@
   <dt>Last name:</dt>
   <dd><%= @member.last_name %></dd>
 
+  <dt>Identity:</dt>
+  <dd><%= @member.identity.try(:name) %></dd>
+  
+  <dt>Sex:</dt>
+  <dd><%= @member.sex %></dd>
+  
+  <dt>Race:</dt>
+  <dd><%= @member.race %></dd>
+  
+  <dt>Ethnicity:</dt>
+  <dd><%= @member.ethnicity %></dd>
+  
+  <dt>Date of Birth:</dt>
+  <% if @member.date_of_birth.present? %>
+    <dd><%= @member.try(:date_of_birth).strftime('%m/%d/%Y') %></dd>
+  <% else %>
+    <dd></dd>
+  <% end %>
+
   <dt>Phone:</dt>
   <dd><%= phone_to @member.phone %></dd>
 
   <dt>Email:</dt>
   <dd><%= mail_to @member.email %></dd>
 
-  <dt>Identity:</dt>
-  <dd><%= @member.identity.try(:name) %></dd>
+  <dt>Facebook Name:</dt>
+  <dd><%= @member.facebook_name %></dd>
   
-  <dt>Cohorts:</dt>
-  <% if @member.cohorts.present? %>
-    <%= content_tag_for(:dd, @member.cohorts) do |cohort| %>
-      <%= link_to cohort.name, cohort %>
-    <% end %>
-  <% else %>
-    <dd></dd>
-  <% end %>
+  <dt>Twitter Handle:</dt>
+  <dd><%= @member.twitter_handle %></dd>
   
-  <dt>Organizations:</dt>
-  <% if @member.organizations.present? %>
-    <%= content_tag_for(:dd, @member.organizations) do |organization| %>
-      <%= link_to organization.name, organization %>
-    <% end %>
-  <% else %>
-    <dd></dd>
-  <% end %>
-
-  <dt>School:</dt>
-  <dd><%= @member.school.try(:name) %></dd>
+  <dt>Instagram Handle:</dt>
+  <dd><%= @member.instagram_handle %></dd>
   
-  <dt>Graduation Class:</dt>
-  <dd><%= @member.graduation_year %></dd>
-  
-  <dt>Neighborhoods:</dt>
-  <% if @member.neighborhoods.present? %>
-    <%= content_tag_for(:dd, @member.neighborhoods) do |neighborhood| %>
-      <%= link_to neighborhood.name, neighborhood %>
-    <% end %>
-  <% else %>
-    <dd></dd>
-  <% end %>
-
   <dt>Address:</dt>
   <dd><%= @member.address %></dd>
 
@@ -70,13 +62,64 @@
 
   <dt>Zip code:</dt>
   <dd><%= @member.zip_code %></dd>
+</dl>
 
+<h1>Student profile</h1>
+<dl class="dl-horizontal text-left">
+  <dt>Cohorts:</dt>
+  <% if @member.cohorts.present? %>
+    <%= content_tag_for(:dd, @member.cohorts) do |cohort| %>
+      <%= link_to cohort.name, cohort %>
+    <% end %>
+  <% else %>
+    <dd></dd>
+  <% end %>
+  
+  <dt>School:</dt>
+  <dd><%= @member.school.try(:name) %></dd>
+  
+  <dt>Graduation Class:</dt>
+  <dd><%= @member.graduation_year %></dd>
+  
+  <dt>High School GPA:</dt>
+  <dd><%= @member.high_school_gpa %></dd>
+  
+  <dt>ACT Score:</dt>
+  <dd><%= @member.act_score %></dd>
+  
+  <dt>Relative Phone:</dt>
+  <dd><%= @member.relative_phone %></dd>
+  
+  <dt>Relative Email:</dt>
+  <dd><%= @member.relative_email %></dd>
+</dl>
+
+<h1>Networking profile</h1>
+<dl class="dl-horizontal text-left">
   <dt>Shirt size:</dt>
   <dd><%= @member.shirt_size %></dd>
 
   <dt>Shirt received:</dt>
   <dd><%= @member.shirt_received %></dd>
   
+  <dt>Organizations:</dt>
+  <% if @member.organizations.present? %>
+    <%= content_tag_for(:dd, @member.organizations) do |organization| %>
+      <%= link_to organization.name, organization %>
+    <% end %>
+  <% else %>
+    <dd></dd>
+  <% end %>
+
+  <dt>Neighborhoods:</dt>
+  <% if @member.neighborhoods.present? %>
+    <%= content_tag_for(:dd, @member.neighborhoods) do |neighborhood| %>
+      <%= link_to neighborhood.name, neighborhood %>
+    <% end %>
+  <% else %>
+    <dd></dd>
+  <% end %>
+
   <dt>Talents:</dt>
   <% if @member.talents.present? %>
     <%= content_tag_for(:dd, @member.talents) do |talent| %>
@@ -132,7 +175,9 @@
           <th>Contacted on</th> 
           <th></th>
           <th></th>
-          <th></th>
+          <% if can? :delete, Communication %>
+            <th></th>
+          <% end %>
         </tr>
       </thead>
 
@@ -143,7 +188,9 @@
           <td><%= communication.contacted_on %></td>
           <td><%= link_to 'Show', member_communication_path(@member, communication) %></td>
           <td><%= link_to 'Edit', edit_member_communication_path(@member, communication) %></td>
-          <td><%= link_to 'Destroy', member_communication_path(@member, communication), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% if can? :delete, Communication %>
+            <td><%= link_to 'Destroy', member_communication_path(@member, communication), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
         <% end %>
       </tbody>
     </table>

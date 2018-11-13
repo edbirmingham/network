@@ -2,12 +2,12 @@
 
 attendee:
   level: attendee
-  member_id: 1
-  network_event_id: 1
+  member: jane
+  network_event: tuggle_network
   user_id: 1
 
 volunteer:
   level: volunteer
-  member_id: 1
-  network_event_id: 1
+  member: martin
+  network_event: tuggle_network
   user_id: 1

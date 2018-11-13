@@ -12,10 +12,30 @@
 
 <dl class="dl-horizontal text-left">
   <dt>Event:</dt>
-  <dd><%= link_to @network_action.network_event.try(:name), @network_action.network_event %></dd>
+  <dd>
+    <% if @network_action.network_event.try(:name) %>
+      <%= link_to @network_action.network_event.try(:name), 
+          @network_action.network_event 
+      %>
+    <% else %>
+      No Event Yet
+    <% end %>  
+  </dd>
 
   <dt>Actor:</dt>
   <dd><%= link_to @network_action.actor.try(:name), @network_action.actor %></dd>
+
+  <dt>Owner:</dt>
+  <dd>
+    <% if @network_action.owner.try(:email) %>
+      <%= link_to @network_action.owner.try(:email), @network_action.owner %>
+    <% else %>
+      No Owner Yet
+    <% end %>
+  </dd>
+
+
+
 
   <dt>Type:</dt>
   <dd><%= @network_action.action_type %></dd>
@@ -34,5 +54,11 @@
 
   <dt>User:</dt>
   <dd><%= @network_action.user.try(:email) %></dd>
+  
+  <dt>Status:</dt>
+  <dd><%= @network_action.try(:status).titleize %></dd>
+
+  <dt>Priority:</dt>
+  <dd><%= @network_action.try(:priority).titleize %></dd>
 
 </dl>

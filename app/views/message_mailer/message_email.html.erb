@@ -1,0 +1,18 @@
+<p>
+  <%= sanitize(@body.html_safe,
+   tags: Rails.application.config.x.allowed_html_tags_in_email,
+   attributes: Rails.application.config.x.allowed_html_attributes_in_email) 
+  %>
+</p>
+<p>
+  Event Details:
+</p>
+<p>
+  <%= @network_event.name %>
+  <br>
+  <%= @network_event.program.try(:name) %>
+  <br>
+  <%= @network_event.location.try(:name) %>
+  <br>
+  <%= @network_event.scheduled_at.try(:strftime, '%B %-d, %Y at%l:%M%P') %>
+</p>

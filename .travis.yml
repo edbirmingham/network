@@ -1,9 +1,12 @@
 language: ruby
 rvm:
-  - 2.2
+  - 2.2.7
 env:
-  - RAILS_ENV=test
+  global:
+    - RAILS_ENV=test
+    - OTP_SECRET_ENCRYPTION_KEY=3b542e14a65f3e2615df211c377da2ed7b6d27ef7d6acf6d7717ec19fd192debaefde0ba2bf7cee41a3813b3da84268402b5773904c4d8ff5caba15b88bfacc0
 script:
   - bundle install
+  - cp config/database.yml.example config/database.yml
   - bundle exec rake db:test:prepare
   - bundle exec rake test

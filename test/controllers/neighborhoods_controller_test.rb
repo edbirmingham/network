@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class NeighborhoodsControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
-  
+  include Devise::Test::ControllerHelpers
+
   setup do
     @neighborhood = neighborhoods(:one)
     sign_in users(:one)
@@ -21,32 +21,38 @@ class NeighborhoodsControllerTest < ActionController::TestCase
 
   test "should create neighborhood" do
     assert_difference('Neighborhood.count') do
-      post :create, neighborhood: { name: @neighborhood.name + 'test' }
+      post :create, params: { neighborhood: { name: @neighborhood.name + 'test' } }
     end
 
     assert_redirected_to neighborhood_path(assigns(:neighborhood))
   end
 
   test "should show neighborhood" do
-    get :show, id: @neighborhood
+    get :show, params: { id: @neighborhood }
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @neighborhood
+    get :edit, params: { id: @neighborhood }
     assert_response :success
   end
 
   test "should update neighborhood" do
-    patch :update, id: @neighborhood, neighborhood: { name: @neighborhood.name + 'test'}
+    patch :update, params: { id: @neighborhood, neighborhood: { name: @neighborhood.name + 'test'} }
     assert_redirected_to neighborhood_path(assigns(:neighborhood))
   end
 
   test "should destroy neighborhood" do
     assert_difference('Neighborhood.count', -1) do
-      delete :destroy, id: @neighborhood
+      delete :destroy, params: { id: @neighborhood }
     end
 
     assert_redirected_to neighborhoods_path
+  end
+  
+  test "staff user shouldn't be able to delete neighborhood" do
+    user = User.create!(email: 'test@example.com', staff: true, password: 'abcdef') 
+    ability = Ability.new(user)
+    assert ability.cannot? :delete, @neighborhood
   end
 end

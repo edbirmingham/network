@@ -38,6 +38,20 @@
     </div>
     <div class="form-group">
       <div class="col-md-12">
+        <%= select_tag :common_task_ids, 
+              options_from_collection_for_select(
+                CommonTask.order(:name).all, 
+                :id, 
+                :name,
+                params[:common_task_ids]
+              ),
+              class: "select2 form-control", 
+              multiple: true, 
+              data: { placeholder: 'Filter by uncompleted tasks' }  %>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-12">
         <%= select_tag :program_ids, 
               options_from_collection_for_select(
                 Program.order(:name).all, 
@@ -82,7 +96,7 @@
       <div class="col-md-12">
         <%= select_tag :cohort_ids, 
               options_from_collection_for_select(
-                Cohort.order(:name).all, 
+                Cohort.active_cohorts, 
                 :id, 
                 :name,
                 params[:cohort_ids]
@@ -108,7 +122,7 @@
     </div>
     <div class="form-group">
       <div class="col-md-12">
-        <%= submit_tag "Filter events", class: "btn btn-secondary"%>
+        <%= submit_tag "Filter events", class: "btn btn-primary" %>
       </div>
     </div>
   </div>
@@ -135,45 +149,58 @@
 <% end %>
 
 </div>
-
-<div class="table-responsive">
-  <table class="table table-striped table-bordered table-hover">
-    <thead>
-      <tr>
-        <th><%= sortable "name"%></th>
-        <th><%= sortable "status"%></th>
-        <th><%= sortable "program"%></th>
-        <th><%= sortable "location"%></th>
-        <th>Organization(s)</th>
-        <th>Volunteer(s)</th>
-        <th><%= sortable "scheduled_at", "Scheduled at"%></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <%= content_tag_for(:tr, @network_events) do |network_event| %>
-        <td><%= network_event.name %></td>
-        <td><%= network_event.status.try(:titleize) %></td>
-        <td><%= network_event.program.try(:name) %></td>
-        <td><%= network_event.location.try(:name) %></td>
-        <td><%= network_event.organizations.map(&:name).join(', ') %></td>
-        <td><%= network_event.volunteers.map(&:name).join(', ') %></td>
-        <td><%= network_event.scheduled_at.try(:to_formatted_s, :long)%></td>
-        <td><%= link_to 'Show', network_event %></td>
-        <td><%= link_to 'Edit', edit_network_event_path(network_event) %></td>
-        <td><%= link_to 'Destroy', network_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= button_tag "Copy", data: {"clipboard-text" => clip_event_info(network_event), "toggle" => "tooltip", "placement" => "right"}, :title => clip_event_info(network_event), :class =>'copy_button btn btn-primary'%></td>
-      <% end %>
-    </tbody>
-  </table>
-  <%= paginate @network_events %>
+<%= form_tag(new_network_event_path, method: "get") do %>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Select</th>
+          <th><%= sortable "name"%></th>
+          <th><%= sortable "status"%></th>
+          <th><%= sortable "program"%></th>
+          <th><%= sortable "location"%></th>
+          <th>Organization(s)</th>
+          <th>Volunteer(s)</th>
+          <th>Participant count</th>
+          <th><%= sortable "scheduled_at", "Scheduled at"%></th>
+          <th></th>
+          <th></th>
+          <% if can? :destroy, NetworkEvent %> 
+            <th></th>
+          <% end %>
+          <th></th>
+        </tr>
+      </thead>
   
-  <%= link_to network_events_path({format: :csv}.merge(download_query_params)), class: 'btn btn-primary' do %>
-    <span class="glyphicon glyphicon-save"></span>
-    Download
-  <% end %>
-</div>
+      <tbody>
+        <%= content_tag_for(:tr, @network_events) do |network_event| %>
+          <td><%= check_box_tag "network_event_ids[]", network_event.id %></td>
+          <td><a class="event-name" data-url="network_events/<%= network_event.id %>"><%= network_event.name %></a></td>
+          <td><%= network_event.status.try(:titleize) %></td>
+          <td><%= network_event.program.try(:name) %></td>
+          <td><%= network_event.location.try(:name) %></td>
+          <td><%= network_event.organizations.map(&:name).join(', ') %></td>
+          <td><%= network_event.volunteers.map(&:name).join(', ') %></td>
+          <td><%= network_event.participants.count %></td>
+          <td><%= network_event.scheduled_at.try(:to_formatted_s, :long)%></td>
+          <td><%= link_to 'Show', network_event %></td>
+          <td><%= link_to 'Edit', edit_network_event_path(network_event) %></td>
+          <% if can? :destroy, network_event %> 
+            <td>
+              <%= link_to 'Destroy', network_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <% end %>
+            <td><%= button_tag "Clip", type: 'button', data: {"clipboard-text" => clip_event_info(network_event), "toggle" => "tooltip", "placement" => "right"}, :title => clip_event_info(network_event), :class =>'clip_button btn btn-primary'%></td>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate @network_events %>
+    
+    <%= submit_tag "Copy Events", class: 'btn btn-primary' do %>
+      <span class="glyphicon glyphicon-plus"></span>
+    <% end %>
+    <%= link_to network_events_path({format: :csv}.merge(network_events_download_query_params)), class: 'btn btn-primary' do %>
+      <span class="glyphicon glyphicon-save"></span>
+      Download
+    <% end %>
+  </div>
+ <% end %> 

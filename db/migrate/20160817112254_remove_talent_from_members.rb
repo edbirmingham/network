@@ -1,4 +1,4 @@
-class RemoveTalentFromMembers < ActiveRecord::Migration
+class RemoveTalentFromMembers < ActiveRecord::Migration[5.1]
   def change
     remove_column :members, :talent
   end

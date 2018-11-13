@@ -5,7 +5,6 @@ one:
   last_name: MyString
   phone: MyString
   email: MyString
-  identity: MyString
   address: MyString
   city: MyString
   state: MyString
@@ -18,14 +17,25 @@ one:
   extra_groups: MyString
   other_networks: MyString
   user: one
+  school: carver
   graduating_class: class_of_2016
+  identity: student
+  high_school_gpa: 4.0
+  act_score: 25
+  relative_phone: 2056687777
+  relative_email: relative@example.com
+  facebook_name: facebookname
+  twitter_handle: twitterhandle
+  instagram_handle: instagramhandle
+  sex: Female
+  race: Black or African American
+  ethnicity: Hispanic or Latino or Spanish Origin
 
 two:
   first_name: MyString
   last_name: MyString
   phone: MyString
   email: MyString
-  identity: MyString
   address: MyString
   city: MyString
   state: MyString
@@ -38,37 +48,160 @@ two:
   extra_groups: MyString
   other_networks: MyString
   user: two
+  school: carver
   graduating_class: class_of_2017
+  identity: two
+  high_school_gpa: 4.0
+  act_score: 25
+  relative_phone: 2056687777
+  relative_email: relative@example.com
+  facebook_name: facebookname
+  twitter_handle: twitterhandle
+  instagram_handle: instagramhandle
+  sex: Female
+  race: Black or African American
+  ethnicity: Hispanic or Latino or Spanish Origin
+
+three:
+  first_name: MyString
+  last_name: MyString
+  phone: MyString
+  email: MyString
+  address: MyString
+  city: MyString
+  state: MyString
+  zip_code: MyString
+  shirt_size: MyString
+  shirt_received: false
+  place_of_worship: MyString
+  recruitment: MyString
+  community_networks: MyString
+  extra_groups: MyString
+  other_networks: MyString
+  user: three
+  school: tuggle
+  graduating_class: class_of_2017
+  high_school_gpa: 4.0
+  act_score: 25
+  relative_phone: 2056687777
+  relative_email: relative@example.com
+  facebook_name: facebookname
+  twitter_handle: twitterhandle
+  instagram_handle: instagramhandle
+  sex: Female
+  race: Black or African American
+  ethnicity: Hispanic or Latino or Spanish Origin
 
 jane:
   first_name: Jane
   last_name: Doe
-  
+  high_school_gpa: 4.0
+  act_score: 25
+  relative_phone: 2056687777
+  relative_email: relative@example.com
+  facebook_name: facebookname
+  twitter_handle: twitterhandle
+  instagram_handle: instagramhandle
+  sex: Female
+  race: Black or African American
+  ethnicity: Hispanic or Latino or Spanish Origin
+
 john:
   first_name: John
   last_name: Smith
-  
+  high_school_gpa: 4.0
+  act_score: 25
+  relative_phone: 2056687777
+  relative_email: relative@example.com
+  facebook_name: facebookname
+  twitter_handle: twitterhandle
+  instagram_handle: instagramhandle
+  sex: Male
+  race: Black or African American
+  ethnicity: Hispanic or Latino or Spanish Origin
+
 martin:
   first_name: Martin
   last_name: King
-  
+  graduating_class: class_of_2017
+  high_school_gpa: 4.0
+  act_score: 25
+  relative_phone: 2056687777
+  relative_email: relative@example.com
+  facebook_name: facebookname
+  twitter_handle: twitterhandle
+  instagram_handle: instagramhandle
+  sex: Male
+  race: Black or African American
+  ethnicity: Hispanic or Latino or Spanish Origin
+
 george:
   first_name: George
   last_name: Carver
-  
+  high_school_gpa: 4.0
+  act_score: 25
+  relative_phone: 2056687777
+  relative_email: relative@example.com
+  facebook_name: facebookname
+  twitter_handle: twitterhandle
+  instagram_handle: instagramhandle
+  sex: Male
+  race: Black or African American
+  ethnicity: Hispanic or Latino or Spanish Origin
+
 rosa:
   first_name: Rosa
   last_name: Parks
-  
+  high_school_gpa: 4.0
+  act_score: 25
+  relative_phone: 2056687777
+  relative_email: relative@example.com
+  facebook_name: facebookname
+  twitter_handle: twitterhandle
+  instagram_handle: instagramhandle
+  sex: Female
+  race: Black or African American
+  ethnicity: Hispanic or Latino or Spanish Origin
+
 carrie:
   first_name: Carrie
   last_name: Tuggle
-  
+  high_school_gpa: 4.0
+  act_score: 25
+  relative_phone: 2056687777
+  relative_email: relative@example.com
+  facebook_name: facebookname
+  twitter_handle: twitterhandle
+  instagram_handle: instagramhandle
+  sex: Female
+  race: Black or African American
+  ethnicity: Hispanic or Latino or Spanish Origin
+
 ossie:
   first_name: Ossie
   last_name: Mitchell
-  
+  high_school_gpa: 4.0
+  act_score: 25
+  relative_phone: 2056687777
+  relative_email: relative@example.com
+  facebook_name: facebookname
+  twitter_handle: twitterhandle
+  instagram_handle: instagramhandle
+  sex: Female
+  race: Black or African American
+  ethnicity: Hispanic or Latino or Spanish Origin
+
 malachi:
   first_name: Malachi
   last_name: Wilkerson
-  
+  email: malachi.wikerson@email.local
+  high_school_gpa: 4.0
+  act_score: 25
+  relative_phone: 2056687777
+  relative_email: relative@example.com
+  facebook_name: facebookname
+  twitter_handle: twitterhandle
+  instagram_handle: instagramhandle
+  sex: Male
+  race: Black or African American
+  ethnicity: Hispanic or Latino or Spanish Origin

@@ -1,10 +1,10 @@
 require 'test_helper'
 
 class IdentitiesControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
-  
+  include Devise::Test::ControllerHelpers
+
   setup do
-    @identity = identities(:one)
+    @identity = identities(:student)
     sign_in users(:one)
   end
 
@@ -21,32 +21,38 @@ class IdentitiesControllerTest < ActionController::TestCase
 
   test "should create identity" do
     assert_difference('Identity.count') do
-      post :create, identity: { name: @identity.name + 'test' }
+      post :create, params: { identity: { name: @identity.name + 'test' } }
     end
 
     assert_redirected_to identity_path(assigns(:identity))
   end
 
   test "should show identity" do
-    get :show, id: @identity
+    get :show, params: { id: @identity }
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @identity
+    get :edit, params: { id: @identity }
     assert_response :success
   end
 
   test "should update identity" do
-    patch :update, id: @identity, identity: { name: @identity.name + 'test' }
+    patch :update, params: { id: @identity, identity: { name: @identity.name + 'test' } }
     assert_redirected_to identity_path(assigns(:identity))
   end
 
   test "should destroy identity" do
     assert_difference('Identity.count', -1) do
-      delete :destroy, id: @identity
+      delete :destroy, params: { id: @identity }
     end
 
     assert_redirected_to identities_path
+  end
+  
+  test "staff user shouldn't be able to delete identity" do
+    user = User.create!(email: 'test@example.com', staff: true, password: 'abcdef') 
+    ability = Ability.new(user)
+    assert ability.cannot? :delete, @identity
   end
 end

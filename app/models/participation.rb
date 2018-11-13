@@ -1,10 +1,12 @@
 # Particiption links members and events to track participation levels
-class Participation < ActiveRecord::Base
+class Participation < ApplicationRecord
   belongs_to :user
   belongs_to :member
   belongs_to :network_event
 
   validates :level, presence: true
+
+  scope :attendee, -> { where level: 'attendee' }
 
   def attendee?
     level == 'attendee'

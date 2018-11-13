@@ -13,7 +13,9 @@
             <th>Year</th>
             <th></th>
         <th></th>
+       <% if can? :delete, GraduatingClass %> 
         <th></th>
+      <% end %>
       </tr>
     </thead>
 
@@ -22,7 +24,9 @@
             <td><%= graduating_class.year %></td>
             <td><%= link_to 'Show', graduating_class %></td>
         <td><%= link_to 'Edit', edit_graduating_class_path(graduating_class) %></td>
-        <td><%= link_to 'Destroy', graduating_class, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+         <% if can? :delete, GraduatingClass %> 
+          <td><%= link_to 'Destroy', graduating_class, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       <% end %>
     </tbody>
   </table>

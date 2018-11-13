@@ -1,4 +1,4 @@
-class CreateCohortAssignments < ActiveRecord::Migration
+class CreateCohortAssignments < ActiveRecord::Migration[5.1]
   def change
     create_table :cohort_assignments do |t|
       t.integer :network_event_id

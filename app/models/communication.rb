@@ -1,12 +1,14 @@
-class Communication < ActiveRecord::Base
+class Communication < ApplicationRecord
   belongs_to :member
   belongs_to :user
   
   def self.kinds 
     %w{
+      Call
       Email 
-      Thank\ You\ Note
       Fundraising\ Request 
+      Text
+      Thank\ You\ Note
     }
   end
 end

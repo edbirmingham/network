@@ -1,4 +1,4 @@
-class CreateSchoolAssignments < ActiveRecord::Migration
+class CreateSchoolAssignments < ActiveRecord::Migration[5.1]
   def change
     create_table :school_assignments do |t|
       t.integer :network_event_id

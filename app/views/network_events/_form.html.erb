@@ -12,21 +12,26 @@
     </div>
   <% end %>
 
+  <% if copy_network_events? %>
+    <% params[:network_event_ids].each do |network_event_id| %>
+      <%= hidden_field_tag "network_event_ids[]", network_event_id %>
+    <% end %>
+  <% end %>
   <div class="form-group">
     <%= f.label :name, class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.text_field :name, class: "form-control" %>
+      <%= f.text_field :name, class: "form-control", disabled: copy_network_events? %>
     </div>
   </div>
   <% if @network_event.persisted? %>
     <div class="form-group">
       <%= f.label :status, class: "col-sm-2 control-label" %>
       <div class="col-sm-10">
-        <%= f.collection_select :status, 
-              NetworkEvent.statuses, 
-              :to_s, 
-              :titleize, 
-              {}, 
+        <%= f.collection_select :status,
+              NetworkEvent.statuses,
+              :to_s,
+              :titleize,
+              { include_blank: true },
               class: "select2 form-control" %>
       </div>
     </div>
@@ -34,114 +39,129 @@
   <div class="form-group">
     <%= f.label :program_id, class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.collection_select :program_id, 
-            Program.order(:name).all, 
-            :id, 
-            :name, 
-            {}, 
-            class: "select2 form-control" %>
+      <%= f.collection_select :program_id,
+            Program.order(:name).all,
+            :id,
+            :name,
+            { include_blank: true },
+            class: "select2 form-control",
+            data: { placeholder: 'Find Program' } %>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :location_id, class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.collection_select :location_id, 
-            Location.order(:name).all, 
-            :id, 
-            :name, 
-            {}, 
-            class: "select2 form-control" %>
+      <%= f.collection_select :location_id,
+            Location.order(:name).all,
+            :id,
+            :name,
+            { include_blank: true },
+            class: "select2 form-control",
+            data: { placeholder: 'Find Location' } %>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :organization_ids, 'Organizations', class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.collection_select :organization_ids, 
-            Organization.order(:name).all, 
-            :id, 
-            :name, 
-            {}, 
+      <%= f.collection_select :organization_ids,
+            Organization.order(:name).all,
+            :id,
+            :name,
+            {},
             class: "select2 form-control",
-            multiple: true, 
+            multiple: true,
             data: { placeholder: 'Find Organizations' }  %>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :site_contact_ids, 'Site Contacts', class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.collection_select :site_contact_ids, 
-            @network_event.site_contacts, 
-            :id, 
-            :text, 
-            {}, 
-            class: "select2 ajax form-control", 
-            multiple: true, 
+      <%= f.collection_select :site_contact_ids,
+            @network_event.site_contacts,
+            :id,
+            :text,
+            {},
+            class: "select2 ajax form-control",
+            multiple: true,
             data: { ajax: { url: members_path }, placeholder: 'Find Site Contacts' }  %>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :school_contact_ids, 'School Contacts', class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.collection_select :school_contact_ids, 
-            @network_event.school_contacts, 
-            :id, 
-            :text, 
-            {}, 
-            class: "select2 ajax form-control", 
-            multiple: true, 
+      <%= f.collection_select :school_contact_ids,
+            @network_event.school_contacts,
+            :id,
+            :text,
+            {},
+            class: "select2 ajax form-control",
+            multiple: true,
             data: { ajax: { url: members_path }, placeholder: 'Find School Contacts' }  %>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :volunteer_ids, 'Volunteers', class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.collection_select :volunteer_ids, 
-            @network_event.volunteers, 
-            :id, 
-            :text, 
-            {}, 
-            class: "select2 ajax form-control", 
-            multiple: true, 
+      <%= f.collection_select :volunteer_ids,
+            @network_event.volunteers,
+            :id,
+            :text,
+            {},
+            class: "select2 ajax form-control",
+            multiple: true,
             data: { ajax: { url: members_path }, placeholder: 'Find Volunteers' }  %>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :school_ids, 'Schools', class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.collection_select :school_ids, 
-            School.order(:name).all, 
-            :id, 
-            :name, 
-            {}, 
-            class: "select2 form-control", 
-            multiple: true, 
+      <%= f.collection_select :school_ids,
+            School.order(:name).all,
+            :id,
+            :name,
+            {},
+            class: "select2 form-control",
+            multiple: true,
             data: { placeholder: 'Find Schools' }  %>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :graduating_class_ids, 'Graduating Classes', class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.collection_select :graduating_class_ids, 
-            GraduatingClass.order(:year).all, 
-            :id, 
-            :name, 
-            {}, 
-            class: "select2 form-control", 
-            multiple: true, 
+      <%= f.collection_select :graduating_class_ids,
+            GraduatingClass.order(:year).all,
+            :id,
+            :name,
+            {},
+            class: "select2 form-control",
+            multiple: true,
             data: { placeholder: 'Find Graduating Classes' }  %>
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :cohort_ids, 'Cohorts', class: "col-sm-2 control-label" %>
+    <%= f.label :attendance_cohort_ids, 'Attendance Cohorts', class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.collection_select :cohort_ids, 
-            Cohort.order(:name).all, 
-            :id, 
-            :name, 
-            {}, 
-            class: "select2 form-control", 
-            multiple: true, 
-            data: { placeholder: 'Find Cohorts' }  %>
+      <%= f.collection_select :attendance_cohort_ids,
+            Cohort.active_cohorts,
+            :id,
+            :name,
+            {},
+            class: "select2 form-control",
+            multiple: true,
+            data: { placeholder: 'Find Attendance Cohorts' }  %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :cohort_ids, 'Cohorts Served', class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.collection_select :cohort_ids,
+            Cohort.active_cohorts,
+            :id,
+            :name,
+            {},
+            class: "select2 form-control",
+            multiple: true,
+            data: { placeholder: 'Find Cohorts Served' }  %>
     </div>
   </div>
   <div class="form-group">
@@ -162,9 +182,13 @@
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :needs_transport, 'Transportation Needed',  class: "col-sm-2 control-label" %>
+    <%= f.label :needs_transport, 'Transportation Needed', class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.check_box :needs_transport, class: "form-control"%>
+      <%= f.select :needs_transport,
+            [["Yes", true], ["No", false]],
+            { include_blank: " " },
+            class: "select2 form-control",
+            data: { placeholder: 'Transportation Needed?' }  %>
     </div>
   </div>
   <div class="form-group" id='order_div'>
@@ -178,36 +202,66 @@
       </div>
       </div>
     </div>
-  <% if @network_event.new_record?%>
-    <div class="form-group">
-      <%= f.label :network_event_tasks, "Task List", class: "col-sm-2 control-label" %>
-      <div class="col-md-10">
-        <%= f.fields_for :network_event_tasks do |event_task| %>
-          <div class="form-group row">
-            <div class="col-md-11">
-            <%= event_task.text_field :name, :disabled => true, class: "form-control task-field" %>
-            <%= event_task.hidden_field :common_task_id , :disabled => true, class: "task-field" %>
-          </div>
-          <div class="col-md-1">
-            <%= check_box_tag "task_present", "0", false, class: "form-control task-chk" %>
-          </div>
-          </div>
-        <% end %>
-        </div>
-    </div>
-  <% end %>
   <div class="form-group">
     <%= f.label :notes, class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.text_area :notes, class: "form-control" %>
+      <%= f.text_area :notes, class: "form-control", disabled: copy_network_events? %>
     </div>
   </div>
+  <% if @network_event.new_record? && !copy_network_events? %>
+    <div class="form-group">
+      <%= f.label :tasks, "Task List", class: "col-sm-2 control-label" %>
+      <div class="col-sm-10">
+        <div class="row">
+          <div class="col-sm-4">
+            <h5>Tasks</h5>
+          </div>
+          <div class="col-sm-4">
+            <h5>Due Date</h5>
+          </div>
+          <div class="col-sm-3">
+            <h5>Owner</h5>
+          </div>
+        </div>
+        <%= f.fields_for :tasks do |event_task| %>
+          <div class="row">
+            <div class="col-sm-4">
+              <%= event_task.text_field :name, disabled: true, class: "form-control task-field" %>
+            </div>
+            <div class="col-sm-4">
+                <%= event_task.collection_select :date_modifier,
+                      CommonTask.date_modifiers,
+                      :to_s,
+                      :titleize,
+                      {},
+                      class: "select2 form-control task-field",
+                      multiple: false,
+                      disabled: true,
+                      data: {placeholder: 'Select Date Modifier'} %>
+            </div>
+            <div class="col-md-3">
+              <%= event_task.collection_select :owner_id, User.all, :id, :email, {:include_blank => "No owner selected"}, class: "select2 form-control task-field", disabled: true %>
+            </div>
+              <%= event_task.hidden_field :common_task_id , disabled: true, class: "task-field" %>
+            <div class="col-sm-1">
+              <%= check_box_tag "task_present", "0", false, class: "form-control task-chk" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <%= f.submit event_button_name(f.object), class: "btn btn-primary" %>
-      <% if controller.action_name == 'new' %>
-        <%= f.submit "Save & Create Another", class: "btn btn-primary" %>
-      <%end%>
+      <% if copy_network_events? %>
+        <%= f.submit "Copy Event(s)", class: "btn btn-primary" %>
+        <%= f.submit "Save & Copy More", class: "btn btn-primary" %>
+      <% else %>
+        <%= f.submit event_button_name(f.object), class: "btn btn-primary" %>
+        <% if controller.action_name == 'new' %>
+          <%= f.submit "Save & Create Another", class: "btn btn-primary" %>
+        <%end%>
+      <% end %>
     </div>
   </div>
 <% end %>

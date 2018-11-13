@@ -1,12 +1,20 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  skip_filter :require_admin_user!
-  
+  skip_before_action :require_admin_or_staff_user!
+
   # You should configure your model like this:
   # devise :omniauthable, omniauth_providers: [:twitter]
 
   # You should also create an action method in this controller like this:
   # def twitter
   # end
+
+  def surveymonkey
+    current_user.surveymonkey_token = request.env["omniauth.auth"].credentials.token
+    current_user.surveymonkey_uid =  request.env["omniauth.auth"].uid
+    current_user.save
+    
+    redirect_to edit_user_registration_path
+  end
 
   # More info at:
   # https://github.com/plataformatec/devise#omniauth

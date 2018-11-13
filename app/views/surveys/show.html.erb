@@ -1,0 +1,51 @@
+<div class="page-header">
+  <%= link_to surveys_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <h1>Show survey</h1>
+</div>
+
+<dl class="dl-horizontal text-left">
+  <dt>Title:</dt>
+  <dd><%= @survey[:title] %></dd>
+  
+  <dt>Response Count:</dt> 
+  <dd><%= @survey[:response_count] %></dd>
+  
+  <dt>Created:</dt> 
+  <dd><%= @survey[:date_created] %></dd>
+  
+  <dt>Modified:</dt> 
+  <dd><%= @survey[:date_modified] %></dd>
+  
+</dl>
+
+<h2>Recipients</h2>
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @recipients.each do |recipient| %>
+        <tr>
+          <td><%= recipient_name(recipient) %></td>
+          <td><%= recipient[:email] %></td>
+          <td><%= recipient[:survey_response_status].humanize %></td>
+          <td>
+            <% if recipient[:survey_response_status] == 'not_responded' %>
+              <%= link_to 'Fill out', recipient[:survey_link], target: '_blank' %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

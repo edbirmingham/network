@@ -13,7 +13,9 @@
             <th>Name</th>
             <th></th>
         <th></th>
-        <th></th>
+        <% if can? :delete, ExtracurricularActivity %>
+          <th></th>
+        <% end %>
       </tr>
     </thead>
 
@@ -22,7 +24,9 @@
             <td><%= extracurricular_activity.name %></td>
             <td><%= link_to 'Show', extracurricular_activity %></td>
         <td><%= link_to 'Edit', edit_extracurricular_activity_path(extracurricular_activity) %></td>
-        <td><%= link_to 'Destroy', extracurricular_activity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if can? :delete, ExtracurricularActivity %>
+          <td><%= link_to 'Destroy', extracurricular_activity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       <% end %>
     </tbody>
   </table>

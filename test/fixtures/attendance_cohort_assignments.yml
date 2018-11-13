@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+tuggle_purple:
+  network_event: tuggle_network
+  cohort: purple
+  user: one
+
+tuggle_green:
+  network_event: tuggle_network
+  cohort: green
+  user: one
+
+carver_red:
+  network_event: carver_tour
+  cohort: red
+  user: one
+  
+carver_blue:
+  network_event: carver_tour
+  cohort: blue
+  user: one

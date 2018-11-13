@@ -1,0 +1,40 @@
+<div class="page-header">
+  <h1>Attendees By Program</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th></th>
+        <th>School Year</th>
+        <th>Program</th>
+        <th>Total Attendees</th>
+        <th>Unique Attendees</th>
+        <th>Average Attendance</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @rows) do |row| %>
+        <td></td>
+        <td><%= row.school_year %></td>
+        <td><%= row.name_of_program %></td>
+        <td><%= row.total_attendees %></td>
+        <td><%= row.unique_attendees %></td>
+        <td><%= row.average_attendance %></td>
+      <% end %>
+    </tbody>
+
+    <tfoot>
+      <tr>
+        <th>Total</th>
+        <th></th>
+        <th></th>
+        <th><%= @total_attendees %></th>
+        <th><%= @total_unique_attendees %></th>
+        <th><%= @average_attendance.to_s(:rounded, precision: 1) %></th>
+      </tr>
+    </tfoot>
+  </table>
+</div>

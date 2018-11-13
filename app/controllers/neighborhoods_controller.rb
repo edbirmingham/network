@@ -1,5 +1,6 @@
 class NeighborhoodsController < ApplicationController
   before_action :set_neighborhood, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /neighborhoods
   # GET /neighborhoods.json

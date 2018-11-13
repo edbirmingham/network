@@ -1,11 +1,12 @@
 class NetworkActionsController < ApplicationController
   before_action :set_network_action, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /network_actions
   # GET /network_actions.json
   # GET /network_actions.csv
   def index
-    @network_actions = NetworkAction.all
+    @network_actions = filtered_network_actions
   end
 
   # GET /network_actions/1
@@ -62,15 +63,34 @@ class NetworkActionsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_network_action
-      @network_action = NetworkAction.find(params[:id])
+  
+  def filtered_network_actions
+    network_actions = NetworkAction.
+      includes(:owner, :actor)
+    
+    # Filter tasks by owner
+    if params[:owner_ids].present?
+      network_actions = network_actions.
+        where(:owner_id => params[:owner_ids])
     end
+    
+    if params[:actor_ids].present?
+      network_actions = network_actions.
+        where(:actor_id => params[:actor_ids])
+    end
+    
+    network_actions
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def network_action_params
-      params.require(:network_action).permit(:actor_id, :network_event_id, :action_type, :description, :member_ids => [])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_network_action
+    @network_action = NetworkAction.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def network_action_params
+    params.require(:network_action).permit(:actor_id, :owner_id, :status, :priority, :network_event_id, :action_type, :description, :member_ids => [])
+  end
 end

@@ -8,12 +8,23 @@ tuggle_network:
   notes: notes_1
   status: confirmed
   user: one
+  needs_transport: false
+  transport_ordered_on: 2016-08-01 02:00:00
 
 carver_tour:
   name: Carver UAB Tour
   program: college_101
   location: uab
   scheduled_at: 2016-08-01 02:00:00
+  notes: notes_2
+  status: completed
+  user: two
+
+jo_tour:
+  name: Jackson Olin UAB Tour
+  program: college_101
+  location: uab
+  scheduled_at: 2016-06-01 02:00:00
   notes: notes_2
   status: completed
   user: two
@@ -25,3 +36,10 @@ dateless_event:
   notes: notes_1
   status: confirmed
   user: one
+
+dashboard_event:
+  name: MyString
+  program: college_101
+  location: tuggle
+  status: confirmed
+  user: dashboard_user

@@ -17,4 +17,53 @@
   <dt>Creator:</dt>
   <dd><%= @cohort.user.try(:email) %></dd>
 
+  <dt>Status:</dt>
+  <dd>
+    <span id="cohort_status_label"><%= @cohort.active ? 'Active' : 'Deactive' %></span>
+    <%= button_tag @cohort.active ? 'Deactivate' : 'Activate' , class: 'btn btn-default', id: 'toggle_cohort_status' %>
+    <%= hidden_field_tag :cohort_status, @cohort.active %>
+  </dd>
+
 </dl>
+
+<h2>Members</h2>
+
+<%= form_tag(cohortians_path) do %>
+  <%= hidden_field_tag :cohort_id, @cohort.id %>
+  <div class="container">
+    <div class="input-group">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="submit" name="commit">Add Members</button>
+        </span>
+        <%= select_tag :member_ids,
+              [],
+              class: "select2 ajax form-control",
+              multiple: true,
+              data: { ajax: { url: members_path(include: 'cohorts') }, placeholder: 'Find members to add' }  %>
+    </div>
+  </div>
+<% end %>
+
+<hr>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Identity</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @cohort.cohortians.joins(:member).includes(:member).merge(Member.order(:last_name, :first_name))) do |cohortian| %>
+        <td><%= link_to cohortian.member.name, cohortian.member %></td>
+        <td><%= cohortian.member.email %></td>
+        <td><%= cohortian.member.phone %></td>
+        <td><%= cohortian.member.identity.try(:name) %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>

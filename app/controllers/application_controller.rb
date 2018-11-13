@@ -4,12 +4,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   before_action :authenticate_user!
-  before_action :require_admin_user!
+  before_action :require_admin_or_staff_user!
   
   protected
   
-  def require_admin_user!
-    unless current_user.admin?
+  def require_admin_or_staff_user!
+    unless current_user.admin? or current_user.staff? or controller_name == 'dashboards'
       redirect_to root_path
     end
   end

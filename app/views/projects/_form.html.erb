@@ -1,0 +1,86 @@
+<%= form_for(@project, html: { class: "form-horizontal", role: "form" }) do |f| %>
+  <% if @project.errors.any? %>
+    <div class="alert alert-danger alert-dismissable" role="alert">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <h4><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h4>
+
+      <ul>
+      <% @project.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_area :description, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :owner, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.collection_select :owner_id, User.all, :id, :email, {:include_blank => "No owner selected"}, class: "select2 form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :due_date, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <div class='input-group date js-proj-form' >
+          <input type='text' class="form-control" id="proj-due-date" name="project[due_date]"/>
+          <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+      </div>
+    </div>
+  </div>
+  <% if @project.new_record? %>
+    <h4>Tasks</h4>
+    <%= f.fields_for :tasks do |task| %>
+        <div class="form-group input-form">
+          <div class="row">
+            <div class="col-sm-offset-2 col-sm-4">
+              <%= task.text_field :name, disabled: true, class: "form-control js-proj-task-form js-task-name" %>
+            </div>
+            <div class='col-sm-4'>
+              <div class="form-group">
+                <%= task.collection_select :date_modifier,
+                      CommonTask.date_modifiers,
+                      :to_s,
+                      :titleize,
+                      {},
+                      class: "select2 form-control task-field js-proj-task-form",
+                      multiple: false,
+                      disabled: true,
+                      data: {placeholder: 'Select Date Modifier'} %>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-offset-2 col-sm-4">
+              <%= task.collection_select :owner_id, User.all, :id, :email, {:include_blank => "No owner selected"}, class: "select2 form-control js-proj-task-form proj-task-owner", disabled: true %>
+            </div>
+            <div class="col-sm-4">
+              <%= task.collection_select :common_task_id, CommonTask.all, :id, :name, {:include_blank => "No common task selected"}, class: "select2 common form-control js-proj-task-form", disabled: true %>
+            </div>
+            <div class="col-sm-1">
+              <%= check_box_tag "task_present", "0", false, class: "form-control unlock-task" %>
+            </div>
+          </div>
+          <br>
+        </div>
+    <% end %>
+  <% end %>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>

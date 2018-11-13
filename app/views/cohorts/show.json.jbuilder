@@ -1,1 +1,1 @@
-json.extract! @cohort, :id, :name, :created_at, :updated_at
+json.extract! @cohort, :id, :name, :created_at, :updated_at, :active

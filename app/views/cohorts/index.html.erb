@@ -10,19 +10,25 @@
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
-            <th>Name</th>
-            <th></th>
+        <th>Name</th>
+        <th>Status</th>
         <th></th>
         <th></th>
+        <% if can? :delete, Cohort %>
+          <th></th>
+        <% end %>
       </tr>
     </thead>
 
     <tbody>
       <%= content_tag_for(:tr, @cohorts) do |cohort| %>
-            <td><%= cohort.name %></td>
-            <td><%= link_to 'Show', cohort %></td>
+        <td><%= cohort.name %></td>
+        <td><%= cohort.active ? 'Active' : 'Deactive' %></td>
+        <td><%= link_to 'Show', cohort %></td>
         <td><%= link_to 'Edit', edit_cohort_path(cohort) %></td>
-        <td><%= link_to 'Destroy', cohort, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if can? :delete, Cohort %>
+          <td><%= link_to 'Destroy', cohort, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       <% end %>
     </tbody>
   </table>
