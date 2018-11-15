@@ -81,6 +81,12 @@ class NetworkActionsController < ApplicationController
         where(:actor_id => params[:actor_ids])
     end
     
+    # Filter by Events
+    if params[:network_event].present?
+      network_actions = network_actions.
+        where(:network_event_id => params[:network_event])
+    end    
+    
     network_actions
   end
 
