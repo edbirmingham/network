@@ -94,6 +94,12 @@ class NetworkActionsController < ApplicationController
         where(:priority => params[:priorities])
     end
     
+    # Filter by Status
+    if params[:status].present?
+      network_actions = network_actions.
+        where(:status => params[:status])
+    end
+    
     network_actions
   end
 

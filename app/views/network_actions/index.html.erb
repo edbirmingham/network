@@ -78,6 +78,21 @@
       
       <div class="form-group">
         <div class="col-md-12">
+          <%= select_tag :status,
+                options_from_collection_for_select(
+                  NetworkAction.statuses,
+                  :first,
+                  lambda { |status| status.first.titleize },
+                  params[:status]
+                ),
+                class: "select2 form-control",
+                multiple: true,
+                data: { placeholder: 'Filter by Status' }  %>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="col-md-12">
           <%= submit_tag 'Filter actions', name: 'commit', class: 'btn btn-primary'%>
         </div>
       </div>           
