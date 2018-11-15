@@ -100,6 +100,12 @@ class NetworkActionsController < ApplicationController
         where(:status => params[:status])
     end
     
+    # Filter by Types
+    if params[:action_type].present?
+      network_actions = network_actions.
+        where(:action_type => params[:action_type])
+    end
+    
     network_actions
   end
 

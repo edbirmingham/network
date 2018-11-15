@@ -93,6 +93,21 @@
       
       <div class="form-group">
         <div class="col-md-12">
+          <%= select_tag :action_type,
+                options_from_collection_for_select(
+                  NetworkAction.types,
+                  lambda { |types| types},
+                  lambda { |types| types.titleize },
+                  params[:action_type]
+                ),
+                class: "select2 form-control",
+                multiple: true,
+                data: { placeholder: 'Filter by Type' }  %>
+        </div>
+      </div>     
+      
+      <div class="form-group">
+        <div class="col-md-12">
           <%= submit_tag 'Filter actions', name: 'commit', class: 'btn btn-primary'%>
         </div>
       </div>           
