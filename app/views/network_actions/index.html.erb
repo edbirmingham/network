@@ -29,6 +29,25 @@
       
       <div class="form-group">
         <div class="col-md-12">
+          <%= select_tag :actor_ids, 
+              options_from_collection_for_select(
+                {}, 
+                :id, 
+                :text,
+                params[:actor_ids]
+              ),
+              class: "select2 ajax form-control", 
+              multiple: true, 
+              data: { 
+                ajax: { url: members_path },
+                placeholder: 'Filter by Actor'
+              }
+          %>
+        </div>
+      </div>            
+      
+      <div class="form-group">
+        <div class="col-md-12">
           <%= submit_tag 'Filter actions', name: 'commit', class: 'btn btn-primary'%>
         </div>
       </div>           
