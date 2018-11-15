@@ -59,6 +59,21 @@
                 multiple: true,
                 data: { placeholder: 'Filter by Events' }  %>
         </div>
+      </div>   
+      
+      <div class="form-group">
+        <div class="col-md-12">
+          <%= select_tag :priorities,
+                options_from_collection_for_select(
+                  NetworkAction.priorities,
+                  :first,
+                  lambda { |priority| priority.first.titleize },
+                  params[:priorities]
+                ),
+                class: "select2 form-control",
+                multiple: true,
+                data: { placeholder: 'Filter by Priority' }  %>
+        </div>
       </div>         
       
       <div class="form-group">
