@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_25_124726) do
+ActiveRecord::Schema.define(version: 2018_11_20_024251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -227,6 +227,7 @@ ActiveRecord::Schema.define(version: 2018_08_25_124726) do
     t.string "sex"
     t.string "race"
     t.string "ethnicity"
+    t.boolean "media_waiver"
     t.index ["identity_id"], name: "index_members_on_identity_id"
   end
 

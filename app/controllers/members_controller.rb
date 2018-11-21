@@ -126,6 +126,7 @@ class MembersController < ApplicationController
         :sex,
         :race,
         :ethnicity,
+        :media_waiver,
         :organization_ids => [], 
         :neighborhood_ids => [], 
         :extracurricular_activity_ids => [], 
