@@ -76,9 +76,34 @@ class NetworkActionsController < ApplicationController
         where(:owner_id => params[:owner_ids])
     end
     
+    # Filter by actor
     if params[:actor_ids].present?
       network_actions = network_actions.
         where(:actor_id => params[:actor_ids])
+    end
+    
+    # Filter by Events
+    if params[:network_event].present?
+      network_actions = network_actions.
+        where(:network_event_id => params[:network_event])
+    end    
+    
+    # Filter by Priorities
+    if params[:priorities].present?
+      network_actions = network_actions.
+        where(:priority => params[:priorities])
+    end
+    
+    # Filter by Status
+    if params[:status].present?
+      network_actions = network_actions.
+        where(:status => params[:status])
+    end
+    
+    # Filter by Types
+    if params[:action_type].present?
+      network_actions = network_actions.
+        where(:action_type => params[:action_type])
     end
     
     network_actions

@@ -1,25 +1,16 @@
 <div class="page-header">
-  <div class="col-md-12" style="margin-bottom: 2rem; padding-left: 0;">
-    <h1 style="text-align: left;float:left; margin: 0 2rem 1rem 0;">Actions</h1>
-    <%= link_to new_network_action_path, class: 'btn btn-primary', style: 'float:left; margin-top: 1rem; height: 3rem;' do %>
-      <span class="glyphicon glyphicon-plus"></span>
-      New Action
-    <% end %>
-  </div>
+  <%= link_to new_network_action_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Action
+  <% end %>
+
+  <h1>Actions</h1>  
   
-  <div style="padding: 2rem 1.5rem;">
   <%= form_tag network_actions_path, :method => :get, class: "form-horizontal" do %>
-    <div class="form-group">
-      <div class="input-group">
-          <span style="display: inline-block;float:left; margin-right: 1rem;">
-            <button 
-              class="btn btn-default" 
-              type="submit" 
-              name="Filter"
-            >
-              Go!
-            </button>
-          </span>
+    <div class="container">
+      
+      <div class="form-group">
+        <div class="col-md-12">
           <%= select_tag :owner_ids, 
               options_from_collection_for_select(
                 User.order(:email).all, 
@@ -28,12 +19,16 @@
                 params[:owner_ids]
               ),
               class: "select2 form-control", 
-              style: "float: left; display:inline-block; width: 30rem;",
               multiple: true, 
               data: {
-                placeholder: 'Find Owner', 
+                placeholder: 'Filter by Owner', 
               } 
-          %>
+          %>        
+        </div>
+      </div>  
+      
+      <div class="form-group">
+        <div class="col-md-12">
           <%= select_tag :actor_ids, 
               options_from_collection_for_select(
                 {}, 
@@ -42,14 +37,81 @@
                 params[:actor_ids]
               ),
               class: "select2 ajax form-control", 
-              style: "float: left; display:inline-block; width: 30rem;",
               multiple: true, 
               data: { 
                 ajax: { url: members_path },
-                placeholder: 'Find Actor'
+                placeholder: 'Filter by Actor'
               }
           %>
+        </div>
+      </div>          
+      
+      <div class="form-group">
+        <div class="col-md-12">
+          <%= select_tag :network_event,
+                options_from_collection_for_select(
+                  NetworkEvent.order(:name).all,
+                  :id,
+                  :name,
+                  params[:network_event]
+                ),
+                class: "select2 form-control",
+                multiple: true,
+                data: { placeholder: 'Filter by Events' }  %>
+        </div>
+      </div>   
+      
+      <div class="form-group">
+        <div class="col-md-12">
+          <%= select_tag :priorities,
+                options_from_collection_for_select(
+                  NetworkAction.priorities,
+                  :first,
+                  lambda { |priority| priority.first.titleize },
+                  params[:priorities]
+                ),
+                class: "select2 form-control",
+                multiple: true,
+                data: { placeholder: 'Filter by Priority' }  %>
+        </div>
+      </div>         
+      
+      <div class="form-group">
+        <div class="col-md-12">
+          <%= select_tag :status,
+                options_from_collection_for_select(
+                  NetworkAction.statuses,
+                  :first,
+                  lambda { |status| status.first.titleize },
+                  params[:status]
+                ),
+                class: "select2 form-control",
+                multiple: true,
+                data: { placeholder: 'Filter by Status' }  %>
+        </div>
       </div>
+      
+      <div class="form-group">
+        <div class="col-md-12">
+          <%= select_tag :action_type,
+                options_from_collection_for_select(
+                  NetworkAction.types,
+                  lambda { |types| types},
+                  lambda { |types| types.titleize },
+                  params[:action_type]
+                ),
+                class: "select2 form-control",
+                multiple: true,
+                data: { placeholder: 'Filter by Type' }  %>
+        </div>
+      </div>     
+      
+      <div class="form-group">
+        <div class="col-md-12">
+          <%= submit_tag 'Filter actions', name: 'commit', class: 'btn btn-primary'%>
+        </div>
+      </div>           
+      
     </div>
   </div>
   
