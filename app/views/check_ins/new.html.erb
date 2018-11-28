@@ -25,16 +25,22 @@
         <th>Last name</th>
         <th>Phone</th>
         <th>Email</th>
+        <th>Media Waiver</th>
       </tr>
     </thead>
 
     <tbody>
       <%= content_tag_for(:tr, @members) do |member| %>
-        <td><%= check_box_tag "checkin_member_ids[]", member.id %></td>
+        <td><%= check_box_tag "checkin_member_ids[]", member.id, false, class: 'checkin' %></td>
         <td><%= member.first_name %></td>
         <td><%= member.last_name %></td>
         <td><%= phone_to member.phone %></td>
         <td><%= mail_to member.email %></td>
+        <% if member.media_waiver %>
+          <td><span class="glyphicon glyphicon-ok text-success"></span></td>
+        <% else %>
+          <td><%= check_box_tag "waiver_member_ids[]", member.id, false, class: 'waiver' %></td>
+        <% end %>
       <% end %>
     </tbody>
   </table>

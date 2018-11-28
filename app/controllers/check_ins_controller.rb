@@ -33,6 +33,8 @@ class CheckInsController < ApplicationController
       end
     end
 
+    update_media_waivers
+    
     respond_to do |format|
       if error_ids.empty?
         flash[:check_in_message] = "#{member_ids.size} members successfully checked in"
@@ -51,5 +53,18 @@ class CheckInsController < ApplicationController
   def participation_params
     params.require(:participation).permit(:member_id, :level, :network_event_id, :participation_type)
   end
-
+  
+  def update_media_waivers
+    if waiver_params[:member_ids].present?
+      Member.where(id: waiver_params[:member_ids]).update_all(media_waiver: true)
+    end
+  end
+  
+  def waiver_params
+    if params.key?(:waiver)
+      params.require(:waiver).permit(member_ids: [])
+    else
+      {}
+    end
+  end
 end
