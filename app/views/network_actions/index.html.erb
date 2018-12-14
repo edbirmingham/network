@@ -52,7 +52,7 @@
                 options_from_collection_for_select(
                   NetworkEvent.order(:name).all,
                   :id,
-                  :name,
+                  :name_with_date,
                   params[:network_event]
                 ),
                 class: "select2 form-control",
