@@ -138,7 +138,7 @@
         <th>Completed on</th>
       </tr>
     </thead>
-
+  <p class="text-right"><%= page_entries_info @tasks %></p>
     <tbody> 
       <%= content_tag_for(:tr, @tasks) do |task| %>
         <td><a class="task-name"  data-url="tasks/<%= task.id %>"><%= task.name %></a></td>

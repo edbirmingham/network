@@ -7,7 +7,11 @@ class NetworkActionsController < ApplicationController
   # GET /network_actions.csv
   def index
     @network_actions = filtered_network_actions
+    respond_to do |format|
+      format.any(:html, :json) { @network_actions = @network_actions.page params[:page] }
+      format.csv
   end
+end
 
   # GET /network_actions/1
   # GET /network_actions/1.json

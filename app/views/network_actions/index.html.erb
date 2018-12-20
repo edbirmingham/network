@@ -21,7 +21,7 @@
               class: "select2 form-control", 
               multiple: true, 
               data: {
-                placeholder: 'Filter by Owner', 
+                placeholder: 'Filter by owner', 
               } 
           %>        
         </div>
@@ -40,7 +40,7 @@
               multiple: true, 
               data: { 
                 ajax: { url: members_path },
-                placeholder: 'Filter by Actor'
+                placeholder: 'Filter by actor'
               }
           %>
         </div>
@@ -57,7 +57,7 @@
                 ),
                 class: "select2 form-control",
                 multiple: true,
-                data: { placeholder: 'Filter by Events' }  %>
+                data: { placeholder: 'Filter by events' }  %>
         </div>
       </div>   
       
@@ -72,7 +72,7 @@
                 ),
                 class: "select2 form-control",
                 multiple: true,
-                data: { placeholder: 'Filter by Priority' }  %>
+                data: { placeholder: 'Filter by priority' }  %>
         </div>
       </div>         
       
@@ -87,7 +87,7 @@
                 ),
                 class: "select2 form-control",
                 multiple: true,
-                data: { placeholder: 'Filter by Status' }  %>
+                data: { placeholder: 'Filter by status' }  %>
         </div>
       </div>
       
@@ -102,7 +102,7 @@
                 ),
                 class: "select2 form-control",
                 multiple: true,
-                data: { placeholder: 'Filter by Type' }  %>
+                data: { placeholder: 'Filter by type' }  %>
         </div>
       </div>     
       
@@ -136,7 +136,7 @@
         <th></th>
       </tr>
     </thead>
-
+  <p class="text-right"><%= page_entries_info @network_actions %></p>
     <tbody>
       <%= content_tag_for(:tr, @network_actions) do |network_action| %>
         <td><%= link_to network_action.actor.try(:name), network_action.actor %></td>

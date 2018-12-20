@@ -171,7 +171,7 @@
           <th></th>
         </tr>
       </thead>
-  
+  <p class="text-right"><%= page_entries_info @network_events %></p>
       <tbody>
         <%= content_tag_for(:tr, @network_events) do |network_event| %>
           <td><%= check_box_tag "network_event_ids[]", network_event.id %></td>
@@ -203,4 +203,4 @@
       Download
     <% end %>
   </div>
- <% end %> 
+ <% end %>
