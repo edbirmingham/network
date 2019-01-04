@@ -117,7 +117,7 @@
   
   <% end %>
 </div>
-
+<p class="text-right"><%= page_entries_info @network_actions %></p>
 <div class="table-responsive">
   
   
@@ -136,7 +136,7 @@
         <th></th>
       </tr>
     </thead>
-  <p class="text-right"><%= page_entries_info @network_actions %></p>
+  
     <tbody>
       <%= content_tag_for(:tr, @network_actions) do |network_action| %>
         <td><%= link_to network_action.actor.try(:name), network_action.actor %></td>

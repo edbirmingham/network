@@ -149,6 +149,7 @@
 <% end %>
 
 </div>
+<p class="text-right"><%= page_entries_info @network_events %></p>
 <%= form_tag(new_network_event_path, method: "get") do %>
   <div class="table-responsive">
     <table class="table table-striped table-bordered table-hover">
@@ -171,7 +172,7 @@
           <th></th>
         </tr>
       </thead>
-  <p class="text-right"><%= page_entries_info @network_events %></p>
+
       <tbody>
         <%= content_tag_for(:tr, @network_events) do |network_event| %>
           <td><%= check_box_tag "network_event_ids[]", network_event.id %></td>
