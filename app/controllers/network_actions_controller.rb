@@ -10,8 +10,8 @@ class NetworkActionsController < ApplicationController
     respond_to do |format|
       format.any(:html, :json) { @network_actions = @network_actions.page params[:page] }
       format.csv
+    end
   end
-end
 
   # GET /network_actions/1
   # GET /network_actions/1.json
