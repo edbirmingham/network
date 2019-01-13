@@ -6,6 +6,7 @@ class NetworkActionsController < ApplicationController
   # GET /network_actions.json
   # GET /network_actions.csv
   def index
+
     @network_actions = filtered_network_actions.page params[:page]
   end
 
